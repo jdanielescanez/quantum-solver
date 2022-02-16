@@ -1,0 +1,118 @@
+
+from execution.qexecute import QExecute
+from algorithms.qrand import QRand
+from algorithms.qalgorithm_manager import QAlgorithmManager
+from halo import Halo
+from pwinput import pwinput
+
+QUANTUM_SOLVER = 'Quantum Solver'
+
+class QuantumSolver:
+  def __init__(self, argv):
+    self.qalgorithm_manager = QAlgorithmManager()
+    self.token = None
+    if len(argv) > 1:
+      self.token = argv[1]
+
+  def run(self):
+    self.__show_header()
+    self.qexecute = self.__get_qexecute()
+    self.__main_menu()
+
+  def __get_qexecute(self):
+    tries = 0
+    MAX_TRIES = 3
+    while tries < MAX_TRIES:
+      tries += 1
+      if self.token == None:
+        self.token = pwinput(mask='*', \
+            prompt='[&] Write your IBM Quantum Experience token: ')
+      message = Halo(text="Authenticating to the IBMQ server", spinner="dots")
+      try:
+        message.start()
+        qexecute = QExecute(self.token)
+        message.succeed()
+        break
+      except:
+        message.fail()
+        self.token = None
+        if tries < 3:
+          print('[!] Invalid IBM Quantum Experience token, try again (' + \
+                str(tries) + ' / ' + str(MAX_TRIES) + ')\n')
+        else:
+          link = 'https://quantum-computing.ibm.com/composer/docs/iqx/manage/account/'
+          print('\n[#] You have reached the maximum number of attempts (' + \
+                str(tries) + ' / ' + str(MAX_TRIES) + ')\nIt ' + \
+                'is advisable to try again after consulting this reference:' + \
+                '\n' + link, '\n')
+          exit(-1)
+    return qexecute
+
+  def __show_header(self):
+    print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
+    print('A little quantum toolset developed using Qiskit')
+    print('WARNING: The toolset uses your personal IBM Quantum Experience')
+    print('token to access to IBM hardware.')
+    print('You can access to your API token or generate another one here:')
+    print('https://quantum-computing.ibm.com/account\n')
+  
+  def __main_menu(self):
+    while True:
+      is_selected_backend = self.qexecute.current_backend != None
+      is_selected_algorithm = self.qalgorithm_manager.current_algorithm != None
+      is_parameter = self.qalgorithm_manager.parameters != None
+      print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
+      print('[1] See available Backends')
+      print('[2] See available Algorithms')
+      print('[3] Select Backend')
+      if is_selected_backend:
+        print('\tCurrent Backend: ' + str(self.qexecute.current_backend))
+      print('[4] Select Algorithm')
+      if is_selected_algorithm:
+        print('\tCurrent Algorithm: ' + \
+            self.qalgorithm_manager.current_algorithm.name)
+      if is_selected_algorithm:
+        print('[5] Select Parameters')
+        if is_parameter:
+          print('\tCurrent Parameters: ' + str(self.qalgorithm_manager.parameters))
+
+      if is_selected_backend and is_selected_algorithm and is_parameter:
+        print('[6] Run Algorithm')
+      print('[0] Exit\n')
+      option = int(input('[&] Select an option: '))
+
+      if option == 0:
+        print()
+        exit(0)
+      elif option == 1:
+        self.qexecute.print_avaiable_backends()
+      elif option == 2:
+        self.qalgorithm_manager.print_avaiable_algorithms()
+      elif option == 3:
+        self.qexecute.select_backend()
+      elif option == 4:
+        self.qalgorithm_manager.select_algorithm()
+      elif option == 5:
+        self.qalgorithm_manager.select_parameters()
+      elif option == 6 and is_selected_backend and \
+          is_selected_algorithm and is_parameter:
+        print()
+        circuit = self.qalgorithm_manager.get_circuit()
+        n_shots = self.qalgorithm_manager.current_algorithm.n_shots
+        message_text = 'Executing '
+        message_text += self.qalgorithm_manager.current_algorithm.name
+        message_text += ' in ' + str(self.qexecute.current_backend)
+        message_text += ' with parameters: '
+        message_text += str(self.qalgorithm_manager.parameters)
+        message = Halo(text=message_text, spinner="dots")
+        try:
+          message.start()
+          result = self.qexecute.run(circuit, n_shots)
+          message.succeed()
+          parsed_result = self.qalgorithm_manager.parse_result(result)
+          print('Output:', parsed_result, '\n')
+        except Exception as exception:
+          message.fail()
+          print('Exception: ', exception)
+      else:
+        print('[!] Invalid option, try again')
