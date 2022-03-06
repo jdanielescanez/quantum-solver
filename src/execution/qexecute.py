@@ -1,12 +1,13 @@
 
 from qiskit import IBMQ, transpile
+from qiskit import Aer
 
 class QExecute:
   # token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
   def __init__(self, token: str):
     self.token = token
     self.provider = IBMQ.enable_account(self.token)
-    self.backends = self.provider.backends()
+    self.backends = [Aer.get_backend('aer_simulator'), *self.provider.backends()]
     self.current_backend = None
     
   def set_current_backend(self, backend_name: str):
