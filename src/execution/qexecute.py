@@ -1,6 +1,7 @@
 
 from qiskit import IBMQ, transpile
 from qiskit import Aer
+from qiskit.utils import QuantumInstance
 
 class QExecute:
   # token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
@@ -18,13 +19,21 @@ class QExecute:
     for i in range(len(self.backends)):
       backend = self.backends[i]
       status = backend.status()
-      is_operational = status.operational
-      jobs_in_queue = status.pending_jobs
       config = backend.configuration()
-      print('[' + str(i + 1) + ']\tName:', str(backend), '\n\t'\
-            'Is ' + ('' if is_operational else 'NOT ') + 'operational', \
-            '\n\tJobs in queue:', str(jobs_in_queue) + \
-            '\n\tNumber of qubits:', str(config.n_qubits) + '\n')
+      jobs_in_queue = status.pending_jobs
+      q_instance = QuantumInstance(backend)
+      is_simulator = q_instance.is_simulator
+      is_operational = status.operational
+
+      print('[' + str(i + 1) + ']\tName:', str(backend), \
+            '\n\tNumber of qubits:', str(config.n_qubits) + \
+            '\n\tJobs in queue:', str(jobs_in_queue))
+      print('\tIs ' + ('' if is_simulator else 'NOT ') + 'a simulator')
+      if is_operational:
+        print('\t✅ Is operational')
+      else:
+        print('\t❌ Is NOT operational')
+      print()
 
   def select_backend(self):
     range_backends = '[1 - ' + str(len(self.backends)) + ']'
