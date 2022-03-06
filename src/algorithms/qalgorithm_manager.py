@@ -1,11 +1,12 @@
 
 from algorithms.qrand import QRand
+from algorithms.bernstein_vazirani import BernsteinVazirani
 
 class QAlgorithmManager:
   def __init__(self):
     self.current_algorithm = None
     self.parameters = None
-    self.algorithms = [QRand()]
+    self.algorithms = [QRand(), BernsteinVazirani()]
 
   def print_avaiable_algorithms(self):
     print('\nAvaliable algorithms:')

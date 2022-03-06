@@ -8,7 +8,7 @@ class BernsteinVazirani:
     self.parameters = [
       {
         'type': 'string',
-        'description': 'The secret number s, to generate de oracle',
+        'description': 'The secret binary number s, to generate the oracle',
         'constraint': 'The length must be smaller than the number of qubits of the selected backend'
       }
     ]
