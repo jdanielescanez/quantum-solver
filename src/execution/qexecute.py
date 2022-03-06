@@ -4,7 +4,7 @@ from qiskit import Aer
 from qiskit.utils import QuantumInstance
 
 class QExecute:
-  # token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
+  # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
   def __init__(self, token: str):
     self.token = token
     self.provider = IBMQ.enable_account(self.token)

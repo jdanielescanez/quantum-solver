@@ -1,7 +1,5 @@
 
-import numpy as np
-from math import floor, ceil, log2
-from qiskit import QuantumCircuit, transpile
+from qiskit import QuantumCircuit
 
 class QRand:
   def __init__(self):
@@ -11,7 +9,7 @@ class QRand:
       {
         'type': 'int',
         'description': 'Number of qubits to use',
-        'constraint': 'Can\'t be bigger than the number of qubits of the selected IBM Hardware'
+        'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
       }
     ]
     self.n_shots = 1
@@ -21,12 +19,13 @@ class QRand:
   def circuit(self, n):
     # Create a Quantum Circuit acting on the q register
     circuit = QuantumCircuit(n, n)
+    n_range = list(range(n))
 
     # Add a H gate on every qubit
-    for i in range(n):
-      circuit.h(i)
+    circuit.h(n_range)
 
-    n_range = list(range(n))
+    circuit.barrier()
+
     # Map the quantum measurement to the classical bits
     circuit.measure(n_range, n_range)
 

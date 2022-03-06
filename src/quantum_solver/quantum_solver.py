@@ -100,7 +100,9 @@ class QuantumSolver:
         message_text = 'Creating circuit'
         message = Halo(text=message_text, spinner="dots")
         try:
+          message.start()
           circuit = self.qalgorithm_manager.get_circuit()
+          message.succeed()
         except Exception as exception:
           message.fail()
           print('Exception: ', exception)
