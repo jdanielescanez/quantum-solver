@@ -19,9 +19,11 @@ class QExecute:
       status = backend.status()
       is_operational = status.operational
       jobs_in_queue = status.pending_jobs
+      config = backend.configuration()
       print('[' + str(i + 1) + ']\tName:', str(backend), '\n\t'\
             'Is ' + ('' if is_operational else 'NOT ') + 'operational', \
-            '\n\tJobs in queue:', str(jobs_in_queue) + '\n')
+            '\n\tJobs in queue:', str(jobs_in_queue) + \
+            '\n\tNumber of qubits:', str(config.n_qubits) + '\n')
 
   def select_backend(self):
     range_backends = '[1 - ' + str(len(self.backends)) + ']'
