@@ -45,8 +45,8 @@ class QAlgorithmManager:
       input_parameter = input('[&] Specify parameter: ' + \
           parameter['description'] + ' [' + parameter['type'] + ']\n' +
               ' ' * 4 + '(' + parameter['constraint'] + '): ')
-      input_parameter = self.current_algorithm.parse_parameters(input_parameter)
       self.parameters.append(input_parameter)
+    self.parameters = self.current_algorithm.parse_parameters(self.parameters)
 
   def get_circuit(self):
     if self.current_algorithm == None:

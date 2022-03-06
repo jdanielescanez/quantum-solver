@@ -97,7 +97,14 @@ class QuantumSolver:
       elif option == 6 and is_selected_backend and \
           is_selected_algorithm and is_parameter:
         print()
-        circuit = self.qalgorithm_manager.get_circuit()
+        message_text = 'Creating circuit'
+        message = Halo(text=message_text, spinner="dots")
+        try:
+          circuit = self.qalgorithm_manager.get_circuit()
+        except Exception as exception:
+          message.fail()
+          print('Exception: ', exception)
+
         n_shots = self.qalgorithm_manager.current_algorithm.n_shots
         message_text = 'Executing '
         message_text += self.qalgorithm_manager.current_algorithm.name
