@@ -4,6 +4,7 @@ from algorithms.qrand import QRand
 from algorithms.qalgorithm_manager import QAlgorithmManager
 from halo import Halo
 from pwinput import pwinput
+import time
 
 QUANTUM_SOLVER = 'Quantum Solver'
 
@@ -92,7 +93,7 @@ class QuantumSolver:
         self.qexecute.select_backend()
       elif option == 4:
         self.qalgorithm_manager.select_algorithm()
-      elif option == 5:
+      elif option == 5 and is_selected_backend and is_selected_algorithm:
         self.qalgorithm_manager.select_parameters()
       elif option == 6 and is_selected_backend and \
           is_selected_algorithm and is_parameter:
@@ -101,8 +102,11 @@ class QuantumSolver:
         message = Halo(text=message_text, spinner="dots")
         try:
           message.start()
+          start_time = time.time()
           circuit = self.qalgorithm_manager.get_circuit()
+          time_ms = (time.time() - start_time) * 1000
           message.succeed()
+          print('  Circuit created in', str(time_ms), 'ms')
         except Exception as exception:
           message.fail()
           print('Exception: ', exception)
@@ -116,10 +120,13 @@ class QuantumSolver:
         message = Halo(text=message_text, spinner="dots")
         try:
           message.start()
+          exec_start_time = time.time()
           result = self.qexecute.run(circuit, n_shots)
+          exec_s = time.time() - exec_start_time
           message.succeed()
+          print('  Execution done in', str(exec_s), 's')
           parsed_result = self.qalgorithm_manager.parse_result(result)
-          print('Output:', parsed_result, '\n')
+          print('\nOutput:', parsed_result, '\n')
         except Exception as exception:
           message.fail()
           print('Exception: ', exception)
