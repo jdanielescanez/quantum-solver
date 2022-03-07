@@ -1,6 +1,7 @@
 
 from qiskit import QuantumCircuit
 from numpy.random import randint
+from bb84.bb84 import N_BITS
 
 class Sender:
   def __init__(self, name, original_bits_size):
@@ -62,13 +63,13 @@ class Sender:
 
   def generate_otp(self):
     self.otp = []
-    N_BITS = 7
     for i in range(len(self.key) // N_BITS):
       bits_string = ''.join(map(str, self.key[i * N_BITS: (i + 1) * N_BITS]))
       self.otp.append(int(bits_string, 2))
 
   def encode_otp_message(self, message):
     encoded_message = ''
+    CHR_LIMIT = 1114112
     for i, char in enumerate(message):
-      encoded_message += chr(ord(char) + self.otp[i % len(self.otp)])
+      encoded_message += chr((ord(char) + self.otp[i % len(self.otp)]) % CHR_LIMIT)
     return encoded_message

@@ -1,8 +1,9 @@
 
+BB84_SIMULATOR = 'BB84 SIMULATOR'
+N_BITS = 6
+
 from quantum_solver.quantum_solver import QuantumSolver
 from bb84.bb84_algorithm import BB84Algorithm
-
-BB84_SIMULATOR = 'BB84 SIMULATOR'
 
 class BB84:
   def __init__(self, token):
@@ -52,7 +53,7 @@ class BB84:
       message = str(input('[&] Message (string): '))
       density = float(input('[&] Interception Density (float between 0 and 1): '))
       backend = self.qexecute.current_backend
-      bits_size = len(message) * 2 ** 7
+      bits_size = len(message) * 2 ** N_BITS
       self.bb84_algorithm.run(message, backend, bits_size, density)
     else:
       print('[!] Invalid option, try again')
