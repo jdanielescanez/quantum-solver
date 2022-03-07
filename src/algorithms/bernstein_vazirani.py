@@ -3,7 +3,7 @@ from qiskit import QuantumCircuit
 
 class BernsteinVazirani:
   def __init__(self):
-    self.name = 'BernsteinVazirani'
+    self.name = 'Bernstein Vazirani'
     self.description = 'Using an oracle: f(x) = (s * x) % 2. Obtain s (a secret number)'
     self.parameters = [
       {
@@ -23,11 +23,11 @@ class BernsteinVazirani:
     circuit = QuantumCircuit(n + 1, n)
     
     circuit.x(n)
-    circuit.h(n_range)
+    circuit.h(n_range + [n])
 
     circuit.barrier()
 
-    for i, char in enumerate(secret_number):
+    for i, char in enumerate(reversed(secret_number)):
       if char == '1':
         circuit.cx(i, n)
 
