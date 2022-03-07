@@ -9,11 +9,9 @@ import time
 QUANTUM_SOLVER = 'Quantum Solver'
 
 class QuantumSolver:
-  def __init__(self, argv):
+  def __init__(self, token=None):
     self.qalgorithm_manager = QAlgorithmManager()
-    self.token = None
-    if len(argv) > 1:
-      self.token = argv[1]
+    self.token = token
 
   def run(self):
     self.__show_header()
