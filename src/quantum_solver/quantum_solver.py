@@ -122,9 +122,9 @@ class QuantumSolver:
           message.start()
           exec_start_time = time.time()
           result = self.qexecute.run(circuit, n_shots)
-          exec_s = time.time() - exec_start_time
+          exec_ms = (time.time() - exec_start_time) * 1000
           message.succeed()
-          print('  Execution done in', str(exec_s), 's')
+          print('  Execution done in', str(exec_ms), 'ms')
           parsed_result = self.qalgorithm_manager.parse_result(result)
           print('\nOutput:', parsed_result, '\n')
         except Exception as exception:
