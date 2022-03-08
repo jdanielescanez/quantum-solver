@@ -8,6 +8,9 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 from halo import Halo
+from numpy.random import randint
+from random import SystemRandom, randrange
+import string
 
 class BB84:
   def __init__(self, token):
@@ -66,17 +69,26 @@ class BB84:
 
   def __experimental_mode(self):
     backend = self.qexecute.current_backend
-    instances = [
-      ('Key', 0),
-      ('SecretKey', 0.5),
-      ('PASSword', 1)
-    ]
-    for message, density in instances:
+    AVERAGE_REPETITION_INSTANCE = 100
+    LEN_MSG_LIMIT = 10
+    DENSITY_MIN = 0
+    DENSITY_MAX = 1
+    DENSITY_STEP = 0.05
+    DENSITY_RANGE = int(DENSITY_MAX / DENSITY_STEP)
+    n_instances = AVERAGE_REPETITION_INSTANCE * LEN_MSG_LIMIT * DENSITY_RANGE
+    image = np.zeros((DENSITY_RANGE, LEN_MSG_LIMIT))
+    for _ in range(n_instances):
+      len_message = randint(1, LEN_MSG_LIMIT)
+      message = ''.join(SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(len_message))
+      density = randrange(DENSITY_MIN, DENSITY_RANGE, DENSITY_MAX)
       bits_size = len(message) * 2 ** N_BITS
-      flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
-      color = 'blue' if flag else 'red'
-      plt.scatter(len(message), density, c=color)
+      flag = self.bb84_algorithm.run(message, backend, bits_size, density / DENSITY_STEP, False)
+      image[density][len(message)] += 1 if flag else -1
 
+    x = list(range(1, LEN_MSG_LIMIT + 1, 1))
+    y = list(np.arange(0, 1 + DENSITY_STEP, DENSITY_STEP))
+    plt.pcolormesh(x, y, image, cmap='inferno')
+    plt.colorbar()
     plt.xlabel('Message Length')
     plt.ylabel('Interception Density')
     plt.show()
