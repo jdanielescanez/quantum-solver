@@ -7,31 +7,22 @@ import binascii
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
 class BB84Algorithm:
-  def __generate_key(self, backend, original_bits_size):
+  def __generate_key(self, backend, original_bits_size, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
     alice.set_values()
     alice.set_axes()
     message = alice.encode_quantum_message()
 
-    alice.show_values()
-    alice.show_axes()
-
     # Interceptor Eve
     eve = Reciever('Eve', original_bits_size)
     eve.set_axes()
     message = eve.decode_quantum_message(message, self.measure_density, backend)
 
-    eve.show_values()
-    eve.show_axes()
-
     # Decoder Bob
     bob = Reciever('Bob', original_bits_size)
     bob.set_axes()
     message = bob.decode_quantum_message(message, 1, backend)
-
-    bob.show_values()
-    bob.show_axes()
 
     # Alice - Bob Remove Garbage
     alice_axes = alice.axes # Alice share her axes
@@ -41,54 +32,70 @@ class BB84Algorithm:
     alice.remove_garbage(bob_axes)
     bob.remove_garbage(alice_axes)
 
-    alice.show_key()
-    bob.show_key()
-
     # Bob share some values of the key to check
     SHARED_SIZE = round(0.5 * len(bob.key))
     shared_key = bob.key[:SHARED_SIZE]
-    print('\nShared Bob Key:')
-    print(shared_key, '\n')
+
+    if verbose:
+      alice.show_values()
+      alice.show_axes()
+
+      eve.show_values()
+      eve.show_axes()
+
+      bob.show_values()
+      bob.show_axes()
+
+      alice.show_key()
+      bob.show_key()
+
+      print('\nShared Bob Key:')
+      print(shared_key, '\n')
 
     # Alice check the shared key
     if alice.check_key(shared_key):
       shared_size = len(shared_key)
       alice.confirm_key(shared_size)
       bob.confirm_key(shared_size)
-      print('Secure Communication!')
-    else:
+      if verbose:
+        print('Secure Communication!')
+    elif verbose:
       print('Unsecure Communication! Eve has been detected intercepting messages')
     
     return alice, bob
 
-  def run(self, message, backend, original_bits_size, measure_density):
+  def run(self, message, backend, original_bits_size, measure_density, verbose):
     self.original_bits_size = original_bits_size
     self.measure_density = measure_density
 
-    alice, bob = self.__generate_key(backend, original_bits_size)
+    alice, bob = self.__generate_key(backend, original_bits_size, verbose)
     if not (alice.safe_key and bob.safe_key):
-      print('❌ Message not send')
+      if verbose:
+        print('❌ Message not send')
       return False
 
     alice.generate_otp()
     bob.generate_otp()
 
-    alice.show_otp()
-    bob.show_otp()
-
-    print('\nInitial Message:')
-    print(message)
-
     encoded_message = alice.encode_otp_message(message)
-    print('Encoded Message:')
-    print(encoded_message)
-
     decoded_message = bob.decode_otp_message(encoded_message)
-    print('💡 Decoded Message:')
-    print(decoded_message)
 
-    if message == decoded_message:
-      print('\n✅ The initial message and the decoded message are identical')
-    else:
-      print('\n❌ The initial message and the decoded message are different')
+    if verbose:
+      alice.show_otp()
+      bob.show_otp()
+
+      print('\nInitial Message:')
+      print(message)
+
+      print('Encoded Message:')
+      print(encoded_message)
+
+      print('💡 Decoded Message:')
+      print(decoded_message)
+
+      if message == decoded_message:
+        print('\n✅ The initial message and the decoded message are identical')
+      else:
+        print('\n❌ The initial message and the decoded message are different')
+
     return True
