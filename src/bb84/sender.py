@@ -15,13 +15,13 @@ class Sender:
 
   def set_values(self, values=None):
     if values == None:
-      self.values = randint(2, size=self.original_bits_size)
+      self.values = list(randint(2, size=self.original_bits_size))
     else:
       self.values = values
 
   def set_axes(self, axes=None):
     if axes == None:
-      self.axes = randint(2, size=self.original_bits_size)
+      self.axes = list(randint(2, size=self.original_bits_size))
     else:
       self.axes = axes
 
@@ -36,6 +36,10 @@ class Sender:
   def show_key(self):
     print('\n', self.name, 'Key:')
     print(self.key)
+
+  def show_otp(self):
+    print('\n', self.name, 'OTP:')
+    print(self.otp)
 
   def remove_garbage(self, another_axes):
     self.key = []

@@ -4,6 +4,8 @@ N_BITS = 6
 
 from quantum_solver.quantum_solver import QuantumSolver
 from bb84.bb84_algorithm import BB84Algorithm
+import time
+from halo import Halo
 
 class BB84:
   def __init__(self, token):
@@ -40,6 +42,24 @@ class BB84:
       print('[3] Run Algorithm')
     print('[0] Exit\n')
 
+  def __run(self):
+    message = str(input('[&] Message (string): '))
+    density = float(input('[&] Interception Density (float between 0 and 1): '))
+    backend = self.qexecute.current_backend
+    bits_size = len(message) * 2 ** N_BITS
+    halo_text = 'Running BB84 simulation'
+    halo = Halo(text=halo_text, spinner="dots")
+    try:
+      halo.start()
+      start_time = time.time()
+      self.bb84_algorithm.run(message, backend, bits_size, density)
+      time_ms = (time.time() - start_time) * 1000
+      halo.succeed()
+      print('  BB84 silumation runned in', str(time_ms), 'ms')
+    except Exception as exception:
+      halo.fail()
+      print('Exception: ', exception)
+
   def __select_option(self):
     option = int(input('[&] Select an option: '))
     if option == 0:
@@ -50,10 +70,6 @@ class BB84:
     elif option == 2:
       self.qexecute.select_backend()
     elif option == 3 and self.is_selected_backend:
-      message = str(input('[&] Message (string): '))
-      density = float(input('[&] Interception Density (float between 0 and 1): '))
-      backend = self.qexecute.current_backend
-      bits_size = len(message) * 2 ** N_BITS
-      self.bb84_algorithm.run(message, backend, bits_size, density)
+      self.__run()
     else:
       print('[!] Invalid option, try again')

@@ -26,14 +26,14 @@ class QuantumSolver:
       if self.token == None:
         self.token = pwinput(mask='*', \
             prompt='[&] Write your IBM Quantum Experience token: ')
-      message = Halo(text="Authenticating to the IBMQ server", spinner="dots")
+      halo = Halo(text="Authenticating to the IBMQ server", spinner="dots")
       try:
-        message.start()
+        halo.start()
         qexecute = QExecute(self.token)
-        message.succeed()
+        halo.succeed()
         break
       except:
-        message.fail()
+        halo.fail()
         self.token = None
         if tries < 3:
           print('[!] Invalid IBM Quantum Experience token, try again (' + \
@@ -98,37 +98,37 @@ class QuantumSolver:
     
   def __run_algorithm(self):
     print()
-    message_text = 'Creating circuit'
-    message = Halo(text=message_text, spinner="dots")
+    halo_text = 'Creating circuit'
+    halo = Halo(text=halo_text, spinner="dots")
     try:
-      message.start()
+      halo.start()
       start_time = time.time()
       circuit = self.qalgorithm_manager.get_circuit()
       time_ms = (time.time() - start_time) * 1000
-      message.succeed()
+      halo.succeed()
       print('  Circuit created in', str(time_ms), 'ms')
     except Exception as exception:
-      message.fail()
+      halo.fail()
       print('Exception: ', exception)
 
     n_shots = self.qalgorithm_manager.current_algorithm.n_shots
-    message_text = 'Executing '
-    message_text += self.qalgorithm_manager.current_algorithm.name
-    message_text += ' in ' + str(self.qexecute.current_backend)
-    message_text += ' with parameters: '
-    message_text += str(self.qalgorithm_manager.parameters)
-    message = Halo(text=message_text, spinner="dots")
+    halo_text = 'Executing '
+    halo_text += self.qalgorithm_manager.current_algorithm.name
+    halo_text += ' in ' + str(self.qexecute.current_backend)
+    halo_text += ' with parameters: '
+    halo_text += str(self.qalgorithm_manager.parameters)
+    halo = Halo(text=halo_text, spinner="dots")
     try:
-      message.start()
+      halo.start()
       exec_start_time = time.time()
       result = self.qexecute.run(circuit, n_shots)
       exec_ms = (time.time() - exec_start_time) * 1000
-      message.succeed()
+      halo.succeed()
       print('  Execution done in', str(exec_ms), 'ms')
       parsed_result = self.qalgorithm_manager.parse_result(result)
-      print('\nOutput:', parsed_result, '\n')
+      print('\n💡 Output:', parsed_result, '\n')
     except Exception as exception:
-      message.fail()
+      halo.fail()
       print('Exception: ', exception)
 
   def __main_menu(self):

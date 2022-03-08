@@ -55,9 +55,9 @@ class BB84Algorithm:
       shared_size = len(shared_key)
       alice.confirm_key(shared_size)
       bob.confirm_key(shared_size)
-      print('Secure!')
+      print('Secure Communication!')
     else:
-      print('Not secure!')
+      print('Unsecure Communication! Eve has been detected intercepting messages')
     
     return alice, bob
 
@@ -67,13 +67,16 @@ class BB84Algorithm:
 
     alice, bob = self.__generate_key(backend, original_bits_size)
     if not (alice.safe_key and bob.safe_key):
-      print('Message not send')
-      return 
+      print('❌ Message not send')
+      return False
 
     alice.generate_otp()
     bob.generate_otp()
 
-    print('Message:')
+    alice.show_otp()
+    bob.show_otp()
+
+    print('\nInitial Message:')
     print(message)
 
     encoded_message = alice.encode_otp_message(message)
@@ -81,5 +84,11 @@ class BB84Algorithm:
     print(encoded_message)
 
     decoded_message = bob.decode_otp_message(encoded_message)
-    print('Decoded Message:')
+    print('💡 Decoded Message:')
     print(decoded_message)
+
+    if message == decoded_message:
+      print('\n✅ The initial message and the decoded message are identical')
+    else:
+      print('\n❌ The initial message and the decoded message are different')
+    return True
