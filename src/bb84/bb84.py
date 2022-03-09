@@ -73,32 +73,38 @@ class BB84:
     DENSITY_MAX = 1
     DENSITY_STEP = 0.05
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / DENSITY_STEP)
-    LEN_MSG_LIMIT = 20
-    REPETITION_INSTANCE = 50
+    LEN_MSG_LIMIT = 5 # 50
+    REPETITION_INSTANCE = 10 # 30
 
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
     image = np.zeros((DENSITY_RANGE + 1, LEN_MSG_LIMIT))
     x = list(range(1, LEN_MSG_LIMIT + 1, 1))
     y = list(np.arange(0, 1 + DENSITY_STEP, DENSITY_STEP))
+    start_time = time.time()
+    print('\nRunning Experiment:')
 
-    with alive_bar(len(x) * len(y) * REPETITION_INSTANCE) as bar:
-      for j, density in enumerate(y):
-        for i, len_message in enumerate(x):
-          for _ in range(REPETITION_INSTANCE):
-            message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-            bits_size = len(message) * 2 * N_BITS
-            flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
-            image[j][i] += 1 if flag else 0
-            bar()
+    try:
+      with alive_bar(len(x) * len(y) * REPETITION_INSTANCE) as bar:
+        for j, density in enumerate(y):
+          for i, len_message in enumerate(x):
+            for _ in range(REPETITION_INSTANCE):
+              message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
+              bits_size = len(message) * 2 * N_BITS
+              flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
+              image[j][i] += 1 if flag else 0
+              bar()
+    except Exception as exception:
+      print('Exception: ', exception)
 
+    time_m = (time.time() - start_time)
+    print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
     plt.figure(num='BB84 Simulator - Experimental Mode')
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
     plt.xlabel('Message Length')
     plt.ylabel('Interception Density')
     plt.show()
-    print('[$] Experiment Finished!')
 
   def __select_option(self):
     option = int(input('[&] Select an option: '))
