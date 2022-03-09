@@ -2,6 +2,7 @@
 from qiskit import QuantumCircuit
 from numpy.random import randint
 from bb84.bb84 import N_BITS
+from math import ceil
 
 class Sender:
   def __init__(self, name, original_bits_size):
@@ -67,7 +68,7 @@ class Sender:
 
   def generate_otp(self):
     self.otp = []
-    for i in range(len(self.key) // N_BITS):
+    for i in range(ceil(len(self.key) / N_BITS)):
       bits_string = ''.join(map(str, self.key[i * N_BITS: (i + 1) * N_BITS]))
       self.otp.append(int(bits_string, 2))
 
