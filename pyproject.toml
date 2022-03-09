@@ -6,6 +6,7 @@ requires = [
   "matplotlib>=3.4.2",
   "qiskit>=0.19.1",
   "pwinput>=1.0.2",
-  "halo">=0.0.31
+  "halo">=0.0.31,
+  "alive-progress">=2.3.1
 ]
 build-backend = "setuptools.build_meta"

@@ -11,6 +11,7 @@ from halo import Halo
 from numpy.random import randint
 from random import SystemRandom, randrange
 import string
+from alive_progress import alive_bar
 
 class BB84:
   def __init__(self, token):
@@ -71,21 +72,25 @@ class BB84:
     DENSITY_MIN = 0
     DENSITY_MAX = 1
     DENSITY_STEP = 0.05
+    DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / DENSITY_STEP)
     LEN_MSG_LIMIT = 20
+    REPETITION_INSTANCE = 50
+
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    REPETITION_INSTANCE = 50
-    DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / DENSITY_STEP)
     image = np.zeros((DENSITY_RANGE + 1, LEN_MSG_LIMIT))
     x = list(range(1, LEN_MSG_LIMIT + 1, 1))
     y = list(np.arange(0, 1 + DENSITY_STEP, DENSITY_STEP))
-    for i, len_message in enumerate(x):
+
+    with alive_bar(len(x) * len(y) * REPETITION_INSTANCE) as bar:
       for j, density in enumerate(y):
-        for _ in range(REPETITION_INSTANCE):
-          message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-          bits_size = len(message) * 2 * N_BITS
-          flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
-          image[j][i] += 1 if flag else 0
+        for i, len_message in enumerate(x):
+          for _ in range(REPETITION_INSTANCE):
+            message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
+            bits_size = len(message) * 2 * N_BITS
+            flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
+            image[j][i] += 1 if flag else 0
+            bar()
 
     plt.figure(num='BB84 Simulator - Experimental Mode')
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
@@ -93,6 +98,7 @@ class BB84:
     plt.xlabel('Message Length')
     plt.ylabel('Interception Density')
     plt.show()
+    print('[$] Experiment Finished!')
 
   def __select_option(self):
     option = int(input('[&] Select an option: '))
