@@ -27,19 +27,19 @@ class Sender:
       self.axes = axes
 
   def show_values(self):
-    print('\n', self.name, 'Values:')
+    print('\n' + self.name, 'Values:')
     print(self.values)
 
   def show_axes(self):
-    print('\n', self.name, 'Axes:')
+    print('\n' + self.name, 'Axes:')
     print(self.axes)
   
   def show_key(self):
-    print('\n', self.name, 'Key:')
+    print('\n' + self.name, 'Key:')
     print(self.key)
 
   def show_otp(self):
-    print('\n', self.name, 'OTP:')
+    print('\n' + self.name, 'OTP:')
     print(self.otp)
 
   def remove_garbage(self, another_axes):

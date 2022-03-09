@@ -54,7 +54,7 @@ class BB84:
     message = str(input('[&] Message (string): '))
     density = float(input('[&] Interception Density (float between 0 and 1): '))
     backend = self.qexecute.current_backend
-    bits_size = len(message) * 2 * N_BITS
+    bits_size = len(message) * 5 * N_BITS
     halo_text = 'Running BB84 simulation'
     halo = Halo(text=halo_text, spinner="dots")
     try:
@@ -90,7 +90,7 @@ class BB84:
           for i, len_message in enumerate(x):
             for _ in range(REPETITION_INSTANCE):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-              bits_size = len(message) * 2 * N_BITS
+              bits_size = len(message) * 5 * N_BITS
               flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
               image[j][i] += 1 if flag else 0
               bar()
