@@ -23,6 +23,9 @@ class AlgorithmsTests(unittest.TestCase):
   def test_print_avaiable_algorithms(self):
     assert self.qAlgorithmManager.print_avaiable_algorithms is not None
 
+  def test_select_algorithm(self):
+    assert self.qAlgorithmManager.select_algorithm is not None
+
   def test_name(self):
     for algorithm in self.algorithms:
       self.assertTrue(isinstance(algorithm.name, str))

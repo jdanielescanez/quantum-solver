@@ -15,9 +15,9 @@ class QAlgorithmManager:
       print('[' + str(i + 1) + ']\tName:', algorithm.name)
       print('\tDescription:', algorithm.description)
       print('\tParameters:')
-      self.print_parameters(algorithm.parameters)
+      self.__print_parameters(algorithm.parameters)
   
-  def print_parameters(self, parameters):
+  def __print_parameters(self, parameters):
     for parameter in parameters:
         print('\t    ' + parameter['description'] + ' (' + \
             parameter['type'] + ')\n')
