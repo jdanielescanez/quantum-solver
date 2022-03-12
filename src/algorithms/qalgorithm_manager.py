@@ -53,7 +53,7 @@ class QAlgorithmManager:
     if self.current_algorithm == None:
       print('[$] Algorithm not selected')
       return
-    if len(self.current_algorithm.parameters) != len(self.parameters):
+    if self.parameters == None or len(self.current_algorithm.parameters) != len(self.parameters):
       print('[$] Parameters not selected')
       return
     return self.current_algorithm.circuit(*self.parameters)
