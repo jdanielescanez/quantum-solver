@@ -21,5 +21,9 @@ class AlgorithmsTests(unittest.TestCase):
     for algorithm in self.algorithms:
       self.assertTrue(isinstance(algorithm.name, str))
 
+  def test_description(self):
+    for algorithm in self.algorithms:
+      self.assertTrue(isinstance(algorithm.description, str))
+
 if __name__ == '__main__':
   unittest.main()
