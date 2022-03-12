@@ -9,6 +9,9 @@ from algorithms.algorithm import Algorithm
 from algorithms.qrand import QRand
 from algorithms.bernstein_vazirani import BernsteinVazirani
 
+def is_lambda(x):
+  return callable(x) and x.__name__ == '<lambda>'
+
 class AlgorithmsTests(unittest.TestCase):
   @unittest.expectedFailure
   def test_algorithm():
