@@ -6,8 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../src')
 
 from algorithms.algorithm import Algorithm
-from algorithms.qrand import QRand
-from algorithms.bernstein_vazirani import BernsteinVazirani
+from algorithms.qalgorithm_manager import QAlgorithmManager
 
 def is_lambda(x):
   return callable(x) and x.__name__ == '<lambda>'
@@ -18,7 +17,8 @@ class AlgorithmsTests(unittest.TestCase):
     algorithm = Algorithm()
 
   def setUp(self):
-    self.algorithms = [QRand(), BernsteinVazirani()]
+    self.qAlgorithmManager = QAlgorithmManager()
+    self.algorithms = self.qAlgorithmManager.algorithms
 
   def test_name(self):
     for algorithm in self.algorithms:
