@@ -25,5 +25,12 @@ class AlgorithmsTests(unittest.TestCase):
     for algorithm in self.algorithms:
       self.assertTrue(isinstance(algorithm.description, str))
 
+  def test_parameters(self):
+    for algorithm in self.algorithms:
+      for parameter in algorithm.parameters:
+        self.assertTrue(isinstance(parameter['type'], str))
+        self.assertTrue(isinstance(parameter['description'], str))
+        self.assertTrue(isinstance(parameter['constraint'], str))
+
 if __name__ == '__main__':
   unittest.main()
