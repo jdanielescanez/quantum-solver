@@ -40,5 +40,9 @@ class AlgorithmsTests(unittest.TestCase):
     for algorithm in self.algorithms:
       self.assertTrue(is_lambda(algorithm.parse_result))
 
+  def test_parse_parameters(self):
+    for algorithm in self.algorithms:
+      self.assertTrue(is_lambda(algorithm.parse_parameters))
+
 if __name__ == '__main__':
   unittest.main()
