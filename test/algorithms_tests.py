@@ -30,11 +30,15 @@ class AlgorithmsTests(unittest.TestCase):
     assert self.qAlgorithmManager.select_parameters is not None
 
   def test_get_circuit(self):
+    self.qAlgorithmManager.current_algorithm = None
     assert self.qAlgorithmManager.get_circuit() is None
     self.qAlgorithmManager.current_algorithm = self.qAlgorithmManager.algorithms[0]
     assert self.qAlgorithmManager.get_circuit() is None
     self.qAlgorithmManager.parameters = [1]
     assert self.qAlgorithmManager.get_circuit() is not None
+
+  def def_qalgorithm_parse_result(self):
+    assert self.qAlgorithmManager.parse_result is not None
 
   def test_name(self):
     for algorithm in self.algorithms:
