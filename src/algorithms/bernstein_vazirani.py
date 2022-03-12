@@ -16,7 +16,7 @@ class BernsteinVazirani:
     self.parse_result = lambda counts: list(counts.keys())[0]
     self.parse_parameters = lambda array: [array[0]]
 
-  def circuit(self, secret_number):
+  def circuit(self, secret_number='01011'):
     n = len(secret_number)
     n_range = list(range(n))
     # Create a Quantum Circuit acting on the q register
