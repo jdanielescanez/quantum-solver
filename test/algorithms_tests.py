@@ -44,5 +44,9 @@ class AlgorithmsTests(unittest.TestCase):
     for algorithm in self.algorithms:
       self.assertTrue(is_lambda(algorithm.parse_parameters))
 
+  def test_circuit(self):
+    for algorithm in self.algorithms:
+      assert algorithm.circuit() is not None
+
 if __name__ == '__main__':
   unittest.main()
