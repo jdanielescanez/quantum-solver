@@ -114,14 +114,14 @@ class QuantumSolver:
       print('  Circuit created in', str(time_ms), 'ms')
     except Exception as exception:
       halo.fail()
-      print('Exception: ', exception)
+      print('Exception:', exception)
 
     N_SHOTS = 1
-    halo_text = 'Executing '
-    halo_text += self.qalgorithm_manager.current_algorithm.name
-    halo_text += ' in ' + str(self.qexecute.current_backend)
-    halo_text += ' with parameters: '
-    halo_text += str(self.qalgorithm_manager.parameters)
+    execution_description = self.qalgorithm_manager.current_algorithm.name
+    execution_description += ' in ' + str(self.qexecute.current_backend)
+    execution_description += ' with parameters: '
+    execution_description += str(self.qalgorithm_manager.parameters)
+    halo_text = 'Executing ' + execution_description
     halo = Halo(text=halo_text, spinner="dots")
     try:
       halo.start()
@@ -134,7 +134,7 @@ class QuantumSolver:
       print('\n💡 Output:', parsed_result, '\n')
     except Exception as exception:
       halo.fail()
-      print('Exception: ', exception)
+      print('Exception:', exception)
 
   def __experimental_mode(self):
     n_shots = int(input('[&] Specify number of shots: '))
@@ -142,12 +142,11 @@ class QuantumSolver:
     start_time = time.time()
     print('\nRunning Experiment:')
 
-    halo_text = 'Executing '
-    halo_text += self.qalgorithm_manager.current_algorithm.name
-    halo_text += ' ' + str(n_shots) + ' times'
-    halo_text += ' in ' + str(self.qexecute.current_backend)
-    halo_text += ' with parameters: '
-    halo_text += str(self.qalgorithm_manager.parameters)
+    execution_description = self.qalgorithm_manager.current_algorithm.name
+    execution_description += ' in ' + str(self.qexecute.current_backend)
+    execution_description += ' with parameters: '
+    execution_description += str(self.qalgorithm_manager.parameters)
+    halo_text = 'Executing ' + execution_description
     halo = Halo(text=halo_text, spinner="dots")
     try:
       halo.start()
@@ -162,14 +161,17 @@ class QuantumSolver:
       plt.show()
     except Exception as exception:
       halo.fail()
-      print('Exception: ', exception)
+      print('Exception:', exception)
 
   def __main_menu(self):
     while True:
-      self.is_selected_backend = self.qexecute.current_backend != None
-      self.is_selected_algorithm = self.qalgorithm_manager.current_algorithm != None
-      self.is_parameter = self.qalgorithm_manager.parameters != None
+      try:
+        self.is_selected_backend = self.qexecute.current_backend != None
+        self.is_selected_algorithm = self.qalgorithm_manager.current_algorithm != None
+        self.is_parameter = self.qalgorithm_manager.parameters != None
 
-      self.__show_options()
-      self.__select_option()
+        self.__show_options()
+        self.__select_option()
+      except Exception as exception:
+        print('Exception:', exception)
       
