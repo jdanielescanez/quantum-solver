@@ -33,10 +33,13 @@ class BB84:
 
   def __main_menu(self):
     while True:
-      self.is_selected_backend = self.qexecute.current_backend != None
+      try:
+        self.is_selected_backend = self.qexecute.current_backend != None
 
-      self.__show_options()
-      self.__select_option()
+        self.__show_options()
+        self.__select_option()
+      except Exception as exception:
+        print('Exception:', exception)
 
   def __show_options(self):
     print('\n' + BB84_SIMULATOR + '\n' + '=' * len(BB84_SIMULATOR) + '\n')
@@ -50,12 +53,15 @@ class BB84:
       print('[4] Experimental mode')
     print('[0] Exit\n')
 
-  def __run(self):
+  def __run_simulation(self):
     message = str(input('[&] Message (string): '))
     density = float(input('[&] Interception Density (float between 0 and 1): '))
     backend = self.qexecute.current_backend
     bits_size = len(message) * 5 * N_BITS
-    halo_text = 'Running BB84 simulation'
+    execution_description = str(self.qexecute.current_backend)
+    execution_description += ' with message "'
+    execution_description += message + '" and density "' + str(density) + '"'
+    halo_text = 'Running BB84 simulation in ' + execution_description
     halo = Halo(text=halo_text, spinner="dots")
     try:
       halo.start()
@@ -63,10 +69,10 @@ class BB84:
       self.bb84_algorithm.run(message, backend, bits_size, density, True)
       time_ms = (time.time() - start_time) * 1000
       halo.succeed()
-      print('  BB84 silumation runned in', str(time_ms), 'ms')
+      print('  BB84 simulation runned in', str(time_ms), 'ms')
     except Exception as exception:
       halo.fail()
-      print('Exception: ', exception)
+      print('Exception:', exception)
 
   def __experimental_mode(self):
     DENSITY_MIN = 0
@@ -82,7 +88,7 @@ class BB84:
     x = list(range(1, LEN_MSG_LIMIT + 1, 1))
     y = list(np.arange(0, 1 + DENSITY_STEP, DENSITY_STEP))
     start_time = time.time()
-    print('\nRunning Experiment:')
+    print('\nRunning BB84 Simulator Experiment (in ' + str(backend) + '):')
 
     try:
       with alive_bar(len(x) * len(y) * REPETITION_INSTANCE) as bar:
@@ -95,11 +101,11 @@ class BB84:
               image[j][i] += 1 if flag else 0
               bar()
     except Exception as exception:
-      print('Exception: ', exception)
+      print('Exception:', exception)
 
     time_m = (time.time() - start_time)
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
-    plt.figure(num='BB84 Simulator - Experimental Mode')
+    plt.figure(num='BB84 Simulator - Experimental Mode' + str(backend))
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
     plt.xlabel('Message Length')
@@ -116,7 +122,7 @@ class BB84:
     elif option == 2:
       self.qexecute.select_backend()
     elif option == 3 and self.is_selected_backend:
-      self.__run()
+      self.__run_simulation()
     elif option == 4 and self.is_selected_backend:
       self.__experimental_mode()
     else:
