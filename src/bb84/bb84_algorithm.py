@@ -50,7 +50,7 @@ class BB84Algorithm:
       bob.show_key()
 
       print('\nShared Bob Key:')
-      print(shared_key, '\n')
+      print(shared_key)
 
     # Alice check the shared key
     if alice.check_key(shared_key):
@@ -58,7 +58,10 @@ class BB84Algorithm:
       alice.confirm_key(shared_size)
       bob.confirm_key(shared_size)
       if verbose:
-        print('Secure Communication!')
+        print('\nFinal Keys')
+        alice.show_key()
+        bob.show_key()
+        print('\nSecure Communication!')
     elif verbose:
       print('Unsecure Communication! Eve has been detected intercepting messages')
     
@@ -77,8 +80,8 @@ class BB84Algorithm:
     alice.generate_otp()
     bob.generate_otp()
 
-    encoded_message = alice.encode_otp_message(message)
-    decoded_message = bob.decode_otp_message(encoded_message)
+    encoded_message = alice.xor_otp_message(message)
+    decoded_message = bob.xor_otp_message(encoded_message)
 
     if verbose:
       alice.show_otp()
