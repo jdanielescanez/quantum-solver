@@ -13,7 +13,6 @@ class QRand(Algorithm):
         'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
       }
     ]
-    self.n_shots = 1
     self.parse_result = lambda counts: int(list(counts.keys())[0], 2)
     self.parse_parameters = lambda array: [int(array[0])]
 

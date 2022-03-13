@@ -7,7 +7,6 @@ class Algorithm(ABC):
     self.name = 'Algorithm'
     self.description = 'Algorithm Description'
     self.parameters = []
-    self.n_shots = 0
     self.parse_result = lambda counts: counts
     self.parse_parameters = lambda array: []
 
