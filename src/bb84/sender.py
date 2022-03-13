@@ -76,5 +76,5 @@ class Sender:
     encoded_message = ''
     CHR_LIMIT = 1114112
     for i, char in enumerate(message):
-      encoded_message += chr((ord(char) + self.otp[i % len(self.otp)]) % CHR_LIMIT)
+      encoded_message += chr((ord(char) ^ self.otp[i % len(self.otp)]) % CHR_LIMIT)
     return encoded_message

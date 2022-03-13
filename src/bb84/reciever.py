@@ -73,5 +73,5 @@ class Reciever:
     decoded_message = ''
     CHR_LIMIT = 1114112
     for i, char in enumerate(encoded_message):
-      decoded_message += chr((ord(char) - self.otp[i % len(self.otp)]) % CHR_LIMIT)
+      decoded_message += chr((ord(char) ^ self.otp[i % len(self.otp)]) % CHR_LIMIT)
     return decoded_message
