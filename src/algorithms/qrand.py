@@ -16,7 +16,7 @@ class QRand:
     self.parse_result = lambda counts: int(list(counts.keys())[0], 2)
     self.parse_parameters = lambda array: [int(array[0])]
 
-  def circuit(self, n):
+  def circuit(self, n=1):
     # Create a Quantum Circuit acting on the q register
     circuit = QuantumCircuit(n, n)
     n_range = list(range(n))
