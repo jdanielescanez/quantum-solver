@@ -13,7 +13,6 @@ class BernsteinVazirani(Algorithm):
         'constraint': 'The length must be smaller than the number of qubits of the selected backend'
       }
     ]
-    self.n_shots = 1
     self.parse_result = lambda counts: list(counts.keys())[0]
     self.parse_parameters = lambda array: [array[0]]
 

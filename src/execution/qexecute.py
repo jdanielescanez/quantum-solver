@@ -27,6 +27,7 @@ class QExecute:
 
       print('[' + str(i + 1) + ']\tName:', str(backend), \
             '\n\tNumber of qubits:', str(config.n_qubits) + \
+            '\n\tMaximum shots:', str(config.max_shots) + \
             '\n\tJobs in queue:', str(jobs_in_queue))
       print('\tIs ' + ('' if is_simulator else 'NOT ') + 'a simulator')
       if is_operational:

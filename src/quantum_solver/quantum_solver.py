@@ -5,6 +5,8 @@ from algorithms.qalgorithm_manager import QAlgorithmManager
 from halo import Halo
 from pwinput import pwinput
 import time
+import matplotlib.pyplot as plt
+from qiskit.visualization import plot_histogram
 
 QUANTUM_SOLVER = 'Quantum Solver'
 
@@ -70,9 +72,9 @@ class QuantumSolver:
       print('[5] Select Parameters')
       if self.is_parameter:
         print('\tCurrent Parameters: ' + str(self.qalgorithm_manager.parameters))
-
     if self.is_selected_backend and self.is_selected_algorithm and self.is_parameter:
       print('[6] Run Algorithm')
+      print('[7] Experimental mode')
     print('[0] Exit\n')
 
   def __select_option(self):
@@ -93,6 +95,9 @@ class QuantumSolver:
     elif option == 6 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
       self.__run_algorithm()
+    elif option == 7 and self.is_selected_backend and \
+        self.is_selected_algorithm and self.is_parameter:
+      self.__experimental_mode()
     else:
       print('[!] Invalid option, try again')
     
@@ -111,7 +116,7 @@ class QuantumSolver:
       halo.fail()
       print('Exception: ', exception)
 
-    n_shots = self.qalgorithm_manager.current_algorithm.n_shots
+    N_SHOTS = 1
     halo_text = 'Executing '
     halo_text += self.qalgorithm_manager.current_algorithm.name
     halo_text += ' in ' + str(self.qexecute.current_backend)
@@ -121,12 +126,40 @@ class QuantumSolver:
     try:
       halo.start()
       exec_start_time = time.time()
-      result = self.qexecute.run(circuit, n_shots)
+      result = self.qexecute.run(circuit, N_SHOTS)
       exec_ms = (time.time() - exec_start_time) * 1000
       halo.succeed()
       print('  Execution done in', str(exec_ms), 'ms')
       parsed_result = self.qalgorithm_manager.parse_result(result)
       print('\n💡 Output:', parsed_result, '\n')
+    except Exception as exception:
+      halo.fail()
+      print('Exception: ', exception)
+
+  def __experimental_mode(self):
+    n_shots = int(input('[&] Specify number of shots: '))
+
+    start_time = time.time()
+    print('\nRunning Experiment:')
+
+    halo_text = 'Executing '
+    halo_text += self.qalgorithm_manager.current_algorithm.name
+    halo_text += ' ' + str(n_shots) + ' times'
+    halo_text += ' in ' + str(self.qexecute.current_backend)
+    halo_text += ' with parameters: '
+    halo_text += str(self.qalgorithm_manager.parameters)
+    halo = Halo(text=halo_text, spinner="dots")
+    try:
+      halo.start()
+      circuit = self.qalgorithm_manager.get_circuit()
+      result = self.qexecute.run(circuit, n_shots)
+      
+      halo.succeed()
+      time_m = (time.time() - start_time)
+      print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
+      print('\n💡 Output:', result, '\n')
+      plot_histogram(result, title='QuantumSolver - Experimental Mode')
+      plt.show()
     except Exception as exception:
       halo.fail()
       print('Exception: ', exception)
