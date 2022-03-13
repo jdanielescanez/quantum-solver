@@ -63,7 +63,7 @@ class BB84Algorithm:
         bob.show_key()
         print('\nSecure Communication!')
     elif verbose:
-      print('Unsecure Communication! Eve has been detected intercepting messages')
+      print('\nUnsecure Communication! Eve has been detected intercepting messages\n')
     
     return alice, bob
 
