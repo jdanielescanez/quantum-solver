@@ -1,5 +1,5 @@
 
-from qiskit import QuantumCircuit, assemble
+from qiskit import QuantumCircuit
 from bb84.sender import Sender
 from bb84.reciever import Reciever
 import binascii

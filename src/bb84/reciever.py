@@ -1,6 +1,6 @@
 
 from bb84.participant import Participant
-from qiskit import QuantumCircuit, assemble
+from qiskit import QuantumCircuit
 from numpy.random import rand, randint
 from bb84.participant import N_BITS
 from math import ceil
@@ -14,8 +14,7 @@ class Reciever(Participant):
         if self.axes[i] == 1:
           qc.h(0)
         qc.measure(0, 0)
-        qobj = assemble(qc, shots=1, memory=True)
-        result = backend.run(qobj).result()
+        result = backend.run(qc, shots=1, memory=True).result()
         measured_bit = int(result.get_memory()[0])
         self.values.append(measured_bit)
       else:

@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../src')
 from bb84.participant import Participant
 from bb84.sender import Sender
 from bb84.reciever import Reciever
+from qiskit import Aer
 
 ALICE = 'Alice'
 BOB = 'Bob'
@@ -119,14 +120,24 @@ class ClassesTests(unittest.TestCase):
     self.test_set_random_axes()
     self.test_set_random_values()
 
-    msg = self.sender.encode_quantum_message()
+    self.msg = self.sender.encode_quantum_message()
 
-    for i, qc in enumerate(msg):
+    for i, qc in enumerate(self.msg):
       for gate in qc.data:
         if gate[0].name == 'x':
           self.assertTrue(self.sender.values[i] == 1)
         if gate[0].name == 'h':
           self.assertTrue(self.sender.axes[i] == 1)
+
+  def test_decode_quantum_message(self):
+    self.test_encode_quantum_message()
+
+    backend = Aer.get_backend('aer_simulator')
+    self.msg = self.reciever.decode_quantum_message(self.msg, 1, backend)
+
+    for i in self.reciever.axes:
+      if self.reciever.axes[i] == self.sender.axes[i]:
+        self.assertEqual(self.reciever.values[i], self.sender.values[i])
 
 if __name__ == '__main__':
   unittest.main()
