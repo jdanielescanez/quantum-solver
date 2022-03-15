@@ -25,5 +25,9 @@ class ClassesTests(unittest.TestCase):
   def test_participant():
     participant = Participant('Participant', ORIGINAL_BITS_SIZE)
 
+  def test_name(self):
+    self.assertEqual(self.sender.name, ALICE)
+    self.assertEqual(self.reciever.name, BOB)
+
 if __name__ == '__main__':
   unittest.main()
