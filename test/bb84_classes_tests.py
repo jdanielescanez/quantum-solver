@@ -14,7 +14,7 @@ ALICE = 'Alice'
 BOB = 'Bob'
 EXAMPLE_LIST_1 = [1, 0, 0, 1, 0, 1, 1]
 EXAMPLE_LIST_2 = [1, 1, 0, 0, 0, 1, 0]
-ORIGINAL_BITS_SIZE = 7
+ORIGINAL_BITS_SIZE = len(EXAMPLE_LIST_1)
 INDEX_SHARED_KEY = 2
 
 def is_lambda(x):
