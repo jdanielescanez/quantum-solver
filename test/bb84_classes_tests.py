@@ -53,7 +53,7 @@ class ClassesTests(unittest.TestCase):
     self.assertTrue(isinstance(self.reciever.values, list) and \
                     len(self.reciever.values) == ORIGINAL_BITS_SIZE)
 
-  def test_values_axes(self):
+  def test_show_values(self):
     self.assertTrue(self.sender.show_values is not None)
     self.assertTrue(self.reciever.show_values is not None)
 
@@ -108,6 +108,10 @@ class ClassesTests(unittest.TestCase):
     self.test_safe_key()
     self.sender.generate_otp()
     self.assertTrue(isinstance(self.sender.otp, list))
+
+  def test_show_otp(self):
+    self.test_generate_otp()
+    self.assertTrue(self.sender.show_otp is not None)
 
   def test_xor_otp_message(self):
     self.test_generate_otp()
