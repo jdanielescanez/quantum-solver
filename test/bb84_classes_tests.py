@@ -115,5 +115,18 @@ class ClassesTests(unittest.TestCase):
     decoded_msg = self.sender.xor_otp_message(encoded_msg)
     self.assertEqual(decoded_msg, msg)
 
+  def test_encode_quantum_message(self):
+    self.test_set_random_axes()
+    self.test_set_random_values()
+
+    msg = self.sender.encode_quantum_message()
+
+    for i, qc in enumerate(msg):
+      for gate in qc.data:
+        if gate[0].name == 'x':
+          self.assertTrue(self.sender.values[i] == 1)
+        if gate[0].name == 'h':
+          self.assertTrue(self.sender.axes[i] == 1)
+
 if __name__ == '__main__':
   unittest.main()
