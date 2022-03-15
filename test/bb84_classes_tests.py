@@ -108,5 +108,12 @@ class ClassesTests(unittest.TestCase):
     self.sender.generate_otp()
     self.assertTrue(isinstance(self.sender.otp, list))
 
+  def test_xor_otp_message(self):
+    self.test_generate_otp()
+    msg = 'qwertyuiopasdfghjklñzxcvbnm012345789QWERTYUIOPASDFGHJKLÑZXCVBNM,._-'
+    encoded_msg = self.sender.xor_otp_message(msg)
+    decoded_msg = self.sender.xor_otp_message(encoded_msg)
+    self.assertEqual(decoded_msg, msg)
+
 if __name__ == '__main__':
   unittest.main()
