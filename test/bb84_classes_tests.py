@@ -14,6 +14,7 @@ BOB = 'Bob'
 EXAMPLE_LIST_1 = [1, 0, 0, 1, 0, 1, 1]
 EXAMPLE_LIST_2 = [1, 1, 0, 0, 0, 1, 0]
 ORIGINAL_BITS_SIZE = 7
+INDEX_SHARED_KEY = 2
 
 def is_lambda(x):
   return callable(x) and x.__name__ == '<lambda>'
@@ -35,13 +36,14 @@ class ClassesTests(unittest.TestCase):
     self.assertEqual(self.sender.original_bits_size, ORIGINAL_BITS_SIZE)
     self.assertEqual(self.reciever.original_bits_size, ORIGINAL_BITS_SIZE)
 
-  def test_values(self):
+  def test_setter_values(self):
     self.sender.set_values(EXAMPLE_LIST_1)
     self.reciever.set_values(EXAMPLE_LIST_1)
 
     self.assertEqual(self.sender.values, EXAMPLE_LIST_1)
     self.assertEqual(self.reciever.values, EXAMPLE_LIST_1)
 
+  def test_set_random_values(self):
     self.sender.set_values()
     self.reciever.set_values()
 
@@ -50,16 +52,18 @@ class ClassesTests(unittest.TestCase):
     self.assertTrue(isinstance(self.reciever.values, list) and \
                     len(self.reciever.values) == ORIGINAL_BITS_SIZE)
 
+  def test_values_axes(self):
     self.assertTrue(self.sender.show_values is not None)
     self.assertTrue(self.reciever.show_values is not None)
 
-  def test_axes(self):
+  def test_setter_axes(self):
     self.sender.set_axes(EXAMPLE_LIST_1)
     self.reciever.set_axes(EXAMPLE_LIST_1)
 
     self.assertEqual(self.sender.axes, EXAMPLE_LIST_1)
     self.assertEqual(self.reciever.axes, EXAMPLE_LIST_1)
 
+  def test_set_random_axes(self):
     self.sender.set_axes()
     self.reciever.set_axes()
 
@@ -68,6 +72,7 @@ class ClassesTests(unittest.TestCase):
     self.assertTrue(isinstance(self.reciever.axes, list) and \
                     len(self.reciever.axes) == ORIGINAL_BITS_SIZE)
 
+  def test_show_axes(self):
     self.assertTrue(self.sender.show_axes is not None)
     self.assertTrue(self.reciever.show_axes is not None)
 
@@ -80,12 +85,22 @@ class ClassesTests(unittest.TestCase):
     self.sender.remove_garbage(EXAMPLE_LIST_2)
     self.reciever.remove_garbage(EXAMPLE_LIST_1)
 
-    INDEX = 2
-    shared_key = self.reciever.key[:INDEX]
+  def test_check_key(self):
+    self.test_remove_garbage()
+    shared_key = self.reciever.key[:INDEX_SHARED_KEY]
     self.assertTrue(self.sender.check_key(shared_key))
+
+  def test_confirm_key(self):
+    self.test_check_key()
+    shared_key = self.reciever.key[:INDEX_SHARED_KEY]
     self.sender.confirm_key(len(shared_key))
+
+  def test_safe_key(self):
+    self.test_confirm_key()
     self.assertTrue(self.sender.safe_key)
 
+  def test_show_key(self):
+    self.test_safe_key()
     self.assertTrue(self.sender.show_key is not None)
 
 if __name__ == '__main__':
