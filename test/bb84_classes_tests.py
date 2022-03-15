@@ -12,6 +12,7 @@ from bb84.reciever import Reciever
 ALICE = 'Alice'
 BOB = 'Bob'
 ORIGINAL_BITS_SIZE = 20
+EXAMPLE_LIST = [1, 0, 0, 1, 0, 1, 1]
 
 def is_lambda(x):
   return callable(x) and x.__name__ == '<lambda>'
@@ -34,13 +35,11 @@ class ClassesTests(unittest.TestCase):
     self.assertEqual(self.reciever.original_bits_size, ORIGINAL_BITS_SIZE)
 
   def test_values(self):
-    example_list = [1, 2]
+    self.sender.set_values(EXAMPLE_LIST)
+    self.reciever.set_values(EXAMPLE_LIST)
 
-    self.sender.set_values(example_list)
-    self.reciever.set_values(example_list)
-
-    self.assertEqual(self.sender.values, example_list)
-    self.assertEqual(self.reciever.values, example_list)
+    self.assertEqual(self.sender.values, EXAMPLE_LIST)
+    self.assertEqual(self.reciever.values, EXAMPLE_LIST)
 
     self.sender.set_values()
     self.reciever.set_values()
@@ -50,14 +49,15 @@ class ClassesTests(unittest.TestCase):
     self.assertTrue(isinstance(self.reciever.values, list) and \
                     len(self.reciever.values) == ORIGINAL_BITS_SIZE)
 
+    assert self.sender.show_values is not None
+    assert self.reciever.show_values is not None
+
   def test_axes(self):
-    example_list = [1, 2]
+    self.sender.set_axes(EXAMPLE_LIST)
+    self.reciever.set_axes(EXAMPLE_LIST)
 
-    self.sender.set_axes(example_list)
-    self.reciever.set_axes(example_list)
-
-    self.assertEqual(self.sender.axes, example_list)
-    self.assertEqual(self.reciever.axes, example_list)
+    self.assertEqual(self.sender.axes, EXAMPLE_LIST)
+    self.assertEqual(self.reciever.axes, EXAMPLE_LIST)
 
     self.sender.set_axes()
     self.reciever.set_axes()
@@ -66,6 +66,9 @@ class ClassesTests(unittest.TestCase):
                     len(self.sender.axes) == ORIGINAL_BITS_SIZE)
     self.assertTrue(isinstance(self.reciever.axes, list) and \
                     len(self.reciever.axes) == ORIGINAL_BITS_SIZE)
+
+    assert self.sender.show_axes is not None
+    assert self.reciever.show_axes is not None
 
 if __name__ == '__main__':
   unittest.main()
