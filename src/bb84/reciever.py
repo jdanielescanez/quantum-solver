@@ -2,7 +2,7 @@
 from bb84.participant import Participant
 from qiskit import QuantumCircuit, assemble
 from numpy.random import rand, randint
-from bb84.bb84 import N_BITS
+from bb84.participant import N_BITS
 from math import ceil
 
 class Reciever(Participant):

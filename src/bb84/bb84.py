@@ -1,7 +1,4 @@
 
-BB84_SIMULATOR = 'BB84 SIMULATOR'
-N_BITS = 6
-
 from quantum_solver.quantum_solver import QuantumSolver
 from bb84.bb84_algorithm import BB84Algorithm
 import time
@@ -12,6 +9,9 @@ from numpy.random import randint
 from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
+from bb84.participant import N_BITS
+
+BB84_SIMULATOR = 'BB84 SIMULATOR'
 
 class BB84:
   def __init__(self, token):
