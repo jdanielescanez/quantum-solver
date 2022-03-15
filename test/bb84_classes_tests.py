@@ -33,5 +33,22 @@ class ClassesTests(unittest.TestCase):
     self.assertEqual(self.sender.original_bits_size, ORIGINAL_BITS_SIZE)
     self.assertEqual(self.reciever.original_bits_size, ORIGINAL_BITS_SIZE)
 
+  def test_values(self):
+    example_list = [1, 2]
+
+    self.sender.set_values(example_list)
+    self.reciever.set_values(example_list)
+
+    self.assertEqual(self.sender.values, example_list)
+    self.assertEqual(self.reciever.values, example_list)
+
+    self.sender.set_values()
+    self.reciever.set_values()
+
+    self.assertTrue(isinstance(self.sender.values, list) and \
+                    len(self.sender.values) == ORIGINAL_BITS_SIZE)
+    self.assertTrue(isinstance(self.reciever.values, list) and \
+                    len(self.reciever.values) == ORIGINAL_BITS_SIZE)
+
 if __name__ == '__main__':
   unittest.main()
