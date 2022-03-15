@@ -29,5 +29,9 @@ class ClassesTests(unittest.TestCase):
     self.assertEqual(self.sender.name, ALICE)
     self.assertEqual(self.reciever.name, BOB)
 
+  def test_original_bits_size(self):
+    self.assertEqual(self.sender.original_bits_size, ORIGINAL_BITS_SIZE)
+    self.assertEqual(self.reciever.original_bits_size, ORIGINAL_BITS_SIZE)
+
 if __name__ == '__main__':
   unittest.main()
