@@ -3,11 +3,12 @@ from abc import ABC
 
 from qiskit import QuantumCircuit
 from numpy.random import randint
-from bb84.bb84 import N_BITS
 from math import ceil
 
+N_BITS = 6
+
 class Participant(ABC):
-  def __init__(self, name, original_bits_size):
+  def __init__(self, name='', original_bits_size=0):
     self.name = name
     self.original_bits_size = original_bits_size
     self.values = None
