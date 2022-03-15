@@ -12,13 +12,13 @@ def is_lambda(x):
   return callable(x) and x.__name__ == '<lambda>'
 
 class AlgorithmsTests(unittest.TestCase):
-  @unittest.expectedFailure
-  def test_algorithm():
-    algorithm = Algorithm()
-
   def setUp(self):
     self.qAlgorithmManager = QAlgorithmManager()
     self.algorithms = self.qAlgorithmManager.algorithms
+    
+  @unittest.expectedFailure
+  def test_algorithm():
+    algorithm = Algorithm()
 
   def test_print_avaiable_algorithms(self):
     assert self.qAlgorithmManager.print_avaiable_algorithms is not None
