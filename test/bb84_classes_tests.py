@@ -103,5 +103,10 @@ class ClassesTests(unittest.TestCase):
     self.test_safe_key()
     self.assertTrue(self.sender.show_key is not None)
 
+  def test_generate_otp(self):
+    self.test_safe_key()
+    self.sender.generate_otp()
+    self.assertTrue(isinstance(self.sender.otp, list))
+
 if __name__ == '__main__':
   unittest.main()
