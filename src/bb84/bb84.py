@@ -74,27 +74,24 @@ class BB84:
       halo.fail()
       print('Exception:', exception)
 
-  def __experimental_mode(self):
+  def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
     DENSITY_MIN = 0
     DENSITY_MAX = 1
-    DENSITY_STEP = 0.05
-    DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / DENSITY_STEP)
-    LEN_MSG_LIMIT = 5 # 50
-    REPETITION_INSTANCE = 10 # 30
+    DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
 
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    image = np.zeros((DENSITY_RANGE + 1, LEN_MSG_LIMIT))
-    x = list(range(1, LEN_MSG_LIMIT + 1, 1))
-    y = list(np.arange(0, 1 + DENSITY_STEP, DENSITY_STEP))
+    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit))
+    x = list(range(1, len_msg_limit + 1, 1))
+    y = list(np.arange(0, 1 + density_step, density_step))
     start_time = time.time()
     print('\nRunning BB84 Simulator Experiment (in ' + str(backend) + '):')
 
     try:
-      with alive_bar(len(x) * len(y) * REPETITION_INSTANCE) as bar:
+      with alive_bar(len(x) * len(y) * repetition_instance) as bar:
         for j, density in enumerate(y):
           for i, len_message in enumerate(x):
-            for _ in range(REPETITION_INSTANCE):
+            for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
               bits_size = len(message) * 5 * N_BITS
               flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
@@ -124,6 +121,9 @@ class BB84:
     elif option == 3 and self.is_selected_backend:
       self.__run_simulation()
     elif option == 4 and self.is_selected_backend:
-      self.__experimental_mode()
+      len_msg_limit = int(input('[&] Specify maximum message length: '))
+      density_step = float(input('[&] Specify density step: '))
+      repetition_instance = int(input('[&] Specify number of repetitions for each instance: '))
+      self.__experimental_mode(len_msg_limit, density_step, repetition_instance)
     else:
       print('[!] Invalid option, try again')
