@@ -7,12 +7,15 @@ class QExecute:
   # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
   def __init__(self, token: str):
     self.token = token
-    self.provider = IBMQ.enable_account(self.token)
-    self.backends = [Aer.get_backend('aer_simulator'), *self.provider.backends()]
+    self.backends = [Aer.get_backend('aer_simulator')]
+    if self.token:
+      self.provider = IBMQ.enable_account(self.token)
+      self.backends += self.provider.backends()
     self.current_backend = None
     
   def set_current_backend(self, backend_name: str):
-    self.current_backend = self.provider.get_backend(backend_name)
+    if self.provider:
+      self.current_backend = self.provider.get_backend(backend_name)
 
   def print_avaiable_backends(self):
     print('\nAvaliable backends:')
