@@ -153,8 +153,8 @@ class QuantumSolver:
       result = self.qexecute.run(circuit, n_shots)
       
       halo.succeed()
-      time_m = (time.time() - start_time)
-      print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
+      time_s = (time.time() - start_time)
+      print('\n[$] Experiment Finished in ' + str(time_s) + ' s!')
       print('\n💡 Output:', result, '\n')
       plot_histogram(result, title='QuantumSolver - Experimental Mode')
       plt.show()
