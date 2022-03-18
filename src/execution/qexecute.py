@@ -17,6 +17,9 @@ class QExecute:
     if self.provider:
       self.current_backend = self.provider.get_backend(backend_name)
 
+  def is_guest_mode(self):
+    return self.token == ''
+
   def print_avaiable_backends(self):
     print('\nAvaliable backends:')
     for i in range(len(self.backends)):
