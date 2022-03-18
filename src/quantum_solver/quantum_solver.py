@@ -27,8 +27,11 @@ class QuantumSolver:
       tries += 1
       if self.token == None:
         self.token = pwinput(mask='*', \
-            prompt='[&] Write your IBM Quantum Experience token: ')
-      halo = Halo(text="Authenticating to the IBMQ server", spinner="dots")
+            prompt='[&] Write your IBM Quantum Experience token (Or Press Enter for Guest Mode): ')
+      if self.token == '':
+        halo = Halo(text="Loading Guest Mode", spinner="dots")
+      else:
+        halo = Halo(text="Authenticating to the IBMQ server", spinner="dots")
       try:
         halo.start()
         qexecute = QExecute(self.token)
@@ -56,6 +59,8 @@ class QuantumSolver:
     print('token to access to IBM hardware.')
     print('You can access to your API token or generate another one here:')
     print('https://quantum-computing.ibm.com/account\n')
+    print('You can also use the Guest Mode which only allows you to run ')
+    print('quantum circuits in a local simulator ("aer_simulator").\n')
   
   def __show_options(self):
     print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
