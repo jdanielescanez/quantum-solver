@@ -5,7 +5,7 @@ from qiskit.utils import QuantumInstance
 
 class QExecute:
   # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
-  def __init__(self, token: str):
+  def __init__(self, token: str = ''):
     self.token = token
     self.backends = [Aer.get_backend('aer_simulator')]
     if self.token:
