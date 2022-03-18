@@ -124,6 +124,8 @@ class BB84:
       len_msg_limit = int(input('[&] Specify maximum message length: '))
       density_step = float(input('[&] Specify density step: '))
       repetition_instance = int(input('[&] Specify number of repetitions for each instance: '))
+      if 1.0 % density_step != 0:
+        density_step = 1 / round(1 / density_step)
       self.__experimental_mode(len_msg_limit, density_step, repetition_instance)
     else:
       print('[!] Invalid option, try again')
