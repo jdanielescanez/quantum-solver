@@ -30,6 +30,8 @@ class BB84:
     print('token to access to IBM hardware.')
     print('You can access to your API token or generate another one here:')
     print('https://quantum-computing.ibm.com/account\n')
+    print('You can also use the Guest Mode which only allows you to run ')
+    print('quantum circuits in a local simulator ("aer_simulator").\n')
 
   def __main_menu(self):
     while True:
