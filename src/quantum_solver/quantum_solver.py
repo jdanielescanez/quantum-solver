@@ -63,7 +63,11 @@ class QuantumSolver:
     print('quantum circuits in a local simulator ("aer_simulator").\n')
   
   def __show_options(self):
-    print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
+    is_guest_mode = self.qexecute.is_guest_mode()
+    guest_mode_string = ' (Guest Mode)' if is_guest_mode else ''
+    len_guest_mode_string = len(guest_mode_string)
+    print('\n' + QUANTUM_SOLVER + guest_mode_string)
+    print('=' * (len(QUANTUM_SOLVER) + len_guest_mode_string) + '\n')
     print('[1] See available Backends')
     print('[2] See available Algorithms')
     print('[3] Select Backend')
