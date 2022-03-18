@@ -8,7 +8,7 @@ import {AlgorithmPage} from './pages/AlgorithmPage';
 import {ParamsPage} from './pages/ParamsPage';
 import {LoadingPage} from './pages/LoadingPage';
 import {OutputPage} from './pages/OutputPage';
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom';
 
 function App() {
   return (
