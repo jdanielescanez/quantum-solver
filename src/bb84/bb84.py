@@ -44,7 +44,11 @@ class BB84:
         print('Exception:', exception)
 
   def __show_options(self):
-    print('\n' + BB84_SIMULATOR + '\n' + '=' * len(BB84_SIMULATOR) + '\n')
+    is_guest_mode = self.qexecute.is_guest_mode()
+    guest_mode_string = ' (Guest Mode)' if is_guest_mode else ''
+    len_guest_mode_string = len(guest_mode_string)
+    print('\n' + BB84_SIMULATOR + guest_mode_string)
+    print('=' * (len(BB84_SIMULATOR) + len_guest_mode_string) + '\n')
     print('[1] See available Backends')
     print('[2] Select Backend')
     if self.is_selected_backend:
