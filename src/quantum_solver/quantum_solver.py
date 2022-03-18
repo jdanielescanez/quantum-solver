@@ -97,7 +97,8 @@ class QuantumSolver:
       self.__run_algorithm()
     elif option == 7 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
-      self.__experimental_mode()
+      n_shots = int(input('[&] Specify number of shots: '))
+      self.__experimental_mode(n_shots)
     else:
       print('[!] Invalid option, try again')
     
@@ -136,9 +137,7 @@ class QuantumSolver:
       halo.fail()
       print('Exception:', exception)
 
-  def __experimental_mode(self):
-    n_shots = int(input('[&] Specify number of shots: '))
-
+  def __experimental_mode(self, n_shots):
     start_time = time.time()
     print('\nRunning Experiment:')
 
@@ -154,8 +153,8 @@ class QuantumSolver:
       result = self.qexecute.run(circuit, n_shots)
       
       halo.succeed()
-      time_m = (time.time() - start_time)
-      print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
+      time_s = (time.time() - start_time)
+      print('\n[$] Experiment Finished in ' + str(time_s) + ' s!')
       print('\n💡 Output:', result, '\n')
       plot_histogram(result, title='QuantumSolver - Experimental Mode')
       plt.show()
