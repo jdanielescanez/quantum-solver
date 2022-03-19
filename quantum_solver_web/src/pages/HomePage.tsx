@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 export function HomePage() {
   return (
     <div>
-      <h1>Hello World! Quantum Solver</h1>
+      <h1>QuantumSolver</h1>
       <Link to="/token">
         <button type="button">
           Start!
