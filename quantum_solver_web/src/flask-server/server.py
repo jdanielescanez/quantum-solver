@@ -23,10 +23,6 @@ def set_token():
     return {'msg': 'Invalid token: "' + token + '". Try Again', 'err': True}
   return {'msg': 'Authenticated with token: ' + token, 'err': False}
 
-@app.route('/token2')
-def set_token2():
-  return {"qc": str(app.config['quantum_solver'])}
-
 CORS(app)
 
 if __name__ == "__main__":
