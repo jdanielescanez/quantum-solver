@@ -7,21 +7,64 @@ from flask import Flask, request
 from quantum_solver.quantum_solver import QuantumSolver
 from execution.qexecute import QExecute
 from flask_cors import CORS
+from qiskit.utils import QuantumInstance
+from qiskit import IBMQ
 
 app = Flask(__name__)
 
-# Members API Route
+def format_backends(backends):
+  result = {'backends': [], 'current_backend': ''}
+  for backend in backends:
+    status = backend.status()
+    is_operational = status.operational
+    if is_operational:
+      config = backend.configuration()
+      jobs_in_queue = status.pending_jobs
+      json_backend = {
+        'name': str(backend),
+        'n_qubits': config.n_qubits,
+        'n_shots': config.max_shots,
+        'jobs_in_queue': jobs_in_queue
+      }
+      result['backends'].append(json_backend)
+  result['current_backend'] = result['backends'][0]
+  return result
 
-@app.route('/get-token', methods=['POST'])
+# Members API Route
+@app.route('/set-token', methods=['POST'])
 def set_token():
   token = request.json['token']
   app.config['quantum_solver'] = QuantumSolver(token)
   try:
+    print('Loading account')
     app.config['quantum_solver'].qexecute = QExecute(app.config['quantum_solver'].token)
+    print('Generating Backends')
+    app.config['backends'] = format_backends(app.config['quantum_solver'].qexecute.backends)
+    print('Generated Backends')
+    return {'msg': 'Authenticated with token: ' + token, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid token: "' + token + '". Try Again', 'err': True}
-  return {'msg': 'Authenticated with token: ' + token, 'err': False}
+
+@app.route('/get-backends', methods=['GET'])
+def get_backends():
+  return app.config['backends']
+
+@app.route('/reset-qexecute', methods=['POST'])
+def reset_qexecute():
+  if IBMQ.active_account():
+    IBMQ.disable_account()
+  return {'msg': 'Reseted qexecute', 'err': False}
+
+@app.route('/set-backend', methods=['POST'])
+def set_backend():
+  backend_name = request.json['name']
+  try:
+    app.config['quantum_solver'].qexecute.set_current_backend(backend_name)
+    return {'msg': 'Selected ' + backend_name, 'err': False}
+  except Exception as exception:
+    print('Exception:', exception)
+    return {'msg': 'Invalid backend: "' + backend_name + '". Try Again', 'err': True}
 
 CORS(app)
 

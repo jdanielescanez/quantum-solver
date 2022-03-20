@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function ParamsPage() {
+export function ParamPage() {
   return (
     <div>
-      <h1>Params PAGE!!!</h1>
+      <h1>Param PAGE!!!</h1>
     </div>
   )
 }

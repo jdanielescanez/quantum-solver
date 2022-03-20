@@ -5,24 +5,22 @@ import {useNavigate} from "react-router-dom";
 const API = process.env.REACT_APP_API;
 
 export function TokenPage() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   let token = '';
-  let error_message = '';
   const getToken = (event: React.ChangeEvent<HTMLInputElement>) => {
     token = event.target.value;
   }
   const sendToken = async () => {
     console.log(token);
-    const result = await fetch(`${API}/get-token`, {
+    const result = await fetch(`${API}/set-token`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({token})
     });
     const data = await result.json();
-    console.log('DATA:', data);
+    console.log('sendToken:', data);
     if (data['err']) {
-      error_message = data['msg'];
-      alert(error_message);
+      alert(data['msg']);
     }
     else {
       goToMenu();
@@ -32,7 +30,7 @@ export function TokenPage() {
     navigate('/menu', { replace: true });
   }
   const checkAndSend = async () => {
-    token = token != '' ? token : 'empty_string_token';
+    token = token !== '' ? token : 'empty_string_token';
     sendToken();
   }
   const guestMode = async () => {
