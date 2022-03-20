@@ -30,7 +30,26 @@ def format_backends(backends):
   result['current_backend'] = result['backends'][0]
   return result
 
+def format_algorithms(algorithms):
+  result = {'algorithms': [], 'current_algorithm': ''}
+  for i, algorithm in enumerate(algorithms):
+    json_algorithm = {
+      'id': i,
+      'name': algorithm.name,
+      'description': algorithm.description,
+      'parameters': algorithm.parameters
+    }
+    result['algorithms'].append(json_algorithm)
+  result['current_algorithm'] = result['algorithms'][0]
+  return result
+
 # Members API Route
+@app.route('/reset-qexecute', methods=['POST'])
+def reset_qexecute():
+  if IBMQ.active_account():
+    IBMQ.disable_account()
+  return {'msg': 'Reseted qexecute', 'err': False}
+
 @app.route('/set-token', methods=['POST'])
 def set_token():
   token = request.json['token']
@@ -50,11 +69,9 @@ def set_token():
 def get_backends():
   return app.config['backends']
 
-@app.route('/reset-qexecute', methods=['POST'])
-def reset_qexecute():
-  if IBMQ.active_account():
-    IBMQ.disable_account()
-  return {'msg': 'Reseted qexecute', 'err': False}
+@app.route('/get-algorithms', methods=['GET'])
+def get_algorithms():
+  return format_algorithms(app.config['quantum_solver'].qalgorithm_manager.algorithms)
 
 @app.route('/set-backend', methods=['POST'])
 def set_backend():
@@ -65,6 +82,17 @@ def set_backend():
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid backend: "' + backend_name + '". Try Again', 'err': True}
+
+@app.route('/set-algorithm', methods=['POST'])
+def set_algorithm():
+  algorithm_id = request.json['id']
+  try:
+    app.config['quantum_solver'].qalgorithm_manager.set_current_algorithm(int(algorithm_id))
+    algorithm_name = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.name
+    return {'msg': 'Selected ' + algorithm_name, 'err': False}
+  except Exception as exception:
+    print('Exception:', exception)
+    return {'msg': 'Invalid algorithm with id: "' + algorithm_id + '". Try Again', 'err': True}
 
 CORS(app)
 

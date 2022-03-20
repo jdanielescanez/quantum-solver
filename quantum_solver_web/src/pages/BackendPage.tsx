@@ -13,7 +13,6 @@ type Backend = {
 
 export function BackendPage() {
   const navigate = useNavigate();
-  let currentBackend = '';
   const [state, setState] = useState({'backends': [], 'current_backend': ''});
   const goToMenu = () => {
     navigate('/menu', { replace: true });
@@ -50,7 +49,7 @@ export function BackendPage() {
     <div>
     <h1>Select Backend</h1>
     <select name='backends' onChange={selectBackend}>
-    <option value="" hidden>Choose a backend here</option>
+      <option value="" hidden>Choose a backend here</option>
       {getOptions} 
     </select>
     <button onClick={setBackend}>
