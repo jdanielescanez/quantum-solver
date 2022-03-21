@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 
 const API = process.env.REACT_APP_API;
 
 export function MenuPage() {
+  const navigate = useNavigate();
   const [state, setState] = useState({'backend': 'None', 'algorithm': 'None', 'params': 'None'});
+  const goToHome = () => {
+    navigate('/', {replace: true});
+  }
   useEffect(() => { 
     (async () => {
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
@@ -13,7 +18,7 @@ export function MenuPage() {
       const data = await result.json();
       console.log(data)
       setState(data);
-    })()
+    })();
   }, []);
   const showParamButton = () => {
     if (state['algorithm'] !== 'None') {
@@ -67,6 +72,9 @@ export function MenuPage() {
       {showParamButton()}
       {showRunButton()}
       {showVariables()}
+      <button onClick={goToHome}>
+        Back
+      </button>
     </div>
   )
 }

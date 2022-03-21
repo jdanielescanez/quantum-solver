@@ -23,7 +23,7 @@ export function ParamPage() {
       });
       const data = await result.json();
       setState(data);
-    })()
+    })();
   }, []);
   const setParamsValues = async () => {
     const result = await fetch(`${API}/set-params-values`, {

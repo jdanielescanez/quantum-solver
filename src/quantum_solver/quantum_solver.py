@@ -103,7 +103,7 @@ class QuantumSolver:
       self.qalgorithm_manager.select_parameters()
     elif option == 6 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
-      self.__run_algorithm()
+      self.run_algorithm()
     elif option == 7 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
       n_shots = int(input('[&] Specify number of shots: '))
@@ -111,7 +111,7 @@ class QuantumSolver:
     else:
       print('[!] Invalid option, try again')
     
-  def __run_algorithm(self):
+  def run_algorithm(self):
     print()
     halo_text = 'Creating circuit'
     halo = Halo(text=halo_text, spinner="dots")
@@ -125,6 +125,7 @@ class QuantumSolver:
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
+      return str(exception)
 
     N_SHOTS = 1
     execution_description = self.qalgorithm_manager.current_algorithm.name
@@ -142,9 +143,11 @@ class QuantumSolver:
       print('  Execution done in', str(exec_ms), 'ms')
       parsed_result = self.qalgorithm_manager.parse_result(result)
       print('\n💡 Output:', parsed_result, '\n')
+      return parsed_result
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
+      return str(exception)
 
   def __experimental_mode(self, n_shots):
     start_time = time.time()

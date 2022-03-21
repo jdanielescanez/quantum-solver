@@ -24,7 +24,7 @@ export function BackendPage() {
       });
       const data = await result.json();
       setState(data);
-    })()
+    })();
   }, []);
   const selectBackend = (event: React.ChangeEvent<HTMLSelectElement>) => {
     state['current_backend'] = event.target.value;

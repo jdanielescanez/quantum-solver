@@ -24,7 +24,7 @@ export function AlgorithmPage() {
       });
       const data = await result.json();
       setState(data);
-    })()
+    })();
   }, []);
   const selectAlgorithm = (event: React.ChangeEvent<HTMLSelectElement>) => {
     state['current_algorithm'] = event.target.value;

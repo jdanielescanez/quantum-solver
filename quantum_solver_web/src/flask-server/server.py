@@ -114,6 +114,7 @@ def set_backend():
 
 @app.route('/set-algorithm', methods=['POST'])
 def set_algorithm():
+  app.config['quantum_solver'].qalgorithm_manager.parameters = None
   algorithm_id = request.json['id']
   try:
     app.config['quantum_solver'].qalgorithm_manager.set_current_algorithm(int(algorithm_id))
@@ -133,6 +134,20 @@ def set_params_values():
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid parameters: "' + str(params_values) + '". Try Again', 'err': True}
+
+@app.route('/run', methods=['POST'])
+def run():
+  try:
+    output = app.config['quantum_solver'].run_algorithm()
+    app.config['output'] = {'output': output, 'err': False}
+  except Exception as exception:
+    print('Exception:', exception)
+    app.config['output'] = {'output': exception, 'err': True}
+  return app.config['output']
+
+@app.route('/get-output', methods=['GET'])
+def get_ouput():
+  return app.config['output']
 
 CORS(app)
 
