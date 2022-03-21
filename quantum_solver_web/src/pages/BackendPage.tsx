@@ -37,7 +37,9 @@ export function BackendPage() {
     });
     const data = await result.json();
     console.log('setBackend: ', data);
-    goToMenu();
+    if (!data.err) {
+      goToMenu();
+    }
   }
   const getOptions = state['backends'].map((item: Backend, i: number) => {
     return <option key={i} value={item.name}>

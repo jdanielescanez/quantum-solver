@@ -37,7 +37,9 @@ export function AlgorithmPage() {
     });
     const data = await result.json();
     console.log('setAlgorithm: ', data);
-    goToMenu();
+    if (!data.err) {
+      goToMenu();
+    }
   }
   const getOptions = state['algorithms'].map((item: Algorithm, i: number) => {
     return <option key={i} value={item.id}>

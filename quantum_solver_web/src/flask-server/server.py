@@ -88,13 +88,18 @@ def get_algorithms():
 def get_params():
   return format_parameters(app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parameters)
 
-@app.route('/are-algorithm-params', methods=['GET'])
+@app.route('/get-backend-algorithm-params', methods=['GET'])
 def are_algorithm_params():
+  algorithm_name = 'None'
+  current_algorithm = app.config['quantum_solver'].qalgorithm_manager.current_algorithm
+  if current_algorithm != None:
+    algorithm_name = current_algorithm.name
   json_algorithm_params = {
-    'is_algorithm': app.config['quantum_solver'].qalgorithm_manager.current_algorithm != None, 
-    'are-params': app.config['quantum_solver'].qalgorithm_manager.parameters != None
+    'algorithm': algorithm_name,
+    'backend': str(app.config['quantum_solver'].qexecute.current_backend),
+    'params': str(app.config['quantum_solver'].qalgorithm_manager.parameters)
   }
-  print(str(json_algorithm_params))
+  print('json_algorithm_params', str(json_algorithm_params))
   return json_algorithm_params
 
 @app.route('/set-backend', methods=['POST'])
@@ -105,7 +110,7 @@ def set_backend():
     return {'msg': 'Selected ' + backend_name, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
-    return {'msg': 'Invalid backend: "' + backend_name + '". Try Again', 'err': True}
+    return {'msg': 'Invalid backend: "' + str(backend_name) + '". Try Again', 'err': True}
 
 @app.route('/set-algorithm', methods=['POST'])
 def set_algorithm():
@@ -116,7 +121,7 @@ def set_algorithm():
     return {'msg': 'Selected ' + algorithm_name, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
-    return {'msg': 'Invalid algorithm with id: "' + algorithm_id + '". Try Again', 'err': True}
+    return {'msg': 'Invalid algorithm with id: "' + str(algorithm_id) + '". Try Again', 'err': True}
 
 @app.route('/set-params-values', methods=['POST'])
 def set_params_values():
@@ -124,7 +129,7 @@ def set_params_values():
   try:
     parsed_params = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parse_parameters(params_values)
     app.config['quantum_solver'].qalgorithm_manager.parameters = parsed_params
-    return {'msg': 'Set parameters: ' + str(parsed_params), 'err': False}
+    return {'msg': 'Setted parameters: ' + str(parsed_params), 'err': False}
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid parameters: "' + str(params_values) + '". Try Again', 'err': True}

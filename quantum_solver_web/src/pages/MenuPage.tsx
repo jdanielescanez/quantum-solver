@@ -4,18 +4,19 @@ import {Link} from 'react-router-dom';
 const API = process.env.REACT_APP_API;
 
 export function MenuPage() {
-  const [state, setState] = useState({'is_algorithm': false, 'are_params': false});
+  const [state, setState] = useState({'backend': 'None', 'algorithm': 'None', 'params': 'None'});
   useEffect(() => { 
     (async () => {
-      const result = await fetch(`${API}/are-algorithm-params`, {
+      const result = await fetch(`${API}/get-backend-algorithm-params`, {
         method: 'GET'
       });
       const data = await result.json();
+      console.log(data)
       setState(data);
     })()
   }, []);
   const showParamButton = () => {
-    if (state['is_algorithm']) {
+    if (state['algorithm'] !== 'None') {
       return (
         <Link to='/menu/param'>
           <button type='button'>
@@ -26,7 +27,7 @@ export function MenuPage() {
     }
   }
   const showRunButton = () => {
-    if (state['are_params']) {
+    if (state['params'] !== 'None' && state['backend'] !== 'None') {
       return (
         <Link to='/menu/loading'>
           <button type='button'>
@@ -35,6 +36,20 @@ export function MenuPage() {
         </Link>
       )
     }
+  }
+  const variablesString = [
+      ((state['backend'] !== 'None') ? 'Current Backend: ' + state['backend'] : ''),
+          ((state['algorithm'] !== 'None') ? 'Current Algorithm: ' + state['algorithm'] : ''),
+              ((state['params'] !== 'None') ? ' Current Parameters: ' + state['params'] : '')
+  ];
+  const showVariables = () => {
+    return (
+      <div>
+        <h3>{variablesString[0]}</h3>
+        <h3>{variablesString[1]}</h3>
+        <h3>{variablesString[2]}</h3>
+      </div>
+    );
   }
   return (
     <div>
@@ -51,6 +66,7 @@ export function MenuPage() {
       </Link>
       {showParamButton()}
       {showRunButton()}
+      {showVariables()}
     </div>
   )
 }

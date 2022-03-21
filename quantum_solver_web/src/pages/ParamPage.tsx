@@ -33,7 +33,9 @@ export function ParamPage() {
     });
     const data = await result.json();
     console.log('setParamsValues: ', data);
-    goToMenu();
+    if (!data.err) {
+      goToMenu();
+    }
   }
   const changeParams = (event: React.ChangeEvent<HTMLInputElement>) => {
     state['params_values'][parseInt(event.target.id)] = event.target.value;
