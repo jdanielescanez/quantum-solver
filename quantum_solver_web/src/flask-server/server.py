@@ -43,6 +43,17 @@ def format_algorithms(algorithms):
   result['current_algorithm'] = result['algorithms'][0]
   return result
 
+def format_parameters(parameters):
+  result = {'params': [], 'params_values': []}
+  for i, parameter in enumerate(parameters):
+    json_parameter = {
+      'type': parameter['type'],
+      'description': parameter['description'],
+      'constraint': parameter['constraint']
+    }
+    result['params'].append(json_parameter)
+  return result
+
 # Members API Route
 @app.route('/reset-qexecute', methods=['POST'])
 def reset_qexecute():
@@ -73,6 +84,10 @@ def get_backends():
 def get_algorithms():
   return format_algorithms(app.config['quantum_solver'].qalgorithm_manager.algorithms)
 
+@app.route('/get-params', methods=['GET'])
+def get_params():
+  return format_parameters(app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parameters)
+
 @app.route('/are-algorithm-params', methods=['GET'])
 def are_algorithm_params():
   json_algorithm_params = {
@@ -102,6 +117,17 @@ def set_algorithm():
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid algorithm with id: "' + algorithm_id + '". Try Again', 'err': True}
+
+@app.route('/set-params-values', methods=['POST'])
+def set_params_values():
+  params_values = request.json['params_values']
+  try:
+    parsed_params = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parse_parameters(params_values)
+    app.config['quantum_solver'].qalgorithm_manager.parameters = parsed_params
+    return {'msg': 'Set parameters: ' + str(parsed_params), 'err': False}
+  except Exception as exception:
+    print('Exception:', exception)
+    return {'msg': 'Invalid parameters: "' + str(params_values) + '". Try Again', 'err': True}
 
 CORS(app)
 

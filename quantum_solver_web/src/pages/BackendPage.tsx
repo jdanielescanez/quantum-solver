@@ -15,7 +15,7 @@ export function BackendPage() {
   const navigate = useNavigate();
   const [state, setState] = useState({'backends': [], 'current_backend': ''});
   const goToMenu = () => {
-    navigate('/menu', { replace: true });
+    navigate('/menu', {replace: true});
   }
   useEffect(() => { 
     (async () => {

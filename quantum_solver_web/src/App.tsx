@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {HomePage} from './pages/HomePage';
 import {TokenPage} from './pages/TokenPage';
 import {MenuPage} from './pages/MenuPage';
@@ -9,6 +8,7 @@ import {ParamPage} from './pages/ParamPage';
 import {LoadingPage} from './pages/LoadingPage';
 import {OutputPage} from './pages/OutputPage';
 import {Route, Routes} from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (

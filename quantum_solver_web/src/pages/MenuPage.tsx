@@ -19,7 +19,7 @@ export function MenuPage() {
       return (
         <Link to='/menu/param'>
           <button type='button'>
-            Select Params
+            Set Parameters Values
           </button>
         </Link>
       );

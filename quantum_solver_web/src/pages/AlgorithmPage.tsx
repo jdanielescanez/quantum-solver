@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
 const API = process.env.REACT_APP_API;
@@ -15,18 +15,17 @@ export function AlgorithmPage() {
   const navigate = useNavigate();
   const [state, setState] = useState({'algorithms': [], 'current_algorithm': ''});
   const goToMenu = () => {
-    navigate('/menu', { replace: true });
+    navigate('/menu', {replace: true});
   }
-  const getAvailableAlgorithms = async () => {
-    const result = await fetch(`${API}/get-algorithms`, {
-      method: 'GET'
-    });
-    const data = await result.json();
-    setState(data);
-  }
-  if (state['algorithms'].length === 0) {
-    getAvailableAlgorithms();
-  }
+  useEffect(() => { 
+    (async () => {
+      const result = await fetch(`${API}/get-algorithms`, {
+        method: 'GET'
+      });
+      const data = await result.json();
+      setState(data);
+    })()
+  }, []);
   const selectAlgorithm = (event: React.ChangeEvent<HTMLSelectElement>) => {
     state['current_algorithm'] = event.target.value;
   }

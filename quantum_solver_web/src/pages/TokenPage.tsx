@@ -27,7 +27,7 @@ export function TokenPage() {
     }
   }
   const goToMenu = () => {
-    navigate('/menu', { replace: true });
+    navigate('/menu', {replace: true});
   }
   const checkAndSend = async () => {
     token = token !== '' ? token : 'empty_string_token';
