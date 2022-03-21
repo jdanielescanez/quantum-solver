@@ -8,6 +8,10 @@ class QAlgorithmManager:
     self.parameters = None
     self.algorithms = [QRand(), BernsteinVazirani()]
 
+  def set_current_algorithm(self, i):
+    if i < len(self.algorithms):
+      self.current_algorithm = self.algorithms[i]
+
   def print_avaiable_algorithms(self):
     print('\nAvaliable algorithms:')
     for i in range(len(self.algorithms)):
