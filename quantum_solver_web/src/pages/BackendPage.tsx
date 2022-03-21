@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 
 const API = process.env.REACT_APP_API;
@@ -17,16 +17,15 @@ export function BackendPage() {
   const goToMenu = () => {
     navigate('/menu', { replace: true });
   }
-  const getAvailableBackends = async () => {
-    const result = await fetch(`${API}/get-backends`, {
-      method: 'GET'
-    });
-    const data = await result.json();
-    setState(data);
-  }
-  if (state['backends'].length === 0) {
-    getAvailableBackends();
-  }
+  useEffect(() => { 
+    (async () => {
+      const result = await fetch(`${API}/get-backends`, {
+        method: 'GET'
+      });
+      const data = await result.json();
+      setState(data);
+    })()
+  }, []);
   const selectBackend = (event: React.ChangeEvent<HTMLSelectElement>) => {
     state['current_backend'] = event.target.value;
   }

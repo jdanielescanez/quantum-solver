@@ -73,6 +73,15 @@ def get_backends():
 def get_algorithms():
   return format_algorithms(app.config['quantum_solver'].qalgorithm_manager.algorithms)
 
+@app.route('/are-algorithm-params', methods=['GET'])
+def are_algorithm_params():
+  json_algorithm_params = {
+    'is_algorithm': app.config['quantum_solver'].qalgorithm_manager.current_algorithm != None, 
+    'are-params': app.config['quantum_solver'].qalgorithm_manager.parameters != None
+  }
+  print(str(json_algorithm_params))
+  return json_algorithm_params
+
 @app.route('/set-backend', methods=['POST'])
 def set_backend():
   backend_name = request.json['name']
