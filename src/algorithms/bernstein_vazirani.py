@@ -4,7 +4,7 @@ from algorithms.algorithm import Algorithm
 
 class BernsteinVazirani(Algorithm):
   def __init__(self):
-    self.name = 'Bernstein Vazirani'
+    self.name = 'Bernstein-Vazirani'
     self.description = 'Using an oracle: f(x) = (s * x) % 2. Obtain s (a secret number)'
     self.parameters = [
       {

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-
 const API = process.env.REACT_APP_API;
 
 export function HomePage() {
@@ -13,8 +12,8 @@ export function HomePage() {
     <div>
       <h1>QuantumSolver</h1>
       <Link to='/token'>
-        <button onClick={resetQExecute}>
-          Start!
+        <button className='button' id='startBtn' onClick={resetQExecute}>
+          <span>Start!</span>
         </button>
       </Link>
     </div>

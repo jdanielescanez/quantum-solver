@@ -53,8 +53,8 @@ export function AlgorithmPage() {
       <option value="" hidden>Choose an algorithm here</option>
       {getOptions} 
     </select>
-    <button onClick={setAlgorithm}>
-      OK
+    <button className='button' id='okBtn' onClick={setAlgorithm}>
+      <span>OK</span>
     </button>
     </div>
   )

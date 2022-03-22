@@ -23,8 +23,8 @@ export function OutputPage() {
     <div>
       <h1>Output</h1>
       <h3>{output}</h3>
-      <button onClick={goToMenu}>
-        Back
+      <button className='button' id='backBtn' onClick={goToMenu}>
+        <span>Back</span>
       </button>
     </div>
   )
