@@ -6,9 +6,6 @@ const API = process.env.REACT_APP_API;
 export function LoadingPage() {
   const navigate = useNavigate();
   const [state, setState] = useState({'algorithm': '', 'backend': '', 'params': ''});
-  const goToOutput = () => {
-    navigate('/menu/output', {replace: true});
-  }
   useEffect(() => { 
     (async () => {
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
@@ -20,9 +17,9 @@ export function LoadingPage() {
       await fetch(`${API}/run`, {
         method: 'POST'
       });
-      goToOutput();
+      navigate('/menu/output', {replace: true});
     })();
-  }, []);
+  }, [navigate]);
   return (
     <div>
       <h1>Loading...</h1>
