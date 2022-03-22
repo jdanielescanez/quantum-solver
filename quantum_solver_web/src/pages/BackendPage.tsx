@@ -53,8 +53,8 @@ export function BackendPage() {
       <option value="" hidden>Choose a backend here</option>
       {getOptions} 
     </select>
-    <button onClick={setBackend}>
-      OK
+    <button className='button' id='okBtn' onClick={setBackend}>
+      <span>OK</span>
     </button>
     </div>
   )

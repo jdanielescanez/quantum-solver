@@ -12,7 +12,7 @@ export function LoadingPage() {
         method: 'GET'
       });
       const data = await result.json();
-      console.log(data)
+      console.log('Get backend, algorithm and params', data);
       setState(data);
       await fetch(`${API}/run`, {
         method: 'POST'

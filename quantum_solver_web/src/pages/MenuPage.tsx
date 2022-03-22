@@ -16,7 +16,7 @@ export function MenuPage() {
         method: 'GET'
       });
       const data = await result.json();
-      console.log(data)
+      console.log('Get backend, algorithm and params', data);
       setState(data);
     })();
   }, []);
@@ -24,8 +24,8 @@ export function MenuPage() {
     if (state['algorithm'] !== 'None') {
       return (
         <Link to='/menu/param'>
-          <button type='button'>
-            Set Parameters Values
+          <button className='button' type='button'>
+            <span>Set Parameters Values</span>
           </button>
         </Link>
       );
@@ -35,8 +35,8 @@ export function MenuPage() {
     if (state['params'] !== 'None' && state['backend'] !== 'None') {
       return (
         <Link to='/menu/loading'>
-          <button type='button'>
-            Run QuantumSolver
+          <button className='button' type='button'>
+            <span>Run QuantumSolver</span>
           </button>
         </Link>
       )
@@ -58,22 +58,22 @@ export function MenuPage() {
   }
   return (
     <div>
-      <h1>Main Menu</h1>
+      <h1>QuantumSolver</h1>
       <Link to='/menu/backend'>
-        <button type='button'>
-          Select Backend
+        <button className='button' type='button'>
+          <span>Select Backend</span>
         </button>
       </Link>
       <Link to='/menu/algorithm'>
-        <button type='button'>
-          Select Algorithm
+        <button className='button' type='button'>
+          <span>Select Algorithm</span>
         </button>
       </Link>
       {showParamButton()}
       {showRunButton()}
       {showVariables()}
-      <button onClick={goToHome}>
-        Back
+      <button className='button' id='backBtn' onClick={goToHome}>
+        <span>Back</span>
       </button>
     </div>
   )

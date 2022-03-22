@@ -42,9 +42,13 @@ export function TokenPage() {
       <h1>QuantumSolver</h1>
       <p>Write your IBMQ token: </p>
       <input type='text' onChange={getToken} placeholder='IBMQ token'/>
-      <button onClick={checkAndSend}>OK</button>
+      <button className='button' id='okBtn' onClick={checkAndSend}>
+        <span>OK</span>
+      </button>
       <p>Or</p>
-      <button onClick={guestMode}>Use Guest Mode</button>
+      <button className='button' onClick={guestMode}>
+        <span>Use Guest Mode</span>
+      </button>
     </div>
   )
 }

@@ -64,8 +64,8 @@ export function ParamPage() {
     <div>
     <h1>Set Parameters Values</h1>
     {getInputs} 
-    <button onClick={setParamsValues}>
-      OK
+    <button className='button' id='okBtn' onClick={setParamsValues}>
+      <span>OK</span>
     </button>
     </div>
   )
