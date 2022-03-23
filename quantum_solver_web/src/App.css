@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #001337;
+  background-color: #231f20;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,10 @@
 #startBtn {
   width: 200px;
   font-size: 28px;
+}
+
+#iconImg {
+  width: 350px;
 }
 
 input {
@@ -55,14 +59,14 @@ select {
   margin: 5px;
 }
 
-.button span {
+#okBtn span, #backBtn span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.button span:after {
+#okBtn span:after, #backBtn span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -71,11 +75,11 @@ select {
   transition: 0.5s;
 }
 
-.button:hover span {
+#okBtn:hover span, #backBtn:hover span {
   padding-right: 25px;
 }
 
-.button:hover span:after {
+#okBtn:hover span:after, #backBtn:hover span:after {
   opacity: 1;
   right: 0;
 }
