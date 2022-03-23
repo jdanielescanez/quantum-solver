@@ -8,7 +8,11 @@ class Algorithm(ABC):
     self.description = 'Algorithm Description'
     self.parameters = []
     self.parse_result = lambda counts: counts
-    self.parse_parameters = lambda array: []
+    self.parse_parameters = lambda parameters: []
+    
+  @abstractmethod
+  def check_parameters(self, parameters):
+    pass
 
   @abstractmethod
   def circuit(self):
