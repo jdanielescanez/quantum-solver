@@ -5,7 +5,7 @@ const API = process.env.REACT_APP_API;
 
 export function OutputPage() {
   const navigate = useNavigate();
-  const [state, setState] = useState({'output': '', 'err': false});
+  const [state, setState] = useState({'output': '', 'image_base64': '', 'err': false});
   const goToMenu = () => {
     navigate('/menu', {replace: true});
   }
@@ -15,14 +15,21 @@ export function OutputPage() {
         method: 'GET'
       });
       const data = await result.json();
+      console.log('Output:', data);
       setState(data);
     })();
   }, []);
   const output = (state['err'] ? 'Error: ' : '') + state['output'];
+  const imageBase64 = (state['err'] ? '' : 'data:image/png;base64,' + state['image_base64']);
   return (
     <div>
-      <h1>Output</h1>
-      <h3>{output}</h3>
+      <div>
+        <h2>Circuit:</h2>
+        <img src={imageBase64} alt='Circuit'></img>
+      </div>
+      <div>
+        <h1>Output: {output}</h1>
+      </div>
       <button className='button' id='backBtn' onClick={goToMenu}>
         <span>Back</span>
       </button>
