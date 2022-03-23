@@ -99,7 +99,7 @@ class QuantumSolver:
       self.qexecute.select_backend()
     elif option == 4:
       self.qalgorithm_manager.select_algorithm()
-    elif option == 5 and self.is_selected_backend and self.is_selected_algorithm:
+    elif option == 5 and self.is_selected_algorithm:
       self.qalgorithm_manager.select_parameters()
     elif option == 6 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
@@ -122,6 +122,7 @@ class QuantumSolver:
       time_ms = (time.time() - start_time) * 1000
       halo.succeed()
       print('  Circuit created in', str(time_ms), 'ms')
+      print('\n\nCircuit visualization:\n\n' + str(circuit) + '\n\n')
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
