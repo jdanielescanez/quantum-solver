@@ -128,6 +128,7 @@ def set_algorithm():
 def set_params_values():
   params_values = request.json['params_values']
   try:
+    assert app.config['quantum_solver'].qalgorithm_manager.current_algorithm.check_parameters(params_values)
     parsed_params = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parse_parameters(params_values)
     app.config['quantum_solver'].qalgorithm_manager.parameters = parsed_params
     return {'msg': 'Setted parameters: ' + str(parsed_params), 'err': False}
