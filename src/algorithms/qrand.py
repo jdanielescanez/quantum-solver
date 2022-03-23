@@ -9,12 +9,19 @@ class QRand(Algorithm):
     self.parameters = [
       {
         'type': 'int',
-        'description': 'Number of qubits to use',
+        'description': 'A positive number of qubits to use',
         'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
       }
     ]
     self.parse_result = lambda counts: int(list(counts.keys())[0], 2)
-    self.parse_parameters = lambda array: [int(array[0])]
+    self.parse_parameters = lambda parameters: [int(parameters[0])]
+
+  def check_parameters(self, parameters):
+    if len(parameters) == 1 and type(parameters[0]) == str:
+      try:
+        return int(parameters[0]) > 0
+      except:
+        return False
 
   def circuit(self, n=1):
     # Create a Quantum Circuit acting on the q register
