@@ -35,6 +35,8 @@ export function ParamPage() {
     console.log('setParamsValues: ', data);
     if (!data.err) {
       goToMenu();
+    } else {
+      alert('Error checking parameters: Read carefully the constraints and try again');
     }
   }
   const changeParams = (event: React.ChangeEvent<HTMLInputElement>) => {

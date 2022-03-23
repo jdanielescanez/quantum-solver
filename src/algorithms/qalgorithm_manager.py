@@ -51,7 +51,11 @@ class QAlgorithmManager:
           parameter['description'] + ' [' + parameter['type'] + ']\n' +
               ' ' * 4 + '(' + parameter['constraint'] + '): ')
       self.parameters.append(input_parameter)
-    self.parameters = self.current_algorithm.parse_parameters(self.parameters)
+    if self.current_algorithm.check_parameters(self.parameters):
+      self.parameters = self.current_algorithm.parse_parameters(self.parameters)
+    else:
+      self.parameters = None
+      print('\n[!] Error checking parameters: Read carefully the constraints and try again')
 
   def get_circuit(self):
     if self.current_algorithm == None:
