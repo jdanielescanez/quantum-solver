@@ -1,5 +1,8 @@
 import sys
 import os
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../../src')
 
@@ -139,11 +142,17 @@ def set_params_values():
 @app.route('/run', methods=['POST'])
 def run():
   try:
-    output = app.config['quantum_solver'].run_algorithm()
-    app.config['output'] = {'output': output, 'err': False}
+    output, circuit = app.config['quantum_solver'].run_algorithm()
+
+    circuit.draw(output='mpl')
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
+
+    app.config['output'] = {'output': output, 'image_base64': image_base64, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
-    app.config['output'] = {'output': exception, 'err': True}
+    app.config['output'] = {'output': exception, 'image_base64': '', 'err': True}
   return app.config['output']
 
 @app.route('/get-output', methods=['GET'])

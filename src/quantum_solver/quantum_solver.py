@@ -144,7 +144,7 @@ class QuantumSolver:
       print('  Execution done in', str(exec_ms), 'ms')
       parsed_result = self.qalgorithm_manager.parse_result(result)
       print('\n💡 Output:', parsed_result, '\n')
-      return parsed_result
+      return parsed_result, circuit
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
