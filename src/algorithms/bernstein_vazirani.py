@@ -14,7 +14,12 @@ class BernsteinVazirani(Algorithm):
       }
     ]
     self.parse_result = lambda counts: list(counts.keys())[0]
-    self.parse_parameters = lambda array: [array[0]]
+    self.parse_parameters = lambda parameters: [parameters[0]]
+    
+  def check_parameters(self, parameters):
+    if len(parameters) == 1 and type(parameters[0]) == str:
+      return all([qubit == '0' or qubit == '1' for qubit in parameters[0]])
+    return False
 
   def circuit(self, secret_number='01011'):
     n = len(secret_number)
