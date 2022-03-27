@@ -8,5 +8,6 @@ requires = [
   "pwinput>=1.0.2",
   "halo">=0.0.31,
   "alive-progress">=2.3.1
+  "ascii_graph"
 ]
 build-backend = "setuptools.build_meta"
