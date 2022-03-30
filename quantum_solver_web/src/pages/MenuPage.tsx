@@ -31,14 +31,21 @@ export function MenuPage() {
       );
     }
   }
-  const showRunButton = () => {
+  const showRunButtons = () => {
     if (state['params'] !== 'None' && state['backend'] !== 'None') {
       return (
-        <Link to='/menu/loading'>
-          <button className='button' type='button'>
-            <span>Run QuantumSolver</span>
-          </button>
-        </Link>
+        <div>
+          <Link to='/menu/loading'>
+            <button className='button' type='button'>
+              <span>Run QuantumSolver</span>
+            </button>
+          </Link>
+          <Link to='/menu/loading-experiment'>
+            <button className='button' type='button'>
+              <span>Run QuantumSolver Experimental Mode</span>
+            </button>
+          </Link>
+        </div>
       )
     }
   }
@@ -70,7 +77,7 @@ export function MenuPage() {
         </button>
       </Link>
       {showParamButton()}
-      {showRunButton()}
+      {showRunButtons()}
       {showVariables()}
       <button className='button' id='backBtn' onClick={goToHome}>
         <span>Back</span>
