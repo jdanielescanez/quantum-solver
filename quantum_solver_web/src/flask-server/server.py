@@ -12,6 +12,7 @@ from execution.qexecute import QExecute
 from flask_cors import CORS
 from qiskit.utils import QuantumInstance
 from qiskit import IBMQ
+from qiskit.visualization import plot_histogram
 
 app = Flask(__name__)
 
@@ -150,6 +151,23 @@ def run():
     image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
 
     app.config['output'] = {'output': output, 'image_base64': image_base64, 'err': False}
+  except Exception as exception:
+    print('Exception:', exception)
+    app.config['output'] = {'output': exception, 'image_base64': '', 'err': True}
+  return app.config['output']
+
+@app.route('/run-experimental-mode', methods=['POST'])
+def run_experimental_mode():
+  try:
+    n_shots = request.json['n_shots']
+    output = app.config['quantum_solver'].experimental_mode(n_shots)
+
+    plot_histogram(output, title='QuantumSolver - Experimental Mode')
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
+
+    app.config['output'] = {'output': str(output), 'image_base64': image_base64, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
     app.config['output'] = {'output': exception, 'image_base64': '', 'err': True}

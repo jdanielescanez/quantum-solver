@@ -6,7 +6,7 @@ from halo import Halo
 from pwinput import pwinput
 import time
 import matplotlib.pyplot as plt
-from qiskit.visualization import plot_histogram
+from ascii_graph import Pyasciigraph
 
 QUANTUM_SOLVER = 'Quantum Solver'
 
@@ -107,7 +107,7 @@ class QuantumSolver:
     elif option == 7 and self.is_selected_backend and \
         self.is_selected_algorithm and self.is_parameter:
       n_shots = int(input('[&] Specify number of shots: '))
-      self.__experimental_mode(n_shots)
+      self.experimental_mode(n_shots)
     else:
       print('[!] Invalid option, try again')
     
@@ -150,7 +150,7 @@ class QuantumSolver:
       print('Exception:', exception)
       return str(exception)
 
-  def __experimental_mode(self, n_shots):
+  def experimental_mode(self, n_shots):
     start_time = time.time()
     print('\nRunning Experiment:')
 
@@ -169,11 +169,15 @@ class QuantumSolver:
       time_s = (time.time() - start_time)
       print('\n[$] Experiment Finished in ' + str(time_s) + ' s!')
       print('\n💡 Output:', result, '\n')
-      plot_histogram(result, title='QuantumSolver - Experimental Mode')
-      plt.show()
+      data = [(key, result[key]) for key in result.keys()]
+      graph = Pyasciigraph(line_length=80)
+      for line in graph.graph('QuantumSolver - Experimental Mode', data):
+        print(line)
+      return result
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
+      return str(exception)
 
   def __main_menu(self):
     while True:
