@@ -7,6 +7,7 @@ import {AlgorithmPage} from './pages/AlgorithmPage';
 import {ParamPage} from './pages/ParamPage';
 import {LoadingPage} from './pages/LoadingPage';
 import {OutputPage} from './pages/OutputPage';
+import {LoadingPageExperiment} from './pages/LoadingPageExperiment';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/menu/algorithm' element={<AlgorithmPage />} />
         <Route path='/menu/param' element={<ParamPage />} />
         <Route path='/menu/loading' element={<LoadingPage />} />
+        <Route path='/menu/loading-experiment' element={<LoadingPageExperiment />} />
         <Route path='/menu/output' element={<OutputPage />} />
       </Routes>
     </div>
