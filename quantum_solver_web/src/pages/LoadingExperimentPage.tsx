@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 const API = process.env.REACT_APP_API;
 
-export function LoadingPageExperiment() {
+export function LoadingExperimentPage() {
   const navigate = useNavigate();
   const [state, setState] = useState({'algorithm': '', 'backend': '', 'params': '', 'n_shots': ''});
   useEffect(() => { 

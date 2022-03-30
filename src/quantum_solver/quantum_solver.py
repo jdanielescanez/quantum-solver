@@ -6,7 +6,6 @@ from halo import Halo
 from pwinput import pwinput
 import time
 import matplotlib.pyplot as plt
-from qiskit.visualization import plot_histogram
 from ascii_graph import Pyasciigraph
 
 QUANTUM_SOLVER = 'Quantum Solver'
