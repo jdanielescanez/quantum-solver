@@ -49,7 +49,7 @@ def format_algorithms(algorithms):
 
 def format_parameters(parameters):
   result = {'params': [], 'params_values': []}
-  for i, parameter in enumerate(parameters):
+  for _, parameter in enumerate(parameters):
     json_parameter = {
       'type': parameter['type'],
       'description': parameter['description'],

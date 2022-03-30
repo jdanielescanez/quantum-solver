@@ -14,6 +14,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <div id='bg-image'></div>
+      <div id='box'></div>
+      <div id='box2'></div>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/token' element={<TokenPage />} />
