@@ -93,7 +93,7 @@ def get_params():
   return format_parameters(app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parameters)
 
 @app.route('/get-backend-algorithm-params', methods=['GET'])
-def are_algorithm_params():
+def get_backend_algorithm_params():
   algorithm_name = 'None'
   current_algorithm = app.config['quantum_solver'].qalgorithm_manager.current_algorithm
   if current_algorithm != None:
@@ -161,8 +161,11 @@ def run_experimental_mode():
   try:
     n_shots = request.json['n_shots']
     output = app.config['quantum_solver'].experimental_mode(n_shots)
+    info = get_backend_algorithm_params()
+    info['n_shots'] = n_shots
+    info_string = info['algorithm'] + ', ' + info['backend'] + ', ' + info['params'] + ', n_shots: ' + str(info['n_shots'])
 
-    plot_histogram(output, title='QuantumSolver - Experimental Mode')
+    plot_histogram(output, title='QuantumSolver - Experimental Mode\n' + info_string)
     tmpfile = BytesIO()
     plt.tight_layout()
     plt.savefig(tmpfile, format='png')

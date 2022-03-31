@@ -35,6 +35,10 @@ export function OutputPage() {
       '' : 'data:image/png;base64,' + state['image_base64'];
   const figure_name = 'figure-' + state['backend'] + '-' + state['algorithm'] +
       '-' + state['params'] + '.png';
+  const copyOutput = () => {
+    navigator.clipboard.writeText(output);
+    alert('[$] Copied output (' + output + ') to clipboard');
+  };
   return (
     <div>
       <div>
@@ -47,6 +51,7 @@ export function OutputPage() {
       <div>
         <h1>Output: {output}</h1>
       </div>
+      <button className='button' onClick={copyOutput}>Copy output</button>
       <button className='button' id='backBtn' onClick={goToMenu}>
         <span>Back</span>
       </button>

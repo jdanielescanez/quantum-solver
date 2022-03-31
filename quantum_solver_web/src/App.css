@@ -117,3 +117,8 @@ select {
   background-size: cover;
   z-index: -1;
 }
+
+a {
+  color: rgb(111, 145, 255);
+  text-shadow: 0 0 30px rgb(2, 0, 92);
+}
