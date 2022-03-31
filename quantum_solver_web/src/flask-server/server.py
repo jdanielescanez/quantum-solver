@@ -164,6 +164,7 @@ def run_experimental_mode():
 
     plot_histogram(output, title='QuantumSolver - Experimental Mode')
     tmpfile = BytesIO()
+    plt.tight_layout()
     plt.savefig(tmpfile, format='png')
     image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
 
