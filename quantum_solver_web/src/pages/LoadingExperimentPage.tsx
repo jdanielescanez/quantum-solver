@@ -9,6 +9,10 @@ export function LoadingExperimentPage() {
   useEffect(() => { 
     (async () => {
       const n_shots = Number(prompt('[&] Number of repetitions: ', '1000'));
+      if (n_shots <= 0) {
+        alert('Number of repetitions must be positive, try again');
+        navigate('/menu', {replace: true});
+      }
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
         method: 'GET'
       });
