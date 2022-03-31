@@ -24,8 +24,8 @@ export function OutputPage() {
   return (
     <div>
       <div>
-        <h2>Circuit:</h2>
-        <img src={imageBase64} alt='Circuit'></img>
+        <h2>Figure:</h2>
+        <img src={imageBase64} alt='Figure'></img>
       </div>
       <div>
         <h1>Output: {output}</h1>
