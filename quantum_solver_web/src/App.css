@@ -98,7 +98,7 @@ select {
   z-index: -2;
 }
 
-#box {
+#triangle {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -108,7 +108,7 @@ select {
   z-index: -1;
 }
 
-#box2 {
+#triangle2 {
   width: 100vw;
   height: 100vh;
   position: fixed;

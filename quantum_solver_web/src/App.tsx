@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="App">
       <div id='bg-image'></div>
-      <div id='box'></div>
-      <div id='box2'></div>
+      <div id='triangle'></div>
+      <div id='triangle2'></div>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/token' element={<TokenPage />} />
