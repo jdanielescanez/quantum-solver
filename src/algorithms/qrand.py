@@ -1,8 +1,8 @@
 
 from qiskit import QuantumCircuit
-from algorithms.algorithm import Algorithm
+from algorithms.qalgorithm import QAlgorithm
 
-class QRand(Algorithm):
+class QRand(QAlgorithm):
   def __init__(self):
     self.name = 'QRand'
     self.description = 'Gives a random number between 0 and 2 ^ n_qubits - 1'

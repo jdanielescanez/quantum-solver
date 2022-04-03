@@ -5,7 +5,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../src')
 
-from algorithms.algorithm import Algorithm
+from algorithms.qalgorithm import QAlgorithm
 from algorithms.qalgorithm_manager import QAlgorithmManager
 
 def is_lambda(x):
@@ -18,7 +18,7 @@ class AlgorithmsTests(unittest.TestCase):
 
   @unittest.expectedFailure
   def test_algorithm():
-    algorithm = Algorithm()
+    algorithm = QAlgorithm()
 
   def test_print_avaiable_algorithms(self):
     self.assertTrue(self.qAlgorithmManager.print_avaiable_algorithms is not None)

@@ -15,8 +15,7 @@ class QExecute:
   def set_current_backend(self, backend_name: str):
     if backend_name == 'aer_simulator':
       self.current_backend = self.backends[0]
-      return
-    if self.provider:
+    elif self.provider:
       self.current_backend = self.provider.get_backend(backend_name)
 
   def is_guest_mode(self):

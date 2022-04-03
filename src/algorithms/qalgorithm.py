@@ -2,11 +2,17 @@
 from abc import ABC, abstractmethod
 from qiskit import QuantumCircuit
 
-class Algorithm(ABC):
+class QAlgorithm(ABC):
   def __init__(self):
-    self.name = 'Algorithm'
-    self.description = 'Algorithm Description'
-    self.parameters = []
+    self.name = 'QAlgorithm'
+    self.description = 'QAlgorithm Description'
+    self.parameters = [
+      {
+        'type': '',
+        'description': '',
+        'constraint': ''
+      }
+    ]
     self.parse_result = lambda counts: counts
     self.parse_parameters = lambda parameters: []
     

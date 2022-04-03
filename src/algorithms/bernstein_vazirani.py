@@ -1,8 +1,8 @@
 
 from qiskit import QuantumCircuit
-from algorithms.algorithm import Algorithm
+from algorithms.qalgorithm import QAlgorithm
 
-class BernsteinVazirani(Algorithm):
+class BernsteinVazirani(QAlgorithm):
   def __init__(self):
     self.name = 'Bernstein-Vazirani'
     self.description = 'Using an oracle: f(x) = (s * x) % 2. Obtain s (a secret number)'
