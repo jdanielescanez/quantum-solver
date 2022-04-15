@@ -26,7 +26,7 @@ def timeout_job():
   for session_token in list(app.config['USERS'].keys()):
     print(session_token)
     time_since_login = time.time() - app.config['USERS'][session_token]['time']
-    SECONDS_IN_TEN_MINUTES = 60 * 1
+    SECONDS_IN_TEN_MINUTES = 60 * 10
     if time_since_login > SECONDS_IN_TEN_MINUTES:
       app.config['USERS'].pop(session_token)
 
@@ -221,7 +221,7 @@ def get_ouput():
 CORS(app)
 
 scheduler = BackgroundScheduler()
-job = scheduler.add_job(timeout_job, 'interval', minutes=0.05)
+job = scheduler.add_job(timeout_job, 'interval', minutes=1)
 scheduler.start()
 
 if __name__ == "__main__":
