@@ -24,7 +24,6 @@ app = Flask(__name__)
 
 def timeout_job():
   for session_token in list(app.config['USERS'].keys()):
-    print(session_token)
     time_since_login = time.time() - app.config['USERS'][session_token]['time']
     SECONDS_IN_TEN_MINUTES = 60 * 10
     if time_since_login > SECONDS_IN_TEN_MINUTES:
@@ -85,7 +84,6 @@ def set_token():
   app.config['USERS'][hashed_token] = {}
   app.config['USERS'][hashed_token]['time'] = time.time()
   app.config['USERS'][hashed_token]['quantum_solver'] = QuantumSolver(token)
-  # TODO cronjob
   try:
     print('Loading account')
     app.config['USERS'][hashed_token]['quantum_solver'].qexecute = QExecute(app.config['USERS'][hashed_token]['quantum_solver'].token)
