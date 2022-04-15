@@ -28,12 +28,12 @@ export function OutputPage() {
         headers: {token}
       });
       const output_data = await output_result.json();
-      console.log('Output:', output_data);
+      console.log(output_data);
       const getter_data = await getter_result.json();
       setState({...output_data, ...getter_data});
     })();
   }, []);
-  const output = (state['err'] ? 'Error: ' : '') + state['output'];
+  const output = (state['err'] ? 'Error: ' : 'Output: ') + state['output'];
   const imageBase64 = state['err'] ?
       '' : 'data:image/png;base64,' + state['image_base64'];
   const figure_name = 'figure-' + state['backend'] + '-' + state['algorithm'] +

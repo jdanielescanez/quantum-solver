@@ -126,7 +126,7 @@ class QuantumSolver:
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
-      return str(exception)
+      raise exception
 
     N_SHOTS = 1
     execution_description = self.qalgorithm_manager.current_algorithm.name
@@ -148,7 +148,7 @@ class QuantumSolver:
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
-      return str(exception)
+      raise exception
 
   def experimental_mode(self, n_shots):
     start_time = time.time()
@@ -177,7 +177,7 @@ class QuantumSolver:
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
-      return str(exception)
+      raise exception
 
   def __main_menu(self):
     while True:

@@ -5,8 +5,6 @@ from qiskit import QuantumCircuit
 from numpy.random import randint
 from math import ceil
 
-N_BITS = 6
-
 class Participant(ABC):
   def __init__(self, name='', original_bits_size=0):
     self.name = name
@@ -58,15 +56,16 @@ class Participant(ABC):
     self.key = self.key[shared_size:]
     self.safe_key = True
 
-  def generate_otp(self):
+  def generate_otp(self, n_bits):
     self.otp = []
-    for i in range(ceil(len(self.key) / N_BITS)):
-      bits_string = ''.join(map(str, self.key[i * N_BITS: (i + 1) * N_BITS]))
+    for i in range(ceil(len(self.key) / n_bits)):
+      bits_string = ''.join(map(str, self.key[i * n_bits: (i + 1) * n_bits]))
       self.otp.append(int(bits_string, 2))
 
   def xor_otp_message(self, message):
     final_message = ''
     CHR_LIMIT = 1114112
-    for i, char in enumerate(message):
-      final_message += chr((ord(char) ^ self.otp[i % len(self.otp)]) % CHR_LIMIT)
+    if len(self.otp) > 0:
+      for i, char in enumerate(message):
+        final_message += chr((ord(char) ^ self.otp[i % len(self.otp)]) % CHR_LIMIT)
     return final_message

@@ -1,9 +1,6 @@
 
 from bb84.participant import Participant
 from qiskit import QuantumCircuit
-from numpy.random import randint
-from bb84.participant import N_BITS
-from math import ceil
 
 class Sender(Participant):
   def encode_quantum_message(self):
