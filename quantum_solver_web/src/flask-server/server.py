@@ -1,18 +1,22 @@
+
 import sys
 import os
 import matplotlib.pyplot as plt
 import base64
+import hashlib
 from io import BytesIO
+import secrets
+
+from flask import Flask, request
+from flask_cors import CORS
+
+from qiskit.utils import QuantumInstance
+from qiskit.visualization import plot_histogram
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../../src')
 
-from flask import Flask, request
 from quantum_solver.quantum_solver import QuantumSolver
 from execution.qexecute import QExecute
-from flask_cors import CORS
-from qiskit.utils import QuantumInstance
-from qiskit import IBMQ
-from qiskit.visualization import plot_histogram
 
 app = Flask(__name__)
 
@@ -59,58 +63,70 @@ def format_parameters(parameters):
   return result
 
 # Members API Route
-@app.route('/reset-qexecute', methods=['POST'])
-def reset_qexecute():
-  if IBMQ.active_account():
-    IBMQ.disable_account()
-  return {'msg': 'Reseted qexecute', 'err': False}
-
 @app.route('/set-token', methods=['POST'])
 def set_token():
   token = request.json['token']
-  app.config['quantum_solver'] = QuantumSolver(token)
+  if request.json['guest_mode_flag']:
+    session_token = secrets.token_urlsafe(16)
+  else:
+    session_token = request.json['token']
+
+  hashed_token = hashlib.md5(session_token.encode()).hexdigest()
+  app.config[hashed_token] = {}
+  app.config[hashed_token]['quantum_solver'] = QuantumSolver(token)
+  # TODO cronjob
   try:
     print('Loading account')
-    app.config['quantum_solver'].qexecute = QExecute(app.config['quantum_solver'].token)
+    app.config[hashed_token]['quantum_solver'].qexecute = QExecute(app.config[hashed_token]['quantum_solver'].token)
     print('Generating Backends')
-    app.config['backends'] = format_backends(app.config['quantum_solver'].qexecute.backends)
+    app.config[hashed_token]['backends'] = format_backends(app.config[hashed_token]['quantum_solver'].qexecute.backends)
     print('Generated Backends')
-    return {'msg': 'Authenticated with token: ' + token, 'err': False}
+    return {'msg': session_token, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
     return {'msg': 'Invalid token: "' + token + '". Try Again', 'err': True}
 
 @app.route('/get-backends', methods=['GET'])
 def get_backends():
-  return app.config['backends']
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  return app.config[hashed_token]['backends']
 
 @app.route('/get-algorithms', methods=['GET'])
 def get_algorithms():
-  return format_algorithms(app.config['quantum_solver'].qalgorithm_manager.algorithms)
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  return format_algorithms(app.config[hashed_token]['quantum_solver'].qalgorithm_manager.algorithms)
 
 @app.route('/get-params', methods=['GET'])
 def get_params():
-  return format_parameters(app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parameters)
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  return format_parameters(app.config[hashed_token]['quantum_solver'].qalgorithm_manager.current_algorithm.parameters)
 
 @app.route('/get-backend-algorithm-params', methods=['GET'])
 def get_backend_algorithm_params():
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
   algorithm_name = 'None'
-  current_algorithm = app.config['quantum_solver'].qalgorithm_manager.current_algorithm
+  current_algorithm = app.config[hashed_token]['quantum_solver'].qalgorithm_manager.current_algorithm
   if current_algorithm != None:
     algorithm_name = current_algorithm.name
   json_algorithm_params = {
     'algorithm': algorithm_name,
-    'backend': str(app.config['quantum_solver'].qexecute.current_backend),
-    'params': str(app.config['quantum_solver'].qalgorithm_manager.parameters)
+    'backend': str(app.config[hashed_token]['quantum_solver'].qexecute.current_backend),
+    'params': str(app.config[hashed_token]['quantum_solver'].qalgorithm_manager.parameters)
   }
   print('json_algorithm_params', str(json_algorithm_params))
   return json_algorithm_params
 
 @app.route('/set-backend', methods=['POST'])
 def set_backend():
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
   backend_name = request.json['name']
   try:
-    app.config['quantum_solver'].qexecute.set_current_backend(backend_name)
+    app.config[hashed_token]['quantum_solver'].qexecute.set_current_backend(backend_name)
     return {'msg': 'Selected ' + backend_name, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
@@ -118,11 +134,13 @@ def set_backend():
 
 @app.route('/set-algorithm', methods=['POST'])
 def set_algorithm():
-  app.config['quantum_solver'].qalgorithm_manager.parameters = None
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  app.config[hashed_token]['quantum_solver'].qalgorithm_manager.parameters = None
   algorithm_id = request.json['id']
   try:
-    app.config['quantum_solver'].qalgorithm_manager.set_current_algorithm(int(algorithm_id))
-    algorithm_name = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.name
+    app.config[hashed_token]['quantum_solver'].qalgorithm_manager.set_current_algorithm(int(algorithm_id))
+    algorithm_name = app.config[hashed_token]['quantum_solver'].qalgorithm_manager.current_algorithm.name
     return {'msg': 'Selected ' + algorithm_name, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
@@ -130,11 +148,13 @@ def set_algorithm():
 
 @app.route('/set-params-values', methods=['POST'])
 def set_params_values():
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
   params_values = request.json['params_values']
   try:
-    assert app.config['quantum_solver'].qalgorithm_manager.current_algorithm.check_parameters(params_values)
-    parsed_params = app.config['quantum_solver'].qalgorithm_manager.current_algorithm.parse_parameters(params_values)
-    app.config['quantum_solver'].qalgorithm_manager.parameters = parsed_params
+    assert app.config[hashed_token]['quantum_solver'].qalgorithm_manager.current_algorithm.check_parameters(params_values)
+    parsed_params = app.config[hashed_token]['quantum_solver'].qalgorithm_manager.current_algorithm.parse_parameters(params_values)
+    app.config[hashed_token]['quantum_solver'].qalgorithm_manager.parameters = parsed_params
     return {'msg': 'Setted parameters: ' + str(parsed_params), 'err': False}
   except Exception as exception:
     print('Exception:', exception)
@@ -142,25 +162,29 @@ def set_params_values():
 
 @app.route('/run', methods=['POST'])
 def run():
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
   try:
-    output, circuit = app.config['quantum_solver'].run_algorithm()
+    output, circuit = app.config[hashed_token]['quantum_solver'].run_algorithm()
 
     circuit.draw(output='mpl')
     tmpfile = BytesIO()
     plt.savefig(tmpfile, format='png')
     image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
 
-    app.config['output'] = {'output': output, 'image_base64': image_base64, 'err': False}
+    app.config[hashed_token]['output'] = {'output': output, 'image_base64': image_base64, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
-    app.config['output'] = {'output': exception, 'image_base64': '', 'err': True}
-  return app.config['output']
+    app.config[hashed_token]['output'] = {'output': exception, 'image_base64': '', 'err': True}
+  return app.config[hashed_token]['output']
 
 @app.route('/run-experimental-mode', methods=['POST'])
 def run_experimental_mode():
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
   try:
     n_shots = request.json['n_shots']
-    output = app.config['quantum_solver'].experimental_mode(n_shots)
+    output = app.config[hashed_token]['quantum_solver'].experimental_mode(n_shots)
     info = get_backend_algorithm_params()
     info['n_shots'] = n_shots
     info_string = info['algorithm'] + ', ' + info['backend'] + ', ' + info['params'] + ', n_shots: ' + str(info['n_shots'])
@@ -171,15 +195,17 @@ def run_experimental_mode():
     plt.savefig(tmpfile, format='png')
     image_base64 = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
 
-    app.config['output'] = {'output': str(output), 'image_base64': image_base64, 'err': False}
+    app.config[hashed_token]['output'] = {'output': str(output), 'image_base64': image_base64, 'err': False}
   except Exception as exception:
     print('Exception:', exception)
-    app.config['output'] = {'output': exception, 'image_base64': '', 'err': True}
-  return app.config['output']
+    app.config[hashed_token]['output'] = {'output': exception, 'image_base64': '', 'err': True}
+  return app.config[hashed_token]['output']
 
 @app.route('/get-output', methods=['GET'])
 def get_ouput():
-  return app.config['output']
+  token = request.headers.get('token')
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  return app.config[hashed_token]['output']
 
 CORS(app)
 

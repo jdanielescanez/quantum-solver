@@ -8,14 +8,17 @@ export function LoadingPage() {
   const [state, setState] = useState({'algorithm': '', 'backend': '', 'params': ''});
   useEffect(() => { 
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
-        method: 'GET'
-      });
+        method: 'GET',
+        headers: {token}
+    });
       const data = await result.json();
       console.log('Get backend, algorithm and params', data);
       setState(data);
       await fetch(`${API}/run`, {
-        method: 'POST'
+        method: 'POST',
+        headers: {token}
       });
       navigate('/menu/output', {replace: true});
     })();

@@ -1,5 +1,6 @@
 
-from qiskit import IBMQ, transpile, Aer
+from qiskit import transpile, Aer
+from qiskit.providers.ibmq import IBMQFactory
 from qiskit.utils import QuantumInstance
 
 class QExecute:
@@ -8,7 +9,7 @@ class QExecute:
     self.token = token
     self.backends = [Aer.get_backend('aer_simulator')]
     if self.token:
-      self.provider = IBMQ.enable_account(self.token)
+      self.provider = IBMQFactory().enable_account(self.token)
       self.backends += self.provider.backends()
     self.current_backend = None
     

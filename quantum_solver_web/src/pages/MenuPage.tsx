@@ -12,8 +12,10 @@ export function MenuPage() {
   }
   useEffect(() => { 
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const data = await result.json();
       console.log('Get backend, algorithm and params', data);

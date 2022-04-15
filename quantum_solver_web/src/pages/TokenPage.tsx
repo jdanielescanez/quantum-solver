@@ -12,10 +12,11 @@ export function TokenPage() {
   }
   const sendToken = async () => {
     console.log(token);
+    const guest_mode_flag = token === '';
     const result = await fetch(`${API}/set-token`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({token})
+      headers: {'Content-Type': 'application/json', token},
+      body: JSON.stringify({token, guest_mode_flag})
     });
     const data = await result.json();
     console.log('sendToken:', data);
@@ -23,6 +24,7 @@ export function TokenPage() {
       alert(data['msg']);
     }
     else {
+      window.sessionStorage.setItem('token', data['msg']);
       goToMenu();
     }
   }

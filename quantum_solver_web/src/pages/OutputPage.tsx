@@ -18,11 +18,14 @@ export function OutputPage() {
   }
   useEffect(() => { 
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const output_result = await fetch(`${API}/get-output`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const getter_result = await fetch(`${API}/get-backend-algorithm-params`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const output_data = await output_result.json();
       console.log('Output:', output_data);

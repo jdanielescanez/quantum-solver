@@ -13,8 +13,10 @@ export function LoadingExperimentPage() {
         alert('Number of repetitions must be positive, try again');
         navigate('/menu', {replace: true});
       }
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-backend-algorithm-params`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const data = await result.json();
       console.log('Get backend, algorithm and params', data);
@@ -22,7 +24,7 @@ export function LoadingExperimentPage() {
       setState(data);
       await fetch(`${API}/run-experimental-mode`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', token},
         body: JSON.stringify({'n_shots': n_shots})
       });
       navigate('/menu/output', {replace: true});

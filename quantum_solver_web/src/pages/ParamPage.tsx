@@ -18,17 +18,20 @@ export function ParamPage() {
   }
   useEffect(() => {
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-params`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const data = await result.json();
       setState(data);
     })();
   }, []);
   const setParamsValues = async () => {
+    const token = window.sessionStorage.getItem('token') || '';
     const result = await fetch(`${API}/set-params-values`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', token},
       body: JSON.stringify({'params_values': state['params_values']})
     });
     const data = await result.json();

@@ -19,8 +19,10 @@ export function BackendPage() {
   }
   useEffect(() => { 
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-backends`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const data = await result.json();
       setState(data);
@@ -30,10 +32,11 @@ export function BackendPage() {
     state['current_backend'] = event.target.value;
   }
   const setBackend = async () => {
+    const token = window.sessionStorage.getItem('token') || '';
     const result = await fetch(`${API}/set-backend`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'name': state['current_backend']})
+      body: JSON.stringify({'name': state['current_backend']}),
+      headers: {'Content-Type': 'application/json', token}
     });
     const data = await result.json();
     console.log('setBackend: ', data);

@@ -19,8 +19,10 @@ export function AlgorithmPage() {
   }
   useEffect(() => { 
     (async () => {
+      const token = window.sessionStorage.getItem('token') || '';
       const result = await fetch(`${API}/get-algorithms`, {
-        method: 'GET'
+        method: 'GET',
+        headers: {token}
       });
       const data = await result.json();
       setState(data);
@@ -30,10 +32,11 @@ export function AlgorithmPage() {
     state['current_algorithm'] = event.target.value;
   }
   const setAlgorithm = async () => {
+    const token = window.sessionStorage.getItem('token') || '';
     const result = await fetch(`${API}/set-algorithm`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'id': state['current_algorithm']})
+      body: JSON.stringify({'id': state['current_algorithm']}),
+      headers: {'Content-Type': 'application/json', token}
     });
     const data = await result.json();
     console.log('setAlgorithm: ', data);
