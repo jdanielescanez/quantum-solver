@@ -113,7 +113,7 @@ class BB84:
     plt.figure(num='BB84 Simulator - Experimental Mode' + str(backend))
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
-    plt.xlabel('Message Length')
+    plt.xlabel('Message Length (number of bits)')
     plt.ylabel('Interception Density')
     plt.show()
 
@@ -129,7 +129,7 @@ class BB84:
     elif option == 3 and self.is_selected_backend:
       self.__run_simulation()
     elif option == 4 and self.is_selected_backend:
-      len_msg_limit = int(input('[&] Specify maximum message length: '))
+      len_msg_limit = int(input('[&] Specify maximum message length (number of bits): '))
       density_step = float(input('[&] Specify density step: '))
       repetition_instance = int(input('[&] Specify number of repetitions for each instance: '))
 
