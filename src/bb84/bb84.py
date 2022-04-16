@@ -9,7 +9,6 @@ from numpy.random import randint
 from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
-from bb84.participant import N_BITS
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
@@ -63,6 +62,7 @@ class BB84:
     message = str(input('[&] Message (string): '))
     density = float(input('[&] Interception Density (float between 0 and 1): '))
     backend = self.qexecute.current_backend
+    N_BITS = 6
     bits_size = len(message) * 5 * N_BITS
     execution_description = str(self.qexecute.current_backend)
     execution_description += ' with message "'
@@ -72,7 +72,7 @@ class BB84:
     try:
       halo.start()
       start_time = time.time()
-      self.bb84_algorithm.run(message, backend, bits_size, density, True)
+      self.bb84_algorithm.run(message, backend, bits_size, density, N_BITS, True)
       time_ms = (time.time() - start_time) * 1000
       halo.succeed()
       print('  BB84 simulation runned in', str(time_ms), 'ms')
@@ -84,7 +84,6 @@ class BB84:
     DENSITY_MIN = 0
     DENSITY_MAX = 1
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
-
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
     image = np.zeros((DENSITY_RANGE + 1, len_msg_limit))
@@ -99,19 +98,22 @@ class BB84:
           for i, len_message in enumerate(x):
             for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-              bits_size = len(message) * 5 * N_BITS
-              flag = self.bb84_algorithm.run(message, backend, bits_size, density, False)
+              bits_size = len(message) * 5
+              flag = self.bb84_algorithm.run(message, backend, bits_size, density, 1, False)
               image[j][i] += 1 if flag else 0
               bar()
+          
     except Exception as exception:
       print('Exception:', exception)
 
     time_m = (time.time() - start_time)
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
+    print('\n💡 Output:\n\nx: ' + str(x) + '\n\ny: ' + str(y))
+    print('\nImage:\n' + str(image) + '\n')
     plt.figure(num='BB84 Simulator - Experimental Mode' + str(backend))
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
-    plt.xlabel('Message Length')
+    plt.xlabel('Message Length (number of bits)')
     plt.ylabel('Interception Density')
     plt.show()
 
@@ -127,11 +129,19 @@ class BB84:
     elif option == 3 and self.is_selected_backend:
       self.__run_simulation()
     elif option == 4 and self.is_selected_backend:
-      len_msg_limit = int(input('[&] Specify maximum message length: '))
+      len_msg_limit = int(input('[&] Specify maximum message length (number of bits): '))
       density_step = float(input('[&] Specify density step: '))
       repetition_instance = int(input('[&] Specify number of repetitions for each instance: '))
-      if 1.0 % density_step != 0:
-        density_step = 1 / round(1 / density_step)
-      self.__experimental_mode(len_msg_limit, density_step, repetition_instance)
+
+      if len_msg_limit <= 0:
+        raise ValueError('Maximum message length must be positive (> 0)')
+      elif repetition_instance <= 0:
+        raise ValueError('Number of repetitions for each instance must be positive (> 0)')
+      elif density_step < 0 or density_step > 1:
+        raise ValueError('Density step must be between 0 and 1 (∈ [0, 1])')
+      else:
+        if 1.0 % density_step != 0:
+          density_step = 1 / round(1 / density_step)
+        self.__experimental_mode(len_msg_limit, density_step, repetition_instance)
     else:
       print('[!] Invalid option, try again')

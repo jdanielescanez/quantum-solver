@@ -183,8 +183,8 @@ def run():
 
     app.config['USERS'][hashed_token]['output'] = {'output': output, 'image_base64': image_base64, 'err': False}
   except Exception as exception:
-    print('Exception:', exception)
-    app.config['USERS'][hashed_token]['output'] = {'output': exception, 'image_base64': '', 'err': True}
+    print('Exception:', str(exception))
+    app.config['USERS'][hashed_token]['output'] = {'output': str(exception), 'image_base64': '', 'err': True}
   return app.config['USERS'][hashed_token]['output']
 
 @app.route('/run-experimental-mode', methods=['POST'])
@@ -206,8 +206,8 @@ def run_experimental_mode():
 
     app.config['USERS'][hashed_token]['output'] = {'output': str(output), 'image_base64': image_base64, 'err': False}
   except Exception as exception:
-    print('Exception:', exception)
-    app.config['USERS'][hashed_token]['output'] = {'output': exception, 'image_base64': '', 'err': True}
+    print('Exception:', str(exception))
+    app.config['USERS'][hashed_token]['output'] = {'output': str(exception), 'image_base64': '', 'err': True}
   return app.config['USERS'][hashed_token]['output']
 
 @app.route('/get-output', methods=['GET'])

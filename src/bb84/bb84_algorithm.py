@@ -7,7 +7,7 @@ import binascii
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
 class BB84Algorithm:
-  def __generate_key(self, backend, original_bits_size, verbose):
+  def __generate_key(self, backend, original_bits_size, n_bits, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
     alice.set_values()
@@ -67,18 +67,18 @@ class BB84Algorithm:
     
     return alice, bob
 
-  def run(self, message, backend, original_bits_size, measure_density, verbose):
+  def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
     self.original_bits_size = original_bits_size
     self.measure_density = measure_density
 
-    alice, bob = self.__generate_key(backend, original_bits_size, verbose)
+    alice, bob = self.__generate_key(backend, original_bits_size, n_bits, verbose)
     if not (alice.safe_key and bob.safe_key):
       if verbose:
         print('❌ Message not send')
       return False
 
-    alice.generate_otp()
-    bob.generate_otp()
+    alice.generate_otp(n_bits)
+    bob.generate_otp(n_bits)
 
     encoded_message = alice.xor_otp_message(message)
     decoded_message = bob.xor_otp_message(encoded_message)
