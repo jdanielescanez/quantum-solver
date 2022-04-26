@@ -1,3 +1,4 @@
 main.yml
 dist
 **/__pycache__
+.vscode
