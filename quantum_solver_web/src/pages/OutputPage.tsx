@@ -33,7 +33,7 @@ export function OutputPage() {
       setState({...output_data, ...getter_data});
     })();
   }, []);
-  const output = (state['err'] ? 'Error: ' : 'Output: ') + state['output'];
+  const output = state['output'];
   const imageBase64 = state['err'] ?
       '' : 'data:image/png;base64,' + state['image_base64'];
   const figure_name = 'figure-' + state['backend'] + '-' + state['algorithm'] +
@@ -68,7 +68,7 @@ export function OutputPage() {
     <div>
       {showFigure()}
       <div>
-        <h1>{output}</h1>
+        <h1>{(state['err'] ? 'Error: ' : 'Output: ') + output}</h1>
       </div>
       {showCopyButton()}
       <button className='button' id='backBtn' onClick={goToMenu}>

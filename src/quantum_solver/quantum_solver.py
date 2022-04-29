@@ -8,7 +8,7 @@ import time
 import matplotlib.pyplot as plt
 from ascii_graph import Pyasciigraph
 
-QUANTUM_SOLVER = 'Quantum Solver'
+QUANTUM_SOLVER = 'QuantumSolver'
 
 class QuantumSolver:
   def __init__(self, token=None):
