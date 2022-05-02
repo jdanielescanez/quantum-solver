@@ -39,8 +39,8 @@ class BB84:
 
         self.__show_options()
         self.__select_option()
-      except Exception as exception:
-        print('Exception:', exception)
+      except Exception as _:
+        pass
 
   def __show_options(self):
     is_guest_mode = self.qexecute.is_guest_mode()
