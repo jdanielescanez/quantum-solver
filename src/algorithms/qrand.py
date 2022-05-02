@@ -24,7 +24,7 @@ class QRand(QAlgorithm):
         return False
 
   def circuit(self, n=1):
-    # Create a Quantum Circuit acting on the q register
+    # Create a Quantum Circuit
     circuit = QuantumCircuit(n, n)
     n_range = list(range(n))
 

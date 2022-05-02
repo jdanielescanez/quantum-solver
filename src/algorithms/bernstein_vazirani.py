@@ -5,7 +5,7 @@ from algorithms.qalgorithm import QAlgorithm
 class BernsteinVazirani(QAlgorithm):
   def __init__(self):
     self.name = 'Bernstein-Vazirani'
-    self.description = 'Using an oracle: f(x) = (s * x) % 2. Obtain s (a secret number)'
+    self.description = 'Using an oracle: f(x) = (s * x) mod 2. Obtain s (a secret number)'
     self.parameters = [
       {
         'type': 'string',
@@ -24,6 +24,7 @@ class BernsteinVazirani(QAlgorithm):
   def circuit(self, secret_number='01011'):
     n = len(secret_number)
     n_range = list(range(n))
+    
     # Create a Quantum Circuit acting on the q register
     circuit = QuantumCircuit(n + 1, n)
     

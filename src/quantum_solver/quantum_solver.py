@@ -188,6 +188,6 @@ class QuantumSolver:
 
         self.__show_options()
         self.__select_option()
-      except Exception as exception:
-        print('Exception:', exception)
+      except Exception as _:
+        pass
       

@@ -2,12 +2,13 @@
 from algorithms.qrand import QRand
 from algorithms.bernstein_vazirani import BernsteinVazirani
 from algorithms.deutsch_jozsa import DeutschJozsa
+from algorithms.grover import Grover
 
 class QAlgorithmManager:
   def __init__(self):
     self.current_algorithm = None
     self.parameters = None
-    self.algorithms = [QRand(), DeutschJozsa(), BernsteinVazirani()]
+    self.algorithms = [QRand(), DeutschJozsa(), BernsteinVazirani(), Grover()]
 
   def set_current_algorithm(self, i):
     if i < len(self.algorithms):
