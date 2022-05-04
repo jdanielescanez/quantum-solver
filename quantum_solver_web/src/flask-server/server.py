@@ -25,8 +25,8 @@ app = Flask(__name__)
 def timeout_job():
   for session_token in list(app.config['USERS'].keys()):
     time_since_login = time.time() - app.config['USERS'][session_token]['time']
-    SECONDS_IN_TEN_MINUTES = 60 * 10
-    if time_since_login > SECONDS_IN_TEN_MINUTES:
+    SECONDS_IN_TWO_HOURS = 60 * 60 * 2
+    if time_since_login > SECONDS_IN_TWO_HOURS:
       app.config['USERS'].pop(session_token)
 
 def format_backends(backends):
