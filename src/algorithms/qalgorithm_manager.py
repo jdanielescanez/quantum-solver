@@ -3,6 +3,7 @@ from algorithms.qrand import QRand
 from algorithms.deutsch_jozsa import DeutschJozsa
 from algorithms.bernstein_vazirani import BernsteinVazirani
 from algorithms.grover import Grover
+from algorithms.quantum_teleportation import QuantumTeleportation
 from algorithms.superdense_coding import SuperdenseCoding
 
 class QAlgorithmManager:
@@ -14,6 +15,7 @@ class QAlgorithmManager:
       DeutschJozsa(),
       BernsteinVazirani(),
       Grover(),
+      QuantumTeleportation(),
       SuperdenseCoding()
     ]
 
