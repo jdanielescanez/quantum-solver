@@ -20,14 +20,14 @@ INDEX_SHARED_KEY = 2
 def is_lambda(x):
   return callable(x) and x.__name__ == '<lambda>'
 
-class ClassesTests(unittest.TestCase):
+class BB84EntitiesTests(unittest.TestCase):
   def setUp(self):
     self.sender = Sender(ALICE, ORIGINAL_BITS_SIZE)
     self.reciever = Reciever(BOB, ORIGINAL_BITS_SIZE)
     
   @unittest.expectedFailure
-  def test_participant():
-    participant = Participant('Participant', ORIGINAL_BITS_SIZE)
+  def test_participant(self):
+    _ = Participant('Participant', ORIGINAL_BITS_SIZE)
 
   def test_name(self):
     self.assertEqual(self.sender.name, ALICE)
@@ -106,7 +106,7 @@ class ClassesTests(unittest.TestCase):
 
   def test_generate_otp(self):
     self.test_safe_key()
-    self.sender.generate_otp()
+    self.sender.generate_otp(ORIGINAL_BITS_SIZE)
     self.assertTrue(isinstance(self.sender.otp, list))
 
   def test_show_otp(self):

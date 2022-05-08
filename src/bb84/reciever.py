@@ -4,6 +4,9 @@ from qiskit import QuantumCircuit
 from numpy.random import rand
 
 class Reciever(Participant):
+  def __init__(self, name='', original_bits_size=0):
+    super().__init__(name, original_bits_size)
+
   def decode_quantum_message(self, message, density, backend):
     self.values = []
     for i, qc in enumerate(message):
