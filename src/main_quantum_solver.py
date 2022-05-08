@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Final de Grado: QuantumSolver
+
+## QuantumSolver Main Program
 
 import sys
 import signal
