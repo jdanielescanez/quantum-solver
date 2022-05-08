@@ -1,27 +1,37 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import transpile, Aer
 from qiskit.providers.ibmq import IBMQFactory
 from qiskit.utils import QuantumInstance
 
+## The component that manages the execution of quantum algorithms for QuantumSolver
 class QExecute:
-  # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
+  ## Constructor
   def __init__(self, token: str = ''):
+    # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
     self.token = token
     self.backends = [Aer.get_backend('aer_simulator')]
     if self.token:
       self.provider = IBMQFactory().enable_account(self.token)
       self.backends += self.provider.backends()
     self.current_backend = None
-    
+
+  ## Current backend setter
   def set_current_backend(self, backend_name: str):
     if backend_name == 'aer_simulator':
       self.current_backend = self.backends[0]
     elif self.provider:
       self.current_backend = self.provider.get_backend(backend_name)
 
+  ## Check if the guest mode is activated
   def is_guest_mode(self):
     return self.token == ''
 
+  ## Print the available backends
   def print_avaiable_backends(self):
     print('\nAvaliable backends:')
     for i in range(len(self.backends)):
@@ -44,6 +54,7 @@ class QExecute:
         print('\t❌ Is NOT operational')
       print()
 
+  ## Backend selection menu
   def select_backend(self):
     range_backends = '[1 - ' + str(len(self.backends)) + ']'
     index = -2
@@ -63,6 +74,7 @@ class QExecute:
         self.current_backend = self.backends[index]
         print('[$]', str(self.current_backend), 'selected')
 
+  ## Run the circuit using the current backend
   def run(self, circuit: 'QuantumCircuit', n_shots: int):
     # Compile the circuit down to low-level QASM instructions
     # supported by the backend
