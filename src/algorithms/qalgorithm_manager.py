@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Final de Grado: QuantumSolver
 
 from algorithms.qrand import QRand
 from algorithms.deutsch_jozsa import DeutschJozsa
@@ -6,7 +11,9 @@ from algorithms.grover import Grover
 from algorithms.quantum_teleportation import QuantumTeleportation
 from algorithms.superdense_coding import SuperdenseCoding
 
+## The component that manages the quantum algorithms for QuantumSolver
 class QAlgorithmManager:
+  ## Constructor
   def __init__(self):
     self.current_algorithm = None
     self.parameters = None
@@ -19,11 +26,13 @@ class QAlgorithmManager:
       SuperdenseCoding()
     ]
 
+  ## Current algorithm setter
   def set_current_algorithm(self, i):
     if i < len(self.algorithms):
       self.current_algorithm = self.algorithms[i]
 
-  def print_avaiable_algorithms(self):
+  ## Print the available algorithms
+  def print_available_algorithms(self):
     print('\nAvaliable algorithms:')
     for i in range(len(self.algorithms)):
       algorithm = self.algorithms[i]
@@ -32,11 +41,13 @@ class QAlgorithmManager:
       print('\tParameters:')
       self.__print_parameters(algorithm.parameters)
   
+  ## Print the needed parameters
   def __print_parameters(self, parameters):
     for parameter in parameters:
         print('\t    ' + parameter['description'] + ' (' + \
             parameter['type'] + ')\n')
 
+  ## Algorithm selection menu
   def select_algorithm(self):
     self.parameters = None
     range_algorithms = '[1 - ' + str(len(self.algorithms)) + ']'
@@ -55,6 +66,7 @@ class QAlgorithmManager:
         self.current_algorithm = self.algorithms[index]
         print('[$]', self.current_algorithm.name, 'selected')
 
+  ## Parameters selection menu
   def select_parameters(self):
     self.parameters = []
     for parameter in self.current_algorithm.parameters:
@@ -68,6 +80,7 @@ class QAlgorithmManager:
       self.parameters = None
       print('\n[!] Error checking parameters: Read carefully the constraints and try again')
 
+  ## Current algorithm circuit getter
   def get_circuit(self):
     if self.current_algorithm == None:
       print('[$] Algorithm not selected')
@@ -77,6 +90,7 @@ class QAlgorithmManager:
       return
     return self.current_algorithm.circuit(*self.parameters)
 
+  ## Result parser
   def parse_result(self, result):
     if self.current_algorithm != None:
       return self.current_algorithm.parse_result(result)
