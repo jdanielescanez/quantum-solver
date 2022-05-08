@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import QuantumCircuit
 from bb84.sender import Sender
@@ -6,7 +11,10 @@ import binascii
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
+## An implementation of the BB84 protocol
+## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class BB84Algorithm:
+  ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, n_bits, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
@@ -67,6 +75,7 @@ class BB84Algorithm:
     
     return alice, bob
 
+  ## Run the implementation of BB84 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
     self.original_bits_size = original_bits_size
     self.measure_density = measure_density
