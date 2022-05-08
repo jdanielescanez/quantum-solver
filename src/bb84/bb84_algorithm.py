@@ -6,7 +6,7 @@
 
 from qiskit import QuantumCircuit
 from bb84.sender import Sender
-from bb84.reciever import Reciever
+from bb84.receiver import Receiver
 import binascii
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'
@@ -23,12 +23,12 @@ class BB84Algorithm:
     message = alice.encode_quantum_message()
 
     # Interceptor Eve
-    eve = Reciever('Eve', original_bits_size)
+    eve = Receiver('Eve', original_bits_size)
     eve.set_axes()
     message = eve.decode_quantum_message(message, self.measure_density, backend)
 
     # Decoder Bob
-    bob = Reciever('Bob', original_bits_size)
+    bob = Receiver('Bob', original_bits_size)
     bob.set_axes()
     message = bob.decode_quantum_message(message, 1, backend)
 
