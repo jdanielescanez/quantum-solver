@@ -1,11 +1,12 @@
 
-from abc import ABC
+from abc import ABC, abstractmethod
 
 from qiskit import QuantumCircuit
 from numpy.random import randint
 from math import ceil
 
 class Participant(ABC):
+  @abstractmethod
   def __init__(self, name='', original_bits_size=0):
     self.name = name
     self.original_bits_size = original_bits_size

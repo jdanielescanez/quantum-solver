@@ -17,8 +17,8 @@ class AlgorithmsTests(unittest.TestCase):
     self.algorithms = self.qAlgorithmManager.algorithms
 
   @unittest.expectedFailure
-  def test_algorithm():
-    algorithm = QAlgorithm()
+  def test_algorithm(self):
+    _ = QAlgorithm()
 
   def test_print_avaiable_algorithms(self):
     self.assertTrue(self.qAlgorithmManager.print_avaiable_algorithms is not None)
@@ -65,7 +65,7 @@ class AlgorithmsTests(unittest.TestCase):
 
   def test_circuit(self):
     for algorithm in self.algorithms:
-      self.assertTrue(algorithm.circuit() is not None)
+      self.assertTrue(algorithm.circuit is not None)
 
 if __name__ == '__main__':
   unittest.main()

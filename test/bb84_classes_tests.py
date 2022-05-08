@@ -26,7 +26,7 @@ class ClassesTests(unittest.TestCase):
     self.reciever = Reciever(BOB, ORIGINAL_BITS_SIZE)
     
   @unittest.expectedFailure
-  def test_participant():
+  def test_participant(self):
     participant = Participant('Participant', ORIGINAL_BITS_SIZE)
 
   def test_name(self):
@@ -106,7 +106,7 @@ class ClassesTests(unittest.TestCase):
 
   def test_generate_otp(self):
     self.test_safe_key()
-    self.sender.generate_otp()
+    self.sender.generate_otp(ORIGINAL_BITS_SIZE)
     self.assertTrue(isinstance(self.sender.otp, list))
 
   def test_show_otp(self):
