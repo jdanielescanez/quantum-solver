@@ -1,7 +1,12 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Final de Grado: QuantumSolver
 
 from abc import ABC, abstractmethod
-from qiskit import QuantumCircuit
 
+## An abstract class of Quantum Algorithm, it can be used as template
 class QAlgorithm(ABC):
   def __init__(self):
     self.name = 'QAlgorithm'
