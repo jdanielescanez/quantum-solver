@@ -20,8 +20,8 @@ class AlgorithmsTests(unittest.TestCase):
   def test_algorithm(self):
     _ = QAlgorithm()
 
-  def test_print_avaiable_algorithms(self):
-    self.assertTrue(self.qAlgorithmManager.print_avaiable_algorithms is not None)
+  def test_print_available_algorithms(self):
+    self.assertTrue(self.qAlgorithmManager.print_available_algorithms is not None)
 
   def test_select_algorithm(self):
     self.assertTrue(self.qAlgorithmManager.select_algorithm is not None)

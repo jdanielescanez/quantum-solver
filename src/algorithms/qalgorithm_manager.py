@@ -2,7 +2,7 @@
 
 # Author: J. Daniel Escánez
 # Ingeniería Informática - Universidad de La Laguna
-# Trabajo Final de Grado: QuantumSolver
+# Trabajo Fin de Grado: QuantumSolver
 
 from algorithms.qrand import QRand
 from algorithms.deutsch_jozsa import DeutschJozsa

@@ -2,7 +2,7 @@
 
 # Author: J. Daniel Escánez
 # Ingeniería Informática - Universidad de La Laguna
-# Trabajo Final de Grado: QuantumSolver
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import QuantumCircuit
 from algorithms.qalgorithm import QAlgorithm
