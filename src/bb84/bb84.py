@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from quantum_solver.quantum_solver import QuantumSolver
 from bb84.bb84_algorithm import BB84Algorithm
@@ -12,16 +17,21 @@ from alive_progress import alive_bar
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
+## Main class of BB84 Simulator
+## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class BB84:
+  ## Constructor
   def __init__(self, token):
     self.bb84_algorithm = BB84Algorithm()
     self.token = token
 
+  ## Print header, get an QExecute and run main menu
   def run(self):
     self.__show_header()
     self.qexecute = QuantumSolver(self.token).get_qexecute()
     self.__main_menu()
 
+  ## Print header
   def __show_header(self):
     print('\n' + BB84_SIMULATOR + '\n' + '=' * len(BB84_SIMULATOR) + '\n')
     print('A BB84 simulator using Qiskit')
@@ -32,6 +42,7 @@ class BB84:
     print('You can also use the Guest Mode which only allows you to run ')
     print('quantum circuits in a local simulator ("aer_simulator").\n')
 
+  ## Loop to run the main menu
   def __main_menu(self):
     while True:
       try:
@@ -42,6 +53,7 @@ class BB84:
       except Exception as _:
         pass
 
+  ## Main menu
   def __show_options(self):
     is_guest_mode = self.qexecute.is_guest_mode()
     guest_mode_string = ' (Guest Mode)' if is_guest_mode else ''
@@ -58,6 +70,7 @@ class BB84:
       print('[4] Experimental mode')
     print('[0] Exit\n')
 
+  ## Run BB84 simulation once
   def __run_simulation(self):
     message = str(input('[&] Message (string): '))
     density = float(input('[&] Interception Density (float between 0 and 1): '))
@@ -80,6 +93,7 @@ class BB84:
       halo.fail()
       print('Exception:', exception)
 
+  ## Run an experiment of BB84 simulation
   def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
     DENSITY_MIN = 0
     DENSITY_MAX = 1
@@ -117,6 +131,7 @@ class BB84:
     plt.ylabel('Interception Density')
     plt.show()
 
+  ## Select the option for main menu
   def __select_option(self):
     option = int(input('[&] Select an option: '))
     if option == 0:
