@@ -12,12 +12,15 @@ from qiskit.utils import QuantumInstance
 class QExecute:
   ## Constructor
   def __init__(self, token: str = ''):
-    # The token must be a IBM_QUANTUM_EXPERIENCE_TOKEN
+    ## The IBMQ Experience token
     self.token = token
+    ## The available backends
     self.backends = [Aer.get_backend('aer_simulator')]
     if self.token:
+      ## The IBMQ provider
       self.provider = IBMQFactory().enable_account(self.token)
       self.backends += self.provider.backends()
+    ## The current backend
     self.current_backend = None
 
   ## Current backend setter
