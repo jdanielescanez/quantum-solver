@@ -22,12 +22,15 @@ BB84_SIMULATOR = 'BB84 SIMULATOR'
 class BB84:
   ## Constructor
   def __init__(self, token):
+    ## The implemented protocol
     self.bb84_algorithm = BB84Algorithm()
+    ## The IBMQ Experience token
     self.token = token
 
   ## Print header, get an QExecute and run main menu
   def run(self):
     self.__show_header()
+    ## A QExecute instance to execute the simulation
     self.qexecute = QuantumSolver(self.token).get_qexecute()
     self.__main_menu()
 
@@ -46,6 +49,7 @@ class BB84:
   def __main_menu(self):
     while True:
       try:
+        ## If a current backend has been selected
         self.is_selected_backend = self.qexecute.current_backend != None
 
         self.__show_options()

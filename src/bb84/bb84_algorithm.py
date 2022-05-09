@@ -77,11 +77,13 @@ class BB84Algorithm:
 
   ## Run the implementation of BB84 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
+    ## The original size of the message
     self.original_bits_size = original_bits_size
+    ## The probability of an interception occurring
     self.measure_density = measure_density
 
     alice, bob = self.__generate_key(backend, original_bits_size, n_bits, verbose)
-    if not (alice.safe_key and bob.safe_key):
+    if not (alice.is_safe_key and bob.is_safe_key):
       if verbose:
         print('❌ Message not send')
       return False

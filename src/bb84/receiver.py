@@ -17,6 +17,7 @@ class Receiver(Participant):
 
   ## Decode the message measuring the circuit (density-dependent)
   def decode_quantum_message(self, message, density, backend):
+    ## The values of the participant
     self.values = []
     for i, qc in enumerate(message):
       qc.barrier()

@@ -16,12 +16,19 @@ class Participant(ABC):
   ## Constructor
   @abstractmethod
   def __init__(self, name='', original_bits_size=0):
+    ## The name of the participant
     self.name = name
+    ## The original size of the message
     self.original_bits_size = original_bits_size
+    ## The values of the participant
     self.values = None
+    ## The axes of the participant
     self.axes = None
+    ## The key of the participant
     self.key = None
-    self.safe_key = False
+    ## If the key is determined safe
+    self.is_safe_key = False
+    ## The otp of the participant
     self.otp = None
 
   ## Values setter
@@ -72,7 +79,7 @@ class Participant(ABC):
   ## Use the rest of the key and validate it
   def confirm_key(self, shared_size):
     self.key = self.key[shared_size:]
-    self.safe_key = True
+    self.is_safe_key = True
 
   ## Generate an One-Time Pad
   def generate_otp(self, n_bits):
