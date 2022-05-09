@@ -12,8 +12,11 @@ from algorithms.qalgorithm import QAlgorithm
 class SuperdenseCoding(QAlgorithm):
   ## Constructor
   def __init__(self):
+    ## The name of the algorithm
     self.name = 'Superdense Coding'
+    ## A short description
     self.description = 'Transmit two classical bits using one qubit of communication'
+    ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'string',
@@ -21,7 +24,9 @@ class SuperdenseCoding(QAlgorithm):
         'constraint': 'Must be a binary string of length two'
       }
     ]
+    ## How to parse the result of the circuit execution
     self.parse_result = lambda counts: list(counts.keys())[0]
+    ## How to parse the input parameters
     self.parse_parameters = lambda parameters: [parameters[0]]
 
   ## Verify that the parameter is a valid message (a binary string of two bits)
@@ -33,7 +38,7 @@ class SuperdenseCoding(QAlgorithm):
       except:
         return False
 
-  ## Create the simplest (and maximal) examples of quantum entanglement
+  ## Create the simplest (and maximal) example of quantum entanglement
   def create_bell_pair(self):
     bell_state_circuit = QuantumCircuit(2)
     bell_state_circuit.h(1)

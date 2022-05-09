@@ -15,8 +15,11 @@ from algorithms.superdense_coding import SuperdenseCoding
 class QAlgorithmManager:
   ## Constructor
   def __init__(self):
+    ## The selected current algorithm
     self.current_algorithm = None
+    ## The selected current parameters
     self.parameters = None
+    ## The available quantum algorithms
     self.algorithms = [
       QRand(),
       DeutschJozsa(),

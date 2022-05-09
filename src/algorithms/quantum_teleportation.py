@@ -16,8 +16,11 @@ from algorithms.qalgorithm import QAlgorithm
 class QuantumTeleportation(QAlgorithm):
   ## Constructor
   def __init__(self):
+    ## The name of the algorithm
     self.name = 'Quantum Teleportation'
+    ## A short description
     self.description = 'Transmit one qubit using two classical bits'
+    ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'float',
@@ -25,7 +28,9 @@ class QuantumTeleportation(QAlgorithm):
         'constraint': 'Must be a float number between 0 and 1'
       },
     ]
+    ## How to parse the result of the circuit execution
     self.parse_result = lambda counts: list(counts.keys())[0]
+    ## How to parse the input parameters
     self.parse_parameters = lambda parameters: [float(parameters[0])]
 
   ## Verify that the parameter is a valid probability of measure 0 (0 <= prob <= 1)
@@ -37,7 +42,7 @@ class QuantumTeleportation(QAlgorithm):
       except:
         return False
 
-  ## Append the simplest (and maximal) examples of quantum entanglement
+  ## Append the simplest (and maximal) example of quantum entanglement
   def get_bell_pair(self, circuit, a, b):
     circuit.h(a)
     circuit.cx(a,b)

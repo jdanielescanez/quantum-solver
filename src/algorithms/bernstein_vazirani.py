@@ -12,8 +12,11 @@ from algorithms.qalgorithm import QAlgorithm
 class BernsteinVazirani(QAlgorithm):
   ## Constructor
   def __init__(self):
+    ## The name of the algorithm
     self.name = 'Bernstein-Vazirani'
+    ## A short description
     self.description = 'Using an oracle: f(x) = (s * x) mod 2. Obtain s (a secret number)'
+    ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'string',
@@ -21,7 +24,9 @@ class BernsteinVazirani(QAlgorithm):
         'constraint': 'The length must be smaller than the number of qubits of the selected backend'
       }
     ]
+    ## How to parse the result of the circuit execution
     self.parse_result = lambda counts: list(counts.keys())[0]
+    ## How to parse the input parameters
     self.parse_parameters = lambda parameters: [parameters[0]]
     
   ## Verify that the parameter is a binary string
