@@ -1,0 +1,5 @@
+<map id="src.algorithms.quantum_teleportation.QuantumTeleportation" name="src.algorithms.quantum_teleportation.QuantumTeleportation">
+<area shape="rect" id="node1" title="A Quantum Teleportation Implemetation for QuantumSolver." alt="" coords="5,169,268,211"/>
+<area shape="rect" id="node2" href="$classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm.html" title="An abstract class of Quantum Algorithm, it can be used as template." alt="" coords="39,80,234,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="112,5,161,32"/>
+</map>

@@ -1,0 +1,227 @@
+\hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover}{}\doxysection{src.\+algorithms.\+grover.\+Grover Class Reference}
+\label{classsrc_1_1algorithms_1_1grover_1_1Grover}\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+
+
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover}{Grover}}\textquotesingle{}s Algorithm Implementation for Quantum\+Solver.  
+
+
+
+
+Inheritance diagram for src.\+algorithms.\+grover.\+Grover\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classsrc_1_1algorithms_1_1grover_1_1Grover__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+algorithms.\+grover.\+Grover\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classsrc_1_1algorithms_1_1grover_1_1Grover__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_abf923d049c845f84098e5191e5fce079}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a6c7090dc515036e0e94241e151f25b54}{check\+\_\+parameters}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a1aa1ebbe097e1251e44075c792d38c11}{parameters}})
+\begin{DoxyCompactList}\small\item\em Verify that the parameters is the mark state (a binary string of two bits) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_af8a13343890531a724a1bc1e9529c13b}{get\+\_\+oracle}} (self, n, mark\+\_\+state)
+\begin{DoxyCompactList}\small\item\em Create the oracle. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a5e0a7746f4ae75ec9aa0e4d4a1b2792e}{get\+\_\+diffusor}} (self, n, n\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Create the diffusor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_aefb6aed55110edafac6eacedb61d4be3}{circuit}} (self, mark\+\_\+state)
+\begin{DoxyCompactList}\small\item\em Create the circuit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_ad36bad5bc1463b004ca25eacabe24bc0}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a6083af89a881645e059da978c7037939}{description}}
+\begin{DoxyCompactList}\small\item\em A short description. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a1aa1ebbe097e1251e44075c792d38c11}{parameters}}
+\begin{DoxyCompactList}\small\item\em The required parameters for the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_a5489af3a97fba14ae3a76015e1b68ecc}{parse\+\_\+result}}
+\begin{DoxyCompactList}\small\item\em How to parse the result of the circuit execution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover_ade8b6af18997c775dd392686507535cb}{parse\+\_\+parameters}}
+\begin{DoxyCompactList}\small\item\em How to parse the input parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1grover_1_1Grover}{Grover}}\textquotesingle{}s Algorithm Implementation for Quantum\+Solver. 
+
+\begin{DoxySeeAlso}{See also}
+\href{https://qiskit.org/textbook/ch-algorithms/grover.html}{\texttt{ https\+://qiskit.\+org/textbook/ch-\/algorithms/grover.\+html}} 
+\end{DoxySeeAlso}
+
+
+Definition at line 12 of file grover.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_abf923d049c845f84098e5191e5fce079}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_abf923d049c845f84098e5191e5fce079}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+grover.\+Grover.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_ae47b5e39f4a311f3770c977b374d6255}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 14 of file grover.\+py.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_a6c7090dc515036e0e94241e151f25b54}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_a6c7090dc515036e0e94241e151f25b54}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!check\_parameters@{check\_parameters}}
+\index{check\_parameters@{check\_parameters}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{check\_parameters()}{check\_parameters()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+grover.\+Grover.\+check\+\_\+parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parameters }\end{DoxyParamCaption})}
+
+
+
+Verify that the parameters is the mark state (a binary string of two bits) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_a1e6f571baad6d4038f93a209624a6d05}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 33 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_aefb6aed55110edafac6eacedb61d4be3}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_aefb6aed55110edafac6eacedb61d4be3}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!circuit@{circuit}}
+\index{circuit@{circuit}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{circuit()}{circuit()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+grover.\+Grover.\+circuit (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{mark\+\_\+state }\end{DoxyParamCaption})}
+
+
+
+Create the circuit. 
+
+
+
+Definition at line 71 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_a5e0a7746f4ae75ec9aa0e4d4a1b2792e}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_a5e0a7746f4ae75ec9aa0e4d4a1b2792e}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!get\_diffusor@{get\_diffusor}}
+\index{get\_diffusor@{get\_diffusor}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{get\_diffusor()}{get\_diffusor()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+grover.\+Grover.\+get\+\_\+diffusor (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{n,  }\item[{}]{n\+\_\+range }\end{DoxyParamCaption})}
+
+
+
+Create the diffusor. 
+
+
+
+Definition at line 58 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_af8a13343890531a724a1bc1e9529c13b}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_af8a13343890531a724a1bc1e9529c13b}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!get\_oracle@{get\_oracle}}
+\index{get\_oracle@{get\_oracle}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{get\_oracle()}{get\_oracle()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+grover.\+Grover.\+get\+\_\+oracle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{n,  }\item[{}]{mark\+\_\+state }\end{DoxyParamCaption})}
+
+
+
+Create the oracle. 
+
+
+
+Definition at line 42 of file grover.\+py.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_a6083af89a881645e059da978c7037939}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_a6083af89a881645e059da978c7037939}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!description@{description}}
+\index{description@{description}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily src.\+algorithms.\+grover.\+Grover.\+description}
+
+
+
+A short description. 
+
+
+
+Definition at line 18 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_ad36bad5bc1463b004ca25eacabe24bc0}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_ad36bad5bc1463b004ca25eacabe24bc0}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!name@{name}}
+\index{name@{name}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily src.\+algorithms.\+grover.\+Grover.\+name}
+
+
+
+The name of the algorithm. 
+
+
+
+Definition at line 16 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_a1aa1ebbe097e1251e44075c792d38c11}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_a1aa1ebbe097e1251e44075c792d38c11}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!parameters@{parameters}}
+\index{parameters@{parameters}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{parameters}{parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+grover.\+Grover.\+parameters}
+
+
+
+The required parameters for the algorithm. 
+
+
+
+Definition at line 20 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_ade8b6af18997c775dd392686507535cb}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_ade8b6af18997c775dd392686507535cb}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!parse\_parameters@{parse\_parameters}}
+\index{parse\_parameters@{parse\_parameters}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{parse\_parameters}{parse\_parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+grover.\+Grover.\+parse\+\_\+parameters}
+
+
+
+How to parse the input parameters. 
+
+
+
+Definition at line 30 of file grover.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1grover_1_1Grover_a5489af3a97fba14ae3a76015e1b68ecc}\label{classsrc_1_1algorithms_1_1grover_1_1Grover_a5489af3a97fba14ae3a76015e1b68ecc}} 
+\index{src.algorithms.grover.Grover@{src.algorithms.grover.Grover}!parse\_result@{parse\_result}}
+\index{parse\_result@{parse\_result}!src.algorithms.grover.Grover@{src.algorithms.grover.Grover}}
+\doxysubsubsection{\texorpdfstring{parse\_result}{parse\_result}}
+{\footnotesize\ttfamily src.\+algorithms.\+grover.\+Grover.\+parse\+\_\+result}
+
+
+
+How to parse the result of the circuit execution. 
+
+
+
+Definition at line 28 of file grover.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/algorithms/\mbox{\hyperlink{grover_8py}{grover.\+py}}\end{DoxyCompactItemize}

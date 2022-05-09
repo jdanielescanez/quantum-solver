@@ -1,12 +1,20 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import QuantumCircuit
 from bb84.sender import Sender
-from bb84.reciever import Reciever
+from bb84.receiver import Receiver
 import binascii
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'
 
+## An implementation of the BB84 protocol
+## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class BB84Algorithm:
+  ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, n_bits, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
@@ -15,12 +23,12 @@ class BB84Algorithm:
     message = alice.encode_quantum_message()
 
     # Interceptor Eve
-    eve = Reciever('Eve', original_bits_size)
+    eve = Receiver('Eve', original_bits_size)
     eve.set_axes()
     message = eve.decode_quantum_message(message, self.measure_density, backend)
 
     # Decoder Bob
-    bob = Reciever('Bob', original_bits_size)
+    bob = Receiver('Bob', original_bits_size)
     bob.set_axes()
     message = bob.decode_quantum_message(message, 1, backend)
 
@@ -67,12 +75,15 @@ class BB84Algorithm:
     
     return alice, bob
 
+  ## Run the implementation of BB84 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
+    ## The original size of the message
     self.original_bits_size = original_bits_size
+    ## The probability of an interception occurring
     self.measure_density = measure_density
 
     alice, bob = self.__generate_key(backend, original_bits_size, n_bits, verbose)
-    if not (alice.safe_key and bob.safe_key):
+    if not (alice.is_safe_key and bob.is_safe_key):
       if verbose:
         print('❌ Message not send')
       return False

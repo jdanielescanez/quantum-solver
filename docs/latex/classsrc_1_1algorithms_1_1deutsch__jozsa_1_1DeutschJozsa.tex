@@ -1,0 +1,211 @@
+\hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa}{}\doxysection{src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa Class Reference}
+\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa}\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+
+
+Deutsch-\/\+Jozsa Algorithm Implementation for Quantum\+Solver.  
+
+
+
+
+Inheritance diagram for src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a0ecd4f05a7235a687d0c47f435dbf7c6}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a3d9db47f22aa542da9e4d88d581eb127}{check\+\_\+parameters}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad22de8a54fadcf3f4d20097fa3b8a370}{parameters}})
+\begin{DoxyCompactList}\small\item\em Verify that the parameters are the oracle type and the number of qubits to use. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_adc26458bdbb2bc3e39f500baf35f0434}{create\+\_\+oracle}} (self, oracle\+\_\+type, n)
+\begin{DoxyCompactList}\small\item\em Create the oracle circuit. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a7934bf147a14011db9f2893dd0f0dad0}{circuit}} (self, oracle\+\_\+type=\textquotesingle{}constant\textquotesingle{}, n=1)
+\begin{DoxyCompactList}\small\item\em Create the circuit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad617ccc6a3b7d9a067e9724fe27b3219}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ab3a9b2b7e3d6e4442384d790b10a2ab3}{description}}
+\begin{DoxyCompactList}\small\item\em A short description. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad22de8a54fadcf3f4d20097fa3b8a370}{parameters}}
+\begin{DoxyCompactList}\small\item\em The required parameters for the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ae8428969a144f5c2356d4fbd6ec79e32}{parse\+\_\+result}}
+\begin{DoxyCompactList}\small\item\em How to parse the result of the circuit execution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ade0e489c4ac22cea64c83d56158e78c2}{parse\+\_\+parameters}}
+\begin{DoxyCompactList}\small\item\em How to parse the input parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Deutsch-\/\+Jozsa Algorithm Implementation for Quantum\+Solver. 
+
+\begin{DoxySeeAlso}{See also}
+\href{https://qiskit.org/textbook/ch-algorithms/deutsch-jozsa.html}{\texttt{ https\+://qiskit.\+org/textbook/ch-\/algorithms/deutsch-\/jozsa.\+html}} 
+\end{DoxySeeAlso}
+
+
+Definition at line 13 of file deutsch\+\_\+jozsa.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a0ecd4f05a7235a687d0c47f435dbf7c6}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a0ecd4f05a7235a687d0c47f435dbf7c6}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_ae47b5e39f4a311f3770c977b374d6255}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 15 of file deutsch\+\_\+jozsa.\+py.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a3d9db47f22aa542da9e4d88d581eb127}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a3d9db47f22aa542da9e4d88d581eb127}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!check\_parameters@{check\_parameters}}
+\index{check\_parameters@{check\_parameters}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{check\_parameters()}{check\_parameters()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+check\+\_\+parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parameters }\end{DoxyParamCaption})}
+
+
+
+Verify that the parameters are the oracle type and the number of qubits to use. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_a1e6f571baad6d4038f93a209624a6d05}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 43 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a7934bf147a14011db9f2893dd0f0dad0}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_a7934bf147a14011db9f2893dd0f0dad0}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!circuit@{circuit}}
+\index{circuit@{circuit}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{circuit()}{circuit()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+circuit (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{oracle\+\_\+type = {\ttfamily \textquotesingle{}constant\textquotesingle{}},  }\item[{}]{n = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Create the circuit. 
+
+
+
+Definition at line 87 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_adc26458bdbb2bc3e39f500baf35f0434}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_adc26458bdbb2bc3e39f500baf35f0434}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!create\_oracle@{create\_oracle}}
+\index{create\_oracle@{create\_oracle}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{create\_oracle()}{create\_oracle()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+create\+\_\+oracle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{oracle\+\_\+type,  }\item[{}]{n }\end{DoxyParamCaption})}
+
+
+
+Create the oracle circuit. 
+
+
+
+Definition at line 52 of file deutsch\+\_\+jozsa.\+py.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ab3a9b2b7e3d6e4442384d790b10a2ab3}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ab3a9b2b7e3d6e4442384d790b10a2ab3}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!description@{description}}
+\index{description@{description}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+description}
+
+
+
+A short description. 
+
+
+
+Definition at line 19 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad617ccc6a3b7d9a067e9724fe27b3219}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad617ccc6a3b7d9a067e9724fe27b3219}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!name@{name}}
+\index{name@{name}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+name}
+
+
+
+The name of the algorithm. 
+
+
+
+Definition at line 17 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad22de8a54fadcf3f4d20097fa3b8a370}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ad22de8a54fadcf3f4d20097fa3b8a370}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!parameters@{parameters}}
+\index{parameters@{parameters}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{parameters}{parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+parameters}
+
+
+
+The required parameters for the algorithm. 
+
+
+
+Definition at line 25 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ade0e489c4ac22cea64c83d56158e78c2}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ade0e489c4ac22cea64c83d56158e78c2}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!parse\_parameters@{parse\_parameters}}
+\index{parse\_parameters@{parse\_parameters}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{parse\_parameters}{parse\_parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+parse\+\_\+parameters}
+
+
+
+How to parse the input parameters. 
+
+
+
+Definition at line 40 of file deutsch\+\_\+jozsa.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ae8428969a144f5c2356d4fbd6ec79e32}\label{classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa_ae8428969a144f5c2356d4fbd6ec79e32}} 
+\index{src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}!parse\_result@{parse\_result}}
+\index{parse\_result@{parse\_result}!src.algorithms.deutsch\_jozsa.DeutschJozsa@{src.algorithms.deutsch\_jozsa.DeutschJozsa}}
+\doxysubsubsection{\texorpdfstring{parse\_result}{parse\_result}}
+{\footnotesize\ttfamily src.\+algorithms.\+deutsch\+\_\+jozsa.\+Deutsch\+Jozsa.\+parse\+\_\+result}
+
+
+
+How to parse the result of the circuit execution. 
+
+
+
+Definition at line 38 of file deutsch\+\_\+jozsa.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/algorithms/\mbox{\hyperlink{deutsch__jozsa_8py}{deutsch\+\_\+jozsa.\+py}}\end{DoxyCompactItemize}

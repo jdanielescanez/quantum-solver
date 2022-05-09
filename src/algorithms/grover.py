@@ -1,11 +1,22 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import QuantumCircuit
 from algorithms.qalgorithm import QAlgorithm
 
+## Grover's Algorithm Implementation for QuantumSolver
+## @see https://qiskit.org/textbook/ch-algorithms/grover.html
 class Grover(QAlgorithm):
+  ## Constructor
   def __init__(self):
+    ## The name of the algorithm
     self.name = 'Grover\'s Algorithm (2 Qubits)'
+    ## A short description
     self.description = 'Performs the search in an unordered sequence of data'
+    ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'string',
@@ -13,9 +24,12 @@ class Grover(QAlgorithm):
         'constraint': 'Must be a binary string of length two'
       }
     ]
+    ## How to parse the result of the circuit execution
     self.parse_result = lambda counts: list(counts.keys())[0]
+    ## How to parse the input parameters
     self.parse_parameters = lambda parameters: [parameters[0]]
 
+  ## Verify that the parameters is the mark state (a binary string of two bits)
   def check_parameters(self, parameters):
     if len(parameters) == 1 and type(parameters[0]) == str and len(parameters[0]) == 2:
       try:
@@ -24,21 +38,23 @@ class Grover(QAlgorithm):
       except:
         return False
 
+  ## Create the oracle
   def get_oracle(self, n, mark_state):
-    diffusor = QuantumCircuit(n, n)
+    oracle = QuantumCircuit(n, n)
 
     for i, char in enumerate(mark_state):
       if char == '0':
-        diffusor.s(i)
+        oracle.s(i)
 
-    diffusor.cz(0, 1)
+    oracle.cz(0, 1)
 
     for i, char in enumerate(mark_state):
       if char == '0':
-        diffusor.s(i)
+        oracle.s(i)
 
-    return diffusor
+    return oracle
 
+  ## Create the diffusor
   def get_diffusor(self, n, n_range):
     diffusor = QuantumCircuit(n, n)
 
@@ -51,6 +67,7 @@ class Grover(QAlgorithm):
 
     return diffusor
 
+  ## Create the circuit
   def circuit(self, mark_state):
     n = 2
     grover_circuit = QuantumCircuit(n, n)

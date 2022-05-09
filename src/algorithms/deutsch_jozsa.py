@@ -1,16 +1,27 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from qiskit import QuantumCircuit
 from algorithms.qalgorithm import QAlgorithm
 import numpy as np
 
+## Deutsch-Jozsa Algorithm Implementation for QuantumSolver
+## @see https://qiskit.org/textbook/ch-algorithms/deutsch-jozsa.html
 class DeutschJozsa(QAlgorithm):
+  ## Constructor
   def __init__(self):
+    ## The name of the algorithm
     self.name = 'Deutsch-Jozsa'
+    ## A short description
     self.description = \
         'Given a hidden Boolean function f: f({x_0,x_1,x_2,...}) → 0 or 1, where x_n is 0 or 1;\n\
             determine whether the given function is balanced or constant. A constant function returns \
                 all 0\'s or all 1\'s for any input, while a balanced function returns 0\'s for exactly \
                     half of all inputs and 1\'s for the other half.'
+    ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'string',
@@ -23,17 +34,21 @@ class DeutschJozsa(QAlgorithm):
         'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
       }
     ]
+    ## How to parse the result of the circuit execution
     self.parse_result = lambda counts: 'Constant' if list(counts.keys())[0][0] == 0 else 'Balanced'
+    ## How to parse the input parameters
     self.parse_parameters = lambda parameters: [str(parameters[0]), int(parameters[1])]
 
+  ## Verify that the parameters are the oracle type and the number of qubits to use
   def check_parameters(self, parameters):
     if len(parameters) == 2 and all(map(lambda param: type(param) == str, parameters)):
       try:
-        oracle_type = parameters[0] == 'constant' or parameters[0] == 'balanced'
-        return oracle_type and int(parameters[1]) > 0
+        is_valid_oracle_type = parameters[0] == 'constant' or parameters[0] == 'balanced'
+        return is_valid_oracle_type and int(parameters[1]) > 0
       except:
         return False
 
+  ## Create the oracle circuit
   def create_oracle(self, oracle_type, n):
     oracle_qc = QuantumCircuit(n + 1)
     
@@ -68,6 +83,7 @@ class DeutschJozsa(QAlgorithm):
     oracle_gate = oracle_qc.to_gate(label='Oracle')
     return oracle_gate
 
+  ## Create the circuit
   def circuit(self, oracle_type='constant', n=1):
     circuit = QuantumCircuit(n + 1, n)
     # Initial setup: Input in state |+>, output in state |->

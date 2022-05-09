@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Author: J. Daniel Escánez
+# Ingeniería Informática - Universidad de La Laguna
+# Trabajo Fin de Grado: QuantumSolver
 
 from execution.qexecute import QExecute
 from algorithms.qrand import QRand
@@ -10,16 +15,23 @@ from ascii_graph import Pyasciigraph
 
 QUANTUM_SOLVER = 'QuantumSolver'
 
+## Main Class of QuantumSolver
 class QuantumSolver:
+  ## Constructor
   def __init__(self, token=None):
+    ## An QAlgorithm Manager instance
     self.qalgorithm_manager = QAlgorithmManager()
+    ## The IBMQ Experience token
     self.token = token
 
+  ## Run main function
   def run(self):
     self.__show_header()
+    ## A QExecute instance to execute the simulation
     self.qexecute = self.get_qexecute()
     self.__main_menu()
 
+  ## QExecute getter
   def get_qexecute(self):
     tries = 0
     MAX_TRIES = 3
@@ -52,6 +64,7 @@ class QuantumSolver:
           exit(-1)
     return qexecute
 
+  ## Print header
   def __show_header(self):
     print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
     print('A little quantum toolset developed using Qiskit')
@@ -62,6 +75,7 @@ class QuantumSolver:
     print('You can also use the Guest Mode which only allows you to run ')
     print('quantum circuits in a local simulator ("aer_simulator").\n')
   
+  ## Print options
   def __show_options(self):
     is_guest_mode = self.qexecute.is_guest_mode()
     guest_mode_string = ' (Guest Mode)' if is_guest_mode else ''
@@ -86,6 +100,7 @@ class QuantumSolver:
       print('[7] Experimental mode')
     print('[0] Exit\n')
 
+  ## Main menu
   def __select_option(self):
     option = int(input('[&] Select an option: '))
     if option == 0:
@@ -94,7 +109,7 @@ class QuantumSolver:
     elif option == 1:
       self.qexecute.print_avaiable_backends()
     elif option == 2:
-      self.qalgorithm_manager.print_avaiable_algorithms()
+      self.qalgorithm_manager.print_available_algorithms()
     elif option == 3:
       self.qexecute.select_backend()
     elif option == 4:
@@ -111,6 +126,7 @@ class QuantumSolver:
     else:
       print('[!] Invalid option, try again')
     
+  ## Run once the current algorithm with the current parameters in the current backend
   def run_algorithm(self):
     print()
     halo_text = 'Creating circuit'
@@ -150,6 +166,7 @@ class QuantumSolver:
       print('Exception:', exception)
       raise exception
 
+  ## Run n_shots times the current algorithm with the current parameters in the current backend
   def experimental_mode(self, n_shots):
     start_time = time.time()
     print('\nRunning Experiment:')
@@ -179,15 +196,18 @@ class QuantumSolver:
       print('Exception:', exception)
       raise exception
 
+  ## Loop for the main menu
   def __main_menu(self):
     while True:
       try:
+        ## If a current backend has been selected
         self.is_selected_backend = self.qexecute.current_backend != None
+        ## If a current algorithm has been selected
         self.is_selected_algorithm = self.qalgorithm_manager.current_algorithm != None
+        ## If a current parameters have been selected
         self.is_parameter = self.qalgorithm_manager.parameters != None
 
         self.__show_options()
         self.__select_option()
       except Exception as _:
         pass
-      
