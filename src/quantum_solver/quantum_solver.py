@@ -19,12 +19,15 @@ QUANTUM_SOLVER = 'QuantumSolver'
 class QuantumSolver:
   ## Constructor
   def __init__(self, token=None):
+    ## An QAlgorithm Manager instance
     self.qalgorithm_manager = QAlgorithmManager()
+    ## The IBMQ Experience token
     self.token = token
 
   ## Run main function
   def run(self):
     self.__show_header()
+    ## A QExecute instance to execute the simulation
     self.qexecute = self.get_qexecute()
     self.__main_menu()
 
@@ -197,8 +200,11 @@ class QuantumSolver:
   def __main_menu(self):
     while True:
       try:
+        ## If a current backend has been selected
         self.is_selected_backend = self.qexecute.current_backend != None
+        ## If a current algorithm has been selected
         self.is_selected_algorithm = self.qalgorithm_manager.current_algorithm != None
+        ## If a current parameters have been selected
         self.is_parameter = self.qalgorithm_manager.parameters != None
 
         self.__show_options()
