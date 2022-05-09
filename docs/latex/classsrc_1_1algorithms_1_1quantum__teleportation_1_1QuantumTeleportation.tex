@@ -1,0 +1,259 @@
+\hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation}{}\doxysection{src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation Class Reference}
+\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation}\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+
+
+A Quantum Teleportation Implemetation for Quantum\+Solver.  
+
+
+
+
+Inheritance diagram for src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a41b6aa0a1519bca216ec7831d60f4062}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a784c8db9274040d956474da758846bbd}{check\+\_\+parameters}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a9368b52e923df11db382875b941b93c7}{parameters}})
+\begin{DoxyCompactList}\small\item\em Verify that the parameter is a valid probability of measure 0 (0 $<$= prob $<$= 1) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a46811f312ac3b5b8c81748288c435b96}{get\+\_\+bell\+\_\+pair}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}{circuit}}, a, b)
+\begin{DoxyCompactList}\small\item\em Append the simplest (and maximal) example of quantum entanglement. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3f8e0dfcca48b44787fdc4daa4a5508d}{alice\+\_\+gates}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}{circuit}}, psi\+\_\+index, a)
+\begin{DoxyCompactList}\small\item\em Alice gates. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_af95393623178646f0101c707da4d204e}{bob\+\_\+gates}} (self, \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}{circuit}}, a, b, c)
+\begin{DoxyCompactList}\small\item\em Bob gates. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a8d8099d18f2f831ab69274fe50faa733}{get\+\_\+statevector}} (self, measure\+\_\+zero\+\_\+prob)
+\begin{DoxyCompactList}\small\item\em Creates a statevector of a qubit that has the specified probability to measure zero. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}{circuit}} (self, measure\+\_\+zero\+\_\+prob)
+\begin{DoxyCompactList}\small\item\em Create the circuit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a6b8fb26ed5d988fa6992e1189c1ee463}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_ac2d5ca9c674ae52b608cc608fab93418}{description}}
+\begin{DoxyCompactList}\small\item\em A short description. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a9368b52e923df11db382875b941b93c7}{parameters}}
+\begin{DoxyCompactList}\small\item\em The required parameters for the algorithm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3fd2d3ea79c5c91d862187523abf9c5c}{parse\+\_\+result}}
+\begin{DoxyCompactList}\small\item\em How to parse the result of the circuit execution. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3044a449ea6ecbba3b9e76b800d0eddc}{parse\+\_\+parameters}}
+\begin{DoxyCompactList}\small\item\em How to parse the input parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A Quantum Teleportation Implemetation for Quantum\+Solver. 
+
+\begin{DoxySeeAlso}{See also}
+\href{https://qiskit.org/textbook/ch-algorithms/teleportation.html}{\texttt{ https\+://qiskit.\+org/textbook/ch-\/algorithms/teleportation.\+html}} 
+\end{DoxySeeAlso}
+
+
+Definition at line 16 of file quantum\+\_\+teleportation.\+py.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a41b6aa0a1519bca216ec7831d60f4062}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a41b6aa0a1519bca216ec7831d60f4062}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_ae47b5e39f4a311f3770c977b374d6255}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 18 of file quantum\+\_\+teleportation.\+py.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3f8e0dfcca48b44787fdc4daa4a5508d}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3f8e0dfcca48b44787fdc4daa4a5508d}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!alice\_gates@{alice\_gates}}
+\index{alice\_gates@{alice\_gates}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{alice\_gates()}{alice\_gates()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+alice\+\_\+gates (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{circuit,  }\item[{}]{psi\+\_\+index,  }\item[{}]{a }\end{DoxyParamCaption})}
+
+
+
+Alice gates. 
+
+
+
+Definition at line 52 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_af95393623178646f0101c707da4d204e}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_af95393623178646f0101c707da4d204e}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!bob\_gates@{bob\_gates}}
+\index{bob\_gates@{bob\_gates}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{bob\_gates()}{bob\_gates()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+bob\+\_\+gates (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{circuit,  }\item[{}]{a,  }\item[{}]{b,  }\item[{}]{c }\end{DoxyParamCaption})}
+
+
+
+Bob gates. 
+
+
+
+Definition at line 58 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a784c8db9274040d956474da758846bbd}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a784c8db9274040d956474da758846bbd}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!check\_parameters@{check\_parameters}}
+\index{check\_parameters@{check\_parameters}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{check\_parameters()}{check\_parameters()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+check\+\_\+parameters (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{parameters }\end{DoxyParamCaption})}
+
+
+
+Verify that the parameter is a valid probability of measure 0 (0 $<$= prob $<$= 1) 
+
+
+
+Reimplemented from \mbox{\hyperlink{classsrc_1_1algorithms_1_1qalgorithm_1_1QAlgorithm_a1e6f571baad6d4038f93a209624a6d05}{src.\+algorithms.\+qalgorithm.\+Q\+Algorithm}}.
+
+
+
+Definition at line 37 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a1d5602569a01dd8234642e9c3ae372f1}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!circuit@{circuit}}
+\index{circuit@{circuit}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{circuit()}{circuit()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+circuit (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{measure\+\_\+zero\+\_\+prob }\end{DoxyParamCaption})}
+
+
+
+Create the circuit. 
+
+
+
+Definition at line 70 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a46811f312ac3b5b8c81748288c435b96}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a46811f312ac3b5b8c81748288c435b96}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!get\_bell\_pair@{get\_bell\_pair}}
+\index{get\_bell\_pair@{get\_bell\_pair}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{get\_bell\_pair()}{get\_bell\_pair()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+get\+\_\+bell\+\_\+pair (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{circuit,  }\item[{}]{a,  }\item[{}]{b }\end{DoxyParamCaption})}
+
+
+
+Append the simplest (and maximal) example of quantum entanglement. 
+
+
+
+Definition at line 46 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a8d8099d18f2f831ab69274fe50faa733}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a8d8099d18f2f831ab69274fe50faa733}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!get\_statevector@{get\_statevector}}
+\index{get\_statevector@{get\_statevector}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{get\_statevector()}{get\_statevector()}}
+{\footnotesize\ttfamily def src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+get\+\_\+statevector (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{measure\+\_\+zero\+\_\+prob }\end{DoxyParamCaption})}
+
+
+
+Creates a statevector of a qubit that has the specified probability to measure zero. 
+
+
+
+Definition at line 64 of file quantum\+\_\+teleportation.\+py.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_ac2d5ca9c674ae52b608cc608fab93418}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_ac2d5ca9c674ae52b608cc608fab93418}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!description@{description}}
+\index{description@{description}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+description}
+
+
+
+A short description. 
+
+
+
+Definition at line 22 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a6b8fb26ed5d988fa6992e1189c1ee463}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a6b8fb26ed5d988fa6992e1189c1ee463}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!name@{name}}
+\index{name@{name}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+name}
+
+
+
+The name of the algorithm. 
+
+
+
+Definition at line 20 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a9368b52e923df11db382875b941b93c7}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a9368b52e923df11db382875b941b93c7}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!parameters@{parameters}}
+\index{parameters@{parameters}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{parameters}{parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+parameters}
+
+
+
+The required parameters for the algorithm. 
+
+
+
+Definition at line 24 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3044a449ea6ecbba3b9e76b800d0eddc}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3044a449ea6ecbba3b9e76b800d0eddc}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!parse\_parameters@{parse\_parameters}}
+\index{parse\_parameters@{parse\_parameters}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{parse\_parameters}{parse\_parameters}}
+{\footnotesize\ttfamily src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+parse\+\_\+parameters}
+
+
+
+How to parse the input parameters. 
+
+
+
+Definition at line 34 of file quantum\+\_\+teleportation.\+py.
+
+\mbox{\Hypertarget{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3fd2d3ea79c5c91d862187523abf9c5c}\label{classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation_a3fd2d3ea79c5c91d862187523abf9c5c}} 
+\index{src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}!parse\_result@{parse\_result}}
+\index{parse\_result@{parse\_result}!src.algorithms.quantum\_teleportation.QuantumTeleportation@{src.algorithms.quantum\_teleportation.QuantumTeleportation}}
+\doxysubsubsection{\texorpdfstring{parse\_result}{parse\_result}}
+{\footnotesize\ttfamily src.\+algorithms.\+quantum\+\_\+teleportation.\+Quantum\+Teleportation.\+parse\+\_\+result}
+
+
+
+How to parse the result of the circuit execution. 
+
+
+
+Definition at line 32 of file quantum\+\_\+teleportation.\+py.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/algorithms/\mbox{\hyperlink{quantum__teleportation_8py}{quantum\+\_\+teleportation.\+py}}\end{DoxyCompactItemize}

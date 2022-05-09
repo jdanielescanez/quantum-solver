@@ -1,0 +1,10 @@
+<map id="src.algorithms.qalgorithm.QAlgorithm" name="src.algorithms.qalgorithm.QAlgorithm">
+<area shape="rect" id="node1" title="An abstract class of Quantum Algorithm, it can be used as template." alt="" coords="103,155,297,196"/>
+<area shape="rect" id="node3" href="$classsrc_1_1algorithms_1_1bernstein__vazirani_1_1BernsteinVazirani.html" title="Bernstein&#45;Vazirani Algorithm Implementation for QuantumSolver." alt="" coords="377,5,576,47"/>
+<area shape="rect" id="node4" href="$classsrc_1_1algorithms_1_1deutsch__jozsa_1_1DeutschJozsa.html" title="Deutsch&#45;Jozsa Algorithm Implementation for QuantumSolver." alt="" coords="391,71,562,112"/>
+<area shape="rect" id="node5" href="$classsrc_1_1algorithms_1_1grover_1_1Grover.html" title="Grover&#39;s Algorithm Implementation for QuantumSolver." alt="" coords="373,137,581,163"/>
+<area shape="rect" id="node6" href="$classsrc_1_1algorithms_1_1qrand_1_1QRand.html" title="A Quantum Algorithm to obtain random numbers for QuantumSolver." alt="" coords="375,187,578,214"/>
+<area shape="rect" id="node7" href="$classsrc_1_1algorithms_1_1quantum__teleportation_1_1QuantumTeleportation.html" title="A Quantum Teleportation Implemetation for QuantumSolver." alt="" coords="345,239,608,280"/>
+<area shape="rect" id="node8" href="$classsrc_1_1algorithms_1_1superdense__coding_1_1SuperdenseCoding.html" title="A Superdense Coding Implemetation for QuantumSolver." alt="" coords="378,304,575,345"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,162,55,189"/>
+</map>
