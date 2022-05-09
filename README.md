@@ -3,6 +3,10 @@
 
 A little quantum toolset developed using [Qiskit](https://qiskit.org/)
 
+<p align="center">
+  <img src="images/logo192.png" alt="Quantum Solver Logo" class="center">
+</p>
+
 <!-- omit in toc -->
 ## Table of Contents
 - [QuantumSolver](#quantumsolver)
@@ -29,8 +33,10 @@ QuantumSolver documentation is available at [https://alu0101238944.github.io/qua
 
 ### Generate
 
-To generate QuantumSolver documentation [install doxygen](https://www.doxygen.nl/manual/install.html) and execute:
-
+To generate QuantumSolver documentation:
+1. [Install QuantumSolver](#install)
+2. [Install Doxygen](https://www.doxygen.nl/manual/install.html)
+3. Execute:
 ```bash
 doxygen doxygen_config.txt
 ```
