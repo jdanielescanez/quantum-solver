@@ -96,16 +96,16 @@ class BB84EntitiesTests(unittest.TestCase):
     shared_key = self.receiver.key[:INDEX_SHARED_KEY]
     self.sender.confirm_key(len(shared_key))
 
-  def test_safe_key(self):
+  def test_is_safe_key(self):
     self.test_confirm_key()
-    self.assertTrue(self.sender.safe_key)
+    self.assertTrue(self.sender.is_safe_key)
 
   def test_show_key(self):
-    self.test_safe_key()
+    self.test_is_safe_key()
     self.assertTrue(self.sender.show_key is not None)
 
   def test_generate_otp(self):
-    self.test_safe_key()
+    self.test_is_safe_key()
     self.sender.generate_otp(ORIGINAL_BITS_SIZE)
     self.assertTrue(isinstance(self.sender.otp, list))
 

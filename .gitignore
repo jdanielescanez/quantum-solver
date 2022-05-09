@@ -2,4 +2,4 @@ main.yml
 dist
 **/__pycache__
 .vscode
-doc
+src/quantum_solver.egg-info
