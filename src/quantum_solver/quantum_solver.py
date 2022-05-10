@@ -144,7 +144,6 @@ class QuantumSolver:
       print('Exception:', exception)
       raise exception
 
-    N_SHOTS = 1
     execution_description = self.qalgorithm_manager.current_algorithm.name
     execution_description += ' in ' + str(self.qexecute.current_backend)
     execution_description += ' with parameters: '
@@ -154,7 +153,7 @@ class QuantumSolver:
     try:
       halo.start()
       exec_start_time = time.time()
-      result = self.qexecute.run(circuit, N_SHOTS)
+      result = self.qexecute.run(circuit, 1)
       exec_ms = (time.time() - exec_start_time) * 1000
       halo.succeed()
       print('  Execution done in', str(exec_ms), 'ms')

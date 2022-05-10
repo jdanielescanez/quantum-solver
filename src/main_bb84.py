@@ -6,8 +6,8 @@
 
 ## BB84 Simulator Main Program
 
-import sys
 import signal
+import sys
 from bb84.bb84 import BB84
 
 def signal_handler(sig, frame):
