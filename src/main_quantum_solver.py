@@ -6,8 +6,8 @@
 
 ## QuantumSolver Main Program
 
-import sys
 import signal
+import sys
 from quantum_solver.quantum_solver import QuantumSolver
 
 def signal_handler(sig, frame):

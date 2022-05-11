@@ -5,7 +5,6 @@
 # Trabajo Fin de Grado: QuantumSolver
 
 from execution.qexecute import QExecute
-from algorithms.qrand import QRand
 from algorithms.qalgorithm_manager import QAlgorithmManager
 from halo import Halo
 from pwinput import pwinput
@@ -69,7 +68,7 @@ class QuantumSolver:
     print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
     print('A little quantum toolset developed using Qiskit')
     print('WARNING: The toolset uses your personal IBM Quantum Experience')
-    print('token to access to IBM hardware.')
+    print('token to access to the IBM hardware.')
     print('You can access to your API token or generate another one here:')
     print('https://quantum-computing.ibm.com/account\n')
     print('You can also use the Guest Mode which only allows you to run ')
@@ -144,7 +143,6 @@ class QuantumSolver:
       print('Exception:', exception)
       raise exception
 
-    N_SHOTS = 1
     execution_description = self.qalgorithm_manager.current_algorithm.name
     execution_description += ' in ' + str(self.qexecute.current_backend)
     execution_description += ' with parameters: '
@@ -154,7 +152,7 @@ class QuantumSolver:
     try:
       halo.start()
       exec_start_time = time.time()
-      result = self.qexecute.run(circuit, N_SHOTS)
+      result = self.qexecute.run(circuit, 1)
       exec_ms = (time.time() - exec_start_time) * 1000
       halo.succeed()
       print('  Execution done in', str(exec_ms), 'ms')
