@@ -5,7 +5,6 @@
 # Trabajo Fin de Grado: QuantumSolver
 
 from execution.qexecute import QExecute
-from algorithms.qrand import QRand
 from algorithms.qalgorithm_manager import QAlgorithmManager
 from halo import Halo
 from pwinput import pwinput
@@ -69,7 +68,7 @@ class QuantumSolver:
     print('\n' + QUANTUM_SOLVER + '\n' + '=' * len(QUANTUM_SOLVER) + '\n')
     print('A little quantum toolset developed using Qiskit')
     print('WARNING: The toolset uses your personal IBM Quantum Experience')
-    print('token to access to IBM hardware.')
+    print('token to access to the IBM hardware.')
     print('You can access to your API token or generate another one here:')
     print('https://quantum-computing.ibm.com/account\n')
     print('You can also use the Guest Mode which only allows you to run ')
