@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['remove_5fgarbage_220',['remove_garbage',['../classsrc_1_1bb84_1_1participant_1_1Participant.html#a9d20cc5e18387928581c572f0ad7bcd6',1,'src::bb84::participant::Participant']]],
-  ['run_221',['run',['../classsrc_1_1bb84_1_1bb84_1_1BB84.html#a07804e362330349beee21c4f43112827',1,'src.bb84.bb84.BB84.run()'],['../classsrc_1_1bb84_1_1bb84__algorithm_1_1BB84Algorithm.html#ade1b5cb09ea4a87de7e0387c68b04402',1,'src.bb84.bb84_algorithm.BB84Algorithm.run()'],['../classsrc_1_1execution_1_1qexecute_1_1QExecute.html#a96ad7945431ffb21e28ff4e07a35ed21',1,'src.execution.qexecute.QExecute.run()'],['../classsrc_1_1quantum__solver_1_1quantum__solver_1_1QuantumSolver.html#ae4190edc3daa9e5d5e1b0d0e491d8844',1,'src.quantum_solver.quantum_solver.QuantumSolver.run()']]],
-  ['run_5falgorithm_222',['run_algorithm',['../classsrc_1_1quantum__solver_1_1quantum__solver_1_1QuantumSolver.html#aaaf7f685b965ea28b4a629da1824e388',1,'src::quantum_solver::quantum_solver::QuantumSolver']]]
+  ['parse_5fresult_219',['parse_result',['../classsrc_1_1algorithms_1_1qalgorithm__manager_1_1QAlgorithmManager.html#afc6fa4acf1228f2ca545382e64ae5f4d',1,'src::algorithms::qalgorithm_manager::QAlgorithmManager']]],
+  ['print_5favaiable_5fbackends_220',['print_avaiable_backends',['../classsrc_1_1execution_1_1qexecute_1_1QExecute.html#a53cc19e7b74026a701eed6c13b9c5835',1,'src::execution::qexecute::QExecute']]],
+  ['print_5favailable_5falgorithms_221',['print_available_algorithms',['../classsrc_1_1algorithms_1_1qalgorithm__manager_1_1QAlgorithmManager.html#a43e0e1fecfa3a36ae255d40a12a9545d',1,'src::algorithms::qalgorithm_manager::QAlgorithmManager']]]
 ];

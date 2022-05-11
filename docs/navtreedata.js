@@ -24,14 +24,12 @@ var NAVTREE =
 [
   [ "QuantumSolver", "index.html", [
     [ "Table of Contents", "index.html#autotoc_md1", null ],
-    [ "Quick Start", "index.html#autotoc_md2", [
-      [ "Install", "index.html#autotoc_md3", null ],
-      [ "Web Interface", "index.html#autotoc_md4", null ]
+    [ "Getting started", "index.html#autotoc_md2", [
+      [ "Warning", "index.html#autotoc_md3", null ],
+      [ "Install", "index.html#autotoc_md4", null ],
+      [ "Web Interface", "index.html#autotoc_md5", null ]
     ] ],
-    [ "Documentation", "index.html#autotoc_md5", [
-      [ "Consult", "index.html#autotoc_md6", null ],
-      [ "Generate", "index.html#autotoc_md7", null ]
-    ] ],
+    [ "Documentation", "index.html#autotoc_md6", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -59,7 +57,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py.html",
-"namespacesrc_1_1quantum__solver.html"
+"qalgorithm_8py.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>QuantumSolver: src/main_bb84.py Source File</title>
+<title>QuantumSolver: src/quantum_solver/__main__.py Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('main__bb84_8py_source.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('quantum__solver_2____main_____8py_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -86,10 +86,10 @@ $(document).ready(function(){initNavTree('main__bb84_8py_source.html',''); initR
 
 <div class="header">
   <div class="headertitle">
-<div class="title">main_bb84.py</div>  </div>
+<div class="title">__main__.py</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="main__bb84_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacesrc_1_1main__bb84.html">    1</a></span>&#160;<span class="comment">#!/usr/bin/env python3</span></div>
+<a href="quantum__solver_2____main_____8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacesrc_1_1quantum__solver_1_1____main____.html">    1</a></span>&#160;<span class="comment">#!/usr/bin/env python3</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"># Author: J. Daniel Escánez</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"># Ingeniería Informática - Universidad de La Laguna</span></div>
@@ -97,27 +97,31 @@ $(document).ready(function(){initNavTree('main__bb84_8py_source.html',''); initR
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> sys</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> signal</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">from</span> bb84.bb84 <span class="keyword">import</span> BB84</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> signal</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> sys</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">from</span> quantum_solver.quantum_solver <span class="keyword">import</span> QuantumSolver</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespacesrc_1_1main__bb84.html#aa27722ddc7c2ea79e7f941862d62d05e">   13</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesrc_1_1main__bb84.html#aa27722ddc7c2ea79e7f941862d62d05e">signal_handler</a>(sig, frame):</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespacesrc_1_1quantum__solver_1_1____main____.html#a3d87a9e19ce5dd208d9902a538b58357">   13</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesrc_1_1quantum__solver_1_1____main____.html#a3d87a9e19ce5dd208d9902a538b58357">signal_handler</a>(sig, frame):</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  print(<span class="stringliteral">&#39;\n\n[$] Exiting successfully\n&#39;</span>)</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  sys.exit()</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespacesrc_1_1quantum__solver_1_1____main____.html#a23600346febac5d1c4422ccc4df13441">   17</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacesrc_1_1quantum__solver_1_1____main____.html#a23600346febac5d1c4422ccc4df13441">main</a>():</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  signal.signal(signal.SIGINT, signal_handler)</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="namespacesrc_1_1main__bb84.html#a50eba246b0dd0aa499a10a4b81de23d2">   19</a></span>&#160;  token = sys.argv[1] <span class="keywordflow">if</span> len(sys.argv) &gt; 1 <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="namespacesrc_1_1main__bb84.html#a20213d8965b4402483e69a9610aea7bc">   20</a></span>&#160;  bb84 = <a class="code" href="classsrc_1_1bb84_1_1bb84_1_1BB84.html">BB84</a>(token)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  bb84.run()</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  token = sys.argv[1] <span class="keywordflow">if</span> len(sys.argv) &gt; 1 <span class="keywordflow">else</span> <span class="keywordtype">None</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  quantum_solver = <a class="code" href="classsrc_1_1quantum__solver_1_1quantum__solver_1_1QuantumSolver.html">QuantumSolver</a>(token)</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  quantum_solver.run()</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <a class="code" href="namespacesrc_1_1quantum__solver_1_1____main____.html#a23600346febac5d1c4422ccc4df13441">main</a>()</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacesrc_1_1main__bb84_html_aa27722ddc7c2ea79e7f941862d62d05e"><div class="ttname"><a href="namespacesrc_1_1main__bb84.html#aa27722ddc7c2ea79e7f941862d62d05e">src.main_bb84.signal_handler</a></div><div class="ttdeci">def signal_handler(sig, frame)</div><div class="ttdef"><b>Definition:</b> <a href="main__bb84_8py_source.html#l00013">main_bb84.py:13</a></div></div>
-<div class="ttc" id="aclasssrc_1_1bb84_1_1bb84_1_1BB84_html"><div class="ttname"><a href="classsrc_1_1bb84_1_1bb84_1_1BB84.html">src.bb84.bb84.BB84</a></div><div class="ttdoc">Main class of BB84 Simulator.</div><div class="ttdef"><b>Definition:</b> <a href="bb84_8py_source.html#l00022">bb84.py:22</a></div></div>
+<div class="ttc" id="anamespacesrc_1_1quantum__solver_1_1____main_____html_a3d87a9e19ce5dd208d9902a538b58357"><div class="ttname"><a href="namespacesrc_1_1quantum__solver_1_1____main____.html#a3d87a9e19ce5dd208d9902a538b58357">src.quantum_solver.__main__.signal_handler</a></div><div class="ttdeci">def signal_handler(sig, frame)</div><div class="ttdef"><b>Definition:</b> <a href="quantum__solver_2____main_____8py_source.html#l00013">__main__.py:13</a></div></div>
+<div class="ttc" id="aclasssrc_1_1quantum__solver_1_1quantum__solver_1_1QuantumSolver_html"><div class="ttname"><a href="classsrc_1_1quantum__solver_1_1quantum__solver_1_1QuantumSolver.html">src.quantum_solver.quantum_solver.QuantumSolver</a></div><div class="ttdoc">Main Class of QuantumSolver.</div><div class="ttdef"><b>Definition:</b> <a href="quantum__solver_8py_source.html#l00018">quantum_solver.py:18</a></div></div>
+<div class="ttc" id="anamespacesrc_1_1quantum__solver_1_1____main_____html_a23600346febac5d1c4422ccc4df13441"><div class="ttname"><a href="namespacesrc_1_1quantum__solver_1_1____main____.html#a23600346febac5d1c4422ccc4df13441">src.quantum_solver.__main__.main</a></div><div class="ttdeci">def main()</div><div class="ttdef"><b>Definition:</b> <a href="quantum__solver_2____main_____8py_source.html#l00017">__main__.py:17</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="main__bb84_8py.html">main_bb84.py</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_8f2b5e06bc5e7fcf45a29981784fc3a9.html">quantum_solver</a></li><li class="navelem"><a class="el" href="quantum__solver_2____main_____8py.html">__main__.py</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
