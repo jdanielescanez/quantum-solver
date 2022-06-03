@@ -98,8 +98,18 @@ Table of Contents</h1>
 <li><a href="#quantumsolver">QuantumSolver</a><ul>
 <li><a href="#getting-started">Getting started</a><ul>
 <li><a href="#warning">Warning</a></li>
-<li><a href="#install">Install</a></li>
-<li><a href="#web-interface">Web Interface</a></li>
+<li><a href="#download">Download</a></li>
+<li><a href="#command-line-interface">Command Line Interface</a><ul>
+<li><a href="#quantumsolver-1">QuantumSolver</a></li>
+<li><a href="#bb84">BB84</a></li>
+</ul>
+</li>
+<li><a href="#web-interface">Web Interface</a><ul>
+<li><a href="#backend">Backend</a></li>
+<li><a href="#frontend">Frontend</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#documentation">Documentation</a></li>
@@ -113,12 +123,42 @@ Warning</h2>
 <p>The toolset uses your personal IBM Quantum Experience token to access to the IBM hardware. You can access to your API token or generate another one <a href="https://quantum-computing.ibm.com/account">here</a>.</p>
 <p>You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator ("aer_simulator").</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
-Install</h2>
-<div class="fragment"><div class="line">python3 -m pip install quantum-solver</div>
+Download</h2>
+<div class="fragment"><div class="line">git clone https://github.com/alu0101238944/quantum-solver.git</div>
+<div class="line">cd quantum-solver</div>
+<div class="line">pip3 install -e .</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
+Command Line Interface</h2>
+<h3><a class="anchor" id="autotoc_md6"></a>
+QuantumSolver</h3>
+<div class="fragment"><div class="line">python3 src/main_quantum_solver.py [optional IBMQ_TOKEN]</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md7"></a>
+BB84</h3>
+<div class="fragment"><div class="line">python3 src/main_bb84.py [optional IBMQ_TOKEN]</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
 Web Interface</h2>
-<p>All functionalities of the toolset can be accessed using the QuantumSolver Web Interface: <a href="https://quantum-solver.herokuapp.com/">https://quantum-solver.herokuapp.com/</a></p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md9"></a>
+Backend</h3>
+<div class="fragment"><div class="line">cd quantum_solver_web</div>
+<div class="line">python3 src/flask-server/server.py</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
+Frontend</h3>
+<div class="fragment"><div class="line">cd quantum_solver_web</div>
+<div class="line">npm i</div>
+<div class="line">npm start</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
+Screenshots</h3>
+<h4><a class="anchor" id="autotoc_md12"></a>
+Home Page</h4>
+<div align="center"> <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/home_web.png?raw=true" alt="Home Page" class="center" class="inline"/> </div><h4><a class="anchor" id="autotoc_md13"></a>
+Token Page</h4>
+<div align="center"> <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/token_web.png?raw=true" alt="Token Page" class="center" class="inline"/> </div><h4><a class="anchor" id="autotoc_md14"></a>
+Main Menu Page</h4>
+<div align="center"> <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/main_menu_web.png?raw=true" alt="Main Menu Page" class="center" class="inline"/> </div><h4><a class="anchor" id="autotoc_md15"></a>
+Run Page</h4>
+<div align="center"> <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_web.png?raw=true" alt="Run Page" class="center" class="inline"/> </div><h4><a class="anchor" id="autotoc_md16"></a>
+Run Experimental Mode Page</h4>
+<div align="center"> <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_experimental_mode_web.png?raw=true" alt="Run Experimental Mode Page" class="center" class="inline"/> </div><h1><a class="anchor" id="autotoc_md17"></a>
 Documentation</h1>
 <p>QuantumSolver documentation is available at <a href="https://alu0101238944.github.io/quantum-solver/">https://alu0101238944.github.io/quantum-solver/</a>. </p>
 </div></div><!-- PageDoc -->

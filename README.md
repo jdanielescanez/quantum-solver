@@ -44,6 +44,7 @@ You can also use the Guest Mode which only allows you to run quantum circuits in
 ```bash
 git clone https://github.com/alu0101238944/quantum-solver.git
 cd quantum-solver
+pip3 install -e .
 ```
 
 ### Command Line Interface
@@ -79,27 +80,32 @@ npm start
 
 #### Screenshots
 
-Home Page
+<!-- omit in toc -->
+##### Home Page
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/home_web.png?raw=true" alt="Home Page" class="center">
 </div>
 
-Token Page
+<!-- omit in toc -->
+##### Token Page
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/token_web.png?raw=true" alt="Token Page" class="center">
 </div>
 
-Main Menu Page
+<!-- omit in toc -->
+##### Main Menu Page
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/main_menu_web.png?raw=true" alt="Main Menu Page" class="center">
 </div>
 
-Run Page
+<!-- omit in toc -->
+##### Run Page
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_web.png?raw=true" alt="Run Page" class="center">
 </div>
 
-Run Experimental Mode Page
+<!-- omit in toc -->
+##### Run Experimental Mode Page
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_experimental_mode_web.png?raw=true" alt="Run Experimental Mode Page" class="center">
 </div>

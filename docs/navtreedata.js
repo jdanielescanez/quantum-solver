@@ -26,10 +26,24 @@ var NAVTREE =
     [ "Table of Contents", "index.html#autotoc_md1", null ],
     [ "Getting started", "index.html#autotoc_md2", [
       [ "Warning", "index.html#autotoc_md3", null ],
-      [ "Install", "index.html#autotoc_md4", null ],
-      [ "Web Interface", "index.html#autotoc_md5", null ]
+      [ "Download", "index.html#autotoc_md4", null ],
+      [ "Command Line Interface", "index.html#autotoc_md5", [
+        [ "QuantumSolver", "index.html#autotoc_md6", null ],
+        [ "BB84", "index.html#autotoc_md7", null ]
+      ] ],
+      [ "Web Interface", "index.html#autotoc_md8", [
+        [ "Backend", "index.html#autotoc_md9", null ],
+        [ "Frontend", "index.html#autotoc_md10", null ],
+        [ "Screenshots", "index.html#autotoc_md11", [
+          [ "Home Page", "index.html#autotoc_md12", null ],
+          [ "Token Page", "index.html#autotoc_md13", null ],
+          [ "Main Menu Page", "index.html#autotoc_md14", null ],
+          [ "Run Page", "index.html#autotoc_md15", null ],
+          [ "Run Experimental Mode Page", "index.html#autotoc_md16", null ]
+        ] ]
+      ] ]
     ] ],
-    [ "Documentation", "index.html#autotoc_md6", null ],
+    [ "Documentation", "index.html#autotoc_md17", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -57,7 +71,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py.html",
-"qalgorithm_8py.html"
+"namespacesrc_1_1bb84_1_1receiver.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

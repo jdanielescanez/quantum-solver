@@ -1,7 +1,6 @@
 var dir_effbd31edf840aa7ff570515b77b84ef =
 [
     [ "__init__.py", "bb84_2____init_____8py.html", null ],
-    [ "__main__.py", "bb84_2____main_____8py.html", "bb84_2____main_____8py" ],
     [ "bb84.py", "bb84_8py.html", "bb84_8py" ],
     [ "bb84_algorithm.py", "bb84__algorithm_8py.html", "bb84__algorithm_8py" ],
     [ "participant.py", "participant_8py.html", [
