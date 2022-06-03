@@ -21,8 +21,14 @@
 - [QuantumSolver](#quantumsolver)
   - [Getting started](#getting-started)
     - [Warning](#warning)
-    - [Install](#install)
+    - [Download](#download)
+    - [Command Line Interface](#command-line-interface)
+      - [QuantumSolver](#quantumsolver-1)
+      - [BB84](#bb84)
     - [Web Interface](#web-interface)
+      - [Backend](#backend)
+      - [Frontend](#frontend)
+      - [Screenshots](#screenshots)
   - [Documentation](#documentation)
 
 ## Getting started
@@ -33,15 +39,70 @@ The toolset uses your personal IBM Quantum Experience token to access to the IBM
 
 You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator ("aer_simulator").
 
-### Install
+### Download
 
 ```bash
-python3 -m pip install quantum-solver
+git clone https://github.com/alu0101238944/quantum-solver.git
+cd quantum-solver
+```
+
+### Command Line Interface
+
+#### QuantumSolver
+
+```
+python3 src/main_quantum_solver.py [optional IBMQ_TOKEN]
+```
+
+#### BB84
+
+```
+python3 src/main_bb84.py [optional IBMQ_TOKEN]
 ```
 
 ### Web Interface
 
-All functionalities of the toolset can be accessed using the QuantumSolver Web Interface: [https://quantum-solver.herokuapp.com/](https://quantum-solver.herokuapp.com/)
+#### Backend
+
+```
+cd quantum_solver_web
+python3 src/flask-server/server.py
+```
+
+#### Frontend
+
+```
+cd quantum_solver_web
+npm i
+npm start
+```
+
+#### Screenshots
+
+Home Page
+<div align="center">
+  <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/home_web.png?raw=true" alt="Home Page" class="center">
+</div>
+
+Token Page
+<div align="center">
+  <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/token_web.png?raw=true" alt="Token Page" class="center">
+</div>
+
+Main Menu Page
+<div align="center">
+  <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/main_menu_web.png?raw=true" alt="Main Menu Page" class="center">
+</div>
+
+Run Page
+<div align="center">
+  <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_web.png?raw=true" alt="Run Page" class="center">
+</div>
+
+Run Experimental Mode Page
+<div align="center">
+  <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_experimental_mode_web.png?raw=true" alt="Run Experimental Mode Page" class="center">
+</div>
 
 ## Documentation
 
