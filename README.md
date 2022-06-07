@@ -21,7 +21,7 @@
 - [QuantumSolver](#quantumsolver)
   - [Getting started](#getting-started)
     - [Warning](#warning)
-    - [Download](#download)
+    - [Download and install](#download-and-install)
     - [Command Line Interface](#command-line-interface)
       - [QuantumSolver](#quantumsolver-1)
       - [BB84](#bb84)
@@ -39,7 +39,7 @@ The toolset uses your personal IBM Quantum Experience token to access to the IBM
 
 You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator ("aer_simulator").
 
-### Download
+### Download and install
 
 ```bash
 git clone https://github.com/alu0101238944/quantum-solver.git
