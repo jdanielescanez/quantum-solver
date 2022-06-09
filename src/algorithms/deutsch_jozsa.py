@@ -17,21 +17,21 @@ class DeutschJozsa(QAlgorithm):
     self.name = 'Deutsch-Jozsa'
     ## A short description
     self.description = \
-        'Given a hidden Boolean function f: f({x_0,x_1,x_2,...}) → 0 or 1, where x_n is 0 or 1;\n\
-            determine whether the given function is balanced or constant. A constant function returns \
-                all 0\'s or all 1\'s for any input, while a balanced function returns 0\'s for exactly \
-                    half of all inputs and 1\'s for the other half.'
+        'Given a hidden Boolean function f: f({x_1,x_2,x_3,...}) → 0 or 1, where x_n is 0 or 1; ' + \
+            'determine whether the given function is balanced or constant. A constant function returns ' + \
+                'all 0\'s or all 1\'s for any input, while a balanced function returns 0\'s for exactly ' + \
+                    'half of all inputs and 1\'s for the other half.'
     ## The required parameters for the algorithm
     self.parameters = [
       {
         'type': 'string',
         'description': 'The oracle type: "constant" or "balanced"',
-        'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
+        'constraint': 'Must be the string without the quotes'
       },
       {
         'type': 'int',
-        'description': 'A positive number of qubits to use',
-        'constraint': 'Can\'t be bigger than the number of qubits of the selected backend'
+        'description': 'The size of the funciton input (n)',
+        'constraint': 'Must be smaller than the number of qubits of the selected backend'
       }
     ]
     ## How to parse the result of the circuit execution
