@@ -4,41 +4,55 @@
 # Ingeniería Informática - Universidad de La Laguna
 # Trabajo Fin de Grado: QuantumSolver
 
-from qiskit import QuantumCircuit
-from bb84.sender import Sender
-from bb84.receiver import Receiver
+from qiskit import execute, QuantumCircuit, QuantumRegister, ClassicalRegister
+from e91.sender import Sender
+from e91.receiver import Receiver
 import binascii
 
-BB84_SIMULATOR = 'BB84 SIMULATOR'
+E91_SIMULATOR = 'E91 SIMULATOR'
 
-## An implementation of the BB84 protocol
+## An implementation of the E91 protocol
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
-class BB84Algorithm:
+class E91Algorithm:
+  ## Append the simplest (and maximal) example of quantum entanglement
+  def get_bell_pair(self, qr, cr):
+    circuit = QuantumCircuit(qr, cr)
+
+    circuit.x([qr[0], qr[1]])
+    circuit.h(qr[0])
+    circuit.cx(qr[0], qr[1])
+    return circuit
+
   ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, verbose):
-    # Encoder Alice
-    alice = Sender('Alice', original_bits_size)
-    alice.set_values()
+    qr = QuantumRegister(2, name="qr")
+    cr = ClassicalRegister(4, name="cr")
+    singlet = self.get_bell_pair(qr, cr)
+
+    alice = Sender('Alice', original_bits_size, qr, cr)
     alice.set_axes()
-    message = alice.encode_quantum_message()
 
-    # Interceptor Eve
-    eve = Receiver('Eve', original_bits_size)
-    eve.set_axes()
-    message = eve.decode_quantum_message(message, self.measure_density, backend)
-
-    # Decoder Bob
-    bob = Receiver('Bob', original_bits_size)
+    eve = Receiver('Eve', original_bits_size, qr, cr)
+    
+    bob = Receiver('Bob', original_bits_size, qr, cr)
     bob.set_axes()
-    message = bob.decode_quantum_message(message, 1, backend)
 
-    # Alice - Bob Remove Garbage
-    alice_axes = alice.axes # Alice share her axes
-    bob_axes = bob.axes # Bob share his axes
+    circuits = []
+    for i in range(original_bits_size):
+      alice_measure = alice.measurements[alice.axes[i]]
+      bob_measure = bob.measurements[bob.axes[i]]
+      circuit = singlet + alice_measure + bob_measure
+      circuit.name = str(i) + ':' + alice.axes[i] + '_' + bob.axes[i]
+      circuits.append(circuit)
 
-    # Delete the difference
-    alice.remove_garbage(bob_axes)
-    bob.remove_garbage(alice_axes)
+    result = execute(circuits, backend=backend, shots=1).result()
+        
+    alice.create_values(result, circuits)
+    bob.create_values(result, circuits)
+
+    # Public measurements
+    alice.create_key(bob.axes, result, circuits)
+    bob.create_key(alice.axes, result, circuits)
 
     # Bob share some values of the key to check
     SHARED_SIZE = round(0.5 * len(bob.key))
@@ -46,12 +60,15 @@ class BB84Algorithm:
 
     if verbose:
       alice.show_values()
+      alice.show_measurements()
       alice.show_axes()
 
       eve.show_values()
+      eve.show_measurements()
       eve.show_axes()
 
       bob.show_values()
+      bob.show_measurements()
       bob.show_axes()
 
       alice.show_key()
@@ -65,7 +82,20 @@ class BB84Algorithm:
       shared_size = len(shared_key)
       alice.confirm_key(shared_size)
       bob.confirm_key(shared_size)
+      
       if verbose:
+        # CHSH inequality test
+        alice.show_corr()
+        bob.show_corr()
+
+        # Length key test
+        alice.show_len_key()
+        bob.show_len_key()
+
+        print('\nCHSH correlation should be close to -2 * √2 ~= -2.8282')
+        print('Length key should be close to (2 / 9) *', original_bits_size, \
+              '/ 2 =', original_bits_size, '/ 9 =', original_bits_size / 9)
+
         print('\nFinal Keys')
         alice.show_key()
         bob.show_key()
@@ -75,7 +105,7 @@ class BB84Algorithm:
     
     return alice, bob
 
-  ## Run the implementation of BB84 protocol
+  ## Run the implementation of E91 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
     ## The original size of the message
     self.original_bits_size = original_bits_size
