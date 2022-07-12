@@ -18,7 +18,7 @@ from alive_progress import alive_bar
 E91_SIMULATOR = 'E91 SIMULATOR'
 
 ## Main class of E91 Simulator
-## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
+## @see https://github.com/qiskit-community/qiskit-community-tutorials/blob/master/awards/teach_me_qiskit_2018/e91_qkd/e91_quantum_key_distribution_protocol.ipynb
 class E91:
   ## Constructor
   def __init__(self, token):

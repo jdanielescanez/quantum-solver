@@ -49,7 +49,7 @@ class Participant(ABC):
     self._calculate_measurements()
     if axes == None:
       self.axes = []
-      for i in range(self.original_bits_size):
+      for _ in range(self.original_bits_size):
         random_measurement = str(choice(list(self.measurements.keys())))
         self.axes.append(random_measurement)
     else:

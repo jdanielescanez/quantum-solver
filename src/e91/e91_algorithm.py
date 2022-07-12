@@ -7,6 +7,7 @@
 from qiskit import execute, QuantumCircuit, QuantumRegister, ClassicalRegister
 from e91.sender import Sender
 from e91.receiver import Receiver
+from e91.eavesdropper import Eveasdropper
 import binascii
 
 E91_SIMULATOR = 'E91 SIMULATOR'
@@ -32,31 +33,57 @@ class E91Algorithm:
     alice = Sender('Alice', original_bits_size, qr, cr)
     alice.set_axes()
 
-    eve = Receiver('Eve', original_bits_size, qr, cr)
+    eve = Eveasdropper('Eve', original_bits_size, qr, cr)
+    eve.set_axes()
     
     bob = Receiver('Bob', original_bits_size, qr, cr)
     bob.set_axes()
 
     circuits = []
     for i in range(original_bits_size):
+      eve_measure = eve.measurements[eve.axes[i][0]] + eve.measurements[eve.axes[i][1]]
       alice_measure = alice.measurements[alice.axes[i]]
       bob_measure = bob.measurements[bob.axes[i]]
-      circuit = singlet + alice_measure + bob_measure
-      circuit.name = str(i) + ':' + alice.axes[i] + '_' + bob.axes[i]
+      circuit = singlet + eve_measure + alice_measure + bob_measure
+      circuit.name = str(i) + ':' + alice.axes[i] + '_' + bob.axes[i] + '_' + eve.axes[i][0] + '-' + eve.axes[i][1]
       circuits.append(circuit)
 
     result = execute(circuits, backend=backend, shots=1).result()
         
     alice.create_values(result, circuits)
     bob.create_values(result, circuits)
+    eve.create_values(result, circuits)
 
     # Public measurements
     alice.create_key(bob.axes, result, circuits)
     bob.create_key(alice.axes, result, circuits)
+    eve.create_key(alice.axes, bob.axes, result, circuits)
 
     # Bob share some values of the key to check
     SHARED_SIZE = round(0.5 * len(bob.key))
     shared_key = bob.key[:SHARED_SIZE]
+
+    keyLength = len(alice.key)
+    # Number of mismatching bits in the keys of Alice and Bob
+    abKeyMismatches = 0
+    # Number of mismatching bits in the keys of Eve and Alice
+    eaKeyMismatches = 0
+    # Number of mismatching bits in the keys of Eve and Bob
+    ebKeyMismatches = 0
+
+    for j in range(keyLength):
+      if alice.key[j] != bob.key[j]: 
+        abKeyMismatches += 1
+      if eve.key[j][0] != alice.key[j]:
+        eaKeyMismatches += 1
+      if eve.key[j][1] != bob.key[j]:
+        ebKeyMismatches += 1
+
+    print("EY:", keyLength)
+    # Eve's knowledge of Bob's key
+    eaKnowledge = (keyLength - eaKeyMismatches) / keyLength
+    # Eve's knowledge of Alice's key
+    ebKnowledge = (keyLength - ebKeyMismatches) / keyLength
 
     if verbose:
       alice.show_values()
@@ -74,8 +101,13 @@ class E91Algorithm:
       alice.show_key()
       bob.show_key()
 
+      print('\nNumber of mismatching bits: ' + str(abKeyMismatches) + '\n')
+
       print('\nShared Bob Key:')
       print(shared_key)
+
+      print('\nEve\'s knowledge of Alice\'s key: ' + str(round(eaKnowledge * 100, 2)) + '%')
+      print('Eve\'s knowledge of Bob\'s key: ' + str(round(ebKnowledge * 100, 2)) + '%')
 
     # Alice check the shared key
     if alice.check_key(shared_key):
