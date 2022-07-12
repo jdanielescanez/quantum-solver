@@ -16,15 +16,18 @@ class Eveasdropper(Receiver):
     super().__init__(name, original_bits_size, qr, cr)
 
     ## Chosen measurements setter
-  def set_axes(self, axes=None):
+  def set_axes(self, axes=None, density=0.0):
     self._calculate_measurements()
     if axes == None:
       self.axes = []
       for _ in range(self.original_bits_size):
-        if uniform(0, 1) <= 0.5: # in 50% of cases perform the WW measurement
-          self.axes.append(['ea2', 'eb1'])
-        else: # in 50% of cases perform the ZZ measurement
-          self.axes.append(['ea3', 'eb2'])
+        if uniform(0, 1) <= density:
+          if uniform(0, 1) <= 0.5: # in 50% of cases perform the WW measurement
+            self.axes.append(['ea2', 'eb1'])
+          else: # in 50% of cases perform the ZZ measurement
+            self.axes.append(['ea3', 'eb2'])
+        else:
+            self.axes.append(None)
     else:
       self.axes = axes
 
@@ -67,6 +70,7 @@ class Eveasdropper(Receiver):
     self.key = []
     for i in range(self.original_bits_size):
       # If Alice and Bob have measured the spin projections onto the a_2/b_1 or a_3/b_2 directions
-      if (alice_choices[i] == 'a2' and bob_choices[i] == 'b1') or \
-        (alice_choices[i] == 'a3' and bob_choices[i] == 'b2'):
+      if self.values[i] != None and \
+          ((alice_choices[i] == 'a2' and bob_choices[i] == 'b1') or \
+              (alice_choices[i] == 'a3' and bob_choices[i] == 'b2')):
           self.key.append([self.values[i][0], 0 if self.values[i][1] == 1 else 1])

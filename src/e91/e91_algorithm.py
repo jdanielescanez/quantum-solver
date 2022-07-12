@@ -34,18 +34,22 @@ class E91Algorithm:
     alice.set_axes()
 
     eve = Eveasdropper('Eve', original_bits_size, qr, cr)
-    eve.set_axes()
+    eve.set_axes(density=self.measure_density)
     
     bob = Receiver('Bob', original_bits_size, qr, cr)
     bob.set_axes()
 
     circuits = []
     for i in range(original_bits_size):
-      eve_measure = eve.measurements[eve.axes[i][0]] + eve.measurements[eve.axes[i][1]]
+      if eve.axes[i] != None:
+        eve_measure = eve.measurements[eve.axes[i][0]] + eve.measurements[eve.axes[i][1]]
+      else:
+        eve_measure = QuantumCircuit(qr, cr)
       alice_measure = alice.measurements[alice.axes[i]]
       bob_measure = bob.measurements[bob.axes[i]]
       circuit = singlet + eve_measure + alice_measure + bob_measure
-      circuit.name = str(i) + ':' + alice.axes[i] + '_' + bob.axes[i] + '_' + eve.axes[i][0] + '-' + eve.axes[i][1]
+      eve_measure_name = '_' + eve.axes[i][0] + '-' + eve.axes[i][1] if eve.axes[i] != None else ''
+      circuit.name = str(i) + ':' + alice.axes[i] + '_' + bob.axes[i] + eve_measure_name
       circuits.append(circuit)
 
     result = execute(circuits, backend=backend, shots=1).result()
@@ -101,7 +105,7 @@ class E91Algorithm:
       alice.show_key()
       bob.show_key()
 
-      print('\nNumber of mismatching bits: ' + str(abKeyMismatches) + '\n')
+      print('\nNumber of mismatching bits: ' + str(abKeyMismatches))
 
       print('\nShared Bob Key:')
       print(shared_key)
