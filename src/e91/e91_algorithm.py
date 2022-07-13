@@ -63,10 +63,6 @@ class E91Algorithm:
     bob.create_key(alice.axes, result, circuits)
     eve.create_key(alice.axes, bob.axes, result, circuits)
 
-    # Bob share some values of the key to check
-    SHARED_SIZE = round(0.5 * len(bob.key))
-    shared_key = bob.key[:SHARED_SIZE]
-
     keyLength = len(alice.key)
     # Number of mismatching bits in the keys of Alice and Bob
     abKeyMismatches = 0
@@ -78,16 +74,16 @@ class E91Algorithm:
     for j in range(keyLength):
       if alice.key[j] != bob.key[j]: 
         abKeyMismatches += 1
-      if eve.key[j][0] != alice.key[j]:
-        eaKeyMismatches += 1
-      if eve.key[j][1] != bob.key[j]:
-        ebKeyMismatches += 1
+      if j < len(eve.key):
+        if eve.key[j][0] != alice.key[j]:
+          eaKeyMismatches += 1
+        if eve.key[j][1] != bob.key[j]:
+          ebKeyMismatches += 1
 
-    print("EY:", keyLength)
     # Eve's knowledge of Bob's key
-    eaKnowledge = (keyLength - eaKeyMismatches) / keyLength
+    eaKnowledge = (keyLength - eaKeyMismatches) / keyLength if keyLength > 0 and len(eve.key) > 0 else 0
     # Eve's knowledge of Alice's key
-    ebKnowledge = (keyLength - ebKeyMismatches) / keyLength
+    ebKnowledge = (keyLength - ebKeyMismatches) / keyLength if keyLength > 0 and len(eve.key) > 0 else 0
 
     if verbose:
       alice.show_values()
@@ -107,37 +103,33 @@ class E91Algorithm:
 
       print('\nNumber of mismatching bits: ' + str(abKeyMismatches))
 
-      print('\nShared Bob Key:')
-      print(shared_key)
-
       print('\nEve\'s knowledge of Alice\'s key: ' + str(round(eaKnowledge * 100, 2)) + '%')
       print('Eve\'s knowledge of Bob\'s key: ' + str(round(ebKnowledge * 100, 2)) + '%')
 
-    # Alice check the shared key
-    if alice.check_key(shared_key):
-      shared_size = len(shared_key)
-      alice.confirm_key(shared_size)
-      bob.confirm_key(shared_size)
-      
+      # CHSH inequality test
+      alice.show_corr()
+      bob.show_corr()
+
+      # Length key test
+      alice.show_len_key()
+      bob.show_len_key()
+
+      print('\nCHSH correlation should be close to -2 * √2 ~= -2.8282')
+      print('\nCHSH correlation should not be between -√2 and √2')
+      print('Length key should be close to', original_bits_size, '* 2 / 9 =', original_bits_size * 2 / 9)
+
+    if alice.check_key() and bob.check_key():
+      alice.confirm_key()
+      bob.confirm_key()
+    
       if verbose:
-        # CHSH inequality test
-        alice.show_corr()
-        bob.show_corr()
-
-        # Length key test
-        alice.show_len_key()
-        bob.show_len_key()
-
-        print('\nCHSH correlation should be close to -2 * √2 ~= -2.8282')
-        print('Length key should be close to (2 / 9) *', original_bits_size, \
-              '/ 2 =', original_bits_size, '/ 9 =', original_bits_size / 9)
-
         print('\nFinal Keys')
         alice.show_key()
         bob.show_key()
         print('\nSecure Communication!')
-    elif verbose:
-      print('\nUnsecure Communication! Eve has been detected intercepting messages\n')
+    elif verbose: 
+      print('\nCHSH correlation is between -√2 and √2')
+      print('Unsecure Communication! Eve has been detected intercepting messages\n')
     
     return alice, bob
 

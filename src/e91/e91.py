@@ -14,6 +14,7 @@ from numpy.random import randint
 from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
+from math import ceil
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 
@@ -80,7 +81,7 @@ class E91:
     density = float(input('[&] Interception Density (float between 0 and 1): '))
     backend = self.qexecute.current_backend
     N_BITS = 6
-    bits_size = len(message) * (9 + 1) * N_BITS # 9 because is the theorical value and 1 is the epsilon
+    bits_size = ceil(len(message) * 9 / 2 * N_BITS) # 2 / 9 because is the theorical value
     execution_description = str(self.qexecute.current_backend)
     execution_description += ' with message "'
     execution_description += message + '" and density "' + str(density) + '"'
@@ -116,7 +117,7 @@ class E91:
           for i, len_message in enumerate(x):
             for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-              bits_size = len(message) * 5
+              bits_size = ceil(len(message) * 9 / 2) # 9 / 2 because is the theorical value
               flag = self.e91_algorithm.run(message, backend, bits_size, density, 1, False)
               image[j][i] += 1 if flag else 0
               bar()

@@ -27,7 +27,7 @@ class Eveasdropper(Receiver):
           else: # in 50% of cases perform the ZZ measurement
             self.axes.append(['ea3', 'eb2'])
         else:
-            self.axes.append(None)
+          self.axes.append(None)
     else:
       self.axes = axes
 
@@ -62,15 +62,21 @@ class Eveasdropper(Receiver):
   # Create the key with the circuit measurement results
   def create_values(self, result, circuits):
     for i in range(self.original_bits_size):
-      res = list(result.get_counts(circuits[i]).keys())[0]
-      self.values.append([int(res[0]), int(res[1])])
+      if self.axes[i] != None:
+        res = list(result.get_counts(circuits[i]).keys())[0]
+        self.values.append([int(res[0]), int(res[1])])
+      else:
+        self.values.append([None, None])
 
   ## Create the key with the other choices
   def create_key(self, alice_choices, bob_choices, result, circuits):
     self.key = []
     for i in range(self.original_bits_size):
       # If Alice and Bob have measured the spin projections onto the a_2/b_1 or a_3/b_2 directions
-      if self.values[i] != None and \
-          ((alice_choices[i] == 'a2' and bob_choices[i] == 'b1') or \
-              (alice_choices[i] == 'a3' and bob_choices[i] == 'b2')):
+      if self.values[i] != [None, None]:
+        if (alice_choices[i] == 'a2' and bob_choices[i] == 'b1') or \
+            (alice_choices[i] == 'a3' and bob_choices[i] == 'b2'):
           self.key.append([self.values[i][0], 0 if self.values[i][1] == 1 else 1])
+      else:
+        self.key.append([None, None])
+
