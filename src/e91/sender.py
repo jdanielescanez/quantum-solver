@@ -38,25 +38,3 @@ class Sender(Participant):
     for i in range(self.original_bits_size):
       res = list(result.get_counts(circuits[i]).keys())[0]
       self.values.append(int(res[-2]))
-
-  ## Create the key with the other choices
-  def create_key(self, other_choices, result, circuits):
-    count = [[0, 0, 0, 0], # XW observable
-             [0, 0, 0, 0], # XV observable
-             [0, 0, 0, 0], # ZW observable
-             [0, 0, 0, 0]] # ZV observable
-
-    self.key = []
-    for i in range(self.original_bits_size):
-      # If Alice and Bob have measured the spin projections onto the a_2/b_1 or a_3/b_2 directions
-      if (self.axes[i] == 'a2' and other_choices[i] == 'b1') or \
-         (self.axes[i] == 'a3' and other_choices[i] == 'b2'):
-        self.key.append(self.values[i])
-      else:
-        if (self.axes[i] == 'a1' or self.axes[i] == 'a3') and (other_choices[i] == 'b1' or other_choices[i] == 'b3'):
-          res = list(result.get_counts(circuits[i]).keys())[0]
-          j = 2 * int(self.axes[i] == 'a3') + int(other_choices[i] == 'b3')
-          k = int(res[-2:], base=2)
-          count[j][k] += 1
-      
-    self.set_corr(count)

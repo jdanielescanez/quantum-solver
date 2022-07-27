@@ -9,6 +9,7 @@ from e91.sender import Sender
 from e91.receiver import Receiver
 from e91.eavesdropper import Eveasdropper
 import binascii
+from math import sqrt
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 
@@ -26,10 +27,12 @@ class E91Algorithm:
 
   ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, verbose):
+    # Initialize the bell pair, quantum and classical registers
     qr = QuantumRegister(2, name="qr")
     cr = ClassicalRegister(4, name="cr")
     singlet = self.get_bell_pair(qr, cr)
 
+    # Initialize entities Alice, Eve and Bob
     alice = Sender('Alice', original_bits_size, qr, cr)
     alice.set_axes()
 
@@ -39,6 +42,7 @@ class E91Algorithm:
     bob = Receiver('Bob', original_bits_size, qr, cr)
     bob.set_axes()
 
+    # Create circuits and get results
     circuits = []
     for i in range(original_bits_size):
       if eve.axes[i] != None:
@@ -53,37 +57,40 @@ class E91Algorithm:
       circuits.append(circuit)
 
     result = execute(circuits, backend=backend, shots=1).result()
-        
+    
     alice.create_values(result, circuits)
     bob.create_values(result, circuits)
     eve.create_values(result, circuits)
 
-    # Public measurements
-    alice.create_key(bob.axes, result, circuits)
-    bob.create_key(alice.axes, result, circuits)
-    eve.create_key(alice.axes, bob.axes, result, circuits)
+    # Publish the measurements
+    # Obtain values from the circuit measurements
+    count = [[0, 0, 0, 0], # XW observable
+             [0, 0, 0, 0], # XV observable
+             [0, 0, 0, 0], # ZW observable
+             [0, 0, 0, 0]] # ZV observable
 
+    alice.key = []; eve.key = []; bob.key = []
+    for i in range(original_bits_size):
+      # If Alice and Bob have measured the spin projections onto the a_2/b_1 or a_3/b_2 directions
+      if (alice.axes[i] == 'a2' and bob.axes[i] == 'b1') or \
+         (alice.axes[i] == 'a3' and bob.axes[i] == 'b2'):
+        alice.key.append(alice.values[i])
+        bob.key.append(0 if bob.values[i] == 1 else 1)
+        if eve.values[i] != [None, None]:
+          eve.key.append([eve.values[i][0], 0 if eve.values[i][1] == 1 else 1])
+        else:
+          eve.key.append([None, None])
+      else:
+        eve.key.append([None, None])
+        if (alice.axes[i] == 'a1' or alice.axes[i] == 'a3') and (bob.axes[i] == 'b1' or bob.axes[i] == 'b3'):
+          res = list(result.get_counts(circuits[i]).keys())[0]
+          j = 2 * int(alice.axes[i] == 'a3') + int(bob.axes[i] == 'b3')
+          k = int(res[-2:], base=2)
+          count[j][k] += 1
+
+    corr = self.compute_corr(count)
     keyLength = len(alice.key)
-    # Number of mismatching bits in the keys of Alice and Bob
-    abKeyMismatches = 0
-    # Number of mismatching bits in the keys of Eve and Alice
-    eaKeyMismatches = 0
-    # Number of mismatching bits in the keys of Eve and Bob
-    ebKeyMismatches = 0
-
-    for j in range(keyLength):
-      if alice.key[j] != bob.key[j]: 
-        abKeyMismatches += 1
-      if j < len(eve.key):
-        if eve.key[j][0] != alice.key[j]:
-          eaKeyMismatches += 1
-        if eve.key[j][1] != bob.key[j]:
-          ebKeyMismatches += 1
-
-    # Eve's knowledge of Bob's key
-    eaKnowledge = (keyLength - eaKeyMismatches) / keyLength if keyLength > 0 and len(eve.key) > 0 else 0
-    # Eve's knowledge of Alice's key
-    ebKnowledge = (keyLength - ebKeyMismatches) / keyLength if keyLength > 0 and len(eve.key) > 0 else 0
+    info = self.get_mismatches_info(alice, eve, bob)
 
     if verbose:
       alice.show_values()
@@ -101,24 +108,21 @@ class E91Algorithm:
       alice.show_key()
       bob.show_key()
 
-      print('\nNumber of mismatching bits: ' + str(abKeyMismatches))
+      print('\nNumber of mismatching bits: ' + str(info['alice_bob_key_mismatches']))
 
-      print('\nEve\'s knowledge of Alice\'s key: ' + str(round(eaKnowledge * 100, 2)) + '%')
-      print('Eve\'s knowledge of Bob\'s key: ' + str(round(ebKnowledge * 100, 2)) + '%')
+      print('\nEve\'s knowledge of Alice\'s key: ' + str(round(info['eve_alice_knowledge'] * 100, 2)) + '%')
+      print('Eve\'s knowledge of Bob\'s key: ' + str(round(info['eve_bob_knowledge'] * 100, 2)) + '%')
 
       # CHSH inequality test
-      alice.show_corr()
-      bob.show_corr()
-
-      # Length key test
-      alice.show_len_key()
-      bob.show_len_key()
+      print('CHSH correlation:', corr)
+      # Key length test
+      print('Key length:', len(alice.key))
 
       print('\nCHSH correlation should be close to -2 * √2 ~= -2.8282')
       print('\nCHSH correlation should not be between -√2 and √2')
-      print('Length key should be close to', original_bits_size, '* 2 / 9 =', original_bits_size * 2 / 9)
+      print('Key length should be close to', original_bits_size, '* 2 / 9 =', original_bits_size * 2 / 9)
 
-    if alice.check_key() and bob.check_key():
+    if not (- sqrt(2) <= corr and corr <= sqrt(2)):
       alice.confirm_key()
       bob.confirm_key()
     
@@ -131,7 +135,51 @@ class E91Algorithm:
       print('\nCHSH correlation is between -√2 and √2')
       print('Unsecure Communication! Eve has been detected intercepting messages\n')
     
-    return alice, bob
+    return alice, bob, corr
+
+  def get_mismatches_info(self, alice, eve, bob):
+    keyLength = len(alice.key)
+    info = {
+      'alice_bob_key_mismatches': 0,
+      'eve_alice_key_mismatches': 0,
+      'eve_bob_key_mismatches': 0,
+      'eve_alice_knowledge': 0,
+      'eve_bob_knowledge': 0
+    }
+
+    for j in range(keyLength):
+      if alice.key[j] != bob.key[j]: 
+        info['alice_bob_key_mismatches'] += 1
+      if j < len(eve.key):
+        if eve.key[j][0] != alice.key[j]:
+          info['eve_alice_key_mismatches'] += 1
+        if eve.key[j][1] != bob.key[j]:
+          info['eve_bob_key_mismatches'] += 1
+
+    if keyLength > 0 and len(eve.key) > 0:
+      # Eve's knowledge of Bob's key
+      info['eve_alice_knowledge'] = (keyLength - info['eve_alice_key_mismatches']) / keyLength
+      # Eve's knowledge of Alice's key
+      info['eve_bob_knowledge'] = (keyLength - info['eve_bob_key_mismatches']) / keyLength
+
+    return info
+
+  ## Calculate correlation
+  def compute_corr(self, count):
+    # Number of the results obtained from the measurements in a particular basis
+    total = [sum(count[0]), sum(count[1]), sum(count[2]), sum(count[3])]
+    check_total = list(map(lambda x: x == 0, total))
+
+    if any(check_total):
+      return float('-inf')
+
+    # Expectation values of XW, XV, ZW and ZV observables
+    expect11 = (count[0][0] - count[0][1] - count[0][2] + count[0][3]) / total[0] # -1 / sqrt(2)
+    expect13 = (count[1][0] - count[1][1] - count[1][2] + count[1][3]) / total[1] #  1 / sqrt(2)
+    expect31 = (count[2][0] - count[2][1] - count[2][2] + count[2][3]) / total[2] # -1 / sqrt(2)
+    expect33 = (count[3][0] - count[3][1] - count[3][2] + count[3][3]) / total[3] # -1 / sqrt(2) 
+    
+    return expect11 - expect13 + expect31 + expect33 # Calculate the CHSC correlation value
 
   ## Run the implementation of E91 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
@@ -140,11 +188,11 @@ class E91Algorithm:
     ## The probability of an interception occurring
     self.measure_density = measure_density
 
-    alice, bob = self.__generate_key(backend, original_bits_size, verbose)
+    alice, bob, corr = self.__generate_key(backend, original_bits_size, verbose)
     if not (alice.is_safe_key and bob.is_safe_key):
       if verbose:
         print('❌ Message not send')
-      return False
+      return False, corr
 
     alice.generate_otp(n_bits)
     bob.generate_otp(n_bits)
@@ -170,4 +218,4 @@ class E91Algorithm:
       else:
         print('\n❌ The initial message and the decoded message are different')
 
-    return True
+    return True, corr

@@ -14,7 +14,7 @@ from numpy.random import randint
 from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
-from math import ceil
+from math import ceil, sqrt
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 
@@ -75,6 +75,14 @@ class E91:
       print('[4] Experimental mode')
     print('[0] Exit\n')
 
+  def __show_options_experimental_mode(self):
+    print('\nResults Experimental Mode')
+    print('=========================')
+    print('[1] See security graph')
+    print('[2] See average correlation graph')
+    print('[3] See checked average correlation graph')
+    print('[0] Exit\n')
+
   ## Run E91 simulation once
   def __run_simulation(self):
     message = str(input('[&] Message (string): '))
@@ -105,8 +113,10 @@ class E91:
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit))
-    x = list(range(1, len_msg_limit + 1, 1))
+    image_security = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
+    image_corr = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
+    image_check = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
+    x = list(range(10, len_msg_limit + 1, 10))
     y = list(np.arange(0, 1 + density_step, density_step))
     start_time = time.time()
     print('\nRunning E91 Simulator Experiment (in ' + str(backend) + '):')
@@ -118,9 +128,17 @@ class E91:
             for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
               bits_size = ceil(len(message) * 9 / 2) # 9 / 2 because is the theorical value
-              flag = self.e91_algorithm.run(message, backend, bits_size, density, 1, False)
-              image[j][i] += 1 if flag else 0
+              flag, corr = self.e91_algorithm.run(message, backend, bits_size, density, 1, False)
+              image_security[j][i] += 1 if flag else 0
+              image_corr[j][i] += corr
               bar()
+            image_corr[j][i] /= repetition_instance
+            image_check[j][i] = image_corr[j][i]
+            if image_check[j][i] != float('-inf'):
+              if not (- sqrt(2) <= corr and corr <= sqrt(2)):
+                image_check[j][i] = 0
+              else:
+                image_check[j][i] = 1
           
     except Exception as exception:
       print('Exception:', exception)
@@ -128,13 +146,26 @@ class E91:
     time_m = (time.time() - start_time)
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
     print('\n💡 Output:\n\nx: ' + str(x) + '\n\ny: ' + str(y))
-    print('\nImage:\n' + str(image) + '\n')
-    plt.figure(num='E91 Simulator - Experimental Mode' + str(backend))
-    plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
-    plt.colorbar(label='Times the protocol is determined safe')
-    plt.xlabel('Message Length (number of bits)')
-    plt.ylabel('Interception Density')
-    plt.show()
+    print('\nImage Security:\n' + str(image_security) + '\n')
+    print('\nImage Average Correlation:\n' + str(image_corr) + '\n')
+    print('\nImage Checked Average Correlation:\n' + str(image_check) + '\n')
+
+    results = {
+      'x': x,
+      'y': y,
+      'backend': backend,
+      'image_security': image_security,
+      'image_corr': image_corr,
+      'image_check': image_check
+    }
+
+    while True:
+      try:
+        self.__show_options_experimental_mode()
+        if self.__select_option_experimental_mode(results) == 0:
+          return
+      except Exception as _:
+        pass
 
   ## Select the option for main menu
   def __select_option(self):
@@ -165,3 +196,33 @@ class E91:
         self.__experimental_mode(len_msg_limit, density_step, repetition_instance)
     else:
       print('[!] Invalid option, try again')
+
+  ## Select the option for main menu
+  def __select_option_experimental_mode(self, results):
+    option = int(input('[&] Select an option: '))
+    if option == 0:
+      pass
+    elif option == 1:
+      plt.figure(num='E91 Simulator - Experimental Mode (Security) [' + str(results['backend']) + ']')
+      plt.pcolormesh(results['x'], results['y'], results['image_security'], cmap='inferno', shading='auto')
+      plt.colorbar(label='Times the protocol is determined safe')
+      plt.xlabel('Message Length (number of bits)')
+      plt.ylabel('Interception Density')
+      plt.show()
+    elif option == 2:
+      plt.figure(num='E91 Simulator - Experimental Mode (Average Correlation) [' + str(results['backend']) + ']')
+      plt.pcolormesh(results['x'], results['y'], results['image_corr'], cmap='inferno', shading='auto')
+      plt.colorbar(label='Average Correlation')
+      plt.xlabel('Message Length (number of bits)')
+      plt.ylabel('Interception Density')
+      plt.show()
+    elif option == 3:
+      plt.figure(num='E91 Simulator - Experimental Mode (Checked Average Correlation) [' + str(results['backend']) + ']')
+      plt.pcolormesh(results['x'], results['y'], results['image_check'], cmap='bwr', shading='auto')
+      plt.colorbar(label='Checked Average Correlation')
+      plt.xlabel('Message Length (number of bits)')
+      plt.ylabel('Interception Density')
+      plt.show()
+    else:
+      print('[!] Invalid option, try again')
+    return option

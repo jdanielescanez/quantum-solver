@@ -10,7 +10,6 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from numpy.random import randint, choice
 from math import ceil
 import re
-from math import sqrt
 
 ## An abstract class of a participant entity in the BB84 implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
@@ -38,8 +37,6 @@ class Participant(ABC):
     self.otp = None
     ## The associated measurements
     self.measurements = {}
-    ## The CHSH correlation
-    self.corr = None
 
   @abstractmethod
   def _calculate_measurements(self):
@@ -82,40 +79,9 @@ class Participant(ABC):
     print('\n' + self.name, 'OTP:')
     print(self.otp)
 
-  ## Print CHSH correlation
-  def show_corr(self):
-    corr = self.corr if self.corr != None else 0
-    print('\n' + self.name, 'CHSH correlation:', str(round(corr, 3)))
-
-  ## Print len key
-  def show_len_key(self):
-    print('\n' + self.name, 'Key length:', len(self.key))
-
-  ## Check if the shared key is equal to the current key
-  def check_key(self):
-    corr = self.corr if self.corr != None else 0
-    return not (- sqrt(2) <= corr and corr <= sqrt(2))
-
   ## Use the rest of the key and validate it
   def confirm_key(self):
     self.is_safe_key = True
-
-  ## Correlation setter
-  def set_corr(self, count):
-    # Number of the results obtained from the measurements in a particular basis
-    total = [sum(count[0]), sum(count[1]), sum(count[2]), sum(count[3])]
-    check_total = list(map(lambda x: x == 0, total))
-
-    if any(check_total):
-      return
-
-    # Expectation values of XW, XV, ZW and ZV observables
-    expect11 = (count[0][0] - count[0][1] - count[0][2] + count[0][3]) / total[0] # -1 / sqrt(2)
-    expect13 = (count[1][0] - count[1][1] - count[1][2] + count[1][3]) / total[1] #  1 / sqrt(2)
-    expect31 = (count[2][0] - count[2][1] - count[2][2] + count[2][3]) / total[2] # -1 / sqrt(2)
-    expect33 = (count[3][0] - count[3][1] - count[3][2] + count[3][3]) / total[3] # -1 / sqrt(2) 
-    
-    self.corr = expect11 - expect13 + expect31 + expect33 # Calculate the CHSC correlation value
 
   ## Generate an One-Time Pad
   def generate_otp(self, n_bits):

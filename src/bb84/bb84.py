@@ -128,7 +128,7 @@ class BB84:
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
     print('\n💡 Output:\n\nx: ' + str(x) + '\n\ny: ' + str(y))
     print('\nImage:\n' + str(image) + '\n')
-    plt.figure(num='BB84 Simulator - Experimental Mode' + str(backend))
+    plt.figure(num='BB84 Simulator - Experimental Mode [' + str(backend) + ']')
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
     plt.xlabel('Message Length (number of bits)')
