@@ -136,11 +136,10 @@ class E91:
               image_corr[j][i] += corr
               bar()
             image_corr[j][i] /= repetition_instance
-            if image_corr[j][i] != float('-inf'):
-              if checker.check_corr(image_corr[j][i]):
-                image_check[j][i] = 0
-              else:
-                image_check[j][i] = 1
+            if checker.check_corr(image_corr[j][i]):
+              image_check[j][i] = 0
+            else:
+              image_check[j][i] = 1
           
     except Exception as exception:
       print('Exception:', exception)
