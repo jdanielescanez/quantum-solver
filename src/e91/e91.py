@@ -14,7 +14,8 @@ from numpy.random import randint
 from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
-from math import ceil, sqrt
+from math import ceil
+from e91.sender import Sender
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 
@@ -108,16 +109,18 @@ class E91:
 
   ## Run an experiment of E91 simulation
   def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
+    STEP_MSG = 10
     DENSITY_MIN = 0
     DENSITY_MAX = 1
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    image_security = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
-    image_corr = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
-    image_check = np.zeros((DENSITY_RANGE + 1, len_msg_limit // 10))
-    x = list(range(10, len_msg_limit + 1, 10))
+    image_security = np.zeros((DENSITY_RANGE + 1, len_msg_limit // STEP_MSG))
+    image_corr = np.zeros((DENSITY_RANGE + 1, len_msg_limit // STEP_MSG))
+    image_check = np.zeros((DENSITY_RANGE + 1, len_msg_limit // STEP_MSG))
+    x = list(range(STEP_MSG, len_msg_limit + 1, STEP_MSG))
     y = list(np.arange(0, 1 + density_step, density_step))
+    checker = Sender()
     start_time = time.time()
     print('\nRunning E91 Simulator Experiment (in ' + str(backend) + '):')
 
@@ -133,9 +136,8 @@ class E91:
               image_corr[j][i] += corr
               bar()
             image_corr[j][i] /= repetition_instance
-            image_check[j][i] = image_corr[j][i]
-            if image_check[j][i] != float('-inf'):
-              if not (- sqrt(2) <= corr and corr <= sqrt(2)):
+            if image_corr[j][i] != float('-inf'):
+              if checker.check_corr(image_corr[j][i]):
                 image_check[j][i] = 0
               else:
                 image_check[j][i] = 1

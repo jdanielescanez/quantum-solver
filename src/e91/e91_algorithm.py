@@ -9,7 +9,6 @@ from e91.sender import Sender
 from e91.receiver import Receiver
 from e91.eavesdropper import Eveasdropper
 import binascii
-from math import sqrt
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 
@@ -119,10 +118,9 @@ class E91Algorithm:
       print('Key length:', len(alice.key))
 
       print('\nCHSH correlation should be close to -2 * √2 ~= -2.8282')
-      print('\nCHSH correlation should not be between -√2 and √2')
       print('Key length should be close to', original_bits_size, '* 2 / 9 =', original_bits_size * 2 / 9)
 
-    if not (- sqrt(2) <= corr and corr <= sqrt(2)):
+    if alice.check_corr(corr):
       alice.confirm_key()
       bob.confirm_key()
     
@@ -132,7 +130,7 @@ class E91Algorithm:
         bob.show_key()
         print('\nSecure Communication!')
     elif verbose: 
-      print('\nCHSH correlation is between -√2 and √2')
+      print('\nCHSH correlation is in −2√2 · (1 ± 0.1)')
       print('Unsecure Communication! Eve has been detected intercepting messages\n')
     
     return alice, bob, corr

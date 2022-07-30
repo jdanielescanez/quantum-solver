@@ -9,6 +9,7 @@ from abc import ABC, abstractmethod
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from numpy.random import randint, choice
 from math import ceil
+from math import sqrt
 import re
 
 ## An abstract class of a participant entity in the BB84 implementation
@@ -78,6 +79,10 @@ class Participant(ABC):
   def show_otp(self):
     print('\n' + self.name, 'OTP:')
     print(self.otp)
+
+  def check_corr(self, corr):
+    ideal_corr = - 2 * sqrt(2)
+    return 1.1 * ideal_corr <= corr and corr <= 0.9 * ideal_corr
 
   ## Use the rest of the key and validate it
   def confirm_key(self):
