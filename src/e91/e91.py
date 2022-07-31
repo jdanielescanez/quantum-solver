@@ -81,7 +81,7 @@ class E91:
     print('=========================')
     print('[1] See security graph')
     print('[2] See average correlation graph')
-    print('[3] See checked average correlation graph')
+    print('[3] See average correlation check graph')
     print('[0] Exit\n')
 
   ## Run E91 simulation once
@@ -149,7 +149,7 @@ class E91:
     print('\n💡 Output:\n\nx: ' + str(x) + '\n\ny: ' + str(y))
     print('\nImage Security:\n' + str(image_security) + '\n')
     print('\nImage Average Correlation:\n' + str(image_corr) + '\n')
-    print('\nImage Checked Average Correlation:\n' + str(image_check) + '\n')
+    print('\nImage Average correlation check:\n' + str(image_check) + '\n')
 
     results = {
       'x': x,
@@ -218,9 +218,9 @@ class E91:
       plt.ylabel('Interception Density')
       plt.show()
     elif option == 3:
-      plt.figure(num='E91 Simulator - Experimental Mode (Checked Average Correlation) [' + str(results['backend']) + ']')
+      plt.figure(num='E91 Simulator - Experimental Mode (Average correlation check) [' + str(results['backend']) + ']')
       plt.pcolormesh(results['x'], results['y'], results['image_check'], cmap='bwr', shading='auto')
-      plt.colorbar(label='Checked Average Correlation')
+      plt.colorbar(label='Average correlation check')
       plt.xlabel('Message Length (number of bits)')
       plt.ylabel('Interception Density')
       plt.show()
