@@ -12,7 +12,7 @@ from math import ceil
 from math import sqrt
 import re
 
-## An abstract class of a participant entity in the BB84 implementation
+## An abstract class of a participant entity in the E91 implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Participant(ABC):
   ## Constructor
