@@ -87,7 +87,7 @@ class RsaSubstitute:
 
   ## Run RSA Substitute simulation once
   def __run_simulation(self):
-    measure_zero_prob = str(input('[&] Probability of measure zero: '))
+    measure_zero_prob = float(input('[&] Probability of measure zero: '))
     n_shots = int(input('[&] Number of shots: '))
     backend = self.qexecute.current_backend
 

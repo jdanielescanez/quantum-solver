@@ -6,8 +6,9 @@
 
 import binascii
 from math import sqrt
-from qiskit import execute, QuantumCircuit
+from qiskit import execute, QuantumCircuit, transpile, assemble
 from qiskit.quantum_info import Statevector
+from qiskit.extensions import Initialize
 
 from rsa_substitute.sender import Sender
 from rsa_substitute.receiver import Receiver
@@ -19,8 +20,8 @@ RSA_SUBSTITUTE_SIMULATOR = 'RSA SUBSTITUTE SIMULATOR'
 class RsaSubstituteAlgorithm:
   ## Run the implementation of RSA substitute protocol
   def run(self, measure_zero_prob, n_shots, backend, verbose):
-    alice = Receiver('Alice', 8, 4)
-    bob = Sender('Bob', 8, alice.p)
+    alice = Receiver('Alice', 3, 3)
+    bob = Sender('Bob', 2, alice.p_numbers)
 
     message = self.generate_message(measure_zero_prob)
 
@@ -28,12 +29,18 @@ class RsaSubstituteAlgorithm:
     alice_bob_encoded_message = alice.encode(bob_encoded_message)
     alice_encoded_message = bob.decode(alice_bob_encoded_message)
     decoded_message = alice.decode(alice_encoded_message)
+    decoded_message.measure(0, 0)
 
-    counts = backend.run(decoded_message, n_shots).result().get_counts()
+    test = transpile(decoded_message, backend)
+    qobj = assemble(test)
+    counts = backend.run(qobj, shots=n_shots).result().get_counts()
+    print(counts)
+    if not '0' in counts.keys():
+      counts['0'] = 0
     obtained_prob = counts['0'] / n_shots
 
-    check_probability = measure_zero_prob * 0.9 < obtained_prob and \
-                        obtained_prob < measure_zero_prob * 1.1
+    relative_error = abs(measure_zero_prob - obtained_prob)
+    check_probability = relative_error <= 0.1
 
     if verbose:
       print('\nInitial Message:')
@@ -71,7 +78,7 @@ class RsaSubstituteAlgorithm:
 
     init_gate = Initialize(psi)
     init_gate.label = 'Init'
-    qc = QuantumCircuit()
+    qc = QuantumCircuit(1, 1)
     qc.append(init_gate, [0])
     qc.barrier()
     return qc

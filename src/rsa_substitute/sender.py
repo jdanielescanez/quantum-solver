@@ -4,6 +4,7 @@
 # Ingeniería Informática - Universidad de La Laguna
 # Trabajo Fin de Grado: QuantumSolver
 
+from qiskit import QuantumCircuit
 from rsa_substitute.participant import Participant
 from random import random, sample
 from math import pi
@@ -12,30 +13,32 @@ from math import pi
 ## @see https://journals.aijr.org/index.php/ajgr/article/view/699/168
 class Sender(Participant):
   ## Constructor
-  def __init__(self, name='', r=0, p_a=[]):
+  def __init__(self, name='', r=0, p_numbers=[]):
     super().__init__(name)
     self.r = r
-    self.p_a = p_a
+    self.p_numbers = p_numbers
 
     TURN = 2 * pi
-    self.theta = TURN * random()
-    self.phi = TURN * random()
-    self.lam = TURN * random()
+    self.theta = round(TURN * random(), 2)
+    self.phi = round(TURN * random(), 2)
+    self.lam = round(TURN * random(), 2)
 
-    self.n = len(self.p_a)
-    self.r_numbers = sample(list(range(len(self.p_a))), self.r)
+    self.n = len(self.p_numbers)
+    self.r_numbers = sample(list(range(len(self.p_numbers))), self.r)
     self.U_r = QuantumCircuit()
     for r_number in self.r_numbers:
-      self.U_r += self.U_power(self.theta, self.phi, self.lam, self.p_a[r_number])
+      self.U_r += self.U_power(self.theta, self.phi, self.lam, self.p_numbers[r_number])
 
   def encode(self, message):
-    message += self.U_r
-    message.barrier()
-    return message
+    qc = message.copy()
+    qc += self.U_r
+    qc.barrier()
+    return qc
 
   def decode(self, message):
+    qc = message.copy()
     for r_number in self.r_numbers:
-      message += self.U_power(-self.theta, -self.phi, -self.lam, self.p_a[r_number])
-    message.barrier()
-    return message
+      qc += self.U_power(-self.theta, -self.phi, -self.lam, self.p_numbers[r_number])
+    qc.barrier()
+    return qc
     

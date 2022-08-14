@@ -16,9 +16,9 @@ class Receiver(Participant):
     super().__init__(name)
 
     TURN = 2 * pi
-    self.theta = TURN * random()
-    self.phi = TURN * random()
-    self.lam = TURN * random()
+    self.theta = round(TURN * random(), 2)
+    self.phi = round(TURN * random(), 2)
+    self.lam = round(TURN * random(), 2)
 
     self.p_numbers = sample(list(range(2 ** t)), n)
 
@@ -28,13 +28,17 @@ class Receiver(Participant):
       self.p.append(self.U_power(self.theta, self.phi, self.lam, p_number))
 
   def encode(self, message):
+    qc = message.copy()
+    qc += self.e
     for p_i in self.p:
-      message += p_i
-    message.barrier()
-    return message
+      qc += p_i
+    qc.barrier()
+    return qc
 
   def decode(self, message):
+    qc = message.copy()
+    qc += self.U_power(-self.theta, -self.phi, -self.lam, 1)
     for p_number in self.p_numbers: 
-      message += self.U_power(-self.theta, -self.phi, -self.lam, p_number)
-    message.barrier()
-    return message
+      qc += self.U_power(-self.theta, -self.phi, -self.lam, p_number)
+    qc.barrier()
+    return qc

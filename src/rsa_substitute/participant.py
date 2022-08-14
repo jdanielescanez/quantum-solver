@@ -5,7 +5,7 @@
 # Trabajo Fin de Grado: QuantumSolver
 
 from abc import ABC, abstractmethod
-from qiskit import QuantumCircuit, QuantumRegister
+from qiskit import QuantumCircuit
 
 ## An abstract class of a participant entity in the RSA substitute protocol implementation
 ## @see https://journals.aijr.org/index.php/ajgr/article/view/699/168
@@ -24,7 +24,11 @@ class Participant(ABC):
   def decode(self, message):
     pass
 
-  def U_power(self, theta, phi, lam, power, qc=QuantumCircuit(1, 1)):
+  def U_power(self, theta, phi, lam, power):
+    u_gate = QuantumCircuit(1)
     for _ in range(power):
-      qc.u3(theta, phi, lam, qc.qubits[0])
+      u_gate.u3(theta, phi, lam, u_gate.qubits[0])
+    label = 'U_' + str(power) + ' ~ theta: ' + str(theta) + ' phi:' + str(phi) + ' lam: ' + str(lam)
+    qc = QuantumCircuit(1, 1)
+    qc.append(u_gate.to_gate(label=label), [0])
     return qc
