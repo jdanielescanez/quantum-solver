@@ -6,8 +6,7 @@
 
 from qiskit import QuantumCircuit
 from rsa_substitute.participant import Participant
-from random import random, sample
-from math import pi
+from random import sample
 
 ## The Sender entity in the E91 implementation
 ## @see https://journals.aijr.org/index.php/ajgr/article/view/699/168
@@ -17,11 +16,6 @@ class Sender(Participant):
     super().__init__(name)
     self.r = r
     self.p_numbers = p_numbers
-
-    TURN = 2 * pi
-    self.theta = round(TURN * random(), 2)
-    self.phi = round(TURN * random(), 2)
-    self.lam = round(TURN * random(), 2)
 
     self.n = len(self.p_numbers)
     self.r_numbers = sample(list(range(len(self.p_numbers))), self.r)
