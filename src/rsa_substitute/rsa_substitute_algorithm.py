@@ -20,8 +20,8 @@ RSA_SUBSTITUTE_SIMULATOR = 'RSA SUBSTITUTE SIMULATOR'
 class RsaSubstituteAlgorithm:
   ## Run the implementation of RSA substitute protocol
   def run(self, measure_zero_prob, n_shots, backend, verbose):
-    alice = Receiver('Alice', 3, 3)
-    bob = Sender('Bob', 2, alice.p_numbers)
+    alice = Receiver('Alice', 6, 5)
+    bob = Sender('Bob', 4, alice.p)
 
     message = self.generate_message(measure_zero_prob)
 
@@ -34,7 +34,6 @@ class RsaSubstituteAlgorithm:
     test = transpile(decoded_message, backend)
     qobj = assemble(test)
     counts = backend.run(qobj, shots=n_shots).result().get_counts()
-    print(counts)
     if not '0' in counts.keys():
       counts['0'] = 0
     obtained_prob = counts['0'] / n_shots
@@ -43,6 +42,9 @@ class RsaSubstituteAlgorithm:
     check_probability = relative_error <= 0.1
 
     if verbose:
+      print('\nOutput:')
+      print(counts)
+
       print('\nInitial Message:')
       print(message)
 
