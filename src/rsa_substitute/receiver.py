@@ -18,7 +18,7 @@ class Receiver(Participant):
     self.theta = pi / 3
     self.phi = pi / sqrt(2)
     self.lam = pi / sqrt(2)
-    self.p_numbers = np.random.choice(list(range(2 ** t)), size=n, replace=True) # TODO comprobar que son n los elegidos (sample no permite repeticion, cambiar)
+    self.p_numbers = np.random.choice(list(range(2 ** t)), size=n, replace=True)
 
     self.e = self.U_power(self.theta, self.phi, self.lam, 1) # U_0
     self.p = [] # U_{1..n}

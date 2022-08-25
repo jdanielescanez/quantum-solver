@@ -66,6 +66,8 @@ class RsaSubstituteAlgorithm:
       print('\nObtained Probability:')
       print(obtained_prob)
 
+      print('\nRelative Error: ' + str(round(relative_error, 2)) + ' %')
+
       if check_probability:
         print('\n✅ The expected probability is obtained within an error range of ±10%')
       else:

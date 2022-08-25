@@ -29,8 +29,8 @@ class Participant(ABC):
     for _ in range(power):
       u_gate.u(theta, phi, lam, u_gate.qubits[0])
     
-    label = 'U_' + str(power) + ' ~ theta:' + str(round(theta, 2))
-    label += ' phi:' + str(round(phi, 2)) + ' lam:' + str(round(lam, 2))
+    label = 'U_' + str(power) + ' ~ 𝜃:' + str(round(theta, 2))
+    label += ' 𝜑:' + str(round(phi, 2)) + ' 𝜆:' + str(round(lam, 2))
     qc = QuantumCircuit(1, 1)
     qc.append(u_gate.to_gate(label=label), [0])
     return qc
