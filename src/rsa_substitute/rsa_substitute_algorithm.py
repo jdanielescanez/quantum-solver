@@ -20,15 +20,15 @@ RSA_SUBSTITUTE_SIMULATOR = 'RSA SUBSTITUTE SIMULATOR'
 class RsaSubstituteAlgorithm:
   ## Run the implementation of RSA substitute protocol
   def run(self, measure_zero_prob, n_shots, backend, verbose):
-    alice = Receiver('Alice', 6, 5)
-    bob = Sender('Bob', 4, alice.p)
+    bob = Receiver('Bob', 6, 5)
+    alice = Sender('Alice', 4, bob.p)
 
     message = self.generate_message(measure_zero_prob)
 
-    bob_encoded_message = bob.encode(message)
-    alice_bob_encoded_message = alice.encode(bob_encoded_message)
-    alice_encoded_message = bob.decode(alice_bob_encoded_message)
-    decoded_message = alice.decode(alice_encoded_message)
+    alice_encoded_message = alice.encode(message)
+    alice_bob_encoded_message = bob.encode(alice_encoded_message)
+    bob_encoded_message = alice.decode(alice_bob_encoded_message)
+    decoded_message = bob.decode(bob_encoded_message)
     decoded_message.measure(0, 0)
 
     test = transpile(decoded_message, backend)
@@ -38,26 +38,26 @@ class RsaSubstituteAlgorithm:
       counts['0'] = 0
     obtained_prob = counts['0'] / n_shots
 
+    EPSILON = 5
     relative_error = abs(measure_zero_prob - obtained_prob)
-    check_probability = relative_error <= 0.1
+    check_probability = relative_error <= 0.01 * EPSILON
 
     if verbose:
-      print('\nOutput:')
-      print(counts)
+      print('\nOutput: ' + str(counts))
 
       print('\nInitial Message:')
       print(message)
 
+      print('\nAlice-Encoded Message:')
+      print(alice_encoded_message)
+
+      print('\nAlice-and-Bob-Encoded Message:')
+      print(alice_bob_encoded_message)
+
       print('\nBob-Encoded Message:')
       print(bob_encoded_message)
 
-      print('Alice-and-Bob-Encoded Message:')
-      print(alice_bob_encoded_message)
-
-      print('Alice-Encoded Message:')
-      print(alice_encoded_message)
-
-      print('💡 Decoded Message:')
+      print('\n💡 Decoded Message:')
       print(decoded_message)
 
       print('\nInput Probability:')
@@ -66,14 +66,14 @@ class RsaSubstituteAlgorithm:
       print('\nObtained Probability:')
       print(obtained_prob)
 
-      print('\nRelative Error: ' + str(round(relative_error, 2)) + ' %')
+      print('\nRelative Error: ' + str(relative_error) + ' %')
 
       if check_probability:
-        print('\n✅ The expected probability is obtained within an error range of ±10%')
+        print('\n✅ The expected probability is obtained within an error range of ±' + str(EPSILON) + '%')
       else:
-        print('\n❌ The expected probability is obtained with an error greater than ±10%')
+        print('\n❌ The expected probability is obtained with an error greater than ±' + str(EPSILON) + '%')
 
-    return check_probability
+    return check_probability, relative_error
 
   def generate_message(self, measure_zero_prob):
     a1 = sqrt(measure_zero_prob)

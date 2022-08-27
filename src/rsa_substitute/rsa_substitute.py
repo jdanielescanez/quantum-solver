@@ -19,7 +19,7 @@ from math import ceil
 RSA_SUBSTITUTE_SIMULATOR = 'RSA Substitute SIMULATOR'
 
 ## Main class of RSA Substitute Simulator
-## @see https://github.com/qiskit-community/qiskit-community-tutorials/blob/master/awards/teach_me_qiskit_2018/rsaSubstitute_qkd/rsaSubstitute_quantum_key_distribution_protocol.ipynb
+## @see https://journals.aijr.org/index.php/ajgr/article/view/699/168
 class RsaSubstitute:
   ## Constructor
   def __init__(self, token):
@@ -69,10 +69,9 @@ class RsaSubstitute:
     print('[2] Select Backend')
     if self.is_selected_backend:
       print('\tCurrent Backend: ' + str(self.qexecute.current_backend))
-    if self.is_selected_backend:
       print('[3] Run Algorithm')
+      print('[4] Experimental mode')
     print('[0] Exit\n')
-
 
   ## Run RSA Substitute simulation once
   def __run_simulation(self):
@@ -101,6 +100,35 @@ class RsaSubstitute:
     except Exception as _:
       halo.fail()
 
+  ## Run an experiment of RSA Substitute simulation
+  def __experimental_mode(self, prob_values, shots_values):
+    backend = self.qexecute.current_backend
+    image = np.zeros((len(prob_values), len(shots_values)))
+    start_time = time.time()
+
+    print('\nRunning RSA Substitute Simulator Experiment (in ' + str(backend) + '):')
+    try:
+      with alive_bar(len(prob_values) * len(shots_values)) as bar:
+        for i, measure_zero_prob in enumerate(prob_values):
+          for j, n_shots in enumerate(shots_values):
+            _, relative_error = self.rsaSubstitute_algorithm.run(measure_zero_prob, n_shots, backend, False)
+            image[i][j] += relative_error
+            bar()
+          
+    except Exception as exception:
+      print('Exception:', exception)
+
+    time_s = (time.time() - start_time)
+    print('\n[$] Experiment Finished in ' + str(time_s) + ' s!')
+    print('\n💡 Output:\n\nx: ' + str(prob_values) + '\n\ny: ' + str(shots_values))
+    print('\nImage:\n' + str(image) + '\n')
+    plt.figure(num='RSA Substitute Simulator - Experimental Mode [' + str(backend) + ']')
+    plt.pcolormesh(shots_values, prob_values, image, cmap='inferno', shading='auto')
+    plt.colorbar(label='Relative Error')
+    plt.xlabel('n_shots')
+    plt.ylabel('Probability of measure zero')
+    plt.show()
+
   ## Select the option for main menu
   def __select_option(self):
     option = int(input('[&] Select an option: '))
@@ -113,5 +141,13 @@ class RsaSubstitute:
       self.qexecute.select_backend()
     elif option == 3 and self.is_selected_backend:
       self.__run_simulation()
+    elif option == 4 and self.is_selected_backend:
+      prob_values = [float(x) for x in input('[&] Specify probability of measure zero values separated by spaces: ').split(' ')]
+      shots_values = [int(x) for x in input('[&] Specify shots values separated by spaces: ').split(' ')]
+
+      if len(prob_values) <= 0 or len(shots_values) <= 0:
+        raise ValueError('Empty values generated, try again')
+      else:
+        self.__experimental_mode(prob_values, shots_values)
     else:
       print('[!] Invalid option, try again')

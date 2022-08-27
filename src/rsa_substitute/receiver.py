@@ -4,6 +4,7 @@
 # Ingeniería Informática - Universidad de La Laguna
 # Trabajo Fin de Grado: QuantumSolver
 
+from qiskit import QuantumCircuit
 from rsa_substitute.participant import Participant
 import numpy as np
 from math import pi, sqrt
@@ -25,6 +26,17 @@ class Receiver(Participant):
     for p_number in self.p_numbers: 
       self.p.append(self.U_power(self.theta, self.phi, self.lam, p_number))
     
+  def U_power(self, theta, phi, lam, power):
+    u_gate = QuantumCircuit(1)
+    for _ in range(power):
+      u_gate.u(theta, phi, lam, u_gate.qubits[0])
+    
+    label = 'U_' + str(power) + ' ~ 𝜃:' + str(round(theta, 2))
+    label += ' 𝜑:' + str(round(phi, 2)) + ' 𝜆:' + str(round(lam, 2))
+    qc = QuantumCircuit(1, 1)
+    qc.append(u_gate.to_gate(label=label), [0])
+    return qc
+  
   def encode(self, message):
     qc = message.copy()
     qc += self.e
