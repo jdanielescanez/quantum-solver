@@ -3,21 +3,20 @@
 # Author: Daniel Escanez-Exposito
 
 from qiskit import QuantumCircuit
-from bb84.sender import Sender
-from bb84.receiver import Receiver
+from b92.sender import Sender
+from b92.receiver import Receiver
 import binascii
 
-BB84_SIMULATOR = 'BB84 SIMULATOR'
+B92_SIMULATOR = 'B92 SIMULATOR'
 
-## An implementation of the BB84 protocol
+## An implementation of the B92 protocol
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
-class BB84Algorithm:
+class B92Algorithm:
   ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
     alice.set_values()
-    alice.set_axes()
     message = alice.encode_quantum_message()
 
     # Interceptor Eve
@@ -30,20 +29,18 @@ class BB84Algorithm:
     bob.set_axes()
     message = bob.decode_quantum_message(message, 1, backend)
 
-    # Alice - Bob Remove Garbage
-    alice_axes = alice.axes # Alice share her axes
-    bob_axes = bob.axes # Bob share his axes
+    # Bob shares his positives reading indexes
+    bob_positive_readings_indexes = bob.share_positive_readings_indexes()
 
     # Delete the difference
-    alice.remove_garbage(bob_axes)
-    bob.remove_garbage(alice_axes)
+    alice.remove_garbage(bob_positive_readings_indexes)
+    bob.remove_garbage(bob_positive_readings_indexes)
 
     # Bob share some values of the key to check
     SHARED_SIZE = round(0.5 * len(bob.key))
     shared_key = bob.key[:SHARED_SIZE]
 
     if verbose:
-      alice.show_values()
       alice.show_axes()
 
       eve.show_values()
@@ -73,7 +70,7 @@ class BB84Algorithm:
     
     return alice, bob
 
-  ## Run the implementation of BB84 protocol
+  ## Run the implementation of B92 protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
     ## The original size of the message
     self.original_bits_size = original_bits_size

@@ -2,11 +2,11 @@
 
 # Author: Daniel Escanez-Exposito
 
-from bb84.participant import Participant
+from b92.participant import Participant
 from qiskit import QuantumCircuit
 from numpy.random import rand
 
-## The Receiver entity in the BB84 implementation
+## The Receiver entity in the B92 implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Receiver(Participant):
   ## Constructor
@@ -20,12 +20,19 @@ class Receiver(Participant):
     for i, qc in enumerate(message):
       qc.barrier()
       if rand() < density:
-        if self.axes[i] == 1:
+        is_hadamard_base = (self.axes[i] == 1)
+        if is_hadamard_base:
           qc.h(0)
         qc.measure(0, 0)
         result = backend.run(qc, shots=1, memory=True).result()
         measured_bit = int(result.get_memory()[0])
-        self.values.append(measured_bit)
+        if measured_bit == 1:
+          self.values.append(int(not is_hadamard_base))
+        else:
+          self.values.append(-2)
       else:
         self.values.append(-1)
     return message
+
+  def share_positive_readings_indexes(self):
+    return map(lambda x: x >= 0, self.values)

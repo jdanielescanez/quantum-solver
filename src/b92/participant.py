@@ -8,7 +8,7 @@ from qiskit import QuantumCircuit
 from numpy.random import randint
 from math import ceil
 
-## An abstract class of a participant entity in the BB84 implementation
+## An abstract class of a participant entity in the B92 implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Participant(ABC):
   ## Constructor
@@ -64,10 +64,10 @@ class Participant(ABC):
     print(self.otp)
 
   ## Remove the values of the qubits that were measured on the wrong axis
-  def remove_garbage(self, another_axes):
+  def remove_garbage(self, bob_positive_readings):
     self.key = []
     for i in range(self.original_bits_size):
-      if self.axes[i] == another_axes[i]:
+      if bob_positive_readings[i]:
         self.key.append(self.values[i])
 
   ## Check if the shared key is equal to the current key

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-# Author: J. Daniel Escánez
-# Ingeniería Informática - Universidad de La Laguna
-# Trabajo Fin de Grado: QuantumSolver
+# Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
 from e91.e91_algorithm import E91Algorithm

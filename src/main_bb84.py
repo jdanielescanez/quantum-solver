@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-# Author: J. Daniel Escánez
-# Ingeniería Informática - Universidad de La Laguna
-# Trabajo Fin de Grado: QuantumSolver
+# Author: Daniel Escanez-Exposito
 
 ## BB84 Simulator Main Program
 
