@@ -35,4 +35,4 @@ class Receiver(Participant):
     return message
 
   def share_positive_readings_indexes(self):
-    return map(lambda x: x >= 0, self.values)
+    return list(map(lambda x: x >= 0, self.values))

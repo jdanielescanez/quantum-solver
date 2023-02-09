@@ -15,9 +15,9 @@ class Sender(Participant):
   ## Encode the message (values) using a quantum circuit
   def encode_quantum_message(self):
     encoded_message = []
-    for i in range(len(self.axes)):
+    for i in range(len(self.values)):
       qc = QuantumCircuit(1, 1)
-      if self.axes[i] == 1:
+      if self.values[i] == 1:
         qc.h(0)
       encoded_message.append(qc)
     return encoded_message

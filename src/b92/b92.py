@@ -52,7 +52,7 @@ class B92:
 
         self.__show_options()
         self.__select_option()
-      except Exception as _:
+      except Exception as e:
         pass
 
   ## Main menu

@@ -41,7 +41,7 @@ class B92Algorithm:
     shared_key = bob.key[:SHARED_SIZE]
 
     if verbose:
-      alice.show_axes()
+      alice.show_values()
 
       eve.show_values()
       eve.show_axes()
