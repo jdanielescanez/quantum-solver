@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-## BB84 Simulator Main Program
+## Six States Simulator Main Program
 
 import signal
 import sys
@@ -15,5 +15,5 @@ def signal_handler(sig, frame):
 if __name__ == "__main__":
   signal.signal(signal.SIGINT, signal_handler)
   token = sys.argv[1] if len(sys.argv) > 1 else None
-  bb84 = SixStates(token)
-  bb84.run()
+  sixstates = SixStates(token)
+  sixstates.run()

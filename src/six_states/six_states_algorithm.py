@@ -3,8 +3,8 @@
 # Author: Daniel Escanez-Exposito, Andrea Hernández Martín
 
 from qiskit import QuantumCircuit
-from bb84.sender import Sender
-from bb84.receiver import Receiver
+from six_states.sender import Sender
+from six_states.receiver import Receiver
 import binascii
 
 SIX_STATES_SIMULATOR = 'SIX-STATES SIMULATOR'
