@@ -13,17 +13,17 @@ E91_SIMULATOR = 'E91 SIMULATOR'
 ## An implementation of the E91 protocol
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class E91Algorithm:
-  ## Append the simplest (and maximal) example of quantum entanglement
+  ## Get the simplest (and maximal) example of quantum entanglement * (- 1j)
   def get_bell_pair(self, qr, cr):
     circuit = QuantumCircuit(qr, cr)
-
-    circuit.x([qr[0], qr[1]])
-    circuit.h(qr[0])
-    circuit.cx(qr[0], qr[1])
+    circuit.x([0, 1])
+    circuit.h(0)
+    circuit.cx(0, 1)
+    circuit.s([0, 1])
     return circuit
 
   ## Generate a key for Alice and Bob
-  def __generate_key(self, backend, original_bits_size, verbose):
+  def generate_key(self, backend, original_bits_size, verbose):
     # Initialize the bell pair, quantum and classical registers
     qr = QuantumRegister(2, name="qr")
     cr = ClassicalRegister(4, name="cr")
@@ -123,12 +123,13 @@ class E91Algorithm:
       bob.confirm_key()
     
       if verbose:
+        print('\nCHSH correlation is in −2√2 · (1 ± 0.1)')
         print('\nFinal Keys')
         alice.show_key()
         bob.show_key()
         print('\nSecure Communication!')
     elif verbose: 
-      print('\nCHSH correlation is in −2√2 · (1 ± 0.1)')
+      print('\nCHSH correlation is not in −2√2 · (1 ± 0.1)')
       print('Unsecure Communication! Eve has been detected intercepting messages\n')
     
     return alice, bob, corr
@@ -184,7 +185,7 @@ class E91Algorithm:
     ## The probability of an interception occurring
     self.measure_density = measure_density
 
-    alice, bob, corr = self.__generate_key(backend, original_bits_size, verbose)
+    alice, bob, corr = self.generate_key(backend, original_bits_size, verbose)
     if not (alice.is_safe_key and bob.is_safe_key):
       if verbose:
         print('❌ Message not send')

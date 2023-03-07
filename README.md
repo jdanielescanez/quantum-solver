@@ -26,6 +26,8 @@
       - [QuantumSolver](#quantumsolver-1)
       - [BB84](#bb84)
       - [E91](#e91)
+      - [B92](#b92)
+      - [WPA3 Key Agreement](#wpa3-key-agreement)
       - [RSA Substitute](#rsa-substitute)
     - [Web Interface](#web-interface)
       - [Backend](#backend)
@@ -117,6 +119,18 @@ python3 src/main_bb84.py [optional IBMQ_TOKEN]
 python3 src/main_e91.py [optional IBMQ_TOKEN]
 ```
 
+#### B92
+
+```
+python3 src/main_b92.py [optional IBMQ_TOKEN]
+```
+
+#### WPA3 Key Agreement
+
+```
+python3 src/main_wpa3_key_agreement.py
+```
+
 #### RSA Substitute
 
 ```
@@ -136,7 +150,6 @@ python3 src/flask-server/server.py
 
 ```
 cd quantum_solver_web
-npm i
 npm start
 ```
 

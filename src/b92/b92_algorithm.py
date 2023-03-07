@@ -13,7 +13,7 @@ B92_SIMULATOR = 'B92 SIMULATOR'
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class B92Algorithm:
   ## Generate a key for Alice and Bob
-  def __generate_key(self, backend, original_bits_size, verbose):
+  def generate_key(self, backend, original_bits_size, verbose):
     # Encoder Alice
     alice = Sender('Alice', original_bits_size)
     alice.set_values()
@@ -77,7 +77,7 @@ class B92Algorithm:
     ## The probability of an interception occurring
     self.measure_density = measure_density
 
-    alice, bob = self.__generate_key(backend, original_bits_size, verbose)
+    alice, bob = self.generate_key(backend, original_bits_size, verbose)
     if not (alice.is_safe_key and bob.is_safe_key):
       if verbose:
         print('❌ Message not send')
