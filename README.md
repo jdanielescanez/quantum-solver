@@ -209,7 +209,7 @@ self.algorithms = [
     ]
 ```
 
-In this way, the protocol will be available both in the QuantumSolver Basic command line interface and in the web interface.
+In this way, the protocol will be available both in the QuantumSolver Basic command line interface and in the web interface. Consider making a Pull Request for the changes to be made publicly effective.
 
 ### QuantumSolver Crypto
 
@@ -232,7 +232,7 @@ self.protocols = [
 ]
 ```
 
-With these steps, your protocol can be simulated from the main program `src/main_crypto.py`.
+With these steps, your protocol can be simulated from the main program `src/main_crypto.py`. Consider making a Pull Request for the changes to be made publicly effective.
 
 ## Documentation
 
