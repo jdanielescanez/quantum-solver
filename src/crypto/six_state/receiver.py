@@ -2,11 +2,11 @@
 
 # Author: Daniel Escanez-Exposito
 
-from six_states.participant import Participant
+from crypto.six_state.participant import Participant
 from qiskit import QuantumCircuit
 from numpy.random import rand
 
-## The Receiver entity in the Six-States implementation
+## The Receiver entity in the Six-State implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Receiver(Participant):
   ## Constructor

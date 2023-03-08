@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from b92.b92_algorithm import B92Algorithm
+from crypto.six_state.six_state_algorithm import SixStateAlgorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,35 +13,23 @@ from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
 
-B92_SIMULATOR = 'B92 SIMULATOR'
+SIX_STATE_SIMULATOR = 'SIX-STATE SIMULATOR'
 
-## Main class of B92 Simulator
+## Main class of Six-State Simulator
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
-class B92:
+class SixState:
   ## Constructor
   def __init__(self, token):
     ## The implemented protocol
-    self.b92_algorithm = B92Algorithm()
+    self.six_state_algorithm = SixStateAlgorithm()
     ## The IBMQ Experience token
     self.token = token
 
   ## Print header, get an QExecute and run main menu
   def run(self):
-    self.__show_header()
     ## A QExecute instance to execute the simulation
     self.qexecute = QuantumSolver(self.token).get_qexecute()
     self.__main_menu()
-
-  ## Print header
-  def __show_header(self):
-    print('\n' + B92_SIMULATOR + '\n' + '=' * len(B92_SIMULATOR) + '\n')
-    print('A B92 simulator using Qiskit')
-    print('WARNING: The B92 simulator uses your personal IBM Quantum Experience')
-    print('token to access to IBM hardware.')
-    print('You can access to your API token or generate another one here:')
-    print('https://quantum-computing.ibm.com/account\n')
-    print('You can also use the Guest Mode which only allows you to run ')
-    print('quantum circuits in a local simulator ("aer_simulator").\n')
 
   ## Loop to run the main menu
   def __main_menu(self):
@@ -52,7 +40,7 @@ class B92:
 
         self.__show_options()
         self.__select_option()
-      except Exception as e:
+      except Exception as _:
         pass
 
   ## Main menu
@@ -60,8 +48,8 @@ class B92:
     is_guest_mode = self.qexecute.is_guest_mode()
     guest_mode_string = ' (Guest Mode)' if is_guest_mode else ''
     len_guest_mode_string = len(guest_mode_string)
-    print('\n' + B92_SIMULATOR + guest_mode_string)
-    print('=' * (len(B92_SIMULATOR) + len_guest_mode_string) + '\n')
+    print('\n' + SIX_STATE_SIMULATOR + guest_mode_string)
+    print('=' * (len(SIX_STATE_SIMULATOR) + len_guest_mode_string) + '\n')
     print('[1] See available Backends')
     print('[2] Select Backend')
     if self.is_selected_backend:
@@ -72,7 +60,7 @@ class B92:
       print('[4] Experimental mode')
     print('[0] Exit\n')
 
-  ## Run B92 simulation once
+  ## Run Six-State simulation once
   def __run_simulation(self):
     message = str(input('[&] Message (string): '))
     density = float(input('[&] Interception Density (float between 0 and 1): '))
@@ -82,32 +70,31 @@ class B92:
     execution_description = str(self.qexecute.current_backend)
     execution_description += ' with message "'
     execution_description += message + '" and density "' + str(density) + '"'
-    halo_text = 'Running B92 simulation in ' + execution_description
+    halo_text = 'Running Six-State simulation in ' + execution_description
     halo = Halo(text=halo_text, spinner="dots")
     try:
       halo.start()
       start_time = time.time()
-      self.b92_algorithm.run(message, backend, bits_size, density, N_BITS, True)
+      self.six_state_algorithm.run(message, backend, bits_size, density, N_BITS, True)
       time_ms = (time.time() - start_time) * 1000
       halo.succeed()
-      print('  B92 simulation runned in', str(time_ms), 'ms')
+      print('  Six-State simulation runned in', str(time_ms), 'ms')
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
 
-  ## Run an experiment of B92 simulation
+  ## Run an experiment of Six-State simulation
   def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
-    STEP_MSG = 10
     DENSITY_MIN = 0
     DENSITY_MAX = 1
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit // STEP_MSG))
-    x = list(range(STEP_MSG, len_msg_limit + 1, STEP_MSG))
+    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit))
+    x = list(range(1, len_msg_limit + 1, 1))
     y = list(np.arange(0, 1 + density_step, density_step))
     start_time = time.time()
-    print('\nRunning B92 Simulator Experiment (in ' + str(backend) + '):')
+    print('\nRunning Six-State Simulator Experiment (in ' + str(backend) + '):')
 
     try:
       with alive_bar(len(x) * len(y) * repetition_instance) as bar:
@@ -116,7 +103,7 @@ class B92:
             for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
               bits_size = len(message) * 5
-              flag = self.b92_algorithm.run(message, backend, bits_size, density, 1, False)
+              flag = self.six_state_algorithm.run(message, backend, bits_size, density, 1, False)
               image[j][i] += 1 if flag else 0
               bar()
           
@@ -127,7 +114,7 @@ class B92:
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')
     print('\n💡 Output:\n\nx: ' + str(x) + '\n\ny: ' + str(y))
     print('\nImage:\n' + str(image) + '\n')
-    plt.figure(num='B92 Simulator - Experimental Mode [' + str(backend) + ']')
+    plt.figure(num='Six-State Simulator - Experimental Mode [' + str(backend) + ']')
     plt.pcolormesh(x, y, image, cmap='inferno', shading='auto')
     plt.colorbar(label='Times the protocol is determined safe')
     plt.xlabel('Message Length (number of bits)')

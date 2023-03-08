@@ -2,10 +2,10 @@
 
 # Author: Daniel Escanez-Exposito
 
-from six_states.participant import Participant
+from crypto.six_state.participant import Participant
 from qiskit import QuantumCircuit
 
-## The Sender entity in the Six-States implementation
+## The Sender entity in the Six-State implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Sender(Participant):
   ## Constructor

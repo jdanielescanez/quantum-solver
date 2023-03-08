@@ -28,21 +28,9 @@ class RsaSubstitute:
 
   ## Print header, get an QExecute and run main menu
   def run(self):
-    self.__show_header()
     ## A QExecute instance to execute the simulation
     self.qexecute = QuantumSolver(self.token).get_qexecute()
     self.__main_menu()
-
-  ## Print header
-  def __show_header(self):
-    print('\n' + RSA_SUBSTITUTE_SIMULATOR + '\n' + '=' * len(RSA_SUBSTITUTE_SIMULATOR) + '\n')
-    print('A RSA Substitute simulator using Qiskit')
-    print('WARNING: The RSA Substitute simulator uses your personal IBM Quantum Experience')
-    print('token to access to IBM hardware.')
-    print('You can access to your API token or generate another one here:')
-    print('https://quantum-computing.ibm.com/account\n')
-    print('You can also use the Guest Mode which only allows you to run ')
-    print('quantum circuits in a local simulator ("aer_simulator").\n')
 
   ## Loop to run the main menu
   def __main_menu(self):

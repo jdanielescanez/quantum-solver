@@ -9,7 +9,7 @@ from numpy.random import randint
 import numpy as np
 from math import ceil
 
-## An abstract class of a participant entity in the Six-States implementation
+## An abstract class of a participant entity in the Six-State implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
 class Participant(ABC):
   ## Constructor

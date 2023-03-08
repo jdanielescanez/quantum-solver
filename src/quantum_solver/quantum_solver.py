@@ -10,7 +10,7 @@ import time
 import matplotlib.pyplot as plt
 from ascii_graph import Pyasciigraph
 
-QUANTUM_SOLVER = 'QuantumSolver'
+QUANTUM_SOLVER = 'QuantumSolver Basic'
 
 ## Main Class of QuantumSolver
 class QuantumSolver:

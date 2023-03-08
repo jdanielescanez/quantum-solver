@@ -3,15 +3,15 @@
 # Author: Daniel Escanez-Exposito, Andrea Hernández Martín
 
 from qiskit import QuantumCircuit
-from six_states.sender import Sender
-from six_states.receiver import Receiver
+from crypto.six_state.sender import Sender
+from crypto.six_state.receiver import Receiver
 import binascii
 
-SIX_STATES_SIMULATOR = 'SIX-STATES SIMULATOR'
+SIX_STATE_SIMULATOR = 'SIX-STATE SIMULATOR'
 
-## An implementation of the Six-States protocol
+## An implementation of the Six-State protocol
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
-class SixStatesAlgorithm:
+class SixStateAlgorithm:
   ## Generate a key for Alice and Bob
   def __generate_key(self, backend, original_bits_size, verbose):
     # Encoder Alice
@@ -73,7 +73,7 @@ class SixStatesAlgorithm:
     
     return alice, bob
 
-  ## Run the implementation of Six-States protocol
+  ## Run the implementation of Six-State protocol
   def run(self, message, backend, original_bits_size, measure_density, n_bits, verbose):
     ## The original size of the message
     self.original_bits_size = original_bits_size

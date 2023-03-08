@@ -23,16 +23,15 @@
     - [Warning](#warning)
     - [Download and install](#download-and-install)
     - [Command Line Interface](#command-line-interface)
-      - [QuantumSolver](#quantumsolver-1)
-      - [BB84](#bb84)
-      - [E91](#e91)
-      - [B92](#b92)
-      - [WPA3 Key Agreement](#wpa3-key-agreement)
-      - [RSA Substitute](#rsa-substitute)
+      - [QuantumSolver Basic](#quantumsolver-basic)
+      - [QuantumSolver Crypto](#quantumsolver-crypto)
     - [Web Interface](#web-interface)
       - [Backend](#backend)
       - [Frontend](#frontend)
       - [Screenshots](#screenshots)
+  - [How to contribute to QuantumSolver?](#how-to-contribute-to-quantumsolver)
+    - [QuantumSolver Basic](#quantumsolver-basic-1)
+    - [QuantumSolver Crypto](#quantumsolver-crypto-1)
   - [Documentation](#documentation)
 
 ## Getting started
@@ -97,45 +96,37 @@ cd quantum_solver_web
 npm install
 ```
 
-<!-- TODO: Available algorithms -->
-
 ### Command Line Interface
 
-#### QuantumSolver
+#### QuantumSolver Basic
+
+This main program allows the execution of the circuits corresponding to the basic quantum algorithms: Radom Generation Number, Deutsch-Jozsa, Bernstein-Vazirani, Grover (2-qubits), Quantum Teleportation and Superdense Coding.
 
 ```
 python3 src/main_quantum_solver.py [optional IBMQ_TOKEN]
 ```
 
-#### BB84
+#### QuantumSolver Crypto
+
+This main program gives the option to run a simulation of the following quantum cryptographic protocols: BB84, E91, B92, Six-State, a Quantum Substitute for RSA and Quantum Elgamal.
 
 ```
-python3 src/main_bb84.py [optional IBMQ_TOKEN]
+python3 src/main_crypto.py [optional IBMQ_TOKEN]
 ```
 
-#### E91
+<!-- TODO: 
+#### QuantumSolver Subrutines
 
 ```
-python3 src/main_e91.py [optional IBMQ_TOKEN]
+python3 src/main_subrutines.py [optional IBMQ_TOKEN]
 ```
 
-#### B92
+#### QuantumSolver AI
 
 ```
-python3 src/main_b92.py [optional IBMQ_TOKEN]
+python3 src/main_quantum_solver_ai.py [optional IBMQ_TOKEN]
 ```
-
-#### WPA3 Key Agreement
-
-```
-python3 src/main_wpa3_key_agreement.py
-```
-
-#### RSA Substitute
-
-```
-python3 src/main_rsa_substitute.py [optional IBMQ_TOKEN]
-```
+-->
 
 ### Web Interface
 
@@ -184,6 +175,64 @@ npm start
 <div align="center">
   <img src="https://github.com/alu0101238944/quantum-solver/blob/main/images/web-interface/run_experimental_mode_web.png?raw=true" alt="Run Experimental Mode Page" class="center">
 </div>
+
+## How to contribute to QuantumSolver?
+
+### QuantumSolver Basic
+
+Creates a derived class (whose name is the name of the algorithm in upper camel case format) in the `src/algorithms` directory from the abstract class `QAlgorithm`. To do this, you can copy and paste the simplest algorithm file found in the `QRand` library, changing the data to suit the circuit you want to implement. The data you must change, besides the name of the file itself (which should be the name of the class in snake case format):
+- Algorithm name
+- Brief description of the problem to be solved
+- List of parameter objects, indicating for each of them the type, a brief description and a warning about the allowed values
+- A method that given a `counts` result of the execution of the circuit extracts the result
+- A lambda function that parses the entered parameters
+- A method that checks the validity of the entered parameters
+- A method that returns the parameterized circuit itself based on the parameters
+
+It may seem an exahusive list, but following the `QAlgorithm` template (and especially its simpler implementation in `QRand`) it is quite simple. If you have any questions in this regard, follow the examples intuitively, open an issue or contact the developers.
+
+Once the derived class has been created, to add it to QuantumSolver just add it to the `QAlgorithmManager` in the `src/algorithms/qalgorithmm_manager.py` directory. In the imported libraries add a line:
+```python
+from algorithms.algorithm_file_name import AlgorithmClass
+```
+
+Finally, add to the array of available algorithms your contribution:
+```python
+self.algorithms = [
+      QRand(),
+      DeutschJozsa(),
+      BernsteinVazirani(),
+      Grover(),
+      QuantumTeleportation(),
+      SuperdenseCoding(),
+      AlgorithmClass()
+    ]
+```
+
+In this way, the protocol will be available both in the QuantumSolver Basic command line interface and in the web interface.
+
+### QuantumSolver Crypto
+
+Follow the example implementation of any of the previously defined protocols (we recommend the use of BB84 as an initial template). To add your quantum cryptography protocol to QuantumSolver just add your created class to the protocols array of the `CyrptoManager` class of the `srcrypto_manager.py` file.
+
+1. Add the import of your protocol
+```
+from crypto.name_dir.name_file import CryptoProtocol
+```
+2. Adds the protocol class to the array
+```
+self.protocols = [
+  BB84(token),
+  E91(token),
+  B92(token),
+  SixState(token),
+  RsaSubstitute(token),
+  ElGamal(token),
+  CryptoProtocol(token)
+]
+```
+
+With these steps, your protocol can be simulated from the main program `src/main_crypto.py`.
 
 ## Documentation
 
