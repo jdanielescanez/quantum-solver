@@ -216,11 +216,11 @@ In this way, the protocol will be available both in the QuantumSolver Basic comm
 Follow the example implementation of any of the previously defined protocols (we recommend the use of BB84 as an initial template). To add your quantum cryptography protocol to QuantumSolver just add your created class to the protocols array of the `CyrptoManager` class of the `srcrypto_manager.py` file.
 
 1. Add the import of your protocol
-```
+```python
 from crypto.name_dir.name_file import CryptoProtocol
 ```
 2. Adds the protocol class to the array
-```
+```python
 self.protocols = [
   BB84(token),
   E91(token),
