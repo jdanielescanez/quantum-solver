@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from rsa_substitute.rsa_substitute_algorithm import RsaSubstituteAlgorithm
+from crypto.rsa_substitute.rsa_substitute_algorithm import RsaSubstituteAlgorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np

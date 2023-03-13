@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from b92.b92_algorithm import B92Algorithm
+from crypto.b92.b92_algorithm import B92Algorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np

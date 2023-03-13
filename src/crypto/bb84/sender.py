@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-from bb84.participant import Participant
+from crypto.bb84.participant import Participant
 from qiskit import QuantumCircuit
 
 ## The Sender entity in the BB84 implementation

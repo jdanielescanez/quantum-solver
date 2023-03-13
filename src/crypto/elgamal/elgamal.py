@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from elgamal.elgamal_algorithm import ElGamalAlgorithm
+from crypto.elgamal.elgamal_algorithm import ElGamalAlgorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np

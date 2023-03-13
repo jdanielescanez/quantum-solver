@@ -8,8 +8,8 @@ from qiskit import execute, QuantumCircuit, transpile, assemble
 from qiskit.quantum_info import Statevector
 from qiskit.extensions import Initialize
 
-from rsa_substitute.sender import Sender
-from rsa_substitute.receiver import Receiver
+from crypto.rsa_substitute.sender import Sender
+from crypto.rsa_substitute.receiver import Receiver
 
 RSA_SUBSTITUTE_SIMULATOR = 'RSA SUBSTITUTE SIMULATOR'
 

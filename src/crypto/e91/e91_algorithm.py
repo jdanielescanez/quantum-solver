@@ -3,9 +3,9 @@
 # Author: Daniel Escanez-Exposito
 
 from qiskit import execute, QuantumCircuit, QuantumRegister, ClassicalRegister
-from e91.sender import Sender
-from e91.receiver import Receiver
-from e91.eavesdropper import Eveasdropper
+from crypto.e91.sender import Sender
+from crypto.e91.receiver import Receiver
+from crypto.e91.eavesdropper import Eveasdropper
 import binascii
 
 E91_SIMULATOR = 'E91 SIMULATOR'

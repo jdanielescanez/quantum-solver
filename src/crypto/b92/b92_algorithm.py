@@ -3,8 +3,8 @@
 # Author: Daniel Escanez-Exposito
 
 from qiskit import QuantumCircuit
-from b92.sender import Sender
-from b92.receiver import Receiver
+from crypto.b92.sender import Sender
+from crypto.b92.receiver import Receiver
 import binascii
 
 B92_SIMULATOR = 'B92 SIMULATOR'

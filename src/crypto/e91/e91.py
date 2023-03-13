@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from e91.e91_algorithm import E91Algorithm
+from crypto.e91.e91_algorithm import E91Algorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,7 +13,7 @@ from random import SystemRandom, randrange
 import string
 from alive_progress import alive_bar
 from math import ceil
-from e91.sender import Sender
+from crypto.e91.sender import Sender
 
 E91_SIMULATOR = 'E91 SIMULATOR'
 

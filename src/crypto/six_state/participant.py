@@ -3,7 +3,9 @@
 # Author: Daniel Escanez-Exposito
 
 from abc import ABC, abstractmethod
-from qiskit import QuantumCircuit
+# from qiskit import QuantumCircuit
+from qiskit.circuit.library import YGate
+from qiskit.circuit.library import ZGate
 from qiskit.circuit.gate import Gate
 from numpy.random import randint
 import numpy as np
@@ -30,7 +32,7 @@ class Participant(ABC):
     ## The otp of the participant
     self.otp = None
     ## The gate measuring z and y axes
-    self.hy = None
+    self.set_hy()
 
   ## Values setter
   def set_values(self, values=None):
@@ -42,7 +44,7 @@ class Participant(ABC):
   ## Axes setter
   def set_axes(self, axes=None):
     if axes == None:
-      self.axes = list(randint(2, size=self.original_bits_size))
+      self.axes = list(randint(3, size=self.original_bits_size))
     else:
       self.axes = axes
 
@@ -100,7 +102,6 @@ class Participant(ABC):
 
   ## New gate setter
   def set_hy(self, hy=None):
-    qc = QuantumCircuit(1, 1)
-    y_gate = qc.y().to_matrix()
-    z_gate = qc.z().to_matrix()
-    self_hy = Gate('hy',1/np.sqrt(2)*(y_gate + z_gate))
+    y_gate = YGate()
+    z_gate = ZGate()
+    self.hy = Gate('hy',1/np.sqrt(2)*(y_gate.to_matrix() + z_gate.to_matrix()))
