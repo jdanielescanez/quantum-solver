@@ -40,8 +40,10 @@ class SixState:
 
         self.__show_options()
         self.__select_option()
-      except Exception as _:
-        pass
+      except Exception as e:
+        # TODO pass
+        print(e)
+        raise e
 
   ## Main menu
   def __show_options(self):
@@ -82,6 +84,7 @@ class SixState:
     except Exception as exception:
       halo.fail()
       print('Exception:', exception)
+      raise exception
 
   ## Run an experiment of Six-State simulation
   def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
@@ -109,6 +112,7 @@ class SixState:
           
     except Exception as exception:
       print('Exception:', exception)
+      raise exception
 
     time_m = (time.time() - start_time)
     print('\n[$] Experiment Finished in ' + str(time_m) + ' s!')

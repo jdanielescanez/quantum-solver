@@ -3,10 +3,11 @@
 # Author: Daniel Escanez-Exposito
 
 from abc import ABC, abstractmethod
-# from qiskit import QuantumCircuit
+from qiskit import QuantumCircuit
 from qiskit.circuit.library import YGate
 from qiskit.circuit.library import ZGate
 from qiskit.circuit.gate import Gate
+import qiskit.quantum_info as qi
 from numpy.random import randint
 import numpy as np
 from math import ceil
@@ -101,7 +102,11 @@ class Participant(ABC):
     return final_message
 
   ## New gate setter
-  def set_hy(self, hy=None):
+  def set_hy(self):
     y_gate = YGate()
     z_gate = ZGate()
-    self.hy = Gate('hy',1/np.sqrt(2)*(y_gate.to_matrix() + z_gate.to_matrix()))
+    hy_op = qi.Operator(1/np.sqrt(2)*(y_gate.to_matrix() + z_gate.to_matrix()))
+
+    hy_gate = QuantumCircuit(1)
+    hy_gate.unitary(hy_op, [0], label='h_y')
+    self.hy = hy_gate.to_gate()
