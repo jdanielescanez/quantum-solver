@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from qiskit import QuantumCircuit
-from rsa_substitute.participant import Participant
+from crypto.rsa_substitute.participant import Participant
 import numpy as np
 
 ## The Sender entity in the E91 implementation

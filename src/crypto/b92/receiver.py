@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-from b92.participant import Participant
+from crypto.b92.participant import Participant
 from qiskit import QuantumCircuit
 from numpy.random import rand
 

@@ -5,8 +5,8 @@
 from qiskit import QuantumCircuit
 from random import vonmisesvariate as random_angle
 from qiskit.circuit.library import UGate
-from elgamal.sender import Sender
-from elgamal.receiver import Receiver
+from crypto.elgamal.sender import Sender
+from crypto.elgamal.receiver import Receiver
 from qiskit.quantum_info import Statevector
 import qiskit.quantum_info as qi
 import numpy as np

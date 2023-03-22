@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-from e91.receiver import Receiver
+from crypto.e91.receiver import Receiver
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from numpy.random import uniform
 

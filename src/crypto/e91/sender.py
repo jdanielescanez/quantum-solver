@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-from e91.participant import Participant
+from crypto.e91.participant import Participant
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 
 ## The Sender entity in the E91 implementation

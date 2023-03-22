@@ -3,7 +3,7 @@
 # Author: Daniel Escanez-Exposito
 
 from quantum_solver.quantum_solver import QuantumSolver
-from bb84.bb84_algorithm import BB84Algorithm
+from crypto.bb84.bb84_algorithm import BB84Algorithm
 import time
 import matplotlib.pyplot as plt
 import numpy as np

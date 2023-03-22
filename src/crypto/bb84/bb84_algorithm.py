@@ -3,8 +3,8 @@
 # Author: Daniel Escanez-Exposito
 
 from qiskit import QuantumCircuit
-from bb84.sender import Sender
-from bb84.receiver import Receiver
+from crypto.bb84.sender import Sender
+from crypto.bb84.receiver import Receiver
 import binascii
 
 BB84_SIMULATOR = 'BB84 SIMULATOR'

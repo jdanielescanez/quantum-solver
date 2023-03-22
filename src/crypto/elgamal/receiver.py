@@ -2,7 +2,7 @@
 
 # Author: Daniel Escanez-Exposito
 
-from elgamal.participant import Participant
+from crypto.elgamal.participant import Participant
 from qiskit import QuantumCircuit
 
 ## The Receiver entity in the ElGamal implementation
