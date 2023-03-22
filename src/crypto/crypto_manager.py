@@ -43,8 +43,7 @@ class CryptoManager:
       try:
         self.__show_options()
         self.__select_option()
-      except Exception as e:
-        raise e # TODO
+      except Exception as _:
         pass
 
   ## Main menu

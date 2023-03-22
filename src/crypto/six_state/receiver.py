@@ -5,6 +5,7 @@
 from crypto.six_state.participant import Participant
 from qiskit import QuantumCircuit
 from numpy.random import rand
+from qiskit import transpile
 
 ## The Receiver entity in the Six-State implementation
 ## @see https://qiskit.org/textbook/ch-algorithms/quantum-key-distribution.html
@@ -25,7 +26,8 @@ class Receiver(Participant):
         elif self.axes[i] == 2:
           qc.append(self.hy,[0])
         qc.measure(0, 0)
-        result = backend.run(qc, shots=1, memory=True).result()
+        transpiled_qc = transpile(qc, backend=backend)
+        result = backend.run(transpiled_qc, shots=1, memory=True).result()
         measured_bit = int(result.get_memory()[0])
         self.values.append(measured_bit)
       else:
