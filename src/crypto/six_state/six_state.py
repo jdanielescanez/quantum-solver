@@ -84,14 +84,15 @@ class SixState:
       print('Exception:', exception)
 
   ## Run an experiment of Six-State simulation
-  def __experimental_mode(self, len_msg_limit=5, density_step=0.05, repetition_instance=10):
+  def __experimental_mode(self, len_msg_limit=75, density_step=0.05, repetition_instance=30):
+    STEP_MSG = 5
     DENSITY_MIN = 0
     DENSITY_MAX = 1
     DENSITY_RANGE = int((DENSITY_MAX - DENSITY_MIN) / density_step)
     backend = self.qexecute.current_backend
     possible_chars = string.ascii_lowercase + string.ascii_uppercase + string.digits
-    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit))
-    x = list(range(1, len_msg_limit + 1, 1))
+    image = np.zeros((DENSITY_RANGE + 1, len_msg_limit // STEP_MSG))
+    x = list(range(STEP_MSG, len_msg_limit + 1, STEP_MSG))
     y = list(np.arange(0, 1 + density_step, density_step))
     start_time = time.time()
     print('\nRunning Six-State Simulator Experiment (in ' + str(backend) + '):')
