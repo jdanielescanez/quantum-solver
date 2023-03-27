@@ -103,7 +103,7 @@ class SixState:
           for i, len_message in enumerate(x):
             for _ in range(repetition_instance):
               message = ''.join(SystemRandom().choice(possible_chars) for _ in range(len_message))
-              bits_size = len(message) * 5
+              bits_size = len(message) * 10
               flag = self.six_state_algorithm.run(message, backend, bits_size, density, 1, False)
               image[j][i] += 1 if flag else 0
               bar()
