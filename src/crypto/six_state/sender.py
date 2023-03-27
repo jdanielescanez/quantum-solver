@@ -22,6 +22,6 @@ class Sender(Participant):
       if self.axes[i] == 1:
         qc.h(0)
       elif self.axes[i] == 2:
-        qc.append(self.hy,[0])
+        qc.append(self.hy, [0])
       encoded_message.append(qc)
     return encoded_message

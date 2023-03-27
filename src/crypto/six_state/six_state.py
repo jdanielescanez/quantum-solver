@@ -66,7 +66,7 @@ class SixState:
     density = float(input('[&] Interception Density (float between 0 and 1): '))
     backend = self.qexecute.current_backend
     N_BITS = 6
-    bits_size = len(message) * 5 * N_BITS
+    bits_size = len(message) * 10 * N_BITS
     execution_description = str(self.qexecute.current_backend)
     execution_description += ' with message "'
     execution_description += message + '" and density "' + str(density) + '"'
