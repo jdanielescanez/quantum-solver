@@ -330,7 +330,7 @@ export const Login = () => {
                         fontFamily: '"Helvetica Neue"',
                         fontWeight: "italic",
                       }}>
-                      here (IBM login page)
+                      IBM login page
                     </Typography>
                   </Typography>
                 </Box>
@@ -352,7 +352,8 @@ export const Login = () => {
                       fontWeight: "italic",
                       marginLeft: "1em"
                     }}>
-                    You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator ("aer_simulator").
+                    You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator
+                    ("aer_simulator").
                   </Typography>
                 </Box>
               </AccordionDetails>
