@@ -12,8 +12,6 @@ import { Dispatch } from 'redux';
 export const setCurrentBackend = (token:string, backend:string): any => (dispatch: Dispatch): any => {
   return backendService.setBackend(token, backend).then(
     (response) => {
-      console.log("getBackendAlgorithmsParams: ")
-      console.log(response.data);
       dispatch({
         type: SET_CURRENT_BACKEND_SUCCESS,
         payload: response.data
@@ -31,11 +29,9 @@ export const setCurrentBackend = (token:string, backend:string): any => (dispatc
 }
 
 
-export const setCurrentAlgorithm = (token:string, algorithm:string): any => (dispatch: Dispatch): any => {
+export const setCurrentAlgorithm = (token:string, algorithm:number): any => (dispatch: Dispatch): any => {
   return backendService.setAlgorithm(token, algorithm).then(
     (response) => {
-      console.log("getBackendAlgorithmsParams: ")
-      console.log(response.data);
       dispatch({
         type: SET_CURRENT_ALGORITHM_SUCCESS,
         payload: response.data
@@ -45,6 +41,25 @@ export const setCurrentAlgorithm = (token:string, algorithm:string): any => (dis
     (error) => {
       dispatch({
         type: SET_CURRENT_ALGORITHM_FAILED,
+        payload: error
+      });
+      return Promise.reject();
+    }
+  );
+}
+
+export const setCurrentParams = (token:string, params:any): any => (dispatch: Dispatch): any => {
+  return backendService.setParams(token, params).then(
+    (response) => {
+      dispatch({
+        type: SET_CURRENT_PARAMS_SUCCESS,
+        payload: response.data
+      });
+      return Promise.resolve();
+    },
+    (error) => {
+      dispatch({
+        type: SET_CURRENT_PARAMS_FAILED,
         payload: error
       });
       return Promise.reject();

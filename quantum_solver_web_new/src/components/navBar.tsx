@@ -107,7 +107,7 @@ export default function ButtonAppBar() {
           <Typography
             tabIndex={0}
             variant='h2'
-            component="p"
+            component="h1"
             sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "regular", marginLeft: "10px", margin: "left" }} >
             QUANTUM SOLVER
           </Typography>

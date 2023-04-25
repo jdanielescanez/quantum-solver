@@ -7,11 +7,11 @@ import drawer_reducer from "./drawerReducer";
 import runAlgorithms_reducer from "./runAlgorithmReducer";
 
 const rootReducers = combineReducers({
-    login_reducer,
-    getAlgorithms_reducer,
-    drawer_reducer,
-    runAlgorithms_reducer,
-    theme_mode_reducer,
+  login_reducer,
+  getAlgorithms_reducer,
+  drawer_reducer,
+  runAlgorithms_reducer,
+  theme_mode_reducer,
 });
 
 

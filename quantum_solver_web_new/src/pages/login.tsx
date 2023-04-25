@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-
 // MUI imports
 import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
@@ -13,10 +12,18 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Alert from '@mui/material/Alert'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Link as linkMui } from '@mui/material';
 import { useTheme } from '@mui/material'
 
 // Fuctions
 import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+
+// components Import 
+import { BreadCrumbsComponent } from '../components/breadCrumbs'
 
 // Import Action 
 import { login } from '../Redux/actions/LoginActions';
@@ -27,7 +34,12 @@ import DarkLogo from '../assets/DarkLogo192.png';
 
 export const Login = () => {
   const theme = useTheme();
+
   const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
+  const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
+  const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900];
+  const colorLinks = colorTokens(theme.palette.mode).grey[100];
+
   let logo;
   theme.palette.mode === "dark" ? (
     logo = DarkLogo
@@ -51,13 +63,17 @@ export const Login = () => {
     navigate("/algorithms");
   }
 
+  const routesLogin = ['/login']
+
   return (
     <div className="login">
+      <BreadCrumbsComponent routes={routesLogin} />
       <Container
         maxWidth="xl"
         sx={{
-          marginY: 5,
+          marginY: 1,
           marginBottom: "2em",
+          minHeight: "60vh",
         }}>
         <Paper
           elevation={3}
@@ -101,7 +117,7 @@ export const Login = () => {
                 <Typography
                   tabIndex={0}
                   variant="h2"
-                  component="h1"
+                  component="h2"
                   align="center"
                   sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}
                 >
@@ -118,8 +134,23 @@ export const Login = () => {
                   variant="body1"
                   component="p"
                   sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}>
-                  Enter your IBM Token to login
+                  Enter your&nbsp;
+                  <Typography
+                    tabIndex={0}
+                    variant='body1'
+                    color={colorLinks}
+                    aria-label="IBM token Information link"
+                    component={linkMui} href='https://quantum-computing.ibm.com/composer/docs/iqx/manage/account/'
+                    sx={{
+                      textDecoration: "underline",
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "italic",
+                    }}>
+                    IBM Token
+                  </Typography>
+                  &nbsp;to login
                 </Typography>
+
               </Box>
               <form className="registerForm" onSubmit={handleTokenLogin}>
                 <TextField
@@ -127,6 +158,7 @@ export const Login = () => {
                   type={'text'}
                   value={token}
                   required={true}
+                  aria-required="true"
                   variant="outlined"
                   color={theme.palette.mode === "dark" ? "secondary" : "primary"}
                   margin="dense"
@@ -139,10 +171,26 @@ export const Login = () => {
                   }}
                 />
                 {flagError === "none" && guest === false &&
-                  <Alert sx={{ marginTop: 2 }} severity="success" variant="filled">{"Valid Token 😄"}</Alert>
+                  <Alert
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "bold",
+                    }}
+                    severity="success"
+                    variant="filled">
+                    {"Valid Token 😄"}
+                  </Alert>
                 }
                 {flagError === "error" &&
-                  <Alert sx={{ marginTop: 2 }} severity="error" variant="filled">{"Invalid Token. Try Again 😞"}</Alert>
+                  <Alert
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "bold",
+                    }}
+                    severity="error"
+                    variant="filled">
+                    {"Invalid Token. Try Again 😞"}
+                  </Alert>
                 }
                 <Box
                   sx={{
@@ -198,15 +246,117 @@ export const Login = () => {
                     navigate("/algorithms");
                   }}
                 >
-                  <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                  <Typography
+                    variant='body1'
+                    component='p'
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "bold"
+                    }}>
                     continue as guest
                   </Typography>
                 </Button>
               </Box>
               {flagError === "none" && guest === true &&
-                <Alert sx={{ marginTop: 2 }} severity="success" variant="filled">{"Valid Guest mode Login 😄"}</Alert>
+                <Alert
+                  sx={{
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "bold",
+                  }}
+                  severity="success"
+                  variant="filled">
+                  {"Valid Guest mode Login 😄"}
+                </Alert>
               }
             </Stack>
+          </Box>
+          <Box
+            sx={{
+              padding: "2%",
+            }}
+          >
+            <Accordion
+              sx={{
+                borderRadius: 2,
+                padding: "2%",
+                bgcolor: theme.palette.mode === 'dark' ? colorTarjeta : colorTrajetaLight,
+              }}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography
+                  tabIndex={0}
+                  variant="body1"
+                  component="p"
+                  justifyContent="left"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "italic",
+                    marginLeft: "1em"
+                  }}>
+                  More information about the IBM Token
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginTop: "1em",
+                    marginBottom: "1em",
+                  }}>
+                  <Typography
+                    tabIndex={0}
+                    variant="body1"
+                    component="p"
+                    justifyContent="left"
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "italic",
+                      marginLeft: "1em"
+                    }}>
+                    The toolset uses your personal IBM Quantum Experience token to access to the IBM hardware.
+                    You can access to your API token or generate another one&nbsp;
+                    <Typography
+                      tabIndex={0}
+                      variant='body1'
+                      color={colorLinks}
+                      aria-label="IBM login page link"
+                      component={linkMui} href='https://quantum-computing.ibm.com/account'
+                      sx={{
+                        textDecoration: "underline",
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "italic",
+                      }}>
+                      here (IBM login page)
+                    </Typography>
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    justifyContent: "left",
+                    display: "flex",
+                    flexDirection: "column",
+                    marginTop: "1em",
+                    marginBottom: "1em",
+                  }}>
+                  <Typography
+                    tabIndex={0}
+                    variant="body1"
+                    component="p"
+                    justifyContent="left"
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "italic",
+                      marginLeft: "1em"
+                    }}>
+                    You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator ("aer_simulator").
+                  </Typography>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
           </Box>
         </Paper>
       </Container>

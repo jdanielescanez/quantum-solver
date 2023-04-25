@@ -17,6 +17,8 @@ import { Welcome } from './pages/welcome';
 import { Login } from './pages/login';
 import { AlgorithmsInformation } from './pages/algorithmsInformation'
 import { RunAlgorithms } from './pages/runAlgorithms';
+import { Accessibility } from './pages/accessibility';
+import { AboutUs } from './pages/aboutUs';
 
 
 
@@ -69,6 +71,8 @@ const PrincipalContainer = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/algorithms" element={<AlgorithmsInformation />} />
           <Route path="/algorithmsRun" element={<RunAlgorithms />} />
+          <Route path="/accessibility" element={<Accessibility />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="*" element={<Welcome />} />
         </Routes>
         <Footer />

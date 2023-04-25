@@ -1,4 +1,3 @@
-
 // Theme Mode Type Actions.
 export const THEME_LIGHT = '@THEME/LIGHT';
 export const THEME_DARK = '@THEME/DARK';
@@ -45,3 +44,24 @@ export const SET_CURRENT_ALGORITHM_FAILED = '@SET_CURRENT_ALGORITHM/FAILED';
 // Set Current Params
 export const SET_CURRENT_PARAMS_SUCCESS = '@SET_CURRENT_PARAMS/SUCCESS';
 export const SET_CURRENT_PARAMS_FAILED = '@SET_CURRENT_PARAMS/FAILED';
+
+// Run mode.
+export const RUN_MODE = 'RUN_MODE';
+
+// Run Normal Mode
+export const RUN_NORMAL_MODE_SUCCESS = '@RUN_NORMAL_MODE/SUCCESS';
+export const RUN_NORMAL_MODE_FAILED = '@RUN_NORMAL_MODE/FAILED';
+
+// Run Experimental Mode
+export const RUN_EXPERIMENTAL_MODE_SUCCESS = '@RUN_EXPERIMENTAL_MODE/SUCCESS';
+export const RUN_EXPERIMENTAL_MODE_FAILED = '@RUN_EXPERIMENTAL_MODE/FAILED';
+
+// get Result
+export const GET_RESULT_SUCCESS = '@GET_RESULT/SUCCESS';
+export const GET_RESULT_FAILED = '@GET_RESULT/FAILED';
+
+// clear params and result data
+export const CLEAR_PARAMS_RESULT = '@CLEAR_PARAMS_RESULT';
+
+// Nshots Type Actions.
+export const SET_N_SHOTS = '@SET_N_SHOTS';

@@ -35,23 +35,54 @@ export default function Footer() {
 
             <Grid item xs={14} sm={3}>
               <Box borderBottom={3} tabIndex={0} aria-label="Authors" >
-                <Typography variant='body1'>
+                <Typography  
+                  variant='body1' 
+                  component="h3"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "bold"
+                  }}
+                  >
                   <b>Authors</b>
                 </Typography>
               </Box>
               <Box>
-                <Typography tabIndex={0} variant='body1'>
+                <Typography 
+                  tabIndex={0} 
+                  variant='body1'
+                  component="p"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
                   Daniel Escánez-Expósito
                 </Typography>
               </Box>
               <Box>
-                <Typography tabIndex={0} variant='body1'>
-                  Vlatko Marchán Sekulic
+                <Typography 
+                  tabIndex={0} 
+                  variant='body1'
+                  component="p"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
+                  Vlatko Marchán-Sekulic
                 </Typography>
               </Box>
               <Box>
-                <Typography tabIndex={0} variant='body1'>
-                  Andrea Hernández Martín
+                <Typography 
+                  tabIndex={0} 
+                  variant='body1'
+                  component="p"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
+                  Andrea Hernández-Martín
                 </Typography>
               </Box>
             </Grid>
@@ -59,7 +90,13 @@ export default function Footer() {
 
             <Grid item xs={14} sm={3}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
-                <Typography variant='body1'>
+                <Typography 
+                  variant='body1'
+                  component="h3"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "bold"
+                  }}>
                   <b>Web Map ( 1 ) </b>
                 </Typography>
               </Box>
@@ -69,7 +106,12 @@ export default function Footer() {
                   variant='body1'
                   color={colorLinks}
                   aria-label="Link to Home page"
-                  component={Link} to='/'>
+                  component={Link} to='/'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
                   Home page
                 </Typography>
               </Box>
@@ -79,7 +121,12 @@ export default function Footer() {
                   variant='body1'
                   color={colorLinks}
                   aria-label="link to login page"
-                  component={Link} to='/login'>
+                  component={Link} to='/login'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
                   Login Page
                 </Typography>
               </Box>
@@ -89,7 +136,12 @@ export default function Footer() {
                   variant='body1'
                   color={colorLinks}
                   aria-label="Link to Information Algorithms page"
-                  component={Link} to='/algorithms'>
+                  component={Link} to='/algorithms'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}
+                  >
                   Algorithms Information
                 </Typography>
               </Box>
@@ -98,7 +150,13 @@ export default function Footer() {
 
             <Grid item xs={14} sm={3}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
-                <Typography variant='body1'>
+                <Typography 
+                  variant='body1'
+                  component="h3"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "bold"
+                  }}>
                   <b>Web Map ( 2 )</b>
                 </Typography>
               </Box>
@@ -108,7 +166,11 @@ export default function Footer() {
                   variant='body1'
                   color={colorLinks}
                   aria-label="link to Run Algorithms page"
-                  component={Link} to='/algorithmsRun'>
+                  component={Link} to='/algorithmsRun'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}>
                   Run algorithms
                 </Typography>
               </Box>
@@ -117,9 +179,13 @@ export default function Footer() {
                   tabIndex={0}
                   variant='body1'
                   color={colorLinks}
-                  aria-label="link to Accesibility declaration page"
-                  component={Link} to='/accesibility'>
-                  Accesibility declaration
+                  aria-label="link to accessibility statement page"
+                  component={Link} to='/accessibility'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}>
+                  Accessibility statement
                 </Typography>
               </Box>
               <Box>
@@ -128,7 +194,11 @@ export default function Footer() {
                   variant='body1'
                   color={colorLinks}
                   aria-label="link to About us page"
-                  component={Link} to='/about'>
+                  component={Link} to='/about'
+                  sx={{
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}>
                   About us
                 </Typography>
               </Box>
@@ -137,7 +207,13 @@ export default function Footer() {
 
             <Grid item xs={14} sm={3}>
               <Box borderBottom={3} tabIndex={0} aria-label="Our Github page">
-                <Typography variant='body1'>
+                <Typography 
+                variant='body1'
+                component="h3"
+                sx={{
+                  fontFamily: '"Helvetica Neue"', 
+                  fontWeight: "bold"
+                }}>
                   <b>Our Github page</b>
                 </Typography>
               </Box>
@@ -148,7 +224,11 @@ export default function Footer() {
                   color={colorLinks}
                   aria-label="link to Github Page"
                   component={linkMui} href='https://github.com/alu0101238944/quantum-solver'
-                  sx={{ textDecoration: "underline" }}>
+                  sx={{
+                    textDecoration: "underline", 
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "italic"
+                  }}>
                   Github repository
                 </Typography>
               </Box>

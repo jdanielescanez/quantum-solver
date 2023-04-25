@@ -64,7 +64,9 @@ const DrawerContent = () => {
       open={open}
     >
       <DrawerHeader>
-        <IconButton onClick={() => dispatch(setDrawer(false))}>
+        <IconButton 
+          aria-label="close drawer"
+          onClick={() => dispatch(setDrawer(false))}>
           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </DrawerHeader>
@@ -77,7 +79,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText primary="Home Page" />
+            <ListItemText 
+            primary="Home page" 
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }}
+           />
           </ListItemButton>
         </ListItem>
 
@@ -89,7 +97,12 @@ const DrawerContent = () => {
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText primary="Login Page" />
+            <ListItemText 
+            primary="Login page" 
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }}/>
           </ListItemButton>
         </ListItem>
 
@@ -101,7 +114,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <BusinessCenterIcon />
             </ListItemIcon>
-            <ListItemText primary="Algorithm Information" />
+            <ListItemText 
+            primary="Algorithms information"
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }} 
+            />
           </ListItemButton>
         </ListItem>
 
@@ -113,7 +132,12 @@ const DrawerContent = () => {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText primary="Run Algorithms" />
+            <ListItemText 
+              primary="Run algorithms" 
+              primaryTypographyProps={{
+                fontFamily: '"Helvetica Neue"', 
+                fontWeight: "regular"
+              }}/>
           </ListItemButton>
         </ListItem>
       </List>
@@ -123,11 +147,16 @@ const DrawerContent = () => {
           <ListItemButton
             tabIndex={0}
             aria-label="link to About us page"
-            component={Link} to='/aboutUs'>
+            component={Link} to='/about'>
             <ListItemIcon>
               <PeopleAltIcon />
             </ListItemIcon>
-            <ListItemText primary="about US" />
+            <ListItemText 
+            primary="About us" 
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }}/>
           </ListItemButton>
         </ListItem>
 
@@ -135,11 +164,16 @@ const DrawerContent = () => {
           <ListItemButton
             tabIndex={0}
             aria-label="link to Accesibility declaration page"
-            component={Link} to='/accesibility'>
+            component={Link} to='/accessibility'>
             <ListItemIcon>
               <TouchAppIcon />
             </ListItemIcon>
-            <ListItemText primary="Accesibility declaration" />
+            <ListItemText 
+            primary="Accessibility statement" 
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }}/>
           </ListItemButton>
         </ListItem>
 
@@ -151,7 +185,12 @@ const DrawerContent = () => {
             <ListItemIcon>
               <GitHubIcon />
             </ListItemIcon>
-            <ListItemText primary="Github repository" />
+            <ListItemText 
+            primary="Github repository" 
+            primaryTypographyProps={{
+              fontFamily: '"Helvetica Neue"', 
+              fontWeight: "regular"
+            }}/>
           </ListItemButton>
         </ListItem>
       </List>

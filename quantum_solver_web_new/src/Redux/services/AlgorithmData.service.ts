@@ -4,11 +4,11 @@ const API_URL = "http://localhost:5000/";
 
 
 const getAlgorithmsData = (token: string) => {
-    return axios.get(API_URL + "get-algorithms", {headers:{token}});
+  return axios.get(API_URL + "get-algorithms", { headers: { token } });
 }
 
 const algorithmService = {
-    getAlgorithmsData
+  getAlgorithmsData
 }
 
 export default algorithmService;

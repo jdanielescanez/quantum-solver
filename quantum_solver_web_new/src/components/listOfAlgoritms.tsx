@@ -11,7 +11,13 @@ import { AlgorithmCard } from './algorithmCard';
 export const ListAlgorithm = ({ listAlgorithm }: any) => {
   return (
     <Stack>
-      {listAlgorithm.map((algorithm: any) => (<AlgorithmCard algorithmName={algorithm.name} description={algorithm.description} parameters={algorithm.parameters} />))}
+      {listAlgorithm.map((algorithm: any, i:number) => (
+        <AlgorithmCard 
+          algorithmName={algorithm.name} 
+          description={algorithm.description} 
+          parameters={algorithm.parameters} 
+          key= {i}
+          />))}
     </Stack>
   )
 }

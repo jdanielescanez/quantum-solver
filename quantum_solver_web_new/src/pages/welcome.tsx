@@ -61,6 +61,7 @@ export const Welcome = () => {
           <Typography
             tabIndex={0}
             variant='h1'
+            component="h2"
             sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}
           >
             Quantum Solver
@@ -113,7 +114,12 @@ export const Welcome = () => {
               textAlign: "center"
             }}
           >
-            <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+            <Typography 
+              component="p"
+              sx={{ 
+                fontFamily: '"Helvetica Neue"', 
+                fontWeight: "bold" 
+              }}>
               <RocketIcon sx={{justifyItems: "center"}}> </RocketIcon> <br></br>
               Start
             </Typography>

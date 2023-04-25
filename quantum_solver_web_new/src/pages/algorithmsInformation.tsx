@@ -9,6 +9,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Alert from '@mui/material/Alert'
 import { useTheme } from '@mui/material'
+import { Button, List } from '@mui/material'
 
 // Fuctions
 import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
@@ -18,7 +19,7 @@ import { getAlgorithms, clearAlgorithms } from '../Redux/actions/getAlgorithmAct
 
 // components
 import { ListAlgorithm } from '../components/listOfAlgoritms'
-import { Button, List } from '@mui/material'
+import {BreadCrumbsComponent} from '../components/breadCrumbs'
 
 const getAlgorithmsFunction = async (token: string, dispatch: any) => {
   await dispatch(getAlgorithms(token))
@@ -32,20 +33,26 @@ export const AlgorithmsInformation = () => {
   const navigate = useNavigate()
 
   const { token } = useSelector((state: any) => state.login_reducer)
+  const {isToken} = useSelector((state: any) => state.login_reducer)
   const { algorithmData } = useSelector((state: any) => state.getAlgorithms_reducer)
 
-  if (algorithmData === "" && token !== "") {
+  if (algorithmData === "" && isToken) {
     getAlgorithmsFunction(token, dispatch)
   }
+
+  const routesAlgorithmInfo = ['/algorithms']
+
   return (
     <div className="algorithmsInformation">
+      <BreadCrumbsComponent routes={routesAlgorithmInfo} />
       <Container
         maxWidth="xl"
         sx={{
-          marginY: 5,
+          marginY: 1,
           marginBottom: "2em",
           height: "100%",
           flexGrow: 0,
+          minHeight: "60vh",
         }}>
         <Paper
           elevation={3}
@@ -53,7 +60,7 @@ export const AlgorithmsInformation = () => {
             borderRadius: 10,
             margin: "auto",
             height: "100%",
-            padding: "10%",
+            padding: "2%",
           }}>
           <Box
             sx={{
@@ -64,7 +71,7 @@ export const AlgorithmsInformation = () => {
             <Typography
               tabIndex={0}
               variant="h2"
-              component="h1"
+              component="h2"
               sx={{
                 fontFamily: '"Helvetica Neue"',
                 fontWeight: "bold"
@@ -74,7 +81,7 @@ export const AlgorithmsInformation = () => {
             </Typography>
           </Box>
           {
-            algorithmData === "" && token === "" ? (
+            algorithmData === "" && !isToken ? (
               <Box
                 sx={{
                   padding: 2,
@@ -94,27 +101,44 @@ export const AlgorithmsInformation = () => {
                     navigate("/login")
                   }
                 >
-                  Go to login
+                  <Typography 
+                  variant='body1'
+                  component='p'
+                  sx={{ 
+                    fontFamily: '"Helvetica Neue"', 
+                    fontWeight: "bold" 
+                    }}>
+                    Go to login
+                  </Typography>
                 </Button>
               </Box>
             ) : (
               null
             )
           }
-          {token === "" ? (
+          {!isToken ? (
             <Box
               sx={{
                 padding: 2,
                 justifyContent: "center",
                 display: "flex",
               }}>
-              <Alert severity="warning" variant="filled">{"You Need to be logged to see the algorithms information "}</Alert>
+              <Alert 
+              severity="warning" 
+              variant="filled"
+              sx={{
+                fontFamily: '"Helvetica Neue"', 
+                fontWeight: "bold",
+                color: "black",
+              }}
+              >
+                {"You Need to be logged to see the algorithms information "}</Alert>
             </Box>
           ) : null}
           {algorithmData !== "" ? <ListAlgorithm listAlgorithm={algorithmData} /> : null}
 
           {
-            algorithmData !== "" && token === "" ? (
+            algorithmData !== "" && !isToken ? (
               dispatch(clearAlgorithms())
             ) : (
               null
