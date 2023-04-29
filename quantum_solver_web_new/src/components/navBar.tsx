@@ -1,5 +1,6 @@
 // React - Redux import
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 // MUI elements
 import IconButton from '@mui/material/IconButton';
@@ -49,8 +50,9 @@ const AppBar = styled(MuiAppBar, {
 export default function ButtonAppBar() {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const paletteMode = theme.palette.mode;
+  let navigate = useNavigate();
 
+  const paletteMode = theme.palette.mode;
   const open = useSelector((state: any) => state.drawer_reducer.open);
 
   let logo;
@@ -92,8 +94,11 @@ export default function ButtonAppBar() {
           <Box
             display="flex"
             tabIndex={0}
-            aria-label='Quantum Solver Logo'
+            aria-label='Quantum Solver Logo link to Home page'
             component="img"
+            onClick={() => {
+              navigate("/")
+            }}
             sx={{
               height: '2.5rem',
               [theme.breakpoints.down("sm")]: {
@@ -107,7 +112,11 @@ export default function ButtonAppBar() {
           <Typography
             tabIndex={0}
             variant='h2'
-            component="h1"
+            component='h1'
+            aria-label="QUANTUM SOLVER, Link to Home page"
+            onClick={() => {
+              navigate("/")
+            }}
             sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "regular", marginLeft: "10px", margin: "left" }} >
             QUANTUM SOLVER
           </Typography>

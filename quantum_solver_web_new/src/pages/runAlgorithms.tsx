@@ -2,6 +2,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // MUI imports
 import Container from '@mui/material/Container'
@@ -28,7 +29,8 @@ import {
 import {
   runNormalMode,
   runExperimentalMode,
-  setNShots
+  setNShots,
+  clearExecutionData
 } from '../Redux/actions/runActions';
 
 // components Import 
@@ -57,9 +59,12 @@ const runExperimentalModeFunction = async (dispatch: any, token: string, nShots:
 
 export const RunAlgorithms = () => {
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
   const navigate = useNavigate()
+  const theme = useTheme();
+
+  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
+  const colorLinks = colorTokens(theme.palette.mode).grey[100];
+
   const { token } = useSelector((state: any) => state.login_reducer)
   const { isToken } = useSelector((state: any) => state.login_reducer)
 
@@ -88,6 +93,11 @@ export const RunAlgorithms = () => {
     dispatch(setNShots(Number(nShots)))
   }
 
+  const clearExecutionDataFunction = (e: any) => {
+    e.preventDefault();
+    dispatch(clearExecutionData());
+  }
+
   if (isToken && allBackends === "" && allAlgorithms === "") {
     getAllData(dispatch, token)
   }
@@ -100,7 +110,7 @@ export const RunAlgorithms = () => {
     runNormalModeFunction(dispatch, token)
   }
 
-  if (isToken && runMode === 'experimental' && n_shots !=="" && algorithmRun === "") {
+  if (isToken && runMode === 'experimental' && n_shots !== "" && algorithmRun === "") {
     runExperimentalModeFunction(dispatch, token, Number(n_shots))
   }
 
@@ -215,6 +225,7 @@ export const RunAlgorithms = () => {
                   && allBackends === "" && allAlgorithms === "" && allParams === "" ?
                   <>
                     <Typography
+                      tabIndex={0}
                       variant='h3'
                       component="p"
                       sx={{
@@ -231,14 +242,49 @@ export const RunAlgorithms = () => {
                 isToken
                   && allBackends !== "None" && allAlgorithms !== "None" && allParams === "None"
                   && currentBackend === "" && currentAlgorithm === "" ?
-                  < RunAlgorithmsForm1 allBackends={allBackends} allAlgorithms={allAlgorithms} />
+                  <>
+                    < RunAlgorithmsForm1 allBackends={allBackends} allAlgorithms={allAlgorithms} />
+                    <Box
+                      sx={{
+                        padding: 2,
+                        justifyContent: "center",
+                        display: "flex",
+                      }}>
+                      <Typography
+                        tabIndex={0}
+                        variant="body1"
+                        component="p"
+                        sx={{
+                          fontFamily: '"Helvetica Neue"',
+                          fontWeight: "bold"
+                        }}
+                      >
+                        You can see all the information on how the algorithms works on&nbsp;
+                        <Typography
+                          tabIndex={0}
+                          variant='body1'
+                          color={colorLinks}
+                          aria-label="link to Run Algorithms page"
+                          component={Link} to='/algorithms'
+                          sx={{
+                            textDecoration: "underline",
+                            fontFamily: '"Helvetica Neue"',
+                            fontWeight: "italic",
+                          }}>
+                          Algorithm Information.
+                        </Typography>
+                      </Typography>
+                    </Box>
+                  </>
                   :
                   null
               }
               {
                 isToken
                   && currentBackend !== "" && currentAlgorithm !== "" && paramsData ?
-                  < RunAlgorithmsForm2 params={paramsData} />
+                  <>
+                    < RunAlgorithmsForm2 params={paramsData} />
+                  </>
                   :
                   null
               }
@@ -274,16 +320,84 @@ export const RunAlgorithms = () => {
               {
                 isToken
                   && runMode === 'experimental' && n_shots === "" && algorithmRun === "" ?
-                  <Box
-                    sx={{
-                      justifyContent: "center",
-                      alignContent: "center",
-                      display: "flex",
-                      marginTop: "2em",
-                      marginBottom: "2em",
-                    }}>
-                    <form className="nshotsForm" onSubmit={setNShotsFunction}>
-                      <div>
+                  <>
+                    <Box
+                      sx={{
+                        justifyContent: "center",
+                        alignContent: "center",
+                        display: "flex",
+                        marginTop: "2em",
+                        marginBottom: "2em",
+                      }}>
+                      <form className="nshotsForm" onSubmit={setNShotsFunction}>
+                        <div>
+                          <Typography
+                            tabIndex={0}
+                            variant="body1"
+                            component="p"
+                            sx={{
+                              fontFamily: '"Helvetica Neue"',
+                              fontWeight: "italic",
+                              marginTop: 1,
+                              marginBottom: 3,
+                            }}>
+                            Insert n_shots :
+                          </Typography>
+                          <TextField
+                            aria-label={"insert n_shots"}
+                            aria-required="true"
+                            id="n_shots"
+                            type="number"
+                            required
+                            label={"insert n_shots"}
+                            onChange={handleShots}
+                            color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+                            sx={{
+                              width: "100%",
+                            }}
+                          />
+                        </div>
+
+                        <Box
+                          sx={{
+                            justifyContent: "center",
+                            alignContent: "center",
+                            display: "flex",
+                          }}>
+                          <Button
+                            tabIndex={0}
+                            aria-label='Set n_shots'
+                            type="submit"
+                            variant="contained"
+                            sx={{
+                              borderRadius: 3,
+                              backgroundColor: colorButton,
+                              justifyContent: "center",
+                              marginTop: 2,
+                            }}
+                          >
+                            <Typography
+                              component="span"
+                              sx={{
+                                fontFamily: '"Helvetica Neue"',
+                                fontWeight: "bold"
+                              }}
+                            >
+                              Set n_shots
+                            </Typography>
+                          </Button>
+                        </Box>
+                      </form>
+                    </Box>
+                    <Stack>
+                      <Box
+                        sx={{
+                          width: "100%",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          display: "flex"
+                        }}
+                      >
                         <Typography
                           tabIndex={0}
                           variant="body1"
@@ -291,44 +405,44 @@ export const RunAlgorithms = () => {
                           sx={{
                             fontFamily: '"Helvetica Neue"',
                             fontWeight: "italic",
-                            marginTop: 1,
-                            marginBottom: 3,
+                            marginTop: 2,
+                            marginBottom: 1,
                           }}>
-                          Insert n_shots :
+                          OR
                         </Typography>
-                        <TextField
-                          aria-label={"insert n_shots"}
-                          aria-required="true"
-                          id="n_shots"
-                          type="number"
-                          required
-                          label={"insert n_shots"}
-                          onChange={handleShots}
-                          color={theme.palette.mode === "dark" ? "secondary" : "primary"}
-                          sx={{
-                            width: "100%",
-                          }}
-                        />
-                      </div>
-
-                      <Button
-                        tabIndex={0}
-                        aria-label='Set backend and algorithm'
-                        type="submit"
-                        variant="contained"
+                      </Box>
+                      <Box
                         sx={{
-                          borderRadius: 3,
-                          backgroundColor: colorButton,
                           justifyContent: "center",
-                          marginTop: 2,
+                          alignContent: "center",
+                          display: "flex"
                         }}
                       >
-                        <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
-                          Set backend and algorithm
-                        </Typography>
-                      </Button>
-                    </form>
-                  </Box>
+                        <Button
+                          tabIndex={0}
+                          aria-label='Go back'
+                          onClick={clearExecutionDataFunction}
+                          variant="contained"
+                          sx={{
+                            borderRadius: 3,
+                            backgroundColor: colorButton,
+                            justifyContent: "center",
+                            marginTop: 2,
+                          }}
+                        >
+                          <Typography
+                            component="span"
+                            sx={{
+                              fontFamily: '"Helvetica Neue"',
+                              fontWeight: "bold"
+                            }}
+                          >
+                            Go back
+                          </Typography>
+                        </Button>
+                      </Box>
+                    </Stack>
+                  </>
                   :
                   null
               }

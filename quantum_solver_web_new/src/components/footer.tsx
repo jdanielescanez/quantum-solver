@@ -32,63 +32,7 @@ export default function Footer() {
       >
         <Container maxWidth="xl" sx={{ display: "flex" }}>
           <Grid container spacing={2} sx={{ marginBottom: "1em", alignContent: "center" }}>
-
-            <Grid item xs={14} sm={3}>
-              <Box borderBottom={3} tabIndex={0} aria-label="Authors" >
-                <Typography  
-                  variant='body1' 
-                  component="h3"
-                  sx={{
-                    fontFamily: '"Helvetica Neue"', 
-                    fontWeight: "bold"
-                  }}
-                  >
-                  <b>Authors</b>
-                </Typography>
-              </Box>
-              <Box>
-                <Typography 
-                  tabIndex={0} 
-                  variant='body1'
-                  component="p"
-                  sx={{
-                    fontFamily: '"Helvetica Neue"', 
-                    fontWeight: "italic"
-                  }}
-                  >
-                  Daniel Escánez-Expósito
-                </Typography>
-              </Box>
-              <Box>
-                <Typography 
-                  tabIndex={0} 
-                  variant='body1'
-                  component="p"
-                  sx={{
-                    fontFamily: '"Helvetica Neue"', 
-                    fontWeight: "italic"
-                  }}
-                  >
-                  Vlatko Marchán-Sekulic
-                </Typography>
-              </Box>
-              <Box>
-                <Typography 
-                  tabIndex={0} 
-                  variant='body1'
-                  component="p"
-                  sx={{
-                    fontFamily: '"Helvetica Neue"', 
-                    fontWeight: "italic"
-                  }}
-                  >
-                  Andrea Hernández-Martín
-                </Typography>
-              </Box>
-            </Grid>
-
-
-            <Grid item xs={14} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
                 <Typography 
                   variant='body1'
@@ -148,7 +92,7 @@ export default function Footer() {
             </Grid>
 
 
-            <Grid item xs={14} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
                 <Typography 
                   variant='body1'
@@ -205,7 +149,7 @@ export default function Footer() {
             </Grid>
 
 
-            <Grid item xs={14} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Our Github page">
                 <Typography 
                 variant='body1'

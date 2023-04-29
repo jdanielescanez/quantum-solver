@@ -1,11 +1,8 @@
-
 // MUI imports
 import Stack from '@mui/material/Stack';
 
 // algorithm card
 import { AlgorithmCard } from './algorithmCard';
-
-
 
 
 export const ListAlgorithm = ({ listAlgorithm }: any) => {

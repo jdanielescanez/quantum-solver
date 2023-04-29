@@ -115,7 +115,7 @@ export const Welcome = () => {
             }}
           >
             <Typography 
-              component="p"
+              component="span"
               sx={{ 
                 fontFamily: '"Helvetica Neue"', 
                 fontWeight: "bold" 

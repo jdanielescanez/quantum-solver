@@ -1,6 +1,7 @@
 //redux-react 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 //MUI imports
 import Box from '@mui/material/Box';
@@ -11,6 +12,10 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTheme } from '@mui/material';
 
 //Fuctions
@@ -44,7 +49,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
+
   const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
+  const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
+  const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900]
+  const colorLinks = colorTokens(theme.palette.mode).grey[100];
 
   const params_value: any = [''];
 
@@ -91,6 +100,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 display: "flex",
               }}>
               <Typography
+                tabIndex={0}
                 variant="h3"
                 component="p"
                 sx={{
@@ -107,7 +117,6 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
               display: "flex"
             }}>
               <Stack spacing={2}>
-
                 <form className="paramsForm" onSubmit={setParams}>
                   {
                     params.map((item: Param, i: number) => {
@@ -176,16 +185,111 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                           marginTop: 2,
                         }}
                       >
-                        <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                        <Typography
+                          component="span"
+                          sx={{
+                            fontFamily: '"Helvetica Neue"',
+                            fontWeight: "bold"
+                          }}
+                        >
                           Set Params
                         </Typography>
                       </Button>
                     </Box>
                   </Stack>
-
                 </form>
+                {
+                  err == false && msg !== "" && runMode === "None" ?
+                    null
+                    :
+                    <>
+                      <Box
+                        sx={{
+                          width: "100%",
+                          justifyContent: "center",
+                          alignContent: "center",
+                          display: "flex"
+                        }}
+                      >
+                        <Typography
+                          tabIndex={0}
+                          variant="body1"
+                          component="p"
+                          sx={{
+                            fontFamily: '"Helvetica Neue"',
+                            fontWeight: "italic",
+                            marginTop: 2,
+                            marginBottom: 1,
+                          }}>
+                          OR
+                        </Typography>
+                      </Box>
+                      <Box
+                        sx={{
+                          justifyContent: "center",
+                          alignContent: "center",
+                          display: "flex"
+                        }}
+                      >
+                        <Button
+                          tabIndex={0}
+                          aria-label='Set other backend and algorithm'
+                          onClick={clearData}
+                          variant="contained"
+                          sx={{
+                            width: "100%",
+                            borderRadius: 3,
+                            backgroundColor: colorButton,
+                            justifyContent: "center",
+                            marginTop: 1,
+                          }}
+                        >
+                          <Typography
+                            component="span"
+                            sx={{
+                              fontFamily: '"Helvetica Neue"',
+                              fontWeight: "bold"
+                            }}
+                          >
+                            Set other backend and algorithm
+                          </Typography>
+                        </Button>
+                      </Box>
+                    </>
+                }
 
               </Stack>
+            </Box>
+            <Box
+              sx={{
+                padding: 2,
+                justifyContent: "center",
+                display: "flex",
+              }}>
+              <Typography
+                tabIndex={0}
+                variant="body1"
+                component="p"
+                sx={{
+                  fontFamily: '"Helvetica Neue"',
+                  fontWeight: "bold"
+                }}
+              >
+                You can see all the information on how the algorithms works on&nbsp;
+                <Typography
+                  tabIndex={0}
+                  variant='body1'
+                  color={colorLinks}
+                  aria-label="link to Run Algorithms page"
+                  component={Link} to='/algorithms'
+                  sx={{
+                    textDecoration: "underline",
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "italic",
+                  }}>
+                  Algorithm Information.
+                </Typography>
+              </Typography>
             </Box>
           </>
           :
@@ -210,7 +314,8 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
 
               }}
             >
-              {msg}</Alert>
+              {msg}
+            </Alert>
           </Box>
           :
           null
@@ -232,7 +337,8 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 fontWeight: "bold",
               }}
             >
-              {msg}</Alert>
+              {msg}
+            </Alert>
           </Box>
           :
           null
@@ -264,7 +370,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
             </Box>
 
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid item xs={2} sm={4} md={4} >
+              <Grid item xs={12} sm={4} md={4} >
                 <Box
                   sx={{
                     justifyContent: "center",
@@ -285,13 +391,19 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       marginTop: 2,
                     }}
                   >
-                    <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "bold"
+                      }}
+                    >
                       Set other backend and algorithm
                     </Typography>
                   </Button>
                 </Box>
               </Grid>
-              <Grid item xs={2} sm={4} md={4}>
+              <Grid item xs={12} sm={4} md={4}>
                 <Box
                   sx={{
                     justifyContent: "center",
@@ -301,7 +413,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 >
                   <Button
                     tabIndex={0}
-                    aria-label='Set other backend and algorithm'
+                    aria-label='Run Simple Execution'
                     onClick={runNormal}
                     variant="contained"
                     sx={{
@@ -312,13 +424,19 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       marginTop: 2,
                     }}
                   >
-                    <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
-                      Run QuantumSolver
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "bold"
+                      }}
+                    >
+                      Simple Execution
                     </Typography>
                   </Button>
                 </Box>
               </Grid>
-              <Grid item xs={2} sm={4} md={4}>
+              <Grid item xs={12} sm={4} md={4}>
                 <Box
                   sx={{
                     justifyContent: "center",
@@ -328,7 +446,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 >
                   <Button
                     tabIndex={0}
-                    aria-label='Set other backend and algorithm'
+                    aria-label='Run Experimental Mode'
                     onClick={runExperimental}
                     variant="contained"
                     sx={{
@@ -339,13 +457,78 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       marginTop: 2,
                     }}
                   >
-                    <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
-                      Run QuantumSolver Experimental Mode
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "bold"
+                      }}
+                    >
+                      Experimental Mode
                     </Typography>
                   </Button>
                 </Box>
               </Grid>
             </Grid>
+            <Box
+              sx={{
+                padding: "2%",
+                marginTop: "2%",
+              }}
+            >
+              <Accordion
+                sx={{
+                  borderRadius: 2,
+                  padding: "2%",
+                  bgcolor: theme.palette.mode === 'dark' ? colorTarjeta : colorTrajetaLight,
+                }}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography
+                    tabIndex={0}
+                    variant="body1"
+                    component="p"
+                    justifyContent="left"
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "italic",
+                      marginLeft: "1em"
+                    }}>
+                    What is the difference between the Simple Execution and the Experimental Mode?
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      marginTop: "1em",
+                      marginBottom: "1em",
+                    }}>
+                    <Typography
+                      tabIndex={0}
+                      variant="body1"
+                      component="p"
+                      justifyContent="left"
+                      sx={{
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "italic",
+                        marginLeft: "1em"
+                      }}>
+                      Performing the simple execution of an algorithm refers to running it only once, obtaining
+                      the result and a graphical representation of the circuit.
+                      <br></br>
+                      <br></br>
+                      The experimental mode allows to run the algorithm several times to observe its behavior
+                      represented in a generated histogram.
+                    </Typography>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            </Box>
           </>
           :
           null

@@ -67,7 +67,7 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
             margin: "0 auto",
             padding: "1em",
           }}>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <Typography
               variant="h3"
               component="p"
@@ -76,10 +76,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                 fontWeight: "bold"
               }}
             >
-              Select BackEnd:
+              Select backend:
             </Typography>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={8}>
             <FormControl
               id="backendid"
               component="div"
@@ -95,13 +95,13 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                 }}
               >
                 <Typography
-                  tabIndex={0}
+                  component="span"
                   sx={{
                     fontFamily: '"Helvetica Neue"',
                     fontWeight: "italic"
                   }}
                 >
-                  Select BackenEnd
+                  Select backend
                 </Typography>
               </InputLabel>
               <Select
@@ -136,7 +136,7 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} sm={4}>
             <Typography
               variant="h3"
               component="p"
@@ -148,13 +148,13 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
               Select Algorithm:
             </Typography>
           </Grid>
-          <Grid item xs={8}>
-            <FormControl 
+          <Grid item xs={12} sm={8}>
+            <FormControl
               component="div"
               aria-required="true"
-              required 
+              required
               fullWidth
-              >
+            >
               <InputLabel
                 id="demo-simple-select-label-2"
                 color={theme.palette.mode === "dark" ? "secondary" : "primary"}
@@ -164,7 +164,7 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                 }}
               >
                 <Typography
-                  tabIndex={0}
+                  component="span"
                   sx={{
                     fontFamily: '"Helvetica Neue"',
                     fontWeight: "italic"
@@ -227,7 +227,13 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
               marginTop: 2,
             }}
           >
-            <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+            <Typography
+              component="span"
+              sx={{
+                fontFamily: '"Helvetica Neue"',
+                fontWeight: "bold"
+              }}
+            >
               Set backend and algorithm
             </Typography>
           </Button>

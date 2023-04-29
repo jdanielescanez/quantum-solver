@@ -16,6 +16,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Grid from '@mui/material/Grid';
 import { Link as linkMui } from '@mui/material';
 import { useTheme } from '@mui/material'
 
@@ -39,6 +40,7 @@ export const Login = () => {
   const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
   const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900];
   const colorLinks = colorTokens(theme.palette.mode).grey[100];
+  const { isToken } = useSelector((state: any) => state.login_reducer)
 
   let logo;
   theme.palette.mode === "dark" ? (
@@ -59,8 +61,9 @@ export const Login = () => {
 
   const handleTokenLogin = async (e: any) => {
     e.preventDefault();
-    await dispatch(login(token, false))
-    navigate("/algorithms");
+    if (!isToken) {
+      await dispatch(login(token, false))
+    }
   }
 
   const routesLogin = ['/login']
@@ -89,7 +92,7 @@ export const Login = () => {
               alignContent: "center",
               display: "flex",
               marginTop: "2em",
-              marginBottom: "2em",
+              marginBottom: "1em",
             }}>
             <Stack
               spacing={2}
@@ -155,7 +158,7 @@ export const Login = () => {
               <form className="registerForm" onSubmit={handleTokenLogin}>
                 <TextField
                   label="Enter your token here"
-                  type={'text'}
+                  type="password"
                   value={token}
                   required={true}
                   aria-required="true"
@@ -175,6 +178,7 @@ export const Login = () => {
                     sx={{
                       fontFamily: '"Helvetica Neue"',
                       fontWeight: "bold",
+                      color: "white"
                     }}
                     severity="success"
                     variant="filled">
@@ -199,7 +203,7 @@ export const Login = () => {
                   }}>
                   <Button
                     tabIndex={0}
-                    aria-label='Login Button with token and go to the algorithm page'
+                    aria-label='Submit Button to login with token'
                     type="submit"
                     variant="contained"
                     sx={{
@@ -209,7 +213,13 @@ export const Login = () => {
                       marginTop: 2,
                     }}
                   >
-                    <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "bold"
+                      }}
+                    >
                       let's go
                     </Typography>
                   </Button>
@@ -224,7 +234,7 @@ export const Login = () => {
                   variant="body1"
                   component="p"
                   sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}>
-                  or continue as has guest
+                  OR
                 </Typography>
               </Box>
               <Box
@@ -234,7 +244,7 @@ export const Login = () => {
                 }}>
                 <Button
                   tabIndex={0}
-                  aria-label='Login Button like a Gest and go to the algorithm page'
+                  aria-label='submit button to login as guest'
                   variant="contained"
                   sx={{
                     borderRadius: 3,
@@ -242,13 +252,14 @@ export const Login = () => {
                     justifyContent: "center",
                   }}
                   onClick={() => {
-                    dispatch(login("", true))
-                    navigate("/algorithms");
+                    if (!isToken) {
+                      dispatch(login("", true))
+                    }
                   }}
                 >
                   <Typography
                     variant='body1'
-                    component='p'
+                    component="span"
                     sx={{
                       fontFamily: '"Helvetica Neue"',
                       fontWeight: "bold"
@@ -262,6 +273,7 @@ export const Login = () => {
                   sx={{
                     fontFamily: '"Helvetica Neue"',
                     fontWeight: "bold",
+                    color: "white"
                   }}
                   severity="success"
                   variant="filled">
@@ -270,6 +282,93 @@ export const Login = () => {
               }
             </Stack>
           </Box>
+          {
+            isToken ?
+              <Box
+                sx={{
+                  padding: 2,
+                  justifyContent: "center",
+                  alignContent: "center",
+                  display: "flex",
+                  marginBottom: "1em",
+                }}>
+                <Stack>
+                  <Typography
+                    tabIndex={0}
+                    variant="h5"
+                    component="p"
+                    sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold", marginBottom: "1em" }}>
+                    Now you can check:
+                  </Typography>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <Box
+                        sx={{
+                          justifyContent: "center",
+                          display: "flex",
+                        }}>
+                        <Button
+                          tabIndex={0}
+                          aria-label='Go to algorithms information'
+                          variant="contained"
+                          sx={{
+                            borderRadius: 3,
+                            backgroundColor: colorButton,
+                            justifyContent: "center",
+                          }}
+                          onClick={() => {
+                            navigate("/algorithms")
+                          }}
+                        >
+                          <Typography
+                            variant='body1'
+                            component='span'
+                            sx={{
+                              fontFamily: '"Helvetica Neue"',
+                              fontWeight: "bold"
+                            }}>
+                            Algorithms Information
+                          </Typography>
+                        </Button>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Box
+                        sx={{
+                          justifyContent: "center",
+                          display: "flex",
+                        }}>
+                        <Button
+                          tabIndex={0}
+                          aria-label='Go to run algorithms'
+                          variant="contained"
+                          sx={{
+                            borderRadius: 3,
+                            backgroundColor: colorButton,
+                            justifyContent: "center",
+                          }}
+                          onClick={() => {
+                            navigate("/algorithmsRun")
+                          }}
+                        >
+                          <Typography
+                            variant='body1'
+                            component='span'
+                            sx={{
+                              fontFamily: '"Helvetica Neue"',
+                              fontWeight: "bold"
+                            }}>
+                            Run Algorithms
+                          </Typography>
+                        </Button>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Stack>
+              </Box>
+              :
+              null
+          }
           <Box
             sx={{
               padding: "2%",
@@ -296,7 +395,7 @@ export const Login = () => {
                     fontWeight: "italic",
                     marginLeft: "1em"
                   }}>
-                  More information about the IBM Token
+                  What is the difference between login and guest mode? What is an IBM token?
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -317,8 +416,9 @@ export const Login = () => {
                       fontWeight: "italic",
                       marginLeft: "1em"
                     }}>
-                    The toolset uses your personal IBM Quantum Experience token to access to the IBM hardware.
-                    You can access to your API token or generate another one&nbsp;
+                    Authentication against IBM services, which provide access to real quantum
+                    hardware and simulators, is done through an "IBM Quantum Experience" API token.
+                    You can access your API token or generate another one on the&nbsp;
                     <Typography
                       tabIndex={0}
                       variant='body1'
@@ -330,7 +430,7 @@ export const Login = () => {
                         fontFamily: '"Helvetica Neue"',
                         fontWeight: "italic",
                       }}>
-                      IBM login page
+                      IBM login page.
                     </Typography>
                   </Typography>
                 </Box>
@@ -352,8 +452,9 @@ export const Login = () => {
                       fontWeight: "italic",
                       marginLeft: "1em"
                     }}>
-                    You can also use the Guest Mode which only allows you to run quantum circuits in a local simulator
-                    ("aer_simulator").
+                    There is also a guest mode that allows you to access the platform without
+                    an IBM Quantum account. In this mode you are only allowed to run algorithms using
+                    "aer_simulator", so it will not be possible to use the real quantum hardware provided by IBM.
                   </Typography>
                 </Box>
               </AccordionDetails>

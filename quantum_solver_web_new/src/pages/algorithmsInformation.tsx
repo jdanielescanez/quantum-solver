@@ -1,6 +1,7 @@
 //React - Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // MUI imports
 import Container from '@mui/material/Container'
@@ -19,7 +20,7 @@ import { getAlgorithms, clearAlgorithms } from '../Redux/actions/getAlgorithmAct
 
 // components
 import { ListAlgorithm } from '../components/listOfAlgoritms'
-import {BreadCrumbsComponent} from '../components/breadCrumbs'
+import { BreadCrumbsComponent } from '../components/breadCrumbs'
 
 const getAlgorithmsFunction = async (token: string, dispatch: any) => {
   await dispatch(getAlgorithms(token))
@@ -27,13 +28,15 @@ const getAlgorithmsFunction = async (token: string, dispatch: any) => {
 
 export const AlgorithmsInformation = () => {
   const theme = useTheme();
+
+  const colorLinks = colorTokens(theme.palette.mode).grey[100];
   const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const { token } = useSelector((state: any) => state.login_reducer)
-  const {isToken} = useSelector((state: any) => state.login_reducer)
+  const { isToken } = useSelector((state: any) => state.login_reducer)
   const { algorithmData } = useSelector((state: any) => state.getAlgorithms_reducer)
 
   if (algorithmData === "" && isToken) {
@@ -101,12 +104,12 @@ export const AlgorithmsInformation = () => {
                     navigate("/login")
                   }
                 >
-                  <Typography 
-                  variant='body1'
-                  component='p'
-                  sx={{ 
-                    fontFamily: '"Helvetica Neue"', 
-                    fontWeight: "bold" 
+                  <Typography
+                    variant='body1'
+                    component="span"
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "bold"
                     }}>
                     Go to login
                   </Typography>
@@ -123,19 +126,56 @@ export const AlgorithmsInformation = () => {
                 justifyContent: "center",
                 display: "flex",
               }}>
-              <Alert 
-              severity="warning" 
-              variant="filled"
-              sx={{
-                fontFamily: '"Helvetica Neue"', 
-                fontWeight: "bold",
-                color: "black",
-              }}
+              <Alert
+                severity="warning"
+                variant="filled"
+                sx={{
+                  fontFamily: '"Helvetica Neue"',
+                  fontWeight: "bold",
+                  color: "black",
+                }}
               >
                 {"You Need to be logged to see the algorithms information "}</Alert>
             </Box>
           ) : null}
-          {algorithmData !== "" ? <ListAlgorithm listAlgorithm={algorithmData} /> : null}
+          {
+            algorithmData !== "" ?
+              <>
+                <Box
+                  sx={{
+                    padding: 2,
+                    justifyContent: "center",
+                    display: "flex",
+                  }}>
+                  <Typography
+                    tabIndex={0}
+                    variant="body1"
+                    component="p"
+                    sx={{
+                      fontFamily: '"Helvetica Neue"',
+                      fontWeight: "bold"
+                    }}
+                    >
+                    You can execute all of this algorithms in the section&nbsp;
+                    <Typography
+                      tabIndex={0}
+                      variant='body1'
+                      color={colorLinks}
+                      aria-label="link to Run Algorithms page"
+                      component={Link} to='/algorithmsRun'
+                      sx={{
+                        textDecoration: "underline",
+                        fontFamily: '"Helvetica Neue"',
+                        fontWeight: "italic",
+                      }}>
+                      Run Algorithms.
+                    </Typography>
+                  </Typography>
+                </Box>
+                <ListAlgorithm listAlgorithm={algorithmData} />
+              </>
+              :
+              null}
 
           {
             algorithmData !== "" && !isToken ? (

@@ -52,7 +52,7 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
             align="center"
             sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}
           >
-            <b>algorithm: </b> {algorithmName}
+            <b>Algorithm: </b> {algorithmName}
           </Typography>
         </Box>
         <Box sx={{ marginLeft: "2em", marginRight: "2em" }}>

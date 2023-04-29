@@ -163,7 +163,7 @@ const DrawerContent = () => {
         <ListItem disablePadding>
           <ListItemButton
             tabIndex={0}
-            aria-label="link to Accesibility declaration page"
+            aria-label="link to Accessibility statement page"
             component={Link} to='/accessibility'>
             <ListItemIcon>
               <TouchAppIcon />

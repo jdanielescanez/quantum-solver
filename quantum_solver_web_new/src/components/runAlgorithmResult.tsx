@@ -70,7 +70,7 @@ export const RunAlgorithmsResult = () => {
   const copyOutput = () => {
     navigator.clipboard.writeText(result.output);
   }
-  
+
 
   return (
     <>
@@ -203,7 +203,7 @@ export const RunAlgorithmsResult = () => {
         }}
       >
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Grid item xs={2} sm={4} md={4} >
+          <Grid item xs={12} sm={4} md={4} >
             <Box
               sx={{
                 justifyContent: "center",
@@ -224,13 +224,19 @@ export const RunAlgorithmsResult = () => {
                   marginTop: 2,
                 }}
               >
-                <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "bold"
+                  }}
+                >
                   Set other backend and algorithm
                 </Typography>
               </Button>
             </Box>
           </Grid>
-          <Grid item xs={2} sm={4} md={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Box
               sx={{
                 justifyContent: "center",
@@ -240,7 +246,7 @@ export const RunAlgorithmsResult = () => {
             >
               <Button
                 tabIndex={0}
-                aria-label='Set other backend and algorithm'
+                aria-label='Clear execution data'
                 onClick={clearExecutionDataFunction}
                 variant="contained"
                 sx={{
@@ -251,13 +257,19 @@ export const RunAlgorithmsResult = () => {
                   marginTop: 2,
                 }}
               >
-                <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "bold"
+                  }}
+                >
                   Clear execution data
                 </Typography>
               </Button>
             </Box>
           </Grid>
-          <Grid item xs={2} sm={4} md={4}>
+          <Grid item xs={12} sm={4} md={4}>
             <Box
               sx={{
                 justifyContent: "center",
@@ -267,7 +279,7 @@ export const RunAlgorithmsResult = () => {
             >
               <Button
                 tabIndex={0}
-                aria-label='Set other backend and algorithm'
+                aria-label='Copy output to clipboard'
                 onClick={copyOutput}
                 variant="contained"
                 sx={{
@@ -278,7 +290,13 @@ export const RunAlgorithmsResult = () => {
                   marginTop: 2,
                 }}
               >
-                <Typography sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontFamily: '"Helvetica Neue"',
+                    fontWeight: "bold"
+                  }}
+                >
                   Copy output to clipboard
                 </Typography>
               </Button>
