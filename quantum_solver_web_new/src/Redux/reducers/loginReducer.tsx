@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from '../actions/typeActions';
+// type actions import 
+import { 
+  LOGIN_SUCCESS, 
+  LOGIN_FAILED,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from '../actions/typeActions';
 
 export const default_login_state = {
   guest: true,
@@ -24,6 +30,22 @@ const login_reducer = (state = default_login_state, action: { type: string, mode
         guest: mode,
         isToken: false,
         flagError: "error",
+        token: "",
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        guest: "",
+        isToken: false,
+        flagError: "none",
+        token: "",
+      };
+    case LOGOUT_FAILED:
+      return {
+        ...state,
+        guest: "",
+        isToken: false,
+        flagError: "none",
         token: "",
       };
     default:

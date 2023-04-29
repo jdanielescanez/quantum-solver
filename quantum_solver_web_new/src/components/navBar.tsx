@@ -13,15 +13,26 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 //action
 import setDrawer from '../Redux/actions/setDrawerActions';
+import {
+  set_theme_dark_action,
+  set_theme_light_action
+} from '../Redux/actions/themeMode';
+
+import {
+  logout
+} from '../Redux/actions/LoginActions'
 
 //icons
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedICon from '@mui/icons-material/DarkModeOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 // assets
 import LightLogo from '../assets/LightLogo192.png';
 import DarkLogo from '../assets/DarkLogo192.png';
-import { set_theme_dark_action, set_theme_light_action } from '../Redux/actions/themeMode';
+
+
+
 
 const drawerWidth = 240;
 
@@ -54,6 +65,9 @@ export default function ButtonAppBar() {
 
   const paletteMode = theme.palette.mode;
   const open = useSelector((state: any) => state.drawer_reducer.open);
+
+  const { token } = useSelector((state: any) => state.login_reducer)
+  const { isToken } = useSelector((state: any) => state.login_reducer)
 
   let logo;
   paletteMode === "dark" ? (
@@ -142,6 +156,26 @@ export default function ButtonAppBar() {
               <LightModeOutlinedIcon />
             )}
           </IconButton>
+
+          {
+            isToken ?
+              <Box
+                display="flex"
+                sx={{ justifyItems: "right", marginLeft: "1em" }}
+              >
+                <IconButton
+                  tabIndex={0}
+                  aria-label='Button to Logout'
+                  onClick={() => {
+                    dispatch(logout(token));
+                    navigate("/login")
+                  }}>
+                  <LogoutOutlinedIcon />
+                </IconButton>
+              </Box>
+              :
+              null
+          }
         </Box>
       </Toolbar>
     </AppBar>

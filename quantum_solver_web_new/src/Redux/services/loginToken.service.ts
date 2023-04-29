@@ -10,8 +10,15 @@ const loginToken = (token: string, guest_mode_flag: boolean) => {
   })
 }
 
+const logout = (token: string) => {
+  return axios.post(API_URL + 'logout', {
+    token: token
+  })
+}
+
 const loginService = {
-  loginToken
+  loginToken,
+  logout,
 }
 
 export default loginService;

@@ -1,4 +1,9 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED } from './typeActions';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT_FAILED,
+  LOGOUT_SUCCESS
+} from './typeActions';
 import loginService from '../services/loginToken.service';
 import { Dispatch } from 'redux';
 
@@ -30,3 +35,28 @@ export const login = (token: string, guest_mode_flag: boolean): any => (dispatch
   );
 }
 
+export const logout = (token: string): any => (dispatch: Dispatch): any => {
+  return loginService.logout(token).then(
+    (response) => {
+      if (response.data.err) {
+        dispatch({
+          type: LOGOUT_FAILED,
+          payload: response.data
+        });
+        return Promise.reject();
+      } else {
+        dispatch({
+          type: LOGOUT_SUCCESS,
+          payload: response.data
+        });
+        return Promise.resolve();
+      }
+    }, (error) => {
+      dispatch({
+        type: LOGOUT_FAILED,
+        payload: error
+      });
+      return Promise.reject();
+    }
+  );
+}

@@ -6,6 +6,10 @@ export const THEME_DARK = '@THEME/DARK';
 export const LOGIN_SUCCESS = '@LOGIN/SUCCESS';
 export const LOGIN_FAILED = '@LOGIN/FAILED';
 
+// Logout Token Type Actions.
+export const LOGOUT_SUCCESS = '@LOGOUT/SUCCESS';
+export const LOGOUT_FAILED = '@LOGOUT/FAILED';
+
 // Get Algorithms information Type Actions.
 export const GET_ALGORITHMS_SUCCESS = '@GET_ALGORITHMS/SUCCESS';
 export const GET_ALGORITHMS_FAILED = '@GET_ALGORITHMS/FAILED';

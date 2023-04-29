@@ -154,6 +154,18 @@ def set_algorithm():
     print('Exception:', exception)
     return {'msg': 'Invalid algorithm with id: "' + str(algorithm_id) + '". Try Again', 'err': True}
 
+@app.route('/logout', methods=['POST'])
+def logout():
+  token = request.json['token']
+  hashed_token = hashlib.md5(token.encode()).hexdigest()
+  valid_token = hashed_token in app.config['USERS'].keys()
+  if valid_token:
+    app.config['USERS'].pop(hashed_token)
+    return {'msg': 'Logout: ' + token, 'err': not valid_token}
+  else:
+    return {'msg': 'Invalid token: "' + token + '". Try Again', 'err': not valid_token}
+
+
 @app.route('/set-params-values', methods=['POST'])
 def set_params_values():
   token = request.headers.get('token')
@@ -224,3 +236,5 @@ scheduler.start()
 if __name__ == "__main__":
   app.config['USERS'] = {}
   app.run(debug=True)
+
+
