@@ -1,13 +1,10 @@
 //redux-react 
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 //MUI imports
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -19,7 +16,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useTheme } from '@mui/material';
 
 //Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 // import actions
 import {
@@ -49,11 +46,6 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
-
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
-  const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
-  const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900]
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
 
   const params_value: any = [''];
 
@@ -101,13 +93,16 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
               }}>
               <Typography
                 tabIndex={0}
-                variant="h3"
+                variant={themeFormat("titleh3")}
                 component="p"
                 sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "bold"
-                }}>
-                Set Parameters:
+                  fontFamily: themeFormat("titleFontFamily"),
+                  fontWeight: themeFormat("textFontWeight"),
+                  textAlign: "left",
+                }}
+
+              >
+                Set Parameters
               </Typography>
             </Box>
             <Box sx={{
@@ -135,15 +130,15 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                         <div key={i}>
                           <Typography
                             tabIndex={0}
-                            variant="body1"
+                            variant={themeFormat("textSize")}
                             component="p"
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "italic",
+                              fontFamily: themeFormat("textFontFamily"),
+                              fontWeight: themeFormat("textFontWeight"),
                               marginTop: 1,
                               marginBottom: 3,
                             }}>
-                            Insert param {i + 1} :
+                            Insert param {i + 1}:
                           </Typography>
                           <TextField
                             aria-label={item.description}
@@ -157,11 +152,62 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                             helperText={item.constraint}
                             sx={{
                               width: "100%",
+                              fontFamily: themeFormat("textFontFamily"),
+                              fontWeight: themeFormat("textFontWeight")
                             }}
                           />
                         </div>
                       );
                     })
+                  }
+
+                  {
+                    err && msg !== "" && runMode === "None" ?
+                      <Box
+                        sx={{
+                          justifyContent: "center",
+                          alignContent: "center",
+                          display: "flex",
+                          marginTop: 2,
+                          marginBottom: 2,
+                        }}>
+                        <Alert severity="error"
+                          variant={themeFormat("alertVariant")}
+                          sx={{
+                            fontFamily: themeFormat("alertsFontFamily"),
+                            fontWeight: themeFormat("alertsFontWeight"),
+                            color: themeFormat("error"),
+                          }}
+                        >
+                          {msg}
+                        </Alert>
+                      </Box>
+                      :
+                      null
+                  }
+                  {
+                    err == false && msg !== "" && runMode === "None" ?
+                      <Box
+                        sx={{
+                          justifyContent: "center",
+                          alignContent: "center",
+                          display: "flex",
+                          marginTop: 2,
+                          marginBottom: 2,
+                        }}>
+                        <Alert severity="success"
+                          variant={themeFormat("alertVariant")}
+                          sx={{
+                            fontFamily: themeFormat("alertsFontFamily"),
+                            fontWeight: themeFormat("alertsFontWeight"),
+                            color: themeFormat("success"),
+                          }}
+                        >
+                          {msg}
+                        </Alert>
+                      </Box>
+                      :
+                      null
                   }
 
                   <Stack>
@@ -175,24 +221,25 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                     >
                       <Button
                         tabIndex={0}
-                        aria-label='Set Params'
+                        aria-label='Submit Parameters'
                         type='submit'
                         variant="contained"
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: colorButton,
+                          backgroundColor: themeFormat("colorButton"),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
+                          variant={themeFormat("textButton")}
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "bold"
+                            fontFamily: themeFormat("buttonFontFamily"),
+                            fontWeight: themeFormat("buttonFontWeight")
                           }}
                         >
-                          Set Params
+                          Submit
                         </Typography>
                       </Button>
                     </Box>
@@ -213,14 +260,15 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       >
                         <Typography
                           tabIndex={0}
-                          variant="body1"
+                          variant={themeFormat("textSize")}
                           component="p"
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "italic",
+                            fontFamily: themeFormat("textFontFamily"),
+                            fontWeight: themeFormat("textFontWeight"),
                             marginTop: 2,
                             marginBottom: 1,
-                          }}>
+                          }}
+                        >
                           OR
                         </Typography>
                       </Box>
@@ -233,120 +281,117 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       >
                         <Button
                           tabIndex={0}
-                          aria-label='Set other backend and algorithm'
+                          aria-label='Go back and set other backend and algorithm'
                           onClick={clearData}
                           variant="contained"
                           sx={{
-                            width: "100%",
                             borderRadius: 3,
-                            backgroundColor: colorButton,
+                            backgroundColor: themeFormat("colorButton"),
                             justifyContent: "center",
                             marginTop: 1,
                           }}
                         >
                           <Typography
                             component="span"
+                            variant={themeFormat("textButton")}
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "bold"
+                              fontFamily: themeFormat("buttonFontFamily"),
+                              fontWeight: themeFormat("buttonFontWeight")
                             }}
                           >
-                            Set other backend and algorithm
+                            Go back
                           </Typography>
                         </Button>
                       </Box>
                     </>
                 }
-
               </Stack>
-            </Box>
-            <Box
-              sx={{
-                padding: 2,
-                justifyContent: "center",
-                display: "flex",
-              }}>
-              <Typography
-                tabIndex={0}
-                variant="body1"
-                component="p"
-                sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "bold"
-                }}
-              >
-                You can see all the information on how the algorithms works on&nbsp;
-                <Typography
-                  tabIndex={0}
-                  variant='body1'
-                  color={colorLinks}
-                  aria-label="link to Run Algorithms page"
-                  component={Link} to='/algorithms'
-                  sx={{
-                    textDecoration: "underline",
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "italic",
-                  }}>
-                  Algorithm Information.
-                </Typography>
-              </Typography>
             </Box>
           </>
           :
           null
       }
-
-      {
-        err && msg !== "" && runMode === "None" ?
-          <Box
-            sx={{
-              justifyContent: "center",
-              alignContent: "center",
-              display: "flex",
-              marginTop: 2,
-              marginBottom: 2,
-            }}>
-            <Alert severity="error"
-              variant="filled"
-              sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold",
-
-              }}
-            >
-              {msg}
-            </Alert>
-          </Box>
-          :
-          null
-      }
-      {
-        err == false && msg !== "" && runMode === "None" ?
-          <Box
-            sx={{
-              justifyContent: "center",
-              alignContent: "center",
-              display: "flex",
-              marginTop: 2,
-              marginBottom: 2,
-            }}>
-            <Alert severity="success"
-              variant="filled"
-              sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold",
-              }}
-            >
-              {msg}
-            </Alert>
-          </Box>
-          :
-          null
-      }
-
       {
         err == false && msg !== "" && runMode === "None" ?
           <>
+            <Box
+              sx={{
+                width: "100%",
+                justifyContent: "center",
+                alignContent: "center",
+                display: "flex",
+                marginTop: 4,
+              }}>
+              <Stack
+                sx={{
+                  width: "40%",
+                }}>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={12} md={6}>
+                    <Box
+                      sx={{
+                        justifyContent: "center",
+                        display: "flex",
+                      }}>
+                      <Button
+                        tabIndex={0}
+                        aria-label='Run Simple Execution'
+                        onClick={runNormal}
+                        variant="contained"
+                        sx={{
+                          borderRadius: 3,
+                          backgroundColor: themeFormat("colorButton"),
+                          justifyContent: "center",
+                          marginTop: 2,
+                        }}
+                      >
+                        <Typography
+                          component="span"
+                          variant={themeFormat("textButton")}
+                          sx={{
+                            fontFamily: themeFormat("buttonFontFamily"),
+                            fontWeight: themeFormat("buttonFontWeight")
+                          }}
+                        >
+                          Simple Execution
+                        </Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6}>
+                    <Box
+                      sx={{
+                        justifyContent: "center",
+                        display: "flex",
+                      }}>
+                      <Button
+                        tabIndex={0}
+                        aria-label='Run Experimental Mode'
+                        onClick={runExperimental}
+                        variant="contained"
+                        sx={{
+                          borderRadius: 3,
+                          backgroundColor: themeFormat("colorButton"),
+                          justifyContent: "center",
+                          marginTop: 2,
+                        }}
+                      >
+                        <Typography
+                          component="span"
+                          variant={themeFormat("textButton")}
+                          sx={{
+                            fontFamily: themeFormat("buttonFontFamily"),
+                            fontWeight: themeFormat("buttonFontWeight")
+                          }}
+                        >
+                          Experimental Mode
+                        </Typography>
+                      </Button>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Stack>
+            </Box>
             <Box
               sx={{
                 width: "100%",
@@ -357,119 +402,51 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
             >
               <Typography
                 tabIndex={0}
-                variant="body1"
+                variant={themeFormat("textSize")}
                 component="p"
                 sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "italic",
+                  fontFamily: themeFormat("textFontFamily"),
+                  fontWeight: themeFormat("textFontWeight"),
                   marginTop: 2,
                   marginBottom: 2,
-                }}>
+                }}
+
+              >
                 OR
               </Typography>
             </Box>
 
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid item xs={12} sm={4} md={4} >
-                <Box
+            <Box
+              sx={{
+                justifyContent: "center",
+                alignContent: "center",
+                display: "flex"
+              }}
+            >
+              <Button
+                tabIndex={0}
+                aria-label='Go back and set other backend and algorithm'
+                onClick={clearData}
+                variant="contained"
+                sx={{
+                  borderRadius: 3,
+                  backgroundColor: themeFormat("colorButton"),
+                  justifyContent: "center",
+                  marginTop: 2,
+                }}
+              >
+                <Typography
+                  component="span"
+                  variant={themeFormat("textButton")}
                   sx={{
-                    justifyContent: "center",
-                    alignContent: "center",
-                    display: "flex"
+                    fontFamily: themeFormat("buttonFontFamily"),
+                    fontWeight: themeFormat("buttonFontWeight")
                   }}
                 >
-                  <Button
-                    tabIndex={0}
-                    aria-label='Set other backend and algorithm'
-                    onClick={clearData}
-                    variant="contained"
-                    sx={{
-                      width: "100%",
-                      borderRadius: 3,
-                      backgroundColor: colorButton,
-                      justifyContent: "center",
-                      marginTop: 2,
-                    }}
-                  >
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold"
-                      }}
-                    >
-                      Set other backend and algorithm
-                    </Typography>
-                  </Button>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={4} md={4}>
-                <Box
-                  sx={{
-                    justifyContent: "center",
-                    alignContent: "center",
-                    display: "flex"
-                  }}
-                >
-                  <Button
-                    tabIndex={0}
-                    aria-label='Run Simple Execution'
-                    onClick={runNormal}
-                    variant="contained"
-                    sx={{
-                      width: "100%",
-                      borderRadius: 3,
-                      backgroundColor: colorButton,
-                      justifyContent: "center",
-                      marginTop: 2,
-                    }}
-                  >
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold"
-                      }}
-                    >
-                      Simple Execution
-                    </Typography>
-                  </Button>
-                </Box>
-              </Grid>
-              <Grid item xs={12} sm={4} md={4}>
-                <Box
-                  sx={{
-                    justifyContent: "center",
-                    alignContent: "center",
-                    display: "flex"
-                  }}
-                >
-                  <Button
-                    tabIndex={0}
-                    aria-label='Run Experimental Mode'
-                    onClick={runExperimental}
-                    variant="contained"
-                    sx={{
-                      width: "100%",
-                      borderRadius: 3,
-                      backgroundColor: colorButton,
-                      justifyContent: "center",
-                      marginTop: 2,
-                    }}
-                  >
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold"
-                      }}
-                    >
-                      Experimental Mode
-                    </Typography>
-                  </Button>
-                </Box>
-              </Grid>
-            </Grid>
+                  Go back
+                </Typography>
+              </Button>
+            </Box>
             <Box
               sx={{
                 padding: "2%",
@@ -480,7 +457,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 sx={{
                   borderRadius: 2,
                   padding: "2%",
-                  bgcolor: theme.palette.mode === 'dark' ? colorTarjeta : colorTrajetaLight,
+                  bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
                 }}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -489,14 +466,15 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 >
                   <Typography
                     tabIndex={0}
-                    variant="body1"
-                    component="p"
                     justifyContent="left"
+                    variant={themeFormat("textSize")}
+                    component="p"
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "italic",
+                      fontFamily: themeFormat("textFontFamily"),
+                      fontWeight: themeFormat("textFontWeight"),
                       marginLeft: "1em"
-                    }}>
+                    }}
+                  >
                     What is the difference between the Simple Execution and the Experimental Mode?
                   </Typography>
                 </AccordionSummary>
@@ -510,14 +488,15 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                     }}>
                     <Typography
                       tabIndex={0}
-                      variant="body1"
-                      component="p"
                       justifyContent="left"
+                      variant={themeFormat("textSize")}
+                      component="p"
                       sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "italic",
+                        fontFamily: themeFormat("textFontFamily"),
+                        fontWeight: themeFormat("textFontWeight"),
                         marginLeft: "1em"
-                      }}>
+                      }}
+                    >
                       Performing the simple execution of an algorithm refers to running it only once, obtaining
                       the result and a graphical representation of the circuit.
                       <br></br>

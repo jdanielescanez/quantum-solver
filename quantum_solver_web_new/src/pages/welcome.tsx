@@ -19,12 +19,10 @@ import LightLogo from '../assets/LightLogo192.png';
 import DarkLogo from '../assets/DarkLogo192.png';
 
 // Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
-
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 export const Welcome = () => {
   const theme = useTheme();
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
   let logo;
   theme.palette.mode === "dark" ? (
     logo = DarkLogo
@@ -34,11 +32,11 @@ export const Welcome = () => {
   return (
     <main className="WelcomePage">
       <Banner />
-      <Container 
-        sx={{ 
-          marginY: 5, 
+      <Container
+        sx={{
+          marginY: 5,
           marginBottom: "1em",
-          }}>
+        }}>
         <Box
           display="flex"
           justifyContent="center"
@@ -50,9 +48,18 @@ export const Welcome = () => {
             component="img"
             marginRight="10px"
             sx={{
-              height: '3rem',
+              height: '3.5rem',
+              [theme.breakpoints.down("lg")]: {
+                height: '3rem',
+              },
+              [theme.breakpoints.down("md")]: {
+                height: '3rem',
+              },
               [theme.breakpoints.down("sm")]: {
-                height: '2rem',
+                height: '3rem',
+              },
+              [theme.breakpoints.down("xs")]: {
+                height: '1rem',
               }
             }}
             alt="Quantum Solver Logo"
@@ -60,9 +67,12 @@ export const Welcome = () => {
           />
           <Typography
             tabIndex={0}
-            variant='h1'
+            variant={themeFormat("titleh2")}
             component="h2"
-            sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}
+            sx={{
+              fontFamily: themeFormat("titleFontFamily"),
+              fontWeight: themeFormat("titleFontWeight")
+            }}
           >
             Quantum Solver
           </Typography>
@@ -73,9 +83,12 @@ export const Welcome = () => {
           sx={{ flexGrow: 1, marginTop: 2 }}>
           <Typography
             tabIndex={0}
-            variant='body1'
+            variant={themeFormat("textSize")}
             component="p"
-            sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}
+            sx={{
+              fontFamily: themeFormat("textFontFamily"),
+              fontWeight: themeFormat("textFontWeight")
+            }}
           >
             <b>Open source</b>  quantum library based on <b>Qiskit</b>
           </Typography>
@@ -86,9 +99,12 @@ export const Welcome = () => {
           sx={{ flexGrow: 1 }}>
           <Typography
             tabIndex={0}
-            variant='body1'
+            variant={themeFormat("textSize")}
             component="p"
-            sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}
+            sx={{
+              fontFamily: themeFormat("textFontFamily"),
+              fontWeight: themeFormat("textFontWeight")
+            }}
           >
             Use it to simulate <b>quantum algorithms</b> and see their results
           </Typography>
@@ -109,18 +125,20 @@ export const Welcome = () => {
             variant="contained"
             size="large"
             sx={{
-              backgroundColor: colorButton,
+              backgroundColor: themeFormat("colorButton"),
               borderRadius: 30,
               textAlign: "center"
             }}
           >
-            <Typography 
+            <Typography
               component="span"
-              sx={{ 
-                fontFamily: '"Helvetica Neue"', 
-                fontWeight: "bold" 
-              }}>
-              <RocketIcon sx={{justifyItems: "center"}}> </RocketIcon> <br></br>
+              variant={themeFormat("textButton")}
+              sx={{
+                fontFamily: themeFormat("buttonFontFamily"),
+                fontWeight: themeFormat("buttonFontWeight")
+              }}
+            >
+              <RocketIcon sx={{ justifyItems: "center" }}> </RocketIcon> <br></br>
               Start
             </Typography>
           </Button>

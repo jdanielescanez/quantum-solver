@@ -10,12 +10,9 @@ import { useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 // function imports
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 export const BreadCrumbsComponent = (routes: any) => {
-  const theme = useTheme();
-  const color = colorTokens(theme.palette.mode).primary[100];
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
 
   const nameMap: {
     [key: string]: string;
@@ -52,29 +49,33 @@ export const BreadCrumbsComponent = (routes: any) => {
           <Breadcrumbs tabIndex={0} separator="›" aria-label="breadcrumb">
             <Typography
               tabIndex={0}
-              variant='body1'
-              color={colorLinks}
               aria-label="link to home page"
               component={Link} to='/'
+              variant={themeFormat("titleh4")}
+              color={themeFormat("colorLinks")}
               sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "italic"
-              }}>
+                textDecoration: themeFormat("linksDecoration"),
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("textFontWeight"),
+              }}
+            >
               Home
             </Typography>
             {
-              routes.routes.map((route: string, i:number) => (
+              routes.routes.map((route: string, i: number) => (
                 <Typography
                   key={"breadcrumbs" + i}
                   tabIndex={0}
-                  variant='body1'
-                  color={colorLinks}
                   aria-label={"link to " + nameMap[route] + " page"}
                   component={Link} to={route}
+                  variant={themeFormat("titleh4")}
+                  color={themeFormat("colorLinks")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "italic"
-                  }}>
+                    textDecoration: themeFormat("linksDecoration"),
+                    fontFamily: themeFormat("titleFontFamily"),
+                    fontWeight: themeFormat("textFontWeight"),
+                  }}
+                >
                   {nameMap[route]}
                 </Typography>
               ))

@@ -21,7 +21,7 @@ import { Link as linkMui } from '@mui/material';
 import { useTheme } from '@mui/material'
 
 // Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 // components Import 
 import { BreadCrumbsComponent } from '../components/breadCrumbs'
@@ -36,10 +36,6 @@ import DarkLogo from '../assets/DarkLogo192.png';
 export const Login = () => {
   const theme = useTheme();
 
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
-  const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
-  const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900];
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
   const { isToken } = useSelector((state: any) => state.login_reducer)
 
   let logo;
@@ -119,10 +115,13 @@ export const Login = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant="h2"
-                  component="h2"
                   align="center"
-                  sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold" }}
+                  variant={themeFormat("titleh2")}
+                  component="h2"
+                  sx={{
+                    fontFamily: themeFormat("titleFontFamily"),
+                    fontWeight: themeFormat("titleFontWeight")
+                  }}
                 >
                   Login Page
                 </Typography>
@@ -134,21 +133,26 @@ export const Login = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant="body1"
+                  variant={themeFormat("textSize")}
                   component="p"
-                  sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}>
+                  sx={{
+                    fontFamily: themeFormat("textFontFamily"),
+                    fontWeight: themeFormat("textFontWeight")
+                  }}
+                >
                   Enter your&nbsp;
                   <Typography
                     tabIndex={0}
-                    variant='body1'
-                    color={colorLinks}
                     aria-label="IBM token Information link"
-                    component={linkMui} href='https://quantum-computing.ibm.com/composer/docs/iqx/manage/account/'
+                    component={linkMui} href='https://quantum-computing.ibm.com/composer/docs/iqx/manage/account/' target="_blank"
+                    variant={themeFormat("textSize")}
+                    color={themeFormat("colorLinks")}
                     sx={{
-                      textDecoration: "underline",
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "italic",
-                    }}>
+                      textDecoration: themeFormat("linksDecoration"),
+                      fontFamily: themeFormat("textFontFamily"),
+                      fontWeight: themeFormat("linkFontWeight"),
+                    }}
+                  >
                     IBM Token
                   </Typography>
                   &nbsp;to login
@@ -170,30 +174,34 @@ export const Login = () => {
                   error={tokenError !== ""}
                   helperText={tokenError}
                   sx={{
-                    width: "100%"
+                    width: "100%",
+                    fontFamily: themeFormat("textFontFamily"),
                   }}
                 />
                 {flagError === "none" && guest === false &&
                   <Alert
-                    sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold",
-                      color: "white"
-                    }}
                     severity="success"
-                    variant="filled">
-                    {"Valid Token 😄"}
+                    variant={themeFormat("alertVariant")}
+                    sx={{
+                      fontFamily: themeFormat("alertsFontFamily"),
+                      fontWeight: themeFormat("alertsFontWeight"),
+                      color: themeFormat("success"),
+                    }}
+                  >
+                    {"Valid token 😄"}
                   </Alert>
                 }
                 {flagError === "error" &&
                   <Alert
-                    sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold",
-                    }}
                     severity="error"
-                    variant="filled">
-                    {"Invalid Token. Try Again 😞"}
+                    variant={themeFormat("alertVariant")}
+                    sx={{
+                      fontFamily: themeFormat("alertsFontFamily"),
+                      fontWeight: themeFormat("alertsFontWeight"),
+                      color: themeFormat("error"),
+                    }}
+                  >
+                    {"Invalid token. Try again 😞"}
                   </Alert>
                 }
                 <Box
@@ -208,16 +216,17 @@ export const Login = () => {
                     variant="contained"
                     sx={{
                       borderRadius: 3,
-                      backgroundColor: colorButton,
+                      backgroundColor: themeFormat("colorButton"),
                       justifyContent: "center",
                       marginTop: 2,
                     }}
                   >
                     <Typography
                       component="span"
+                      variant={themeFormat("textButton")}
                       sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold"
+                        fontFamily: themeFormat("buttonFontFamily"),
+                        fontWeight: themeFormat("buttonFontWeight")
                       }}
                     >
                       let's go
@@ -231,9 +240,13 @@ export const Login = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant="body1"
+                  variant={themeFormat("textSize")}
                   component="p"
-                  sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "italic" }}>
+                  sx={{
+                    fontFamily: themeFormat("textFontFamily"),
+                    fontWeight: themeFormat("textFontWeight")
+                  }}
+                >
                   OR
                 </Typography>
               </Box>
@@ -245,38 +258,40 @@ export const Login = () => {
                 <Button
                   tabIndex={0}
                   aria-label='submit button to login as guest'
-                  variant="contained"
-                  sx={{
-                    borderRadius: 3,
-                    backgroundColor: colorButton,
-                    justifyContent: "center",
-                  }}
                   onClick={() => {
                     if (!isToken) {
                       dispatch(login("", true))
                     }
                   }}
+                  variant="contained"
+                  sx={{
+                    borderRadius: 3,
+                    backgroundColor: themeFormat("colorButton"),
+                    justifyContent: "center",
+                  }}
                 >
                   <Typography
-                    variant='body1'
                     component="span"
+                    variant={themeFormat("textButton")}
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold"
-                    }}>
+                      fontFamily: themeFormat("buttonFontFamily"),
+                      fontWeight: themeFormat("buttonFontWeight")
+                    }}
+                  >
                     continue as guest
                   </Typography>
                 </Button>
               </Box>
               {flagError === "none" && guest === true &&
                 <Alert
-                  sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "bold",
-                    color: "white"
-                  }}
                   severity="success"
-                  variant="filled">
+                  variant={themeFormat("alertVariant")}
+                  sx={{
+                    fontFamily: themeFormat("alertsFontFamily"),
+                    fontWeight: themeFormat("alertsFontWeight"),
+                    color: themeFormat("success"),
+                  }}
+                >
                   {"Valid Guest mode Login 😄"}
                 </Alert>
               }
@@ -292,19 +307,31 @@ export const Login = () => {
                   display: "flex",
                   marginBottom: "1em",
                 }}>
-                <Stack>
+                <Stack
+                  sx={{
+                    width: "40%"
+                  }}
+                >
                   <Typography
                     tabIndex={0}
-                    variant="h5"
+                    variant={themeFormat("titleh5")}
                     component="p"
-                    sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "bold", marginBottom: "1em" }}>
+                    sx={{
+                      fontFamily: themeFormat("titleFontFamily"),
+                      fontWeight: themeFormat("titleFontWeight"),
+                      textAlign: "center",
+                      marginBottom: "1em",
+                    }}
+                  >
                     Now you can check:
                   </Typography>
-                  <Grid container spacing={2}>
+                  <Grid container spacing={1}>
                     <Grid item xs={12} sm={6}>
                       <Box
                         sx={{
                           justifyContent: "center",
+                          alignContent: "center",
+                          justifyItems: "center",
                           display: "flex",
                         }}>
                         <Button
@@ -313,7 +340,7 @@ export const Login = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: colorButton,
+                            backgroundColor: themeFormat("colorButton"),
                             justifyContent: "center",
                           }}
                           onClick={() => {
@@ -321,12 +348,13 @@ export const Login = () => {
                           }}
                         >
                           <Typography
-                            variant='body1'
-                            component='span'
+                            component="span"
+                            variant={themeFormat("textButton")}
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "bold"
-                            }}>
+                              fontFamily: themeFormat("buttonFontFamily"),
+                              fontWeight: themeFormat("buttonFontWeight")
+                            }}
+                          >
                             Algorithms Information
                           </Typography>
                         </Button>
@@ -336,6 +364,8 @@ export const Login = () => {
                       <Box
                         sx={{
                           justifyContent: "center",
+                          alignContent: "center",
+                          justifyItems: "center",
                           display: "flex",
                         }}>
                         <Button
@@ -344,7 +374,7 @@ export const Login = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: colorButton,
+                            backgroundColor: themeFormat("colorButton"),
                             justifyContent: "center",
                           }}
                           onClick={() => {
@@ -352,12 +382,13 @@ export const Login = () => {
                           }}
                         >
                           <Typography
-                            variant='body1'
-                            component='span'
+                            component="span"
+                            variant={themeFormat("textButton")}
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "bold"
-                            }}>
+                              fontFamily: themeFormat("buttonFontFamily"),
+                              fontWeight: themeFormat("buttonFontWeight")
+                            }}
+                          >
                             Run Algorithms
                           </Typography>
                         </Button>
@@ -378,7 +409,7 @@ export const Login = () => {
               sx={{
                 borderRadius: 2,
                 padding: "2%",
-                bgcolor: theme.palette.mode === 'dark' ? colorTarjeta : colorTrajetaLight,
+                bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
               }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -387,14 +418,15 @@ export const Login = () => {
               >
                 <Typography
                   tabIndex={0}
-                  variant="body1"
+                  variant={themeFormat("textSize")}
                   component="p"
                   justifyContent="left"
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "italic",
+                    fontFamily: themeFormat("textFontFamily"),
+                    fontWeight: themeFormat("textFontWeight"),
                     marginLeft: "1em"
-                  }}>
+                  }}
+                >
                   What is the difference between login and guest mode? What is an IBM token?
                 </Typography>
               </AccordionSummary>
@@ -408,28 +440,30 @@ export const Login = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant="body1"
+                    variant={themeFormat("textSize")}
                     component="p"
                     justifyContent="left"
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "italic",
+                      fontFamily: themeFormat("textFontFamily"),
+                      fontWeight: themeFormat("textFontWeight"),
                       marginLeft: "1em"
-                    }}>
+                    }}
+                  >
                     Authentication against IBM services, which provide access to real quantum
                     hardware and simulators, is done through an "IBM Quantum Experience" API token.
                     You can access your API token or generate another one on the&nbsp;
                     <Typography
                       tabIndex={0}
-                      variant='body1'
-                      color={colorLinks}
                       aria-label="IBM login page link"
-                      component={linkMui} href='https://quantum-computing.ibm.com/account'
+                      component={linkMui} href='https://quantum-computing.ibm.com/account' target="_blank"
+                      variant={themeFormat("textSize")}
+                      color={themeFormat("colorLinks")}
                       sx={{
-                        textDecoration: "underline",
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "italic",
-                      }}>
+                        textDecoration: themeFormat("linksDecoration"),
+                        fontFamily: themeFormat("textFontFamily"),
+                        fontWeight: themeFormat("linkFontWeight"),
+                      }}
+                    >
                       IBM login page.
                     </Typography>
                   </Typography>
@@ -444,14 +478,15 @@ export const Login = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant="body1"
+                    variant={themeFormat("textSize")}
                     component="p"
                     justifyContent="left"
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "italic",
+                      fontFamily: themeFormat("textFontFamily"),
+                      fontWeight: themeFormat("textFontWeight"),
                       marginLeft: "1em"
-                    }}>
+                    }}
+                  >
                     There is also a guest mode that allows you to access the platform without
                     an IBM Quantum account. In this mode you are only allowed to run algorithms using
                     "aer_simulator", so it will not be possible to use the real quantum hardware provided by IBM.

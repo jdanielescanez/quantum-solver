@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material';
 
 // fuction
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 // import actions
 import {
@@ -42,10 +42,6 @@ export const RunAlgorithmsResult = () => {
   const current_params = useSelector((state: any) => state.runAlgorithms_reducer.currentParams.msg);
 
   // Colors
-  const colorTarjeta = colorTokens(theme.palette.mode).grey[800];
-  const colorTrajetaLight = colorTokens(theme.palette.mode).grey[900];
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
 
   const dispatch = useDispatch();
 
@@ -81,19 +77,19 @@ export const RunAlgorithmsResult = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            marginTop: '2rem',
-            marginBottom: '1rem',
+            marginBottom: 'italic',
           }}
         >
           <Typography
             tabIndex={0}
-            variant="h3"
-            component="p"
+            variant={themeFormat("titleh3")}
+            component="h2"
             sx={{
-              fontFamily: '"Helvetica Neue"',
-              fontWeight: "bold",
-            }}>
-            Run result:
+              fontFamily: themeFormat("titleFontFamily"),
+              fontWeight: themeFormat("titleFontWeight"),
+            }}
+          >
+            Result
           </Typography>
         </Box>
         <Box
@@ -135,15 +131,18 @@ export const RunAlgorithmsResult = () => {
         >
           <Typography
             tabIndex={0}
+            aira-label={"Download resulting figure after execution of the algorithm " + current_algorithm}
             variant="h4"
             component="a"
             download={figure_name}
             href={imageBase64}
-            color={colorLinks}
+            color={themeFormat("colorLinks")}
             sx={{
-              fontFamily: '"Helvetica Neue"',
-              fontWeight: "italic",
-            }}>
+              textDecoration: themeFormat("linksDecoration"),
+              fontFamily: themeFormat("textFontFamily"),
+              fontWeight: themeFormat("linkFontWeight"),
+            }}
+          >
             Download figure here
           </Typography>
         </Box>
@@ -156,7 +155,7 @@ export const RunAlgorithmsResult = () => {
             sx={{
               borderRadius: 2,
               padding: "2%",
-              bgcolor: theme.palette.mode === 'dark' ? colorTarjeta : colorTrajetaLight,
+              bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
             }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -165,28 +164,30 @@ export const RunAlgorithmsResult = () => {
             >
               <Typography
                 tabIndex={0}
-                variant="body1"
-                component="p"
                 justifyContent="left"
+                variant={themeFormat("textSize")}
+                component="p"
                 sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "italic",
+                  fontFamily: themeFormat("textFontFamily"),
+                  fontWeight: themeFormat("textFontWeight"),
                   marginLeft: "1em"
-                }}>
+                }}
+              >
                 Output
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography
                 tabIndex={0}
-                variant="body1"
-                component="p"
                 justifyContent="left"
+                variant={themeFormat("textSize")}
+                component="p"
                 sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "italic",
+                  fontFamily: themeFormat("textFontFamily"),
+                  fontWeight: themeFormat("textFontWeight"),
                   marginLeft: "1em"
-                }}>
+                }}
+              >
                 {result.output}
               </Typography>
             </AccordionDetails>
@@ -213,25 +214,26 @@ export const RunAlgorithmsResult = () => {
             >
               <Button
                 tabIndex={0}
-                aria-label='Set other backend and algorithm'
+                aria-label='Go to set other backend and algorithm'
                 onClick={clearData}
                 variant="contained"
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: colorButton,
+                  backgroundColor: themeFormat("colorButton"),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
+                  variant={themeFormat("textButton")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "bold"
+                    fontFamily: themeFormat("buttonFontFamily"),
+                    fontWeight: themeFormat("buttonFontWeight"),
                   }}
                 >
-                  Set other backend and algorithm
+                  Change algorithm
                 </Typography>
               </Button>
             </Box>
@@ -246,25 +248,26 @@ export const RunAlgorithmsResult = () => {
             >
               <Button
                 tabIndex={0}
-                aria-label='Clear execution data'
+                aria-label='Change execution parameters'
                 onClick={clearExecutionDataFunction}
                 variant="contained"
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: colorButton,
+                  backgroundColor: themeFormat("colorButton"),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
+                  variant={themeFormat("textButton")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "bold"
+                    fontFamily: themeFormat("buttonFontFamily"),
+                    fontWeight: themeFormat("buttonFontWeight"),
                   }}
                 >
-                  Clear execution data
+                  Change parameters
                 </Typography>
               </Button>
             </Box>
@@ -285,16 +288,17 @@ export const RunAlgorithmsResult = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: colorButton,
+                  backgroundColor: themeFormat("colorButton"),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
+                  variant={themeFormat("textButton")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "bold"
+                    fontFamily: themeFormat("buttonFontFamily"),
+                    fontWeight: themeFormat("buttonFontWeight"),
                   }}
                 >
                   Copy output to clipboard

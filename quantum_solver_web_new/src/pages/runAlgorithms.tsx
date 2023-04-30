@@ -15,8 +15,11 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import { useTheme } from '@mui/material'
 
+//icons 
+import CircularProgress from '@mui/material/CircularProgress';
+
 //Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 //import actions
 import {
@@ -62,9 +65,6 @@ export const RunAlgorithms = () => {
   const navigate = useNavigate()
   const theme = useTheme();
 
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
-
   const { token } = useSelector((state: any) => state.login_reducer)
   const { isToken } = useSelector((state: any) => state.login_reducer)
 
@@ -78,8 +78,6 @@ export const RunAlgorithms = () => {
 
   const [nShots, setnShots] = React.useState('');
   const n_shots = useSelector((state: any) => state.runAlgorithms_reducer.n_shots);
-
-  console.log("n_shots", n_shots)
 
   const runMode = useSelector((state: any) => state.runAlgorithms_reducer.RunMode);
   const algorithmRun = useSelector((state: any) => state.runAlgorithms_reducer.RunAlgorithmData);
@@ -114,7 +112,7 @@ export const RunAlgorithms = () => {
     runExperimentalModeFunction(dispatch, token, Number(n_shots))
   }
 
-  const routesAlgorithmInfo = ['/algorithmsRun']
+  const routesAlgorithmInfo = ['/login', '/algorithmsRun']
 
   return (
     <div className="runAlgorithms">
@@ -133,6 +131,7 @@ export const RunAlgorithms = () => {
             padding: 1,
             margin: 2,
             borderRadius: 10,
+            minHeight: "60vh",
           }}
         >
           <Box
@@ -159,11 +158,11 @@ export const RunAlgorithms = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant="h2"
+                  variant={themeFormat("titleh2")}
                   component="h2"
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "bold",
+                    fontFamily: themeFormat("titleFontFamily"),
+                    fontWeight: themeFormat("titleFontWeight")
                   }}
                 >
                   Run Algorithms
@@ -185,17 +184,19 @@ export const RunAlgorithms = () => {
                         onClick={() => navigate('/login')}
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: colorButton,
+                          backgroundColor: themeFormat("colorButton"),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
+                          variant={themeFormat("textButton")}
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "bold",
-                          }}>
+                            fontFamily: themeFormat("buttonFontFamily"),
+                            fontWeight: themeFormat("buttonFontWeight")
+                          }}
+                        >
                           Go to Login Page
                         </Typography>
                       </Button>
@@ -207,11 +208,11 @@ export const RunAlgorithms = () => {
                         display: "flex",
                       }}>
                       <Alert severity="warning"
-                        variant="filled"
+                        variant={themeFormat("alertVariant")}
                         sx={{
-                          fontFamily: '"Helvetica Neue"',
-                          fontWeight: "bold",
-                          color: "black",
+                          fontFamily: themeFormat("alertsFontFamily"),
+                          fontWeight: themeFormat("alertsFontWeight"),
+                          color: themeFormat("warning"),
                         }}
                       >
                         {"You need to be logged in to run algorithms "}</Alert>
@@ -224,16 +225,31 @@ export const RunAlgorithms = () => {
                 isToken
                   && allBackends === "" && allAlgorithms === "" && allParams === "" ?
                   <>
-                    <Typography
-                      tabIndex={0}
-                      variant='h3'
-                      component="p"
+                    <Box
                       sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold"
+                        justifyContent: "center",
+                        alignContent: "center",
+                        display: "flex",
+                        marginTop: "2em",
+                        marginBottom: "2em",
                       }}>
-                      Loading...
-                    </Typography>
+                      <CircularProgress
+                        tabIndex={0}
+                        aria-label='loading data'
+                        color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+                      />
+                      <Typography
+                        tabIndex={0}
+                        variant={themeFormat("titleh3")}
+                        component="p"
+                        sx={{
+                          fontFamily: themeFormat("titleFontFamily"),
+                          fontWeight: themeFormat("titleFontWeight")
+                        }}
+                      >
+                        &nbsp;Loading...
+                      </Typography>
+                    </Box>
                   </>
                   :
                   null
@@ -252,25 +268,26 @@ export const RunAlgorithms = () => {
                       }}>
                       <Typography
                         tabIndex={0}
-                        variant="body1"
+                        variant={themeFormat("textSize")}
                         component="p"
                         sx={{
-                          fontFamily: '"Helvetica Neue"',
-                          fontWeight: "bold"
+                          fontFamily: themeFormat("textFontFamily"),
+                          fontWeight: themeFormat("textFontWeight")
                         }}
                       >
                         You can see all the information on how the algorithms works on&nbsp;
                         <Typography
                           tabIndex={0}
-                          variant='body1'
-                          color={colorLinks}
                           aria-label="link to Run Algorithms page"
                           component={Link} to='/algorithms'
+                          variant={themeFormat("textSize")}
+                          color={themeFormat("colorLinks")}
                           sx={{
-                            textDecoration: "underline",
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "italic",
-                          }}>
+                            textDecoration: themeFormat("linksDecoration"),
+                            fontFamily: themeFormat("textFontFamily"),
+                            fontWeight: themeFormat("linkFontWeight"),
+                          }}
+                        >
                           Algorithm Information.
                         </Typography>
                       </Typography>
@@ -296,15 +313,19 @@ export const RunAlgorithms = () => {
                   marginTop: "2em",
                   marginBottom: "2em"
                 }}>
+                  <CircularProgress
+                    color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+                  />
                   <Typography
                     tabIndex={0}
-                    variant='h3'
+                    variant={themeFormat("titleh3")}
                     component="p"
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold"
-                    }}>
-                    Running Algorithm...
+                      fontFamily: themeFormat("titleFontFamily"),
+                      fontWeight: themeFormat("titleFontWeight")
+                    }}
+                  >
+                    &nbsp;Running Algorithm...
                   </Typography>
                 </Box>
                 :
@@ -333,15 +354,15 @@ export const RunAlgorithms = () => {
                         <div>
                           <Typography
                             tabIndex={0}
-                            variant="body1"
+                            variant={themeFormat("titleh4")}
                             component="p"
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "italic",
-                              marginTop: 1,
-                              marginBottom: 3,
-                            }}>
-                            Insert n_shots :
+                              fontFamily: themeFormat("titleFontFamily"),
+                              fontWeight: themeFormat("titleFontWeight"),
+                              marginBottom: "1em"
+                            }}
+                          >
+                            Insert n_shots
                           </Typography>
                           <TextField
                             aria-label={"insert n_shots"}
@@ -354,6 +375,8 @@ export const RunAlgorithms = () => {
                             color={theme.palette.mode === "dark" ? "secondary" : "primary"}
                             sx={{
                               width: "100%",
+                              marginBottom: "1em",
+                              fontFamily: themeFormat("textFontFamily")
                             }}
                           />
                         </div>
@@ -371,16 +394,17 @@ export const RunAlgorithms = () => {
                             variant="contained"
                             sx={{
                               borderRadius: 3,
-                              backgroundColor: colorButton,
+                              backgroundColor: themeFormat("colorButton"),
                               justifyContent: "center",
                               marginTop: 2,
                             }}
                           >
                             <Typography
                               component="span"
+                              variant={themeFormat("textButton")}
                               sx={{
-                                fontFamily: '"Helvetica Neue"',
-                                fontWeight: "bold"
+                                fontFamily: themeFormat("buttonFontFamily"),
+                                fontWeight: themeFormat("buttonFontWeight")
                               }}
                             >
                               Set n_shots
@@ -400,14 +424,15 @@ export const RunAlgorithms = () => {
                       >
                         <Typography
                           tabIndex={0}
-                          variant="body1"
+                          variant={themeFormat("textSize")}
                           component="p"
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "italic",
+                            fontFamily: themeFormat("textFontFamily"),
+                            fontWeight: themeFormat("textFontWeight"),
                             marginTop: 2,
                             marginBottom: 1,
-                          }}>
+                          }}
+                        >
                           OR
                         </Typography>
                       </Box>
@@ -425,16 +450,17 @@ export const RunAlgorithms = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: colorButton,
+                            backgroundColor: themeFormat("colorButton"),
                             justifyContent: "center",
                             marginTop: 2,
                           }}
                         >
                           <Typography
                             component="span"
+                            variant={themeFormat("textButton")}
                             sx={{
-                              fontFamily: '"Helvetica Neue"',
-                              fontWeight: "bold"
+                              fontFamily: themeFormat("buttonFontFamily"),
+                              fontWeight: themeFormat("buttonFontWeight")
                             }}
                           >
                             Go back
@@ -450,6 +476,8 @@ export const RunAlgorithms = () => {
                 isToken
                   && runMode === 'experimental' && n_shots !== "" && algorithmRun === "" ?
                   <Box
+                    tabIndex={0}
+                    aria-label='loading gif'
                     sx={{
                       justifyContent: "center",
                       alignContent: "center",
@@ -457,16 +485,19 @@ export const RunAlgorithms = () => {
                       marginTop: "2em",
                       marginBottom: "2em",
                     }}>
+                    <CircularProgress
+                      color={theme.palette.mode === "dark" ? "secondary" : "primary"}
+                    />
                     <Typography
                       tabIndex={0}
-                      variant='h3'
+                      variant={themeFormat("titleh3")}
                       component="p"
                       sx={{
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "bold",
+                        fontFamily: themeFormat("titleFontFamily"),
+                        fontWeight: themeFormat("titleFontWeight")
                       }}
                     >
-                      Running Algorithm in Experimental mode...
+                      &nbsp;Running Algorithm in Experimental mode...
                     </Typography>
                   </Box>
                   :

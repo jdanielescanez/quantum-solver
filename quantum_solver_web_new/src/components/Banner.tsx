@@ -11,8 +11,10 @@ export default function Banner() {
             sx={{
                 marginY: "0",
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(${Image})`,
-                width: "100%",
-                height: "700px",
+                width: "auto",
+                height: "auto",
+                maxHeight: "75vh",
+                minWidth: "100%",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",

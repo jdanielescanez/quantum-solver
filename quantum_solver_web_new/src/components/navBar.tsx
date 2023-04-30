@@ -31,7 +31,8 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import LightLogo from '../assets/LightLogo192.png';
 import DarkLogo from '../assets/DarkLogo192.png';
 
-
+// Fuctions
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 
 const drawerWidth = 240;
@@ -84,12 +85,15 @@ export default function ButtonAppBar() {
         justifyContent: "space-between",
         padding: "1 2em",
         width: "100%",
-        height: "3em",
+        height: "auto",
         marginBotton: "4em",
       }}
 
       open={open}>
-      <Toolbar>
+      <Toolbar
+        sx={{
+          display: "flex",
+        }}>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -103,7 +107,9 @@ export default function ButtonAppBar() {
           display="flex"
           sx={{
             flexGrow: 1,
-            justifyContent: "center"
+            justifyContent: "center",
+            alignItems: "center",
+            marginBotton: "1%",
           }}>
           <Box
             display="flex"
@@ -114,9 +120,9 @@ export default function ButtonAppBar() {
               navigate("/")
             }}
             sx={{
-              height: '2.5rem',
+              height: '2rem',
               [theme.breakpoints.down("sm")]: {
-                height: '2rem',
+                height: '1.5rem',
               }
             }}
 
@@ -125,20 +131,29 @@ export default function ButtonAppBar() {
           />
           <Typography
             tabIndex={0}
-            variant='h2'
-            component='h1'
             aria-label="QUANTUM SOLVER, Link to Home page"
             onClick={() => {
               navigate("/")
             }}
-            sx={{ fontFamily: '"Helvetica Neue"', fontWeight: "regular", marginLeft: "10px", margin: "left" }} >
+            variant={themeFormat("titleh3")}
+            component="h1"
+            sx={{
+              fontFamily: themeFormat("titleFontFamily"),
+              fontWeight: themeFormat("textFontWeight"),
+              margin: "left",
+              marginLeft: "10px",
+            }} 
+            >
             QUANTUM SOLVER
           </Typography>
         </Box>
 
+
         <Box
           display="flex"
-          sx={{ justifyItems: "right", marginRight: "1em" }}
+          sx={{
+            justifyItems: "right",
+          }}
         >
           <IconButton
             tabIndex={0}
@@ -149,11 +164,28 @@ export default function ButtonAppBar() {
               } else {
                 dispatch(set_theme_dark_action());
               }
-            }}>
+            }}
+            sx={{
+              height: '4rem',
+              [theme.breakpoints.down("sm")]: {
+                height: '1.5rem',
+              },
+              [theme.breakpoints.down("xs")]: {
+                height: '1rem',
+              }
+            }}
+          >
             {paletteMode === "dark" ? (
-              <DarkModeOutlinedICon />
+              <DarkModeOutlinedICon
+                sx={{
+                  height: '2rem',
+                  [theme.breakpoints.down("sm")]: {
+                    height: '1.5rem',
+                  }
+                }}
+              />
             ) : (
-              <LightModeOutlinedIcon />
+              <LightModeOutlinedIcon/>
             )}
           </IconButton>
 
@@ -161,7 +193,10 @@ export default function ButtonAppBar() {
             isToken ?
               <Box
                 display="flex"
-                sx={{ justifyItems: "right", marginLeft: "1em" }}
+                sx={{
+                  justifyItems: "right",
+                  marginLeft: "auto"
+                }}
               >
                 <IconButton
                   tabIndex={0}
@@ -169,8 +204,18 @@ export default function ButtonAppBar() {
                   onClick={() => {
                     dispatch(logout(token));
                     navigate("/login")
-                  }}>
-                  <LogoutOutlinedIcon />
+                  }}
+                  sx={{
+                    height: '4rem',
+                    [theme.breakpoints.down("sm")]: {
+                      height: '1.5rem',
+                    },
+                    [theme.breakpoints.down("xs")]: {
+                      height: '1rem',
+                    }
+                  }}
+                >
+                  <LogoutOutlinedIcon/>
                 </IconButton>
               </Box>
               :
@@ -178,6 +223,6 @@ export default function ButtonAppBar() {
           }
         </Box>
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
 }

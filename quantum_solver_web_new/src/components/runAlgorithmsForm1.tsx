@@ -14,7 +14,7 @@ import Select from '@mui/material/Select';;
 import { useTheme } from '@mui/material';
 
 //Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 //import actions
 import {
@@ -28,7 +28,6 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
 
   const [backend, setBackend] = React.useState('');
   const [algorithm, setAlgorithm] = React.useState('');
@@ -69,11 +68,11 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
           }}>
           <Grid item xs={12} sm={4}>
             <Typography
-              variant="h3"
+              variant={themeFormat("titleh3")}
               component="p"
               sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold"
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
               }}
             >
               Select backend:
@@ -96,9 +95,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
               >
                 <Typography
                   component="span"
+                  variant={themeFormat("textSize")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "italic"
+                    fontFamily: themeFormat("textFontFamily"),
+                    fontWeight: themeFormat("textFontWeight"),
                   }}
                 >
                   Select backend
@@ -123,9 +123,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                         aria-label={backend.name}
                         value={backend.name}>
                         <Typography
+                          variant={themeFormat("textSize")}
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "italic"
+                            fontFamily: themeFormat("textFontFamily"),
+                            fontWeight: themeFormat("textFontWeight"),
                           }}
                         >
                           name: {backend.name}, qubits: {backend.n_qubits}, shots: {backend.n_shots}, queue: {backend.jobs_in_queue}
@@ -138,14 +139,14 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography
-              variant="h3"
+              variant={themeFormat("titleh3")}
               component="p"
               sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold"
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
               }}
             >
-              Select Algorithm:
+              Select algorithm:
             </Typography>
           </Grid>
           <Grid item xs={12} sm={8}>
@@ -164,13 +165,13 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                 }}
               >
                 <Typography
-                  component="span"
+                  variant={themeFormat("textSize")}
                   sx={{
-                    fontFamily: '"Helvetica Neue"',
-                    fontWeight: "italic"
+                    fontFamily: themeFormat("textFontFamily"),
+                    fontWeight: themeFormat("textFontWeight"),
                   }}
                 >
-                  Select Algorithm
+                  Select algorithm
                 </Typography>
               </InputLabel>
               <Select
@@ -192,9 +193,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                         aria-label={algorithms.name}
                         value={algorithms.id}>
                         <Typography
+                          variant={themeFormat("textSize")}
                           sx={{
-                            fontFamily: '"Helvetica Neue"',
-                            fontWeight: "italic"
+                            fontFamily: themeFormat("textFontFamily"),
+                            fontWeight: themeFormat("textFontWeight"),
                           }}
                         >
                           {algorithms.name}
@@ -217,24 +219,25 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
         >
           <Button
             tabIndex={0}
-            aria-label='Set backend and algorithm'
+            aria-label='Submit backend and algorithm'
             type="submit"
             variant="contained"
             sx={{
               borderRadius: 3,
-              backgroundColor: colorButton,
+              backgroundColor: themeFormat("colorButton"),
               justifyContent: "center",
               marginTop: 2,
             }}
           >
             <Typography
               component="span"
+              variant={themeFormat("textButton")}
               sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold"
+                fontFamily: themeFormat("buttonFontFamily"),
+                fontWeight: themeFormat("buttonFontWeight"),
               }}
             >
-              Set backend and algorithm
+              Submit
             </Typography>
           </Button>
         </Box>

@@ -43,41 +43,70 @@ export const themeSettings = (mode: any) => {
 					},
 				}),
 		},
-		breakpoints: {
-			values: {
-				xs: 0,
-				sm: 600,
-				md: 900,
-				lg: 1200,
-				xl: 1600,
-			},
-		},
 		typography: {
-			fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-			fontSize: 20,
+			fontFamily: [
+				'Source Sans Pro',
+				'Helvetica',
+			].join(","),
 			h1: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 40,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 			h2: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 32,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 			h3: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 30,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 			h4: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 28,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 			h5: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 25,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 			h6: {
-				fontFamily: ["Source Sans Pro", "sans-serif", '"Helvetica Neue"'].join(","),
-				fontSize: 20,
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
+			},
+			subtitle1: {
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
+			},
+			subtitle2: {
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
+			},
+			body1: {
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
+			},
+			body2: {
+				fontFamily: [
+					'Source Sans Pro',
+					'Helvetica',
+				].join(","),
 			},
 		},
 	};

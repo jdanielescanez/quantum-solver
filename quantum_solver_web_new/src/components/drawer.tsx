@@ -29,6 +29,9 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 //action
 import setDrawer from '../Redux/actions/setDrawerActions';
 
+// fuction
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
+
 // Drawer width
 const drawerWidth = 240;
 
@@ -64,7 +67,7 @@ const DrawerContent = () => {
       open={open}
     >
       <DrawerHeader>
-        <IconButton 
+        <IconButton
           aria-label="close drawer"
           onClick={() => dispatch(setDrawer(false))}>
           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -75,17 +78,19 @@ const DrawerContent = () => {
         <ListItem disablePadding>
           <ListItemButton
             aria-label="Link to Home page"
-            component={Link} to='/'>
+            component={Link} to='/'
+            >
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="Home page" 
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }}
-           />
+            <ListItemText
+              primary="Home page"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }}
+            />
           </ListItemButton>
         </ListItem>
 
@@ -97,12 +102,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="Login page" 
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }}/>
+            <ListItemText
+              primary="Login page"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }} />
           </ListItemButton>
         </ListItem>
 
@@ -114,12 +120,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <BusinessCenterIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="Algorithms information"
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }} 
+            <ListItemText
+              primary="Algorithms information"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }}
             />
           </ListItemButton>
         </ListItem>
@@ -132,12 +139,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText 
-              primary="Run algorithms" 
+            <ListItemText
+              primary="Run algorithms"
               primaryTypographyProps={{
-                fontFamily: '"Helvetica Neue"', 
-                fontWeight: "regular"
-              }}/>
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -151,12 +159,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <PeopleAltIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="About us" 
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }}/>
+            <ListItemText
+              primary="About us"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }} />
           </ListItemButton>
         </ListItem>
 
@@ -168,12 +177,13 @@ const DrawerContent = () => {
             <ListItemIcon>
               <TouchAppIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="Accessibility statement" 
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }}/>
+            <ListItemText
+              primary="Accessibility statement"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }} />
           </ListItemButton>
         </ListItem>
 
@@ -181,16 +191,18 @@ const DrawerContent = () => {
           <ListItemButton
             tabIndex={0}
             aria-label="link to Github Page"
-            component={linkMui} href='https://github.com/alu0101238944/quantum-solver'>
+            component={linkMui} href='https://github.com/alu0101238944/quantum-solver' target="_blank"
+          >
             <ListItemIcon>
               <GitHubIcon />
             </ListItemIcon>
-            <ListItemText 
-            primary="Github repository" 
-            primaryTypographyProps={{
-              fontFamily: '"Helvetica Neue"', 
-              fontWeight: "regular"
-            }}/>
+            <ListItemText
+              primary="Github repository"
+              primaryTypographyProps={{
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight"),
+                fontSize: themeFormat("listDrawerFontSize"),
+              }} />
           </ListItemButton>
         </ListItem>
       </List>

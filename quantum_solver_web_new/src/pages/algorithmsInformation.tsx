@@ -13,7 +13,7 @@ import { useTheme } from '@mui/material'
 import { Button, List } from '@mui/material'
 
 // Fuctions
-import { colorTokens } from '../Redux/reducers/ThemeFunctions/colorsTokensPallete';
+import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
 
 //actions
 import { getAlgorithms, clearAlgorithms } from '../Redux/actions/getAlgorithmActions'
@@ -29,9 +29,6 @@ const getAlgorithmsFunction = async (token: string, dispatch: any) => {
 export const AlgorithmsInformation = () => {
   const theme = useTheme();
 
-  const colorLinks = colorTokens(theme.palette.mode).grey[100];
-  const colorButton = colorTokens(theme.palette.mode).blueAccent[500];
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -43,7 +40,7 @@ export const AlgorithmsInformation = () => {
     getAlgorithmsFunction(token, dispatch)
   }
 
-  const routesAlgorithmInfo = ['/algorithms']
+  const routesAlgorithmInfo = ['/login', '/algorithms']
 
   return (
     <div className="algorithmsInformation">
@@ -73,11 +70,11 @@ export const AlgorithmsInformation = () => {
             }}>
             <Typography
               tabIndex={0}
-              variant="h2"
+              variant={themeFormat("titleh2")}
               component="h2"
               sx={{
-                fontFamily: '"Helvetica Neue"',
-                fontWeight: "bold"
+                fontFamily: themeFormat("titleFontFamily"),
+                fontWeight: themeFormat("titleFontWeight")
               }}
             >
               Algorithms Information
@@ -97,7 +94,7 @@ export const AlgorithmsInformation = () => {
                   variant="contained"
                   sx={{
                     borderRadius: 3,
-                    backgroundColor: colorButton,
+                    backgroundColor: themeFormat("colorButton"),
                     justifyContent: "center",
                   }}
                   onClick={() =>
@@ -105,12 +102,13 @@ export const AlgorithmsInformation = () => {
                   }
                 >
                   <Typography
-                    variant='body1'
                     component="span"
+                    variant={themeFormat("textButton")}
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold"
-                    }}>
+                      fontFamily: themeFormat("buttonFontFamily"),
+                      fontWeight: themeFormat("buttonFontWeight")
+                    }}
+                  >
                     Go to login
                   </Typography>
                 </Button>
@@ -128,14 +126,15 @@ export const AlgorithmsInformation = () => {
               }}>
               <Alert
                 severity="warning"
-                variant="filled"
+                variant={themeFormat("alertVariant")}
                 sx={{
-                  fontFamily: '"Helvetica Neue"',
-                  fontWeight: "bold",
-                  color: "black",
+                  fontFamily: themeFormat("alertsFontFamily"),
+                  fontWeight: themeFormat("alertsFontWeight"),
+                  color: themeFormat("warning"),
                 }}
               >
-                {"You Need to be logged to see the algorithms information "}</Alert>
+                {"You Need to be logged to see the algorithms information "}
+              </Alert>
             </Box>
           ) : null}
           {
@@ -149,26 +148,27 @@ export const AlgorithmsInformation = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant="body1"
+                    variant={themeFormat("textSize")}
                     component="p"
                     sx={{
-                      fontFamily: '"Helvetica Neue"',
-                      fontWeight: "bold"
+                      fontFamily: themeFormat("textFontFamily"),
+                      fontWeight: themeFormat("textFontWeight")
                     }}
-                    >
+                  >
                     You can execute all of this algorithms in the section&nbsp;
                     <Typography
                       tabIndex={0}
-                      variant='body1'
-                      color={colorLinks}
                       aria-label="link to Run Algorithms page"
                       component={Link} to='/algorithmsRun'
+                      variant={themeFormat("textSize")}
+                      color={themeFormat("colorLinks")}
                       sx={{
-                        textDecoration: "underline",
-                        fontFamily: '"Helvetica Neue"',
-                        fontWeight: "italic",
-                      }}>
-                      Run Algorithms.
+                        textDecoration: themeFormat("linksDecoration"),
+                        fontFamily: themeFormat("textFontFamily"),
+                        fontWeight: themeFormat("linkFontWeight"),
+                      }}
+                    >
+                      Run Algorithms
                     </Typography>
                   </Typography>
                 </Box>
