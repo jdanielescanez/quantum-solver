@@ -1,10 +1,8 @@
 //imports functions
 import { colorTokens } from './colorsTokensPallete';
-import { useTheme } from '@mui/material';
 
 
-export const themeFormat = (mode: string): any => {
-  const theme = useTheme();
+export const themeFormat = (mode: string, theme:any): any => {
 
   // font family.
   const titleFontFamily = 'Source Sans Pro';

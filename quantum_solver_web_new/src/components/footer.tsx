@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link as linkMui } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 // React
 import { Link } from 'react-router-dom';
@@ -13,6 +14,9 @@ import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColors
 
 
 export default function Footer() {
+
+  const theme = useTheme();
+
   return (
     <footer className='Footer'>
       <Box
@@ -24,7 +28,7 @@ export default function Footer() {
           height: "100%",
           justifyContent: "center",
           alignItems: "center",
-          color: themeFormat("color"),
+          color: themeFormat("color",theme),
           marginTop: "auto",
         }}
       >
@@ -33,11 +37,11 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
                 <Typography
-                  variant={themeFormat("titleh4")}
+                  variant={themeFormat("titleh4",theme)}
                   component="h3"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight"),
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme),
                   }}
                 >
                   <b>Web Map ( 1 ) </b>
@@ -48,12 +52,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="Link to Home page"
                   component={Link} to='/'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Home page
@@ -64,12 +68,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="link to login page"
                   component={Link} to='/login'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Login Page
@@ -80,12 +84,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="Link to Information Algorithms page"
                   component={Link} to='/algorithms'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Algorithms Information
@@ -97,11 +101,11 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Link to Web Map">
                 <Typography
-                  variant={themeFormat("titleh4")}
+                  variant={themeFormat("titleh4",theme)}
                   component="h3"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight"),
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme),
                   }}
                 >
                   <b>Web Map ( 2 )</b>
@@ -112,12 +116,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="link to Run Algorithms page"
                   component={Link} to='/algorithmsRun'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Run algorithms
@@ -128,12 +132,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="link to accessibility statement page"
                   component={Link} to='/accessibility'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Accessibility statement
@@ -144,12 +148,12 @@ export default function Footer() {
                   tabIndex={0}
                   aria-label="link to About us page"
                   component={Link} to='/about'
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   About us
@@ -161,11 +165,11 @@ export default function Footer() {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={3} tabIndex={0} aria-label="Our Github page">
                 <Typography
-                  variant={themeFormat("titleh4")}
+                  variant={themeFormat("titleh4",theme)}
                   component="h3"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight"),
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme),
                   }}
                 >
                   <b>Our Github page</b>
@@ -176,12 +180,12 @@ export default function Footer() {
                   tabIndex={0}
                   component={linkMui} href='https://github.com/alu0101238944/quantum-solver' target="_blank"
                   aria-label="link to Github Page"
-                  variant={themeFormat("textSize")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("textSize",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("linkFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
                   Github repository

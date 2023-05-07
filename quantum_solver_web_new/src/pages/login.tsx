@@ -116,11 +116,11 @@ export const Login = () => {
                 <Typography
                   tabIndex={0}
                   align="center"
-                  variant={themeFormat("titleh2")}
+                  variant={themeFormat("titleh2", theme)}
                   component="h2"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight")
+                    fontFamily: themeFormat("titleFontFamily", theme),
+                    fontWeight: themeFormat("titleFontWeight", theme)
                   }}
                 >
                   Login Page
@@ -133,11 +133,11 @@ export const Login = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize", theme)}
                   component="p"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight")
+                    fontFamily: themeFormat("textFontFamily", theme),
+                    fontWeight: themeFormat("textFontWeight", theme)
                   }}
                 >
                   Enter your&nbsp;
@@ -145,12 +145,12 @@ export const Login = () => {
                     tabIndex={0}
                     aria-label="IBM token Information link"
                     component={linkMui} href='https://quantum-computing.ibm.com/composer/docs/iqx/manage/account/' target="_blank"
-                    variant={themeFormat("textSize")}
-                    color={themeFormat("colorLinks")}
+                    variant={themeFormat("textSize", theme)}
+                    color={themeFormat("colorLinks", theme)}
                     sx={{
-                      textDecoration: themeFormat("linksDecoration"),
-                      fontFamily: themeFormat("textFontFamily"),
-                      fontWeight: themeFormat("linkFontWeight"),
+                      textDecoration: themeFormat("linksDecoration", theme),
+                      fontFamily: themeFormat("textFontFamily", theme),
+                      fontWeight: themeFormat("linkFontWeight", theme),
                     }}
                   >
                     IBM Token
@@ -175,34 +175,41 @@ export const Login = () => {
                   helperText={tokenError}
                   sx={{
                     width: "100%",
-                    fontFamily: themeFormat("textFontFamily"),
+                    fontFamily: themeFormat("textFontFamily", theme),
                   }}
                 />
-                {flagError === "none" && guest === false &&
-                  <Alert
-                    severity="success"
-                    variant={themeFormat("alertVariant")}
-                    sx={{
-                      fontFamily: themeFormat("alertsFontFamily"),
-                      fontWeight: themeFormat("alertsFontWeight"),
-                      color: themeFormat("success"),
-                    }}
-                  >
-                    {"Valid token 😄"}
-                  </Alert>
+                {flagError === "none" && guest === false && isToken === true ?
+                  (
+                    <Alert
+                      severity="success"
+                      variant={themeFormat("alertVariant", theme)}
+                      sx={{
+                        fontFamily: themeFormat("alertsFontFamily", theme),
+                        fontWeight: themeFormat("alertsFontWeight", theme),
+                        color: themeFormat("success", theme),
+                      }}
+                    >
+                      {"Valid token 😄"}
+                    </Alert>
+                  ) : (
+                    null
+                  )
                 }
-                {flagError === "error" &&
+                {flagError === "error" ? (
                   <Alert
                     severity="error"
-                    variant={themeFormat("alertVariant")}
+                    variant={themeFormat("alertVariant", theme)}
                     sx={{
-                      fontFamily: themeFormat("alertsFontFamily"),
-                      fontWeight: themeFormat("alertsFontWeight"),
-                      color: themeFormat("error"),
+                      fontFamily: themeFormat("alertsFontFamily", theme),
+                      fontWeight: themeFormat("alertsFontWeight", theme),
+                      color: themeFormat("error", theme),
                     }}
                   >
                     {"Invalid token. Try again 😞"}
                   </Alert>
+                ) : (
+                  null
+                )
                 }
                 <Box
                   sx={{
@@ -216,17 +223,17 @@ export const Login = () => {
                     variant="contained"
                     sx={{
                       borderRadius: 3,
-                      backgroundColor: themeFormat("colorButton"),
+                      backgroundColor: themeFormat("colorButton", theme),
                       justifyContent: "center",
                       marginTop: 2,
                     }}
                   >
                     <Typography
                       component="span"
-                      variant={themeFormat("textButton")}
+                      variant={themeFormat("textButton", theme)}
                       sx={{
-                        fontFamily: themeFormat("buttonFontFamily"),
-                        fontWeight: themeFormat("buttonFontWeight")
+                        fontFamily: themeFormat("buttonFontFamily", theme),
+                        fontWeight: themeFormat("buttonFontWeight", theme)
                       }}
                     >
                       let's go
@@ -240,11 +247,11 @@ export const Login = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize", theme)}
                   component="p"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight")
+                    fontFamily: themeFormat("textFontFamily", theme),
+                    fontWeight: themeFormat("textFontWeight", theme)
                   }}
                 >
                   OR
@@ -266,34 +273,39 @@ export const Login = () => {
                   variant="contained"
                   sx={{
                     borderRadius: 3,
-                    backgroundColor: themeFormat("colorButton"),
+                    backgroundColor: themeFormat("colorButton", theme),
                     justifyContent: "center",
                   }}
                 >
                   <Typography
                     component="span"
-                    variant={themeFormat("textButton")}
+                    variant={themeFormat("textButton", theme)}
                     sx={{
-                      fontFamily: themeFormat("buttonFontFamily"),
-                      fontWeight: themeFormat("buttonFontWeight")
+                      fontFamily: themeFormat("buttonFontFamily", theme),
+                      fontWeight: themeFormat("buttonFontWeight", theme)
                     }}
                   >
                     continue as guest
                   </Typography>
                 </Button>
               </Box>
-              {flagError === "none" && guest === true &&
-                <Alert
-                  severity="success"
-                  variant={themeFormat("alertVariant")}
-                  sx={{
-                    fontFamily: themeFormat("alertsFontFamily"),
-                    fontWeight: themeFormat("alertsFontWeight"),
-                    color: themeFormat("success"),
-                  }}
-                >
-                  {"Valid Guest mode Login 😄"}
-                </Alert>
+              {flagError === "none" && guest === true && isToken === true ?
+                (
+                  <Alert
+                    severity="success"
+                    variant={themeFormat("alertVariant", theme)}
+                    sx={{
+                      fontFamily: themeFormat("alertsFontFamily", theme),
+                      fontWeight: themeFormat("alertsFontWeight", theme),
+                      color: themeFormat("success", theme),
+                    }}
+                  >
+                    {"Valid Guest mode Login 😄"}
+                  </Alert>
+                )
+                : (
+                  null
+                )
               }
             </Stack>
           </Box>
@@ -314,11 +326,11 @@ export const Login = () => {
                 >
                   <Typography
                     tabIndex={0}
-                    variant={themeFormat("titleh5")}
+                    variant={themeFormat("titleh5", theme)}
                     component="p"
                     sx={{
-                      fontFamily: themeFormat("titleFontFamily"),
-                      fontWeight: themeFormat("titleFontWeight"),
+                      fontFamily: themeFormat("titleFontFamily", theme),
+                      fontWeight: themeFormat("titleFontWeight", theme),
                       textAlign: "center",
                       marginBottom: "1em",
                     }}
@@ -340,7 +352,7 @@ export const Login = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: themeFormat("colorButton"),
+                            backgroundColor: themeFormat("colorButton", theme),
                             justifyContent: "center",
                           }}
                           onClick={() => {
@@ -349,10 +361,10 @@ export const Login = () => {
                         >
                           <Typography
                             component="span"
-                            variant={themeFormat("textButton")}
+                            variant={themeFormat("textButton", theme)}
                             sx={{
-                              fontFamily: themeFormat("buttonFontFamily"),
-                              fontWeight: themeFormat("buttonFontWeight")
+                              fontFamily: themeFormat("buttonFontFamily", theme),
+                              fontWeight: themeFormat("buttonFontWeight", theme)
                             }}
                           >
                             Algorithms Information
@@ -374,7 +386,7 @@ export const Login = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: themeFormat("colorButton"),
+                            backgroundColor: themeFormat("colorButton", theme),
                             justifyContent: "center",
                           }}
                           onClick={() => {
@@ -383,10 +395,10 @@ export const Login = () => {
                         >
                           <Typography
                             component="span"
-                            variant={themeFormat("textButton")}
+                            variant={themeFormat("textButton", theme)}
                             sx={{
-                              fontFamily: themeFormat("buttonFontFamily"),
-                              fontWeight: themeFormat("buttonFontWeight")
+                              fontFamily: themeFormat("buttonFontFamily", theme),
+                              fontWeight: themeFormat("buttonFontWeight", theme)
                             }}
                           >
                             Run Algorithms
@@ -409,7 +421,7 @@ export const Login = () => {
               sx={{
                 borderRadius: 2,
                 padding: "2%",
-                bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
+                bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta", theme) : themeFormat("colorTrajetaLight", theme),
               }}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -418,12 +430,12 @@ export const Login = () => {
               >
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize", theme)}
                   component="p"
                   justifyContent="left"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily", theme),
+                    fontWeight: themeFormat("textFontWeight", theme),
                     marginLeft: "1em"
                   }}
                 >
@@ -440,12 +452,12 @@ export const Login = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant={themeFormat("textSize")}
+                    variant={themeFormat("textSize", theme)}
                     component="p"
                     justifyContent="left"
                     sx={{
-                      fontFamily: themeFormat("textFontFamily"),
-                      fontWeight: themeFormat("textFontWeight"),
+                      fontFamily: themeFormat("textFontFamily", theme),
+                      fontWeight: themeFormat("textFontWeight", theme),
                       marginLeft: "1em"
                     }}
                   >
@@ -456,12 +468,12 @@ export const Login = () => {
                       tabIndex={0}
                       aria-label="IBM login page link"
                       component={linkMui} href='https://quantum-computing.ibm.com/account' target="_blank"
-                      variant={themeFormat("textSize")}
-                      color={themeFormat("colorLinks")}
+                      variant={themeFormat("textSize", theme)}
+                      color={themeFormat("colorLinks", theme)}
                       sx={{
-                        textDecoration: themeFormat("linksDecoration"),
-                        fontFamily: themeFormat("textFontFamily"),
-                        fontWeight: themeFormat("linkFontWeight"),
+                        textDecoration: themeFormat("linksDecoration", theme),
+                        fontFamily: themeFormat("textFontFamily", theme),
+                        fontWeight: themeFormat("linkFontWeight", theme),
                       }}
                     >
                       IBM login page.
@@ -478,12 +490,12 @@ export const Login = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant={themeFormat("textSize")}
+                    variant={themeFormat("textSize", theme)}
                     component="p"
                     justifyContent="left"
                     sx={{
-                      fontFamily: themeFormat("textFontFamily"),
-                      fontWeight: themeFormat("textFontWeight"),
+                      fontFamily: themeFormat("textFontFamily", theme),
+                      fontWeight: themeFormat("textFontWeight", theme),
                       marginLeft: "1em"
                     }}
                   >

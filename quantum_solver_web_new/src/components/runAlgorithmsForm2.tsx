@@ -93,11 +93,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
               }}>
               <Typography
                 tabIndex={0}
-                variant={themeFormat("titleh3")}
+                variant={themeFormat("titleh3",theme)}
                 component="p"
                 sx={{
-                  fontFamily: themeFormat("titleFontFamily"),
-                  fontWeight: themeFormat("textFontWeight"),
+                  fontFamily: themeFormat("titleFontFamily",theme),
+                  fontWeight: themeFormat("textFontWeight",theme),
                   textAlign: "left",
                 }}
 
@@ -130,11 +130,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                         <div key={i}>
                           <Typography
                             tabIndex={0}
-                            variant={themeFormat("textSize")}
+                            variant={themeFormat("textSize",theme)}
                             component="p"
                             sx={{
-                              fontFamily: themeFormat("textFontFamily"),
-                              fontWeight: themeFormat("textFontWeight"),
+                              fontFamily: themeFormat("textFontFamily",theme),
+                              fontWeight: themeFormat("textFontWeight",theme),
                               marginTop: 1,
                               marginBottom: 3,
                             }}>
@@ -152,8 +152,8 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                             helperText={item.constraint}
                             sx={{
                               width: "100%",
-                              fontFamily: themeFormat("textFontFamily"),
-                              fontWeight: themeFormat("textFontWeight")
+                              fontFamily: themeFormat("textFontFamily",theme),
+                              fontWeight: themeFormat("textFontWeight",theme)
                             }}
                           />
                         </div>
@@ -172,11 +172,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                           marginBottom: 2,
                         }}>
                         <Alert severity="error"
-                          variant={themeFormat("alertVariant")}
+                          variant={themeFormat("alertVariant",theme)}
                           sx={{
-                            fontFamily: themeFormat("alertsFontFamily"),
-                            fontWeight: themeFormat("alertsFontWeight"),
-                            color: themeFormat("error"),
+                            fontFamily: themeFormat("alertsFontFamily",theme),
+                            fontWeight: themeFormat("alertsFontWeight",theme),
+                            color: themeFormat("error",theme),
                           }}
                         >
                           {msg}
@@ -196,11 +196,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                           marginBottom: 2,
                         }}>
                         <Alert severity="success"
-                          variant={themeFormat("alertVariant")}
+                          variant={themeFormat("alertVariant",theme)}
                           sx={{
-                            fontFamily: themeFormat("alertsFontFamily"),
-                            fontWeight: themeFormat("alertsFontWeight"),
-                            color: themeFormat("success"),
+                            fontFamily: themeFormat("alertsFontFamily",theme),
+                            fontWeight: themeFormat("alertsFontWeight",theme),
+                            color: themeFormat("success",theme),
                           }}
                         >
                           {msg}
@@ -226,17 +226,17 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                         variant="contained"
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: themeFormat("colorButton"),
+                          backgroundColor: themeFormat("colorButton",theme),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
-                          variant={themeFormat("textButton")}
+                          variant={themeFormat("textButton",theme)}
                           sx={{
-                            fontFamily: themeFormat("buttonFontFamily"),
-                            fontWeight: themeFormat("buttonFontWeight")
+                            fontFamily: themeFormat("buttonFontFamily",theme),
+                            fontWeight: themeFormat("buttonFontWeight",theme)
                           }}
                         >
                           Submit
@@ -260,11 +260,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                       >
                         <Typography
                           tabIndex={0}
-                          variant={themeFormat("textSize")}
+                          variant={themeFormat("textSize",theme)}
                           component="p"
                           sx={{
-                            fontFamily: themeFormat("textFontFamily"),
-                            fontWeight: themeFormat("textFontWeight"),
+                            fontFamily: themeFormat("textFontFamily",theme),
+                            fontWeight: themeFormat("textFontWeight",theme),
                             marginTop: 2,
                             marginBottom: 1,
                           }}
@@ -286,17 +286,17 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: themeFormat("colorButton"),
+                            backgroundColor: themeFormat("colorButton",theme),
                             justifyContent: "center",
                             marginTop: 1,
                           }}
                         >
                           <Typography
                             component="span"
-                            variant={themeFormat("textButton")}
+                            variant={themeFormat("textButton",theme)}
                             sx={{
-                              fontFamily: themeFormat("buttonFontFamily"),
-                              fontWeight: themeFormat("buttonFontWeight")
+                              fontFamily: themeFormat("buttonFontFamily",theme),
+                              fontWeight: themeFormat("buttonFontWeight",theme)
                             }}
                           >
                             Go back
@@ -340,17 +340,17 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                         variant="contained"
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: themeFormat("colorButton"),
+                          backgroundColor: themeFormat("colorButton",theme),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
-                          variant={themeFormat("textButton")}
+                          variant={themeFormat("textButton",theme)}
                           sx={{
-                            fontFamily: themeFormat("buttonFontFamily"),
-                            fontWeight: themeFormat("buttonFontWeight")
+                            fontFamily: themeFormat("buttonFontFamily",theme),
+                            fontWeight: themeFormat("buttonFontWeight",theme)
                           }}
                         >
                           Simple Execution
@@ -371,17 +371,17 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                         variant="contained"
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: themeFormat("colorButton"),
+                          backgroundColor: themeFormat("colorButton",theme),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
-                          variant={themeFormat("textButton")}
+                          variant={themeFormat("textButton",theme)}
                           sx={{
-                            fontFamily: themeFormat("buttonFontFamily"),
-                            fontWeight: themeFormat("buttonFontWeight")
+                            fontFamily: themeFormat("buttonFontFamily",theme),
+                            fontWeight: themeFormat("buttonFontWeight",theme)
                           }}
                         >
                           Experimental Mode
@@ -402,11 +402,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
             >
               <Typography
                 tabIndex={0}
-                variant={themeFormat("textSize")}
+                variant={themeFormat("textSize",theme)}
                 component="p"
                 sx={{
-                  fontFamily: themeFormat("textFontFamily"),
-                  fontWeight: themeFormat("textFontWeight"),
+                  fontFamily: themeFormat("textFontFamily",theme),
+                  fontWeight: themeFormat("textFontWeight",theme),
                   marginTop: 2,
                   marginBottom: 2,
                 }}
@@ -430,17 +430,17 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 variant="contained"
                 sx={{
                   borderRadius: 3,
-                  backgroundColor: themeFormat("colorButton"),
+                  backgroundColor: themeFormat("colorButton",theme),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
-                  variant={themeFormat("textButton")}
+                  variant={themeFormat("textButton",theme)}
                   sx={{
-                    fontFamily: themeFormat("buttonFontFamily"),
-                    fontWeight: themeFormat("buttonFontWeight")
+                    fontFamily: themeFormat("buttonFontFamily",theme),
+                    fontWeight: themeFormat("buttonFontWeight",theme)
                   }}
                 >
                   Go back
@@ -457,7 +457,7 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                 sx={{
                   borderRadius: 2,
                   padding: "2%",
-                  bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
+                  bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta",theme) : themeFormat("colorTrajetaLight",theme),
                 }}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -467,11 +467,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                   <Typography
                     tabIndex={0}
                     justifyContent="left"
-                    variant={themeFormat("textSize")}
+                    variant={themeFormat("textSize",theme)}
                     component="p"
                     sx={{
-                      fontFamily: themeFormat("textFontFamily"),
-                      fontWeight: themeFormat("textFontWeight"),
+                      fontFamily: themeFormat("textFontFamily",theme),
+                      fontWeight: themeFormat("textFontWeight",theme),
                       marginLeft: "1em"
                     }}
                   >
@@ -489,11 +489,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                     <Typography
                       tabIndex={0}
                       justifyContent="left"
-                      variant={themeFormat("textSize")}
+                      variant={themeFormat("textSize",theme)}
                       component="p"
                       sx={{
-                        fontFamily: themeFormat("textFontFamily"),
-                        fontWeight: themeFormat("textFontWeight"),
+                        fontFamily: themeFormat("textFontFamily",theme),
+                        fontWeight: themeFormat("textFontWeight",theme),
                         marginLeft: "1em"
                       }}
                     >

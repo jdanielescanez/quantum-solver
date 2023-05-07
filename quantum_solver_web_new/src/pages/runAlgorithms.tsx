@@ -158,11 +158,11 @@ export const RunAlgorithms = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("titleh2")}
+                  variant={themeFormat("titleh2",theme)}
                   component="h2"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight")
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme)
                   }}
                 >
                   Run Algorithms
@@ -184,17 +184,17 @@ export const RunAlgorithms = () => {
                         onClick={() => navigate('/login')}
                         sx={{
                           borderRadius: 3,
-                          backgroundColor: themeFormat("colorButton"),
+                          backgroundColor: themeFormat("colorButton", theme),
                           justifyContent: "center",
                           marginTop: 2,
                         }}
                       >
                         <Typography
                           component="span"
-                          variant={themeFormat("textButton")}
+                          variant={themeFormat("textButton", theme)}
                           sx={{
-                            fontFamily: themeFormat("buttonFontFamily"),
-                            fontWeight: themeFormat("buttonFontWeight")
+                            fontFamily: themeFormat("buttonFontFamily", theme),
+                            fontWeight: themeFormat("buttonFontWeight", theme)
                           }}
                         >
                           Go to Login Page
@@ -208,11 +208,11 @@ export const RunAlgorithms = () => {
                         display: "flex",
                       }}>
                       <Alert severity="warning"
-                        variant={themeFormat("alertVariant")}
+                        variant={themeFormat("alertVariant", theme)}
                         sx={{
-                          fontFamily: themeFormat("alertsFontFamily"),
-                          fontWeight: themeFormat("alertsFontWeight"),
-                          color: themeFormat("warning"),
+                          fontFamily: themeFormat("alertsFontFamily", theme),
+                          fontWeight: themeFormat("alertsFontWeight", theme),
+                          color: themeFormat("warning", theme),
                         }}
                       >
                         {"You need to be logged in to run algorithms "}</Alert>
@@ -240,11 +240,11 @@ export const RunAlgorithms = () => {
                       />
                       <Typography
                         tabIndex={0}
-                        variant={themeFormat("titleh3")}
+                        variant={themeFormat("titleh3", theme)}
                         component="p"
                         sx={{
-                          fontFamily: themeFormat("titleFontFamily"),
-                          fontWeight: themeFormat("titleFontWeight")
+                          fontFamily: themeFormat("titleFontFamily", theme),
+                          fontWeight: themeFormat("titleFontWeight", theme)
                         }}
                       >
                         &nbsp;Loading...
@@ -268,11 +268,11 @@ export const RunAlgorithms = () => {
                       }}>
                       <Typography
                         tabIndex={0}
-                        variant={themeFormat("textSize")}
+                        variant={themeFormat("textSize", theme)}
                         component="p"
                         sx={{
-                          fontFamily: themeFormat("textFontFamily"),
-                          fontWeight: themeFormat("textFontWeight")
+                          fontFamily: themeFormat("textFontFamily", theme),
+                          fontWeight: themeFormat("textFontWeight", theme)
                         }}
                       >
                         You can see all the information on how the algorithms works on&nbsp;
@@ -280,12 +280,12 @@ export const RunAlgorithms = () => {
                           tabIndex={0}
                           aria-label="link to Run Algorithms page"
                           component={Link} to='/algorithms'
-                          variant={themeFormat("textSize")}
-                          color={themeFormat("colorLinks")}
+                          variant={themeFormat("textSize", theme)}
+                          color={themeFormat("colorLinks", theme)}
                           sx={{
-                            textDecoration: themeFormat("linksDecoration"),
-                            fontFamily: themeFormat("textFontFamily"),
-                            fontWeight: themeFormat("linkFontWeight"),
+                            textDecoration: themeFormat("linksDecoration", theme),
+                            fontFamily: themeFormat("textFontFamily", theme),
+                            fontWeight: themeFormat("linkFontWeight", theme),
                           }}
                         >
                           Algorithm Information.
@@ -318,11 +318,11 @@ export const RunAlgorithms = () => {
                   />
                   <Typography
                     tabIndex={0}
-                    variant={themeFormat("titleh3")}
+                    variant={themeFormat("titleh3", theme)}
                     component="p"
                     sx={{
-                      fontFamily: themeFormat("titleFontFamily"),
-                      fontWeight: themeFormat("titleFontWeight")
+                      fontFamily: themeFormat("titleFontFamily", theme),
+                      fontWeight: themeFormat("titleFontWeight", theme)
                     }}
                   >
                     &nbsp;Running Algorithm...
@@ -354,11 +354,11 @@ export const RunAlgorithms = () => {
                         <div>
                           <Typography
                             tabIndex={0}
-                            variant={themeFormat("titleh4")}
+                            variant={themeFormat("titleh4",theme)}
                             component="p"
                             sx={{
-                              fontFamily: themeFormat("titleFontFamily"),
-                              fontWeight: themeFormat("titleFontWeight"),
+                              fontFamily: themeFormat("titleFontFamily",theme),
+                              fontWeight: themeFormat("titleFontWeight",theme),
                               marginBottom: "1em"
                             }}
                           >
@@ -376,7 +376,7 @@ export const RunAlgorithms = () => {
                             sx={{
                               width: "100%",
                               marginBottom: "1em",
-                              fontFamily: themeFormat("textFontFamily")
+                              fontFamily: themeFormat("textFontFamily",theme)
                             }}
                           />
                         </div>
@@ -394,17 +394,17 @@ export const RunAlgorithms = () => {
                             variant="contained"
                             sx={{
                               borderRadius: 3,
-                              backgroundColor: themeFormat("colorButton"),
+                              backgroundColor: themeFormat("colorButton",theme),
                               justifyContent: "center",
                               marginTop: 2,
                             }}
                           >
                             <Typography
                               component="span"
-                              variant={themeFormat("textButton")}
+                              variant={themeFormat("textButton",theme)}
                               sx={{
-                                fontFamily: themeFormat("buttonFontFamily"),
-                                fontWeight: themeFormat("buttonFontWeight")
+                                fontFamily: themeFormat("buttonFontFamily",theme),
+                                fontWeight: themeFormat("buttonFontWeight",theme)
                               }}
                             >
                               Set n_shots
@@ -424,11 +424,11 @@ export const RunAlgorithms = () => {
                       >
                         <Typography
                           tabIndex={0}
-                          variant={themeFormat("textSize")}
+                          variant={themeFormat("textSize",theme)}
                           component="p"
                           sx={{
-                            fontFamily: themeFormat("textFontFamily"),
-                            fontWeight: themeFormat("textFontWeight"),
+                            fontFamily: themeFormat("textFontFamily",theme),
+                            fontWeight: themeFormat("textFontWeight",theme),
                             marginTop: 2,
                             marginBottom: 1,
                           }}
@@ -450,17 +450,17 @@ export const RunAlgorithms = () => {
                           variant="contained"
                           sx={{
                             borderRadius: 3,
-                            backgroundColor: themeFormat("colorButton"),
+                            backgroundColor: themeFormat("colorButton",theme),
                             justifyContent: "center",
                             marginTop: 2,
                           }}
                         >
                           <Typography
                             component="span"
-                            variant={themeFormat("textButton")}
+                            variant={themeFormat("textButton",theme)}
                             sx={{
-                              fontFamily: themeFormat("buttonFontFamily"),
-                              fontWeight: themeFormat("buttonFontWeight")
+                              fontFamily: themeFormat("buttonFontFamily",theme),
+                              fontWeight: themeFormat("buttonFontWeight",theme)
                             }}
                           >
                             Go back
@@ -490,11 +490,11 @@ export const RunAlgorithms = () => {
                     />
                     <Typography
                       tabIndex={0}
-                      variant={themeFormat("titleh3")}
+                      variant={themeFormat("titleh3",theme)}
                       component="p"
                       sx={{
-                        fontFamily: themeFormat("titleFontFamily"),
-                        fontWeight: themeFormat("titleFontWeight")
+                        fontFamily: themeFormat("titleFontFamily",theme),
+                        fontWeight: themeFormat("titleFontWeight",theme)
                       }}
                     >
                       &nbsp;Running Algorithm in Experimental mode...

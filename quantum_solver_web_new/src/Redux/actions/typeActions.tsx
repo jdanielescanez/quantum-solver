@@ -1,7 +1,3 @@
-// Theme Mode Type Actions.
-export const THEME_LIGHT = '@THEME/LIGHT';
-export const THEME_DARK = '@THEME/DARK';
-
 // Login Token Type Actions.
 export const LOGIN_SUCCESS = '@LOGIN/SUCCESS';
 export const LOGIN_FAILED = '@LOGIN/FAILED';

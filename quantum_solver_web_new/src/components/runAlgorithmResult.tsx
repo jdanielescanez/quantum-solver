@@ -49,8 +49,11 @@ export const RunAlgorithmsResult = () => {
     dispatch(getResult(token));
   }
 
+  let imageBase64 = '';
   // Data processing  
-  const imageBase64 = 'data:image/png;base64,' + result.image_base64;
+  if (result.image_base64) {
+    imageBase64 = 'data:image/png;base64,' + result.image_base64;
+  }
   const figure_name = 'figure-' + current_backend + '-' + current_algorithm + '-' + current_params + '.png';
 
   const clearData = (e: any) => {
@@ -82,11 +85,11 @@ export const RunAlgorithmsResult = () => {
         >
           <Typography
             tabIndex={0}
-            variant={themeFormat("titleh3")}
+            variant={themeFormat("titleh3",theme)}
             component="h2"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("titleFontWeight"),
+              fontFamily: themeFormat("titleFontFamily",theme),
+              fontWeight: themeFormat("titleFontWeight",theme),
             }}
           >
             Result
@@ -136,11 +139,11 @@ export const RunAlgorithmsResult = () => {
             component="a"
             download={figure_name}
             href={imageBase64}
-            color={themeFormat("colorLinks")}
+            color={themeFormat("colorLinks",theme)}
             sx={{
-              textDecoration: themeFormat("linksDecoration"),
-              fontFamily: themeFormat("textFontFamily"),
-              fontWeight: themeFormat("linkFontWeight"),
+              textDecoration: themeFormat("linksDecoration",theme),
+              fontFamily: themeFormat("textFontFamily",theme),
+              fontWeight: themeFormat("linkFontWeight",theme),
             }}
           >
             Download figure here
@@ -155,7 +158,7 @@ export const RunAlgorithmsResult = () => {
             sx={{
               borderRadius: 2,
               padding: "2%",
-              bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
+              bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta",theme) : themeFormat("colorTrajetaLight",theme),
             }}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -165,11 +168,11 @@ export const RunAlgorithmsResult = () => {
               <Typography
                 tabIndex={0}
                 justifyContent="left"
-                variant={themeFormat("textSize")}
+                variant={themeFormat("textSize",theme)}
                 component="p"
                 sx={{
-                  fontFamily: themeFormat("textFontFamily"),
-                  fontWeight: themeFormat("textFontWeight"),
+                  fontFamily: themeFormat("textFontFamily",theme),
+                  fontWeight: themeFormat("textFontWeight",theme),
                   marginLeft: "1em"
                 }}
               >
@@ -180,11 +183,11 @@ export const RunAlgorithmsResult = () => {
               <Typography
                 tabIndex={0}
                 justifyContent="left"
-                variant={themeFormat("textSize")}
+                variant={themeFormat("textSize",theme)}
                 component="p"
                 sx={{
-                  fontFamily: themeFormat("textFontFamily"),
-                  fontWeight: themeFormat("textFontWeight"),
+                  fontFamily: themeFormat("textFontFamily",theme),
+                  fontWeight: themeFormat("textFontWeight",theme),
                   marginLeft: "1em"
                 }}
               >
@@ -220,17 +223,17 @@ export const RunAlgorithmsResult = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: themeFormat("colorButton"),
+                  backgroundColor: themeFormat("colorButton",theme),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
-                  variant={themeFormat("textButton")}
+                  variant={themeFormat("textButton",theme)}
                   sx={{
-                    fontFamily: themeFormat("buttonFontFamily"),
-                    fontWeight: themeFormat("buttonFontWeight"),
+                    fontFamily: themeFormat("buttonFontFamily",theme),
+                    fontWeight: themeFormat("buttonFontWeight",theme),
                   }}
                 >
                   Change algorithm
@@ -254,17 +257,17 @@ export const RunAlgorithmsResult = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: themeFormat("colorButton"),
+                  backgroundColor: themeFormat("colorButton",theme),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
-                  variant={themeFormat("textButton")}
+                  variant={themeFormat("textButton",theme)}
                   sx={{
-                    fontFamily: themeFormat("buttonFontFamily"),
-                    fontWeight: themeFormat("buttonFontWeight"),
+                    fontFamily: themeFormat("buttonFontFamily",theme),
+                    fontWeight: themeFormat("buttonFontWeight",theme),
                   }}
                 >
                   Change parameters
@@ -288,17 +291,17 @@ export const RunAlgorithmsResult = () => {
                 sx={{
                   width: "100%",
                   borderRadius: 3,
-                  backgroundColor: themeFormat("colorButton"),
+                  backgroundColor: themeFormat("colorButton",theme),
                   justifyContent: "center",
                   marginTop: 2,
                 }}
               >
                 <Typography
                   component="span"
-                  variant={themeFormat("textButton")}
+                  variant={themeFormat("textButton",theme)}
                   sx={{
-                    fontFamily: themeFormat("buttonFontFamily"),
-                    fontWeight: themeFormat("buttonFontWeight"),
+                    fontFamily: themeFormat("buttonFontFamily",theme),
+                    fontWeight: themeFormat("buttonFontWeight",theme),
                   }}
                 >
                   Copy output to clipboard

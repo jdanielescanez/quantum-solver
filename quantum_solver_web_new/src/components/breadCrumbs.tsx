@@ -14,6 +14,8 @@ import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColors
 
 export const BreadCrumbsComponent = (routes: any) => {
 
+  const theme = useTheme();
+
   const nameMap: {
     [key: string]: string;
     '/accessibility': string;
@@ -51,12 +53,12 @@ export const BreadCrumbsComponent = (routes: any) => {
               tabIndex={0}
               aria-label="link to home page"
               component={Link} to='/'
-              variant={themeFormat("titleh4")}
-              color={themeFormat("colorLinks")}
+              variant={themeFormat("titleh4",theme)}
+              color={themeFormat("colorLinks",theme)}
               sx={{
-                textDecoration: themeFormat("linksDecoration"),
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("textFontWeight"),
+                textDecoration: themeFormat("linksDecoration",theme),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("textFontWeight",theme),
               }}
             >
               Home
@@ -68,12 +70,12 @@ export const BreadCrumbsComponent = (routes: any) => {
                   tabIndex={0}
                   aria-label={"link to " + nameMap[route] + " page"}
                   component={Link} to={route}
-                  variant={themeFormat("titleh4")}
-                  color={themeFormat("colorLinks")}
+                  variant={themeFormat("titleh4",theme)}
+                  color={themeFormat("colorLinks",theme)}
                   sx={{
-                    textDecoration: themeFormat("linksDecoration"),
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    textDecoration: themeFormat("linksDecoration",theme),
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                   }}
                 >
                   {nameMap[route]}

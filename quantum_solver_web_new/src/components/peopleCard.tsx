@@ -36,7 +36,7 @@ export const PeopleCard = ({ name, position, photo, socialMedia }: PeopleCardPro
   return (
     <Box>
       <Card
-        color={theme.palette.mode === 'dark' ? themeFormat("colorTarjeta")  : themeFormat("colorTrajetaLight")}
+        color={theme.palette.mode === 'dark' ? themeFormat("colorTarjeta",theme)  : themeFormat("colorTrajetaLight",theme)}
         elevation={5}
         sx={{
           Height: "400px",
@@ -72,11 +72,11 @@ export const PeopleCard = ({ name, position, photo, socialMedia }: PeopleCardPro
           <Typography
             tabIndex={0}
             gutterBottom
-            variant={themeFormat("titleh5")}
+            variant={themeFormat("titleh5",theme)}
             component="p"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("titleFontWeight"),
+              fontFamily: themeFormat("titleFontFamily",theme),
+              fontWeight: themeFormat("titleFontWeight",theme),
               alignContent: "center",
               justifyContent: "center",
               display: "flex",
@@ -86,12 +86,12 @@ export const PeopleCard = ({ name, position, photo, socialMedia }: PeopleCardPro
           </Typography>
           <Typography
             tabIndex={0}
-            variant={themeFormat("textSize")}
+            variant={themeFormat("textSize",theme)}
             component="p"
             color="text.secondary"
             sx={{
-              fontFamily: themeFormat("textFontFamily"),
-              fontWeight: themeFormat("textFontWeight"),
+              fontFamily: themeFormat("textFontFamily",theme),
+              fontWeight: themeFormat("textFontWeight",theme),
               alignContent: "center",
               justifyContent: "center",
               display: "flex",

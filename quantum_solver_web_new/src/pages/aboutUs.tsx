@@ -122,11 +122,11 @@ export const AboutUs = () => {
                 <Typography
                   tabIndex={0}
                   align="center"
-                  variant={themeFormat("titleh2")}
+                  variant={themeFormat("titleh2",theme)}
                   component="h2"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight")
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme)
                   }}
                 >
                   About us
@@ -142,11 +142,11 @@ export const AboutUs = () => {
                 <Typography
                   tabIndex={0}
                   align="left"
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize",theme)}
                   component="p"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight")
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme)
                   }}
                 >
                   QuantumSolver is an initiative for democratizing quantum development

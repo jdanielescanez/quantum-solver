@@ -57,7 +57,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const PrincipalContainer = () => {
   const open = useSelector((state: any) => state.drawer_reducer.open);
-  console.log(open)
 
   return (
     <>

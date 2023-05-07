@@ -67,11 +67,11 @@ export const Welcome = () => {
           />
           <Typography
             tabIndex={0}
-            variant={themeFormat("titleh2")}
+            variant={themeFormat("titleh2", theme)}
             component="h2"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("titleFontWeight")
+              fontFamily: themeFormat("titleFontFamily", theme),
+              fontWeight: themeFormat("titleFontWeight", theme)
             }}
           >
             Quantum Solver
@@ -83,11 +83,11 @@ export const Welcome = () => {
           sx={{ flexGrow: 1, marginTop: 2 }}>
           <Typography
             tabIndex={0}
-            variant={themeFormat("textSize")}
+            variant={themeFormat("textSize", theme)}
             component="p"
             sx={{
-              fontFamily: themeFormat("textFontFamily"),
-              fontWeight: themeFormat("textFontWeight")
+              fontFamily: themeFormat("textFontFamily", theme),
+              fontWeight: themeFormat("textFontWeight", theme)
             }}
           >
             <b>Open source</b>  quantum library based on <b>Qiskit</b>
@@ -99,11 +99,11 @@ export const Welcome = () => {
           sx={{ flexGrow: 1 }}>
           <Typography
             tabIndex={0}
-            variant={themeFormat("textSize")}
+            variant={themeFormat("textSize", theme)}
             component="p"
             sx={{
-              fontFamily: themeFormat("textFontFamily"),
-              fontWeight: themeFormat("textFontWeight")
+              fontFamily: themeFormat("textFontFamily", theme),
+              fontWeight: themeFormat("textFontWeight", theme)
             }}
           >
             Use it to simulate <b>quantum algorithms</b> and see their results
@@ -125,17 +125,17 @@ export const Welcome = () => {
             variant="contained"
             size="large"
             sx={{
-              backgroundColor: themeFormat("colorButton"),
+              backgroundColor: themeFormat("colorButton", theme),
               borderRadius: 30,
               textAlign: "center"
             }}
           >
             <Typography
               component="span"
-              variant={themeFormat("textButton")}
+              variant={themeFormat("textButton", theme)}
               sx={{
-                fontFamily: themeFormat("buttonFontFamily"),
-                fontWeight: themeFormat("buttonFontWeight")
+                fontFamily: themeFormat("buttonFontFamily", theme),
+                fontWeight: themeFormat("buttonFontWeight", theme)
               }}
             >
               <RocketIcon sx={{ justifyItems: "center" }}> </RocketIcon> <br></br>

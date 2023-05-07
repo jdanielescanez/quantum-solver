@@ -29,7 +29,7 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
           padding: 2,
           margin: 2,
           borderRadius: 10,
-          bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTrajetaLight"),
+          bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta",theme) : themeFormat("colorTrajetaLight",theme),
         }}
       >
         <Box
@@ -44,11 +44,11 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
           <Typography
             tabIndex={0}
             align="center"
-            variant={themeFormat("titleh3")}
+            variant={themeFormat("titleh3",theme)}
             component="h2"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("titleFontWeight"),
+              fontFamily: themeFormat("titleFontFamily",theme),
+              fontWeight: themeFormat("titleFontWeight",theme),
             }}
           >
             <b>Algorithms </b> {algorithmName}
@@ -71,11 +71,11 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
             tabIndex={0}
             align="justify"
             justifyContent="left"
-            variant={themeFormat("textSize")}
+            variant={themeFormat("textSize",theme)}
             component="p"
             sx={{
-              fontFamily: themeFormat("textFontFamily"),
-              fontWeight: themeFormat("textFontWeight"),
+              fontFamily: themeFormat("textFontFamily",theme),
+              fontWeight: themeFormat("textFontWeight",theme),
               marginLeft: "2em",
               marginRight: "2em"
             }}
@@ -99,11 +99,11 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
             tabIndex={0}
             justifyContent="left"
             align="center"
-            variant={themeFormat("titleh4")}
+            variant={themeFormat("titleh4",theme)}
             component="h2"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("titleFontWeight"),
+              fontFamily: themeFormat("titleFontFamily",theme),
+              fontWeight: themeFormat("titleFontWeight",theme),
             }}
           >
             Parameters characteristics
@@ -117,7 +117,7 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
               sx={{
                 borderRadius: 2,
                 padding: "2%",
-                bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta") : themeFormat("colorTarjeta"),
+                bgcolor: theme.palette.mode === 'dark' ? themeFormat("colorTarjeta",theme) : themeFormat("colorTarjeta",theme),
               }}>
               <AccordionSummary
                 key={"AcordionSection" + i}
@@ -125,12 +125,12 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
                 aria-controls="panel1a-content"
                 id="panel1a-header">
                 <Typography
-                  variant={themeFormat("titleh6")}
+                  variant={themeFormat("titleh6",theme)}
                   component="p"
                   justifyContent="left"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                     marginLeft: "1em"
                   }}
                 >
@@ -141,12 +141,12 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
                 key={"AcordionSection" + i}>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize",theme)}
                   component="p"
                   justifyContent="left"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                     marginLeft: "1em"
                   }}
                 >
@@ -154,12 +154,12 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
                 </Typography>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize",theme)}
                   component="p"
                   justifyContent="left"
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                     marginLeft: "1em"
                   }}
                 >

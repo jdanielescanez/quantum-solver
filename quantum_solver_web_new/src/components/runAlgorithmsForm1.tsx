@@ -68,11 +68,11 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
           }}>
           <Grid item xs={12} sm={4}>
             <Typography
-              variant={themeFormat("titleh3")}
+              variant={themeFormat("titleh3",theme)}
               component="p"
               sx={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
               }}
             >
               Select backend:
@@ -95,10 +95,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
               >
                 <Typography
                   component="span"
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize",theme)}
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                   }}
                 >
                   Select backend
@@ -123,10 +123,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                         aria-label={backend.name}
                         value={backend.name}>
                         <Typography
-                          variant={themeFormat("textSize")}
+                          variant={themeFormat("textSize",theme)}
                           sx={{
-                            fontFamily: themeFormat("textFontFamily"),
-                            fontWeight: themeFormat("textFontWeight"),
+                            fontFamily: themeFormat("textFontFamily",theme),
+                            fontWeight: themeFormat("textFontWeight",theme),
                           }}
                         >
                           name: {backend.name}, qubits: {backend.n_qubits}, shots: {backend.n_shots}, queue: {backend.jobs_in_queue}
@@ -139,11 +139,11 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography
-              variant={themeFormat("titleh3")}
+              variant={themeFormat("titleh3",theme)}
               component="p"
               sx={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
               }}
             >
               Select algorithm:
@@ -165,10 +165,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                 }}
               >
                 <Typography
-                  variant={themeFormat("textSize")}
+                  variant={themeFormat("textSize",theme)}
                   sx={{
-                    fontFamily: themeFormat("textFontFamily"),
-                    fontWeight: themeFormat("textFontWeight"),
+                    fontFamily: themeFormat("textFontFamily",theme),
+                    fontWeight: themeFormat("textFontWeight",theme),
                   }}
                 >
                   Select algorithm
@@ -193,10 +193,10 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
                         aria-label={algorithms.name}
                         value={algorithms.id}>
                         <Typography
-                          variant={themeFormat("textSize")}
+                          variant={themeFormat("textSize",theme)}
                           sx={{
-                            fontFamily: themeFormat("textFontFamily"),
-                            fontWeight: themeFormat("textFontWeight"),
+                            fontFamily: themeFormat("textFontFamily",theme),
+                            fontWeight: themeFormat("textFontWeight",theme),
                           }}
                         >
                           {algorithms.name}
@@ -224,17 +224,17 @@ const RunAlgorithmsForm1 = ({ allBackends, allAlgorithms }: any): any => {
             variant="contained"
             sx={{
               borderRadius: 3,
-              backgroundColor: themeFormat("colorButton"),
+              backgroundColor: themeFormat("colorButton",theme),
               justifyContent: "center",
               marginTop: 2,
             }}
           >
             <Typography
               component="span"
-              variant={themeFormat("textButton")}
+              variant={themeFormat("textButton",theme)}
               sx={{
-                fontFamily: themeFormat("buttonFontFamily"),
-                fontWeight: themeFormat("buttonFontWeight"),
+                fontFamily: themeFormat("buttonFontFamily",theme),
+                fontWeight: themeFormat("buttonFontWeight",theme),
               }}
             >
               Submit

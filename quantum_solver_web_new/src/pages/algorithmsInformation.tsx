@@ -70,11 +70,11 @@ export const AlgorithmsInformation = () => {
             }}>
             <Typography
               tabIndex={0}
-              variant={themeFormat("titleh2")}
+              variant={themeFormat("titleh2",theme)}
               component="h2"
               sx={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight")
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme)
               }}
             >
               Algorithms Information
@@ -94,7 +94,7 @@ export const AlgorithmsInformation = () => {
                   variant="contained"
                   sx={{
                     borderRadius: 3,
-                    backgroundColor: themeFormat("colorButton"),
+                    backgroundColor: themeFormat("colorButton",theme),
                     justifyContent: "center",
                   }}
                   onClick={() =>
@@ -103,10 +103,10 @@ export const AlgorithmsInformation = () => {
                 >
                   <Typography
                     component="span"
-                    variant={themeFormat("textButton")}
+                    variant={themeFormat("textButton",theme)}
                     sx={{
-                      fontFamily: themeFormat("buttonFontFamily"),
-                      fontWeight: themeFormat("buttonFontWeight")
+                      fontFamily: themeFormat("buttonFontFamily",theme),
+                      fontWeight: themeFormat("buttonFontWeight",theme)
                     }}
                   >
                     Go to login
@@ -126,11 +126,11 @@ export const AlgorithmsInformation = () => {
               }}>
               <Alert
                 severity="warning"
-                variant={themeFormat("alertVariant")}
+                variant={themeFormat("alertVariant",theme)}
                 sx={{
-                  fontFamily: themeFormat("alertsFontFamily"),
-                  fontWeight: themeFormat("alertsFontWeight"),
-                  color: themeFormat("warning"),
+                  fontFamily: themeFormat("alertsFontFamily",theme),
+                  fontWeight: themeFormat("alertsFontWeight",theme),
+                  color: themeFormat("warning",theme),
                 }}
               >
                 {"You Need to be logged to see the algorithms information "}
@@ -148,11 +148,11 @@ export const AlgorithmsInformation = () => {
                   }}>
                   <Typography
                     tabIndex={0}
-                    variant={themeFormat("textSize")}
+                    variant={themeFormat("textSize",theme)}
                     component="p"
                     sx={{
-                      fontFamily: themeFormat("textFontFamily"),
-                      fontWeight: themeFormat("textFontWeight")
+                      fontFamily: themeFormat("textFontFamily",theme),
+                      fontWeight: themeFormat("textFontWeight",theme)
                     }}
                   >
                     You can execute all of this algorithms in the section&nbsp;
@@ -160,12 +160,12 @@ export const AlgorithmsInformation = () => {
                       tabIndex={0}
                       aria-label="link to Run Algorithms page"
                       component={Link} to='/algorithmsRun'
-                      variant={themeFormat("textSize")}
-                      color={themeFormat("colorLinks")}
+                      variant={themeFormat("textSize",theme)}
+                      color={themeFormat("colorLinks",theme)}
                       sx={{
-                        textDecoration: themeFormat("linksDecoration"),
-                        fontFamily: themeFormat("textFontFamily"),
-                        fontWeight: themeFormat("linkFontWeight"),
+                        textDecoration: themeFormat("linksDecoration",theme),
+                        fontFamily: themeFormat("textFontFamily",theme),
+                        fontWeight: themeFormat("linkFontWeight",theme),
                       }}
                     >
                       Run Algorithms

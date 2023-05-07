@@ -86,9 +86,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Home page"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }}
             />
           </ListItemButton>
@@ -105,9 +105,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Login page"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }} />
           </ListItemButton>
         </ListItem>
@@ -123,9 +123,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Algorithms information"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }}
             />
           </ListItemButton>
@@ -142,9 +142,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Run algorithms"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }} />
           </ListItemButton>
         </ListItem>
@@ -162,9 +162,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="About us"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }} />
           </ListItemButton>
         </ListItem>
@@ -180,9 +180,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Accessibility statement"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }} />
           </ListItemButton>
         </ListItem>
@@ -199,9 +199,9 @@ const DrawerContent = () => {
             <ListItemText
               primary="Github repository"
               primaryTypographyProps={{
-                fontFamily: themeFormat("titleFontFamily"),
-                fontWeight: themeFormat("titleFontWeight"),
-                fontSize: themeFormat("listDrawerFontSize"),
+                fontFamily: themeFormat("titleFontFamily",theme),
+                fontWeight: themeFormat("titleFontWeight",theme),
+                fontSize: themeFormat("listDrawerFontSize",theme),
               }} />
           </ListItemButton>
         </ListItem>

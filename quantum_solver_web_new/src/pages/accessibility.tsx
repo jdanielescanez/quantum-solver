@@ -16,6 +16,8 @@ import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColors
 
 export const Accessibility = () => {
 
+  const theme = useTheme();
+
   const routesAccessibility = ['/accessibility']
 
   return (
@@ -54,11 +56,11 @@ export const Accessibility = () => {
                 }}>
                 <Typography
                   tabIndex={0}
-                  variant={themeFormat("titleh2")}
+                  variant={themeFormat("titleh2",theme)}
                   component="h2"
                   sx={{
-                    fontFamily: themeFormat("titleFontFamily"),
-                    fontWeight: themeFormat("titleFontWeight")
+                    fontFamily: themeFormat("titleFontFamily",theme),
+                    fontWeight: themeFormat("titleFontWeight",theme)
                   }}
                 >
                   Accessibility Statement for Quantum Solver website
@@ -67,11 +69,11 @@ export const Accessibility = () => {
               <Typography
                 tabIndex={0}
                 align="left"
-                variant={themeFormat("textSize")}
+                variant={themeFormat("textSize",theme)}
                 component="p"
                 sx={{
-                  fontFamily: themeFormat("textFontFamily"),
-                  fontWeight: themeFormat("textFontWeight")
+                  fontFamily: themeFormat("textFontFamily",theme),
+                  fontWeight: themeFormat("textFontWeight",theme)
                 }}
               >
                 The primary objective of developing the QuantumSolver open-source library was to make quantum computing accessible to the general public. To achieve this goal, we have created a website that is designed to be as user-friendly as possible, following the AA WCAG 2.1 standards for accessibility. These guidelines are a set of stable technical reference standards that consist of 12-13 guidelines grouped into four principles: perceivable, operable, understandable, and robust. Each guideline includes specific conformance criteria that can be tested and are classified into three levels: A, AA, and AAA. The AA WCAG 2.1 standards are an updated version of the WCAG 2.0 standards and include an additional 17 conformance criteria that must be considered.

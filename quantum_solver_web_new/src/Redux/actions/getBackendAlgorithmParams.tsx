@@ -15,8 +15,6 @@ import { Dispatch } from 'redux';
 export const getBackendAlgorithmsParams = (token:string): any => (dispatch: Dispatch): any => {
   return backendService.getBackendAlgorithmParams(token).then(
     (response) => {
-      console.log("getBackendAlgorithmsParams: ")
-      console.log(response.data);
       dispatch({
         type: GET_BACKEND_ALGORITHM_PARAMS_SUCCESS,
         payload: response.data
@@ -36,8 +34,6 @@ export const getBackendAlgorithmsParams = (token:string): any => (dispatch: Disp
 export const getBackendData = (token:string): any => (dispatch: Dispatch): any => {
   return backendService.getBackends(token).then(
     (response) => {
-      console.log("getBackendData: ")
-      console.log(response.data);
       dispatch({
         type: GET_BACKEND_DATA_SUCCESS,
         payload: response.data
@@ -57,8 +53,6 @@ export const getBackendData = (token:string): any => (dispatch: Dispatch): any =
 export const getAlgorithmData = (token:string): any => (dispatch: Dispatch): any => {
   return backendService.getAlgorithms(token).then(
     (response) => {
-      console.log("getAlgorithmData: ")
-      console.log(response.data);
       dispatch({
         type: GET_ALGORITHM_DATA_SUCCESS,
         payload: response.data
@@ -78,8 +72,6 @@ export const getAlgorithmData = (token:string): any => (dispatch: Dispatch): any
 export const getParamsData = (token:string): any => (dispatch: Dispatch): any => {
   return backendService.getParams(token).then(
     (response) => {
-      console.log("getParamsData: ")
-      console.log(response.data);
       dispatch({
         type: GET_PARAMS_DATA_SUCCESS,
         payload: response.data

@@ -1,56 +1,58 @@
 // type actions import 
-import { 
-  LOGIN_SUCCESS, 
+import {
+  LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 } from '../actions/typeActions';
 
 export const default_login_state = {
-  guest: true,
+  guest: false,
   isToken: false,
-  flagError: "",
+  flagError: "none",
   token: "",
 };
 
 const login_reducer = (state = default_login_state, action: { type: string, mode: boolean, payload: { msg: string } }) => {
-  const { type, mode, payload } = action;
-  switch (type) {
+  switch (action.type) {
     case LOGIN_SUCCESS:
-      return {
+      state = {
         ...state,
-        guest: mode,
+        guest: action.mode,
         isToken: true,
         flagError: "none",
-        token: payload.msg,
+        token: action.payload.msg,
       };
+      break;
     case LOGIN_FAILED:
-      return {
+      state = {
         ...state,
-        guest: mode,
+        guest: action.mode,
         isToken: false,
         flagError: "error",
         token: "",
       };
+      break;
     case LOGOUT_SUCCESS:
-      return {
+      state = {
         ...state,
-        guest: "",
+        guest: true,
         isToken: false,
         flagError: "none",
         token: "",
       };
+      break;
     case LOGOUT_FAILED:
-      return {
+      state = {
         ...state,
-        guest: "",
+        guest: true,
         isToken: false,
         flagError: "none",
         token: "",
       };
-    default:
-      return state;
+      break;
   }
+  return state;
 }
 
 export default login_reducer;

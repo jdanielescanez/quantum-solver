@@ -9,21 +9,25 @@ import { useSelector } from 'react-redux';
 // Mui imports
 import Box from '@mui/material/Box';
 
+import { ColorModeContext, useMode } from './Redux/reducers/ThemeFunctions/CustomTheme';
 
 import PrincipalContainer from './PrincipalContainer';
 
 
 function App() {
-  const Theme = useSelector((state: any) => state.theme_mode_reducer.Theme);
+  const [theme, colorMode] = useMode();
+
   return (
-    <ThemeProvider theme={Theme}>
-      <Box sx={{ display: 'flex' }}>
-        <Router>
-          <CssBaseline />
-          <PrincipalContainer />
-        </Router>
-      </Box>
-    </ThemeProvider>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: 'flex' }}>
+          <Router>
+            <CssBaseline />
+            <PrincipalContainer />
+          </Router>
+        </Box>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 

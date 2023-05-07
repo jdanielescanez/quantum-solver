@@ -1,6 +1,7 @@
 // React - Redux import
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 // MUI elements
 import IconButton from '@mui/material/IconButton';
@@ -13,10 +14,6 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
 //action
 import setDrawer from '../Redux/actions/setDrawerActions';
-import {
-  set_theme_dark_action,
-  set_theme_light_action
-} from '../Redux/actions/themeMode';
 
 import {
   logout
@@ -33,7 +30,7 @@ import DarkLogo from '../assets/DarkLogo192.png';
 
 // Fuctions
 import { themeFormat } from '../Redux/reducers/ThemeFunctions/personalizedColorsAndFounts';
-
+import { ColorModeContext } from '../Redux/reducers/ThemeFunctions/CustomTheme';
 
 const drawerWidth = 240;
 
@@ -63,6 +60,8 @@ export default function ButtonAppBar() {
   const theme = useTheme();
   const dispatch = useDispatch();
   let navigate = useNavigate();
+
+  const colorMode = React.useContext(ColorModeContext);
 
   const paletteMode = theme.palette.mode;
   const open = useSelector((state: any) => state.drawer_reducer.open);
@@ -135,11 +134,11 @@ export default function ButtonAppBar() {
             onClick={() => {
               navigate("/")
             }}
-            variant={themeFormat("titleh3")}
+            variant={themeFormat("titleh3",theme)}
             component="h1"
             sx={{
-              fontFamily: themeFormat("titleFontFamily"),
-              fontWeight: themeFormat("textFontWeight"),
+              fontFamily: themeFormat("titleFontFamily",theme),
+              fontWeight: themeFormat("textFontWeight",theme),
               margin: "left",
               marginLeft: "10px",
             }} 
@@ -158,13 +157,7 @@ export default function ButtonAppBar() {
           <IconButton
             tabIndex={0}
             aria-label='Button to switch dark and light theme'
-            onClick={() => {
-              if (theme.palette.mode === "dark") {
-                dispatch(set_theme_light_action());
-              } else {
-                dispatch(set_theme_dark_action());
-              }
-            }}
+            onClick={colorMode.toggleColorMode}
             sx={{
               height: '4rem',
               [theme.breakpoints.down("sm")]: {

@@ -1,3 +1,6 @@
+import React from 'react';
+import { createTheme } from '@mui/material/styles';
+import { responsiveFontSizes } from '@mui/material/styles';
 import { colorTokens } from './colorsTokensPallete'
 
 
@@ -110,4 +113,25 @@ export const themeSettings = (mode: any) => {
 			},
 		},
 	};
+};
+
+
+// context for color mode
+export const ColorModeContext = React.createContext({ toggleColorMode: () => { } });
+
+export const useMode = () => {
+	const [mode, setmode] = React.useState("dark");
+
+	const colorMode = React.useMemo(
+		() => ({
+			toggleColorMode: () => {
+				setmode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+			}
+		}),
+		[]
+	);
+
+	const theme:any = React.useMemo(() => responsiveFontSizes(createTheme(themeSettings(mode))), [mode]);
+	
+	return [theme, colorMode];
 };
