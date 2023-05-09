@@ -134,7 +134,7 @@ export default function ButtonAppBar() {
             onClick={() => {
               navigate("/")
             }}
-            variant={themeFormat("titleh3",theme)}
+            variant={themeFormat("titleh4",theme)}
             component="h1"
             sx={{
               fontFamily: themeFormat("titleFontFamily",theme),
