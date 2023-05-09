@@ -30,6 +30,7 @@ def timeout_job():
       app.config['USERS'].pop(session_token)
 
 def format_backends(backends):
+  print(backends)
   result = {'backends': [], 'current_backend': ''}
   for backend in backends:
     status = backend.status()

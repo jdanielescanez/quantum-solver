@@ -5,6 +5,12 @@
 from qiskit import transpile, Aer
 from qiskit.providers.ibmq import IBMQFactory
 from qiskit.utils import QuantumInstance
+# from qiskit.providers.fake_provider import FakeVigo
+# from qiskit.test.mock import FakeVigoV2
+# from qiskit.providers.aer import AerSimulator
+from qiskit.test.mock import FakeProvider
+
+# device_backend = FakeVigo()
 
 ## The component that manages the execution of quantum algorithms for QuantumSolver
 class QExecute:
@@ -12,8 +18,12 @@ class QExecute:
   def __init__(self, token: str = ''):
     ## The IBMQ Experience token
     self.token = token
+    ## The fake backends provider
+    self.provider_fake = FakeProvider()
     ## The available backends
-    self.backends = [Aer.get_backend('aer_simulator')]
+    self.backends = [Aer.get_backend('aer_simulator'), self.provider_fake.get_backend('fake_tenerife'), self.provider_fake.get_backend('fake_tokyo'), self.provider_fake.get_backend('fake_armonk'), self.provider_fake.get_backend('fake_brooklyn'), self.provider_fake.get_backend('fake_cambridge'), self.provider_fake.get_backend('fake_casablanca'), self.provider_fake.get_backend('fake_guadalupe'), self.provider_fake.get_backend('fake_melbourne'), self.provider_fake.get_backend('fake_paris'), self.provider_fake.get_backend('fake_openpulse_2q'), self.provider_fake.get_backend('fake_openpulse_3q'), self.provider_fake.get_backend('fake_rochester')]
+    #self.backends = [Aer.get_backend('aer_simulator')]
+    # self.backends += self.provider_fake.backends()
     if self.token:
       ## The IBMQ provider
       self.provider = IBMQFactory().enable_account(self.token)
@@ -25,6 +35,8 @@ class QExecute:
   def set_current_backend(self, backend_name: str):
     if backend_name == 'aer_simulator':
       self.current_backend = self.backends[0]
+    elif backend_name[0:5] == 'fake_':
+      self.current_backend = self.provider_fake.get_backend(backend_name)
     elif self.provider:
       self.current_backend = self.provider.get_backend(backend_name)
 
@@ -41,7 +53,7 @@ class QExecute:
       config = backend.configuration()
       jobs_in_queue = status.pending_jobs
       q_instance = QuantumInstance(backend)
-      is_simulator = q_instance.is_simulator
+      is_simulator = q_instance.is_simulator or str(backend)[0:5] == 'fake_'
       is_operational = status.operational
 
       print('[' + str(i + 1) + ']\tName:', str(backend), \
