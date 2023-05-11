@@ -57,13 +57,13 @@ class QPE(QSubroutine):
     range_list = list(range(n))
     qc = QuantumCircuit(n + 1, n)
       
-    # Inicialización del circuito con los n primeros cúbits en el estado |+> y el último en estado |1>
+    # Initialization of the circuit with the first n cubits in the |+> state and the last in the |1> state
     qc.h(range_list)
     qc.x(n)
     qc.barrier()
     
-    # Aplicación de las potencias de 2 de la fase de phase controlada,
-    # con controles desde 0 hasta n - 1 y objetivos en n 
+    # Application of the powers of 2 of the controlled phase,
+    # with controls from 0 to n - 1 and targets in n 
     cu = CPhaseGate(phase) 
     for i in range_list:
       cu_power = cu.power(2 ** i)
