@@ -24,6 +24,7 @@
     - [Download and install](#download-and-install)
     - [Command Line Interface](#command-line-interface)
       - [QuantumSolver Basic](#quantumsolver-basic)
+      - [QuantumSolver Subroutine](#quantumsolver-subroutine)
       - [QuantumSolver Crypto](#quantumsolver-crypto)
     - [Web Interface](#web-interface)
       - [Backend](#backend)
@@ -31,7 +32,9 @@
       - [Screenshots](#screenshots)
   - [How to contribute to QuantumSolver?](#how-to-contribute-to-quantumsolver)
     - [QuantumSolver Basic](#quantumsolver-basic-1)
+    - [QuantumSolver Subroutine](#quantumsolver-subroutine-1)
     - [QuantumSolver Crypto](#quantumsolver-crypto-1)
+    - [QuantumSolver Composer](#quantumsolver-composer)
   - [Documentation](#documentation)
 
 ## Getting started
@@ -106,6 +109,15 @@ This main program allows the execution of the circuits corresponding to the basi
 python3 src/main_quantum_solver.py [optional IBMQ_TOKEN]
 ```
 
+#### QuantumSolver Subroutine
+
+The main Subroutine program allows running more complex algorithms that require preprocessing of the parameters, and postprocessing of the output from the repeated execution of the defined circuits. 
+
+```
+python3 src/main_subroutine.py [optional IBMQ_TOKEN]
+```
+
+
 #### QuantumSolver Crypto
 
 This main program gives the option to run a simulation of the following quantum cryptographic protocols: BB84, E91, B92, Six-State, a Quantum Substitute for RSA and Quantum Elgamal.
@@ -114,11 +126,15 @@ This main program gives the option to run a simulation of the following quantum 
 python3 src/main_crypto.py [optional IBMQ_TOKEN]
 ```
 
-<!-- TODO: 
-#### QuantumSolver Subrutines
+
+<!-- TODO:
+
+#### QuantumSolver Composer
+
+Permitir un bucle REPL capaz de añadir las diferentes funcionalidades, visualizar y ejecutar el circuito en cualquier momento (añadiendo entradas que el usuario defina por pantalla)
 
 ```
-python3 src/main_subrutines.py [optional IBMQ_TOKEN]
+python3 src/main_composer.py [optional IBMQ_TOKEN]
 ```
 
 #### QuantumSolver AI
@@ -211,6 +227,16 @@ self.algorithms = [
 
 In this way, the protocol will be available both in the QuantumSolver Basic command line interface and in the web interface. Consider making a Pull Request for the changes to be made publicly effective.
 
+### QuantumSolver Subroutine
+
+To contribute to this module, the procedure is completely analogous to that of QuantumSolver Basic. It has two minor differences:
+- It uses `SubroutineManager` (`src/subroutine/subroutine_manager.py`) instead of `AlgorithmManager`.
+- The `QSubroutine` class has two more methods than `QAlgorithm`:
+  - One for preprocessing, where you must place the instructions you want to practice to the parameters before becoming part of the input to the circuit constructor.
+  - Another one of postprocessing, where the instructions that transform the output of the repeated execution of the circuit (`counts`) in the final result of the algorithm to be implemented are included. 
+
+The approach taken in the first simple derivative class for the Quantum Phase Estimation algorithm can be clearly seen.
+
 ### QuantumSolver Crypto
 
 Follow the example implementation of any of the previously defined protocols (we recommend the use of BB84 as an initial template). To add your quantum cryptography protocol to QuantumSolver just add your created class to the protocols array of the `CyrptoManager` class of the `srcrypto_manager.py` file.
@@ -233,6 +259,11 @@ self.protocols = [
 ```
 
 With these steps, your protocol can be simulated from the main program `src/main_crypto.py`. Consider making a Pull Request for the changes to be made publicly effective.
+
+
+### QuantumSolver Composer
+
+Any complex classical circuit procedure can be defined from existing circuits or by creating new primitives. This module is still in the experimental phase.
 
 ## Documentation
 

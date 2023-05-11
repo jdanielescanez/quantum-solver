@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Author: Daniel Escanez-Exposito
 
 from subroutine.qsubroutine import QSubroutine
 from qiskit import QuantumCircuit

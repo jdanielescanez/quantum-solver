@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+# Author: Daniel Escanez-Exposito
 
 from subroutine.qpe.qpe import QPE
 from algorithms.qalgorithm_manager import QAlgorithmManager
