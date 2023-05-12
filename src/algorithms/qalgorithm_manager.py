@@ -54,7 +54,7 @@ class QAlgorithmManager:
     range_algorithms = '[1 - ' + str(len(self.algorithms)) + ']'
     index = -2
     while index < 0 or index >= len(self.algorithms):
-      msg = '[&] Select a algorithm of the list ' + str(range_algorithms) + ': '
+      msg = '[&] Select an algorithm of the list ' + str(range_algorithms) + ': '
       index = int(input(msg)) - 1
       if index == -1:
         self.current_algorithm = None
