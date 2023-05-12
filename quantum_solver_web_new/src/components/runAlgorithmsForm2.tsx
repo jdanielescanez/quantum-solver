@@ -116,9 +116,11 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                   {
                     params.map((item: Param, i: number) => {
                       let type: string = '';
+                      let step = 1;
                       switch (item.type) {
-                        case 'int':
                         case 'float':
+                          step = 0.01
+                        case 'int':
                           type = 'number';
                           break;
 
@@ -146,6 +148,9 @@ const RunAlgorithmsForm2 = ({ params }: any) => {
                             aria-required="true"
                             type={type}
                             required
+                            inputProps={{
+                              step: step,
+                            }}
                             label={item.description}
                             onChange={changeParams}
                             color={theme.palette.mode === "dark" ? "secondary" : "primary"}

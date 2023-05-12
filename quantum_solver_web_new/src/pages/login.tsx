@@ -189,7 +189,7 @@ export const Login = () => {
                         color: themeFormat("success", theme),
                       }}
                     >
-                      {"Valid token 😄"}
+                      {"Valid token 😄. If you want to access with another user, please logout"}
                     </Alert>
                   ) : (
                     null
@@ -300,7 +300,7 @@ export const Login = () => {
                       color: themeFormat("success", theme),
                     }}
                   >
-                    {"Valid Guest mode Login 😄"}
+                    {"Valid Guest mode Login 😄. If you want to access with another user, please logout"}
                   </Alert>
                 )
                 : (

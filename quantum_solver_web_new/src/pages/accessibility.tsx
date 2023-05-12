@@ -63,7 +63,7 @@ export const Accessibility = () => {
                     fontWeight: themeFormat("titleFontWeight",theme)
                   }}
                 >
-                  Accessibility Statement for Quantum Solver website
+                  Accessibility Statement for Quantum Solver Website
                 </Typography>
               </Box>
               <Typography

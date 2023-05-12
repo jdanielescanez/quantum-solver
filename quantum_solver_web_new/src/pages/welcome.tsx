@@ -74,7 +74,7 @@ export const Welcome = () => {
               fontWeight: themeFormat("titleFontWeight", theme)
             }}
           >
-            Quantum Solver
+            QuantumSolver
           </Typography>
         </Box>
         <Box

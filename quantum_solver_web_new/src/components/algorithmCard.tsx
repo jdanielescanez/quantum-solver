@@ -69,7 +69,7 @@ export const AlgorithmCard = ({ algorithmName, description, parameters }: Algori
         >
           <Typography
             tabIndex={0}
-            align="justify"
+            align="left"
             justifyContent="left"
             variant={themeFormat("textSize",theme)}
             component="p"

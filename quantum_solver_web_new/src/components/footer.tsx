@@ -76,7 +76,7 @@ export default function Footer() {
                     fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
-                  Login Page
+                  Login page
                 </Typography>
               </Box>
               <Box>
@@ -92,7 +92,7 @@ export default function Footer() {
                     fontWeight: themeFormat("linkFontWeight",theme),
                   }}
                 >
-                  Algorithms Information
+                  Algorithms information
                 </Typography>
               </Box>
             </Grid>
@@ -172,7 +172,7 @@ export default function Footer() {
                     fontWeight: themeFormat("titleFontWeight",theme),
                   }}
                 >
-                  <b>Our Github page</b>
+                  <b>Our Github Page</b>
                 </Typography>
               </Box>
               <Box>
