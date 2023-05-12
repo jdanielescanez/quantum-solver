@@ -21,7 +21,7 @@ class QExecute:
     ## The fake backends provider
     self.provider_fake = FakeProvider()
     ## The available backends
-    self.backends = [Aer.get_backend('aer_simulator'), self.provider_fake.get_backend('fake_tenerife'), self.provider_fake.get_backend('fake_tokyo'), self.provider_fake.get_backend('fake_armonk'), self.provider_fake.get_backend('fake_brooklyn'), self.provider_fake.get_backend('fake_cambridge'), self.provider_fake.get_backend('fake_casablanca'), self.provider_fake.get_backend('fake_guadalupe'), self.provider_fake.get_backend('fake_melbourne'), self.provider_fake.get_backend('fake_paris'), self.provider_fake.get_backend('fake_openpulse_2q'), self.provider_fake.get_backend('fake_openpulse_3q'), self.provider_fake.get_backend('fake_rochester')]
+    self.backends = [Aer.get_backend('aer_simulator'), self.provider_fake.get_backend('fake_tenerife'), self.provider_fake.get_backend('fake_tokyo'), self.provider_fake.get_backend('fake_armonk'), self.provider_fake.get_backend('fake_brooklyn'), self.provider_fake.get_backend('fake_cambridge'), self.provider_fake.get_backend('fake_casablanca'), self.provider_fake.get_backend('fake_guadalupe'), self.provider_fake.get_backend('fake_melbourne'), self.provider_fake.get_backend('fake_paris'), self.provider_fake.get_backend('fake_rochester')]
     #self.backends = [Aer.get_backend('aer_simulator')]
     # self.backends += self.provider_fake.backends()
     if self.token:
