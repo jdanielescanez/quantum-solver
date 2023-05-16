@@ -37,6 +37,9 @@ class DatasetManager:
   def get_current_dataset(self):
     return self.current_dataset.get_view()
 
+  def get_current_size(self):
+    return len(self.get_current_dataset().columns) - 1
+
   def print_current_dataset(self):
     print(self.get_current_dataset())
 
@@ -52,14 +55,16 @@ class DatasetManager:
       index = int(input(msg)) - 1
       if index == -1:
         print('[$] View not created')
-        return
+        return None
       if index < 0 or index >= len(cols):
         index = -1
-        print('[!] The size of the view must be in range [1, ' + str(range_cols) + ']')
+        print('[!] The size of the view must be in range ' + str(range_cols))
       else:
-        self.current_dataset.set_view_size(index + 1)
+        size = index + 1
+        self.current_dataset.set_view_size(size)
         print('[$] Created view:')
         print(self.current_dataset.get_view())
+        return {'type': 'decision_tree', 'size': size}
 
   def reset_view(self):
     print('[$] Reseted view')

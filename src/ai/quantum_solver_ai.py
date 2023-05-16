@@ -8,6 +8,7 @@ from halo import Halo
 from pwinput import pwinput
 import time
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 QUANTUM_SOLVER_AI = 'QuantumSolver AI'
 
@@ -22,6 +23,8 @@ class QuantumSolverAI():
 
   ## Run main function
   def run(self):
+    self.view_conf = None
+
     self.__show_header()
     self.__main_menu()
 
@@ -38,13 +41,19 @@ class QuantumSolverAI():
     print('[2] See available Models')
     print('[3] Select Dataset')
     if self.is_selected_dataset:
-      print('\tCurrent Subroutine: ' + \
+      print('\tCurrent Dataset: ' + \
           self.dataset_manager.current_dataset.name)
     print('[4] Select Model')
     if self.is_selected_model:
       print('\tCurrent Model: ' + self.model_manager.current_model.name)
+    if self.is_selected_dataset:
+      print('[5] Set a View')
+      if self.is_created_view:
+        view_type, view_size = self.view_conf['type'], self.view_conf['size']
+        print('\tCurrent View: ' + view_type + ' - size: ' + str(view_size))
+      print('[6] See current Dataset (applying the View)')
     if self.is_selected_dataset and self.is_selected_model:
-      print('[5] Train')
+      print('[7] Train')
     print('[0] Exit\n')
 
   ## Main menu
@@ -61,7 +70,14 @@ class QuantumSolverAI():
       self.dataset_manager.select_dataset()
     elif option == 4:
       self.model_manager.select_model()
-    elif option == 5 and self.is_selected_dataset and self.is_selected_model:
+    elif option == 5:
+      self.view_conf = self.dataset_manager.create_view()
+    elif option == 6:
+      df = self.dataset_manager.get_current_dataset()
+      sns.pairplot(df, hue="class", palette="tab10")
+      plt.show()
+      self.dataset_manager.print_current_dataset()
+    elif option == 7 and self.is_selected_dataset and self.is_selected_model:
       self.train()
     else:
       print('[!] Invalid option, try again')
@@ -81,7 +97,7 @@ class QuantumSolverAI():
       
       halo.succeed()
       time_s = (time.time() - start_time)
-      print('\n[$] Experiment Finished in ' + str(time_s) + ' s!')
+      print('\n[$] Experiment finished in ' + str(time_s) + ' s!')
       print('Results (' + model_name + ' - ' + dataset_name + '):', results)
     except Exception as exception:
       halo.fail()
@@ -93,7 +109,8 @@ class QuantumSolverAI():
   def __train_and_get_data(self):
     model = self.model_manager.current_model
     dataset = self.dataset_manager.current_dataset
-    model.fit(dataset.train_data, dataset.train_targets.values.ravel())
+    size = self.dataset_manager.get_current_size()
+    model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
     return {
       'train': model.score(dataset.train_data, dataset.train_targets),
       'test':  model.score(dataset.test_data, dataset.test_targets)
@@ -107,6 +124,8 @@ class QuantumSolverAI():
         self.is_selected_dataset = self.dataset_manager.current_dataset != None
         ## If a current model has been selected
         self.is_selected_model = self.model_manager.current_model != None
+        ## If a view has been created and is activated
+        self.is_created_view = self.view_conf != None
 
         self.__show_options()
         self.__select_option()
