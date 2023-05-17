@@ -149,7 +149,6 @@ class Simon(QSubroutine):
           terms.append(f"b{i} * {z[i]}")
         equation += " + ".join(terms)
         equation += f" =  0  (mod 2) ({result[z]*100/shots:.2f}%)"
-
         print(equation)
     
     # Solve the system of equations

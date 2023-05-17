@@ -123,9 +123,8 @@ class Shor(QSubroutine):
       result.append([math.gcd(pow(a,period//2)+1,n), math.gcd(pow(a,period//2)-1,n)])
     unique_results = list(set(map(tuple, result)))
 
-    print(a)
 
-    return unique_results
+    return unique_results if len(unique_results) > 0 else 'No result found'
     
 
     
