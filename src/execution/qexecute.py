@@ -5,12 +5,7 @@
 from qiskit import transpile, Aer
 from qiskit.providers.ibmq import IBMQFactory
 from qiskit.utils import QuantumInstance
-# from qiskit.providers.fake_provider import FakeVigo
-# from qiskit.test.mock import FakeVigoV2
-# from qiskit.providers.aer import AerSimulator
 from qiskit.test.mock import FakeProvider
-
-# device_backend = FakeVigo()
 
 ## The component that manages the execution of quantum algorithms for QuantumSolver
 class QExecute:
@@ -21,9 +16,24 @@ class QExecute:
     ## The fake backends provider
     self.provider_fake = FakeProvider()
     ## The available backends
-    self.backends = [Aer.get_backend('aer_simulator'), self.provider_fake.get_backend('fake_tenerife'), self.provider_fake.get_backend('fake_tokyo'), self.provider_fake.get_backend('fake_armonk'), self.provider_fake.get_backend('fake_brooklyn'), self.provider_fake.get_backend('fake_cambridge'), self.provider_fake.get_backend('fake_casablanca'), self.provider_fake.get_backend('fake_guadalupe'), self.provider_fake.get_backend('fake_melbourne'), self.provider_fake.get_backend('fake_paris'), self.provider_fake.get_backend('fake_rochester')]
-    #self.backends = [Aer.get_backend('aer_simulator')]
-    # self.backends += self.provider_fake.backends()
+    self.backends = [
+      Aer.get_backend('aer_simulator')
+    ]
+    fake_backends = [
+      'fake_armonk',
+      'fake_tenerife',
+      'fake_casablanca',
+      'fake_melbourne',
+      'fake_guadalupe',
+      'fake_tokyo',
+      'fake_paris',
+      'fake_cambridge',
+      'fake_rochester',
+      'fake_brooklyn'
+    ]
+    for fake_backend in fake_backends:
+      self.backends.append(self.provider_fake.get_backend(fake_backend))
+    
     if self.token:
       ## The IBMQ provider
       self.provider = IBMQFactory().enable_account(self.token)
