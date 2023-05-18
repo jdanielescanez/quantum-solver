@@ -1,0 +1,67 @@
+// Login Token Type Actions.
+export const LOGIN_SUCCESS = '@LOGIN/SUCCESS';
+export const LOGIN_FAILED = '@LOGIN/FAILED';
+
+// Logout Token Type Actions.
+export const LOGOUT_SUCCESS = '@LOGOUT/SUCCESS';
+export const LOGOUT_FAILED = '@LOGOUT/FAILED';
+
+// Get Algorithms information Type Actions.
+export const GET_ALGORITHMS_SUCCESS = '@GET_ALGORITHMS/SUCCESS';
+export const GET_ALGORITHMS_FAILED = '@GET_ALGORITHMS/FAILED';
+export const CLEAR_ALGORITHMS = '@CLEAR_ALGORITHMS';
+
+// Open Drawer Type Actions.
+export const OPEN_DRAWER = '@OPEN_DRAWER';
+export const CLOSE_DRAWER = '@CLOSE_DRAWER';
+
+// Run Algorithms Type Actions.
+// Get Backend-Algorithm-Params data
+export const GET_BACKEND_ALGORITHM_PARAMS_SUCCESS = '@GET_BACKEND_ALGORITHM_PARAMS/SUCCESS';
+export const GET_BACKEND_ALGORITHM_PARAMS_FAILED = '@GET_BACKEND_ALGORITHM_PARAMS/FAILED';
+export const CLEAR_BACKEND_ALGORITHM_PARAMS = '@CLEAR_BACKEND_ALGORITHM_PARAMS';
+
+// Get Backend data
+export const GET_BACKEND_DATA_SUCCESS = '@GET_BACKEND_DATA/SUCCESS';
+export const GET_BACKEND_DATA_FAILED = '@GET_BACKEND_DATA/FAILED';
+
+// Get Algorithm data
+export const GET_ALGORITHM_DATA_SUCCESS = '@GET_ALGORITHM_DATA/SUCCESS';
+export const GET_ALGORITHM_DATA_FAILED = '@GET_ALGORITHM_DATA/FAILED';
+
+// Get Params data
+export const GET_PARAMS_DATA_SUCCESS = '@GET_PARAMS_DATA/SUCCESS';
+export const GET_PARAMS_DATA_FAILED = '@GET_PARAMS_DATA/FAILED';
+
+// Set Current Backend
+export const SET_CURRENT_BACKEND_SUCCESS = '@SET_CURRENT_BACKEND/SUCCESS';
+export const SET_CURRENT_BACKEND_FAILED = '@SET_CURRENT_BACKEND/FAILED';
+
+// Set Current Algorithm
+export const SET_CURRENT_ALGORITHM_SUCCESS = '@SET_CURRENT_ALGORITHM/SUCCESS';
+export const SET_CURRENT_ALGORITHM_FAILED = '@SET_CURRENT_ALGORITHM/FAILED';
+
+// Set Current Params
+export const SET_CURRENT_PARAMS_SUCCESS = '@SET_CURRENT_PARAMS/SUCCESS';
+export const SET_CURRENT_PARAMS_FAILED = '@SET_CURRENT_PARAMS/FAILED';
+
+// Run mode.
+export const RUN_MODE = 'RUN_MODE';
+
+// Run Normal Mode
+export const RUN_NORMAL_MODE_SUCCESS = '@RUN_NORMAL_MODE/SUCCESS';
+export const RUN_NORMAL_MODE_FAILED = '@RUN_NORMAL_MODE/FAILED';
+
+// Run Experimental Mode
+export const RUN_EXPERIMENTAL_MODE_SUCCESS = '@RUN_EXPERIMENTAL_MODE/SUCCESS';
+export const RUN_EXPERIMENTAL_MODE_FAILED = '@RUN_EXPERIMENTAL_MODE/FAILED';
+
+// get Result
+export const GET_RESULT_SUCCESS = '@GET_RESULT/SUCCESS';
+export const GET_RESULT_FAILED = '@GET_RESULT/FAILED';
+
+// clear params and result data
+export const CLEAR_PARAMS_RESULT = '@CLEAR_PARAMS_RESULT';
+
+// Nshots Type Actions.
+export const SET_N_SHOTS = '@SET_N_SHOTS';

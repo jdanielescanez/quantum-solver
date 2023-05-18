@@ -105,6 +105,9 @@ class QuantumSolverSubroutine(QuantumSolver):
       halo.start()
 
       circuit = self.subroutine_manager.get_circuit()
+
+      print('\n\nCircuit visualization:\n\n' + str(circuit) + '\n\n')
+      
       counts = self.qexecute.run(circuit, n_shots)
       
       halo.succeed()
