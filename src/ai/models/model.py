@@ -1,6 +1,7 @@
 
 from abc import ABC, abstractmethod
 import numpy as np
+
 np.random.seed(43)
 
 class Model(ABC):
@@ -11,6 +12,7 @@ class Model(ABC):
     self.description = desc
     ## The model itself
     self.model = None
+    ## Objective function values
     self.objective_func_vals = []
 
   @abstractmethod

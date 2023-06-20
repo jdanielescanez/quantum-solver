@@ -54,6 +54,11 @@ class QuantumSolverAI():
       print('[6] See current Dataset (applying the View)')
     if self.is_selected_dataset and self.is_selected_model:
       print('[7] Train')
+    
+    if self.is_selected_dataset:
+      print('[8] Experimental Mode [Dataset] (Train all models on the current dataset)')
+    
+    print('[9] Experimental Mode [ALL] (Train all models on all datasets)')
     print('[0] Exit\n')
 
   ## Main menu
@@ -79,10 +84,14 @@ class QuantumSolverAI():
       self.dataset_manager.print_current_dataset()
     elif option == 7 and self.is_selected_dataset and self.is_selected_model:
       self.train()
+    elif option == 8 and self.is_selected_dataset:
+      self.experimental_mode_dataset()
+    elif option == 9:
+      self.experimental_mode_all()
     else:
       print('[!] Invalid option, try again')
     
-  ## Train the current model using the selected backend and dataset
+  ## Train the current model using the current dataset
   def train(self):
     dataset_name = self.dataset_manager.current_dataset.name
     model_name = self.model_manager.current_model.name
@@ -106,10 +115,91 @@ class QuantumSolverAI():
   
     return results
 
+## Train the all models using the current dataset
+  def experimental_mode_dataset(self):
+    results = {}
+    dataset_name = self.dataset_manager.current_dataset.name
+
+    for current_model in self.model_manager.models:
+      self.model_manager.current_model = current_model
+      model_name = self.model_manager.current_model.name
+
+      start_time = time.time()
+      halo_text = 'Executing ' + model_name + ' - ' + dataset_name
+      halo = Halo(text=halo_text, spinner="dots")
+      print()
+      try:
+        halo.start()
+
+        results[model_name] = self.__train_and_get_data()
+        
+        halo.succeed()
+        time_s = (time.time() - start_time)
+        print('\n[$] Experiment finished in ' + str(time_s) + ' s!')
+        print('Results (' + model_name + ' - ' + dataset_name + '):', results[model_name])
+      except Exception as exception:
+        halo.fail()
+        print('Exception:', exception)
+        raise exception
+
+    print('\nDataset:', dataset_name)
+    print('-' * (len(dataset_name) + 8) + '\n')
+    print('Model                           | Train Score | Test Score')
+    for model_name in results.keys():
+      train_score, test_score = results[model_name]['train'], results[model_name]['test']
+      print(model_name.rjust(31) + f" | {train_score:11.2f} | {test_score:10.2f}")
+  
+    return results
+
+## Train the all models using the all datasets
+  def experimental_mode_all(self):
+    results = {}
+    for current_dataset in self.dataset_manager.datasets:
+      self.dataset_manager.current_dataset = current_dataset
+      dataset_name = self.dataset_manager.current_dataset.name
+      results[dataset_name] = {}
+
+      for current_model in self.model_manager.models:
+        self.model_manager.current_model = current_model
+        model_name = self.model_manager.current_model.name
+
+        start_time = time.time()
+        halo_text = 'Executing ' + model_name + ' - ' + dataset_name
+        halo = Halo(text=halo_text, spinner="dots")
+        print()
+        try:
+          halo.start()
+
+          results[dataset_name][model_name] = self.__train_and_get_data()
+          
+          halo.succeed()
+          time_s = (time.time() - start_time)
+          print('\n[$] Experiment finished in ' + str(time_s) + ' s!')
+          print('Results (' + model_name + ' - ' + dataset_name + '):', results[dataset_name][model_name])
+        except Exception as exception:
+          halo.fail()
+          print('Exception:', exception)
+          raise exception
+
+    for dataset_name in results.keys():
+      results_dataset = results[dataset_name]
+      print('\nDataset:', dataset_name)
+      print('-' * (len(dataset_name) + 8) + '\n')
+      print('Model'.rjust(32) + ' | Train Score | Test Score')
+      for model_name in results_dataset.keys():
+        train_score, test_score = results_dataset[model_name]['train'], results_dataset[model_name]['test']
+        print(model_name.rjust(32) + f" | {train_score:10.2f} | {test_score:10.2f}")
+  
+    return results
+
   def __train_and_get_data(self):
     model = self.model_manager.current_model
     dataset = self.dataset_manager.current_dataset
     size = self.dataset_manager.get_current_size()
+
+    plt.figure(0)
+    plt.figure(0).clear()
+
     model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
     return {
       'train': model.score(dataset.train_data, dataset.train_targets),

@@ -4,6 +4,7 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 from operator import itemgetter
 import numpy as np
+
 np.random.seed(43)
 
 class Dataset:
@@ -44,7 +45,7 @@ class Dataset:
         train_test_split(
           self.features,
           self.targets,
-          train_size=0.7,
+          train_size=0.5,
           stratify=self.targets
         )
 

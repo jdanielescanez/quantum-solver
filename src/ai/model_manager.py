@@ -1,6 +1,11 @@
 
 from ai.models.qs_svc import QS_SVC
-from ai.models.qs_vqc import QS_VQC
+from ai.models.qs_vqc_z_ra import QS_VQC_Z_RA
+from ai.models.qs_vqc_z_esu2 import QS_VQC_Z_ESU2
+from ai.models.qs_vqc_z_ep import QS_VQC_Z_EP
+from ai.models.qs_vqc_zz_ra import QS_VQC_ZZ_RA
+from ai.models.qs_vqc_zz_esu2 import QS_VQC_ZZ_ESU2
+from ai.models.qs_vqc_zz_ep import QS_VQC_ZZ_EP
 
 class ModelManager:
   ## Constructor
@@ -10,7 +15,12 @@ class ModelManager:
     ## The available quantum models
     self.models = [
       QS_SVC(),
-      QS_VQC()
+      QS_VQC_Z_RA(),
+      QS_VQC_Z_ESU2(),
+      QS_VQC_Z_EP(),
+      QS_VQC_ZZ_RA(),
+      QS_VQC_ZZ_ESU2(),
+      QS_VQC_ZZ_EP(),
     ]
 
   ## Current model setter
