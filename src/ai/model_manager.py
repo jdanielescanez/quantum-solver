@@ -12,7 +12,7 @@ class ModelManager:
   def __init__(self):
     ## The selected current model
     self.current_model = None
-    ## The available quantum models
+    ## The available models
     self.models = [
       QS_SVC(),
       QS_VQC_Z_RA(),

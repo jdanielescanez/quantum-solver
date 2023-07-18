@@ -24,14 +24,7 @@ class QuantumSolverAI():
   ## Run main function
   def run(self):
     self.view_conf = None
-
-    self.__show_header()
     self.__main_menu()
-
-  ## Print header
-  def __show_header(self):
-    print('\n' + QUANTUM_SOLVER_AI + '\n' + '=' * len(QUANTUM_SOLVER_AI) + '\n')
-    print('A little quantum toolset developed using Qiskit')
   
   ## Print options
   def __show_options(self):
@@ -115,10 +108,11 @@ class QuantumSolverAI():
   
     return results
 
-## Train the all models using the current dataset
+  ## Train the all models using the current dataset
   def experimental_mode_dataset(self):
     results = {}
     dataset_name = self.dataset_manager.current_dataset.name
+    saved_model = self.model_manager.current_model
 
     for current_model in self.model_manager.models:
       self.model_manager.current_model = current_model
@@ -138,20 +132,24 @@ class QuantumSolverAI():
         print('\n[$] Experiment finished in ' + str(time_s) + ' s!')
         print('Results (' + model_name + ' - ' + dataset_name + '):', results[model_name])
       except Exception as exception:
+        self.model_manager.current_model = saved_model
         halo.fail()
         print('Exception:', exception)
         raise exception
 
+    self.model_manager.current_model = saved_model
+    header = 'Model | Train Score | Test Score'
     print('\nDataset:', dataset_name)
     print('-' * (len(dataset_name) + 8) + '\n')
-    print('Model                           | Train Score | Test Score')
+    print(26 * ' ' + header)
+    print((26 + len(header)) * '=')
     for model_name in results.keys():
       train_score, test_score = results[model_name]['train'], results[model_name]['test']
       print(model_name.rjust(31) + f" | {train_score:11.2f} | {test_score:10.2f}")
   
     return results
 
-## Train the all models using the all datasets
+  ## Train the all models using the all datasets
   def experimental_mode_all(self):
     results = {}
     for current_dataset in self.dataset_manager.datasets:

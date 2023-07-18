@@ -16,4 +16,3 @@ class QS_VQC_ZZ_ESU2(QS_VQC):
     args.append(ansatz)
 
     super().set_model(args)
-

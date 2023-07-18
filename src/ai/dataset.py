@@ -45,7 +45,7 @@ class Dataset:
         train_test_split(
           self.features,
           self.targets,
-          train_size=0.5,
+          train_size=0.75,
           stratify=self.targets
         )
 
