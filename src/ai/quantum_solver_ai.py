@@ -205,18 +205,18 @@ class QuantumSolverAI():
     plt.figure(0).clear()
 
     fitted_model = model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
-    classes = model.model.classes_
+    classes = list(set(dataset.view['class']))
 
     train_targets = label_binarize(dataset.train_targets, classes=classes)
-    train_score = fitted_model.decision_function(dataset.train_data)
+    # train_score = fitted_model.decision_function(dataset.train_data)
     train_pred = label_binarize(fitted_model.predict(dataset.train_data), classes=classes)
-    self.__save_roc_curves(train_targets, train_score, classes, 'train')
+    # self.__save_roc_curves(train_targets, train_score, classes, 'train')
     self.__save_confusion_matrix(train_targets, train_pred, classes, 'train')
 
     test_targets = label_binarize(dataset.test_targets, classes=classes)
-    test_score = fitted_model.decision_function(dataset.test_data)
+    # test_score = fitted_model.decision_function(dataset.test_data)
     test_pred = label_binarize(fitted_model.predict(dataset.test_data), classes=classes)
-    self.__save_roc_curves(test_targets, test_score, classes, 'test')
+    # self.__save_roc_curves(test_targets, test_score, classes, 'test')
     self.__save_confusion_matrix(test_targets, test_pred, classes, 'test')
 
     return {
