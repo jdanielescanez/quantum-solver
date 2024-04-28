@@ -231,8 +231,8 @@ class QuantumSolverAI():
     FILE_PATH_CONFUSION += datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
     FILE_PATH_CONFUSION += '_confusion_matrix'
 
-    train_confusion_matrix = confusion_matrix(targets, pred)
-    df_cm = pd.DataFrame(train_confusion_matrix, index=classes, columns=classes)
+    confusion = confusion_matrix(targets.argmax(axis=1), pred.argmax(axis=1))
+    df_cm = pd.DataFrame(confusion, index=classes, columns=classes)
     fig = plt.figure()
     sn.heatmap(df_cm, annot=True, fmt='g')
     plt.title(model_name + ' - ' + dataset_name + f' ({file_tag}) confusion matrix')
