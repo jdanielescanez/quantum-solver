@@ -9,6 +9,12 @@ from pwinput import pwinput
 import time
 import matplotlib.pyplot as plt
 import seaborn as sns
+from datetime import datetime
+from sklearn.metrics import roc_curve, auc, confusion_matrix
+from sklearn.preprocessing import label_binarize
+import numpy as np
+import pandas as pd
+import seaborn as sn
 
 QUANTUM_SOLVER_AI = 'QuantumSolver AI'
 
@@ -198,11 +204,80 @@ class QuantumSolverAI():
     plt.figure(0)
     plt.figure(0).clear()
 
-    model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
+    fitted_model = model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
+    classes = model.model.classes_
+
+    train_targets = label_binarize(dataset.train_targets, classes=classes)
+    train_score = fitted_model.decision_function(dataset.train_data)
+    train_pred = label_binarize(fitted_model.predict(dataset.train_data), classes=classes)
+    self.__save_roc_curves(train_targets, train_score, classes, 'train')
+    self.__save_confusion_matrix(train_targets, train_pred, classes, 'train')
+
+    test_targets = label_binarize(dataset.test_targets, classes=classes)
+    test_score = fitted_model.decision_function(dataset.test_data)
+    test_pred = label_binarize(fitted_model.predict(dataset.test_data), classes=classes)
+    self.__save_roc_curves(test_targets, test_score, classes, 'test')
+    self.__save_confusion_matrix(test_targets, test_pred, classes, 'test')
+
     return {
       'train': model.score(dataset.train_data, dataset.train_targets),
       'test':  model.score(dataset.test_data, dataset.test_targets)
     }
+  
+  def __save_confusion_matrix(self, targets, pred, classes, file_tag):
+    model_name = self.model_manager.current_model.name
+    dataset_name = self.dataset_manager.current_dataset.name
+    FILE_PATH_CONFUSION = 'src/ai/generated_images/' + model_name + '_' + dataset_name + '_'
+    FILE_PATH_CONFUSION += datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
+    FILE_PATH_CONFUSION += '_confusion_matrix'
+
+    train_confusion_matrix = confusion_matrix(targets, pred)
+    df_cm = pd.DataFrame(train_confusion_matrix, index=classes, columns=classes)
+    fig = plt.figure()
+    sn.heatmap(df_cm, annot=True, fmt='g')
+    plt.title(model_name + ' - ' + dataset_name + f' ({file_tag}) confusion matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    fig.savefig(FILE_PATH_CONFUSION + '_' + file_tag + '.png', format='png')
+    fig.savefig(FILE_PATH_CONFUSION + '_' + file_tag + '.eps', format='eps')
+
+  def __save_roc_curves(self, targets, y_score, classes, file_tag):
+    n_classes = classes.shape[0]
+    
+    if n_classes == 2:
+      y_score = np.array(list(map(lambda x: [x], y_score)))
+
+    # Compute ROC curve and ROC area for each class
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+    limit_classes = n_classes if n_classes != 2 else 1
+    for i in range(limit_classes):
+      fpr[i], tpr[i], _ = roc_curve(targets[:, i], y_score[:, i])
+      roc_auc[i] = auc(fpr[i], tpr[i])
+
+      plt.figure()
+      plt.plot(
+          fpr[i],
+          tpr[i],
+          color="darkorange",
+          label="ROC curve (area = %0.2f)" % roc_auc[i],
+      )
+      plt.plot([0, 1], [0, 1], color="navy", linestyle="--")
+      plt.xlim([0.0, 1.0])
+      plt.ylim([0.0, 1.05])
+      plt.xlabel("False Positive Rate")
+      plt.ylabel("True Positive Rate")
+      plt.title("Receiver operating characteristic example")
+      plt.legend(loc="lower right")
+
+      dataset_name = self.dataset_manager.current_dataset.name
+      model_name = self.model_manager.current_model.name
+      FILE_PATH = 'src/ai/generated_images/' + model_name + '_' + dataset_name + '_'
+      FILE_PATH += datetime.today().strftime('%Y-%m-%d_%H-%M-%S') + '_' + classes[i]
+      FILE_PATH += '_' + file_tag
+      plt.savefig(FILE_PATH + '.eps', format='eps')
+      plt.savefig(FILE_PATH + '.png', format='png')
 
   ## Loop for the main menu
   def __main_menu(self):
@@ -217,5 +292,5 @@ class QuantumSolverAI():
 
         self.__show_options()
         self.__select_option()
-      except Exception as _:
-        pass
+      except Exception as e:
+        raise e

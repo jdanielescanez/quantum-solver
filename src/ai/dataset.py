@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from operator import itemgetter
 import numpy as np
 
-np.random.seed(43)
+np.random.seed(42)
 
 class Dataset:
   def __init__(self, file_name):

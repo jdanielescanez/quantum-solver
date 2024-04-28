@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 import numpy as np
 
-np.random.seed(43)
+np.random.seed(42)
 
 class Model(ABC):
   def __init__(self, name, desc):
