@@ -40,7 +40,6 @@ key = input('Insert key: ').upper()
 assert all(list(map(lambda c: c in ALPHABET, msg)))
 assert all(list(map(lambda c: c in ALPHABET, key)))
 
-
 cypher = ''
 for i, msg_char in enumerate(msg):
     key_char = key[i % len(key)]
