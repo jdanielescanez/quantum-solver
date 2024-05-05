@@ -205,18 +205,22 @@ class QuantumSolverAI():
     plt.figure(0).clear()
 
     fitted_model = model.fit(dataset.train_data, dataset.train_targets.values.ravel(), [size])
-    classes = model.model.classes_
+    classes = list(set(dataset.view['class']))
 
-    train_targets = label_binarize(dataset.train_targets, classes=classes)
-    train_score = fitted_model.decision_function(dataset.train_data)
-    train_pred = label_binarize(fitted_model.predict(dataset.train_data), classes=classes)
-    self.__save_roc_curves(train_targets, train_score, classes, 'train')
-    self.__save_confusion_matrix(train_targets, train_pred, classes, 'train')
+    train_targets = dataset.train_targets
+    train_targets_bin = label_binarize(train_targets, classes=classes)
+    # train_score = fitted_model.decision_function(dataset.train_data)
+    train_pred = fitted_model.predict(dataset.train_data)
+    train_pred_bin = label_binarize(train_pred, classes=classes)
+    # self.__save_roc_curves(train_targets_bin, train_score, classes, 'train')
+    self.__save_confusion_matrix(train_targets['class'].to_list(), train_pred, classes, 'train')
 
-    test_targets = label_binarize(dataset.test_targets, classes=classes)
-    test_score = fitted_model.decision_function(dataset.test_data)
-    test_pred = label_binarize(fitted_model.predict(dataset.test_data), classes=classes)
-    self.__save_roc_curves(test_targets, test_score, classes, 'test')
+    test_targets = dataset.test_targets
+    test_targets_bin = label_binarize(test_targets, classes=classes)
+    # test_score = fitted_model.decision_function(dataset.test_data)
+    test_pred = fitted_model.predict(dataset.test_data)
+    test_pred_bin = label_binarize(test_pred, classes=classes)
+    # self.__save_roc_curves(test_targets_bin, test_score, classes, 'test')
     self.__save_confusion_matrix(test_targets, test_pred, classes, 'test')
 
     return {
@@ -231,14 +235,14 @@ class QuantumSolverAI():
     FILE_PATH_CONFUSION += datetime.today().strftime('%Y-%m-%d_%H-%M-%S')
     FILE_PATH_CONFUSION += '_confusion_matrix'
 
-    confusion = confusion_matrix(targets.argmax(axis=1), pred.argmax(axis=1))
+    confusion = confusion_matrix(targets, pred, labels=classes)
     df_cm = pd.DataFrame(confusion, index=classes, columns=classes)
     fig = plt.figure()
     sn.heatmap(df_cm, annot=True, fmt='g')
     plt.title(model_name + ' - ' + dataset_name + f' ({file_tag}) confusion matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    fig.savefig(FILE_PATH_CONFUSION + '_' + file_tag + '.png', format='png')
+    # fig.savefig(FILE_PATH_CONFUSION + '_' + file_tag + '.png', format='png')
     fig.savefig(FILE_PATH_CONFUSION + '_' + file_tag + '.eps', format='eps')
 
   def __save_roc_curves(self, targets, y_score, classes, file_tag):
