@@ -1,7 +1,7 @@
 
 import sys, os
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../composer')
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../')
 
 from composer.qs_circuit import QSCircuit
 from qiskit import execute, BasicAer
