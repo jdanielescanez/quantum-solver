@@ -19,8 +19,8 @@ def vigenere_qcypher(msg, key):
 
     qc = QSCircuit(CIRCUIT_SIZE)
 
-    qc.set_reg(a, msg_indexes) # a
-    qc.set_reg(b, key_indexes) # b
+    qc.set_reg(msg, msg_indexes) # a
+    qc.set_reg(key, key_indexes) # b
 
     qc.xor2(msg_indexes, key_indexes)
 
