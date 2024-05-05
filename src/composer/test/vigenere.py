@@ -13,24 +13,24 @@ SIZE_REG = int(math.log2(len(ALPHABET)))
 CIRCUIT_SIZE = SIZE_REG * 2
 
 def vigenere_qcypher(msg, key):
-    a_indexes = list(range(0, SIZE_REG))
-    b_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
-    b_slice = slice(SIZE_REG, 2 * SIZE_REG)
+    msg_indexes = list(range(0, SIZE_REG))
+    key_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
+    key_slice = slice(SIZE_REG, 2 * SIZE_REG)
 
     qc = QSCircuit(CIRCUIT_SIZE)
 
-    qc.set_reg(a, a_indexes) # a
-    qc.set_reg(b, b_indexes) # b
+    qc.set_reg(a, msg_indexes) # a
+    qc.set_reg(b, key_indexes) # b
 
-    qc.xor2(a_indexes, b_indexes)
+    qc.xor2(msg_indexes, key_indexes)
 
-    qc.measure(b_indexes, b_indexes)
+    qc.measure(key_indexes, key_indexes)
 
     backend = BasicAer.get_backend('qasm_simulator')
     job = execute(qc, backend, shots=1)
 
     counts = job.result().get_counts(qc)
-    result_bin = ''.join(list(list(counts.keys())[0][::-1][b_slice][::-1]))
+    result_bin = ''.join(list(list(counts.keys())[0][::-1][key_slice][::-1]))
     result_char = ALPHABET[int(result_bin, 2) % len(ALPHABET)]
     return result_char
 
