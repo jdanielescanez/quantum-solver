@@ -75,6 +75,9 @@ class QSCircuit(QuantumCircuit):
     self.reset(a)
     self.x(a)
 
+  def set_bin_reg(self, values, indexes):
+    self.set_reg(values[::-1], indexes)
+
   def set_reg(self, values, indexes):
     for i, value in enumerate(values):
       if value == '1':

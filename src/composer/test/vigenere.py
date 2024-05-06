@@ -12,15 +12,15 @@ ALPHABET = list(string.ascii_uppercase) + [' ', '-', '_', '.', ',', '@']
 SIZE_REG = int(math.log2(len(ALPHABET)))
 CIRCUIT_SIZE = SIZE_REG * 2
 
-def vigenere_qcypher(msg, key):
-    msg_indexes = list(range(0, SIZE_REG))
-    key_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
-    key_slice = slice(SIZE_REG, 2 * SIZE_REG)
+msg_indexes = list(range(0, SIZE_REG))
+key_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
+key_slice = slice(SIZE_REG, 2 * SIZE_REG)
 
+def vigenere_qcypher(msg, key):
     qc = QSCircuit(CIRCUIT_SIZE)
 
-    qc.set_reg(msg, msg_indexes) # a
-    qc.set_reg(key, key_indexes) # b
+    qc.set_reg(msg, msg_indexes)
+    qc.set_reg(key, key_indexes)
 
     qc.xor2(msg_indexes, key_indexes)
 
