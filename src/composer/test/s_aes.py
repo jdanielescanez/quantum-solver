@@ -6,15 +6,10 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../')
 from composer.qs_circuit import QSCircuit
 from qiskit import execute
 from qiskit_aer import AerSimulator
-import math
 
 SIZE_REG = 16
 CIRCUIT_SIZE = SIZE_REG * 2
 ALPHABET = ['0', '1']
-
-msg_indexes = list(range(0, SIZE_REG))
-msg_slice = slice(0, SIZE_REG)
-key_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
 
 class QS_SAES_Circuit(QSCircuit):
   def __init__(self, CIRCUIT_SIZE, msg, key, msg_indexes, key_indexes):
@@ -51,7 +46,7 @@ class QS_SAES_Circuit(QSCircuit):
     self.add_roundkey()
   
   def add_roundkey(self):
-    self.xor2(msg_indexes, key_indexes)
+    self.xor2(self.msg_indexes, self.key_indexes)
 
   def s_box(self):
     for limit in range(0, 16, 4):
@@ -113,6 +108,10 @@ class QS_SAES_Circuit(QSCircuit):
     self.xor2(self.key_indexes[:8], self.key_indexes[-8:])
 
 def saes_qcypher(msg, key):
+  msg_indexes = list(range(0, SIZE_REG))
+  msg_slice = slice(0, SIZE_REG)
+  key_indexes = list(range(SIZE_REG, 2 * SIZE_REG))
+
   qc = QS_SAES_Circuit(CIRCUIT_SIZE, msg, key, msg_indexes, key_indexes)
   qc.measure(msg_indexes, msg_indexes)
   print(qc)
@@ -124,18 +123,19 @@ def saes_qcypher(msg, key):
   result_bin = ''.join(list(list(counts.keys())[0][::-1][msg_slice][::-1]))
   return result_bin
 
-msg = '0110111101101011' # input('Insert message: ')
-key = '1010011100111011' # input('Insert key: ')
+if __name__ == "__main__":
+  msg = '0110111101101011' # input('Insert message: ')
+  key = '1010011100111011' # input('Insert key: ')
 
-assert all(list(map(lambda c: c in ALPHABET, msg)))
-assert all(list(map(lambda c: c in ALPHABET, key)))
-assert len(msg) == SIZE_REG
-assert len(msg) == len(key)
+  assert all(list(map(lambda c: c in ALPHABET, msg)))
+  assert all(list(map(lambda c: c in ALPHABET, key)))
+  assert len(msg) == SIZE_REG
+  assert len(msg) == len(key)
 
-cypher = saes_qcypher(msg, key)
+  cypher = saes_qcypher(msg, key)
 
-print()
-print(f'Message:     {msg}')
-print(f'Key:         {key}\n')
-print(f'-> Expected: 0000011100111000')
-print(f'Cypher text: {cypher}\n')
+  print()
+  print(f'Message:     {msg}')
+  print(f'Key:         {key}\n')
+  print(f'-> Expected: 0000011100111000')
+  print(f'Cypher text: {cypher}\n')
