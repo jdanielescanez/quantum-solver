@@ -86,7 +86,7 @@ class QSCircuit(QuantumCircuit):
         self.reset1(indexes[i])
 
   # output in indexes2
-  def add_regs(self, indexes1, indexes2, carry, auxs):
+  def full_add_regs(self, indexes1, indexes2, carry, auxs):
     a_xor_b, a_prod_b, aux = auxs
     self.reset1(carry)
     for a, b in zip(indexes1, indexes2):
@@ -103,6 +103,14 @@ class QSCircuit(QuantumCircuit):
 
       # carry_out = (a * b) + (carry_in * (a xor b))
       self.or3(a_prod_b, aux, carry)
+
+  # output in indexes2
+  def half_add_regs(self, indexes1, indexes2, carries):
+    self.reset1(carries)
+    for a, b, c in zip(indexes1, indexes2, carries):
+      self.and3(a, b, c) # c = ab
+      self.xor2(a, b) # b = b xor a
+      self.swap2(b, c) # b = ab; c = a xor b
 
   def encoder(self, inputs, outputs, aux):
     n = len(inputs)
